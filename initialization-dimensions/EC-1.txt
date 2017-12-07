@@ -1,0 +1,23 @@
+main.cpp:77:8: error: expected ';' at end of declaration
+    T o 1;
+       ^
+       ;
+main.cpp:78:7: error: no viable conversion from 'int' to 'T'
+    T u = 1;
+      ^   ~
+main.cpp:47:5: note: candidate constructor not viable: no known conversion from 'int' to 'const T &' for 1st argument
+    T(const T & t)
+    ^
+main.cpp:84:7: error: no viable conversion from 'int' to 'T'
+    T u = (1);
+      ^   ~~~
+main.cpp:47:5: note: candidate constructor not viable: no known conversion from 'int' to 'const T &' for 1st argument
+    T(const T & t)
+    ^
+main.cpp:90:7: error: chosen constructor is explicit in copy-initialization
+    T u = {1};
+      ^   ~~~
+main.cpp:29:5: note: constructor declared here
+    T(int a)
+    ^
+4 errors generated.

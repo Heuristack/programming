@@ -1,0 +1,15 @@
+main.cpp:96:8: error: expected ';' at end of declaration
+    T o 2,2;
+       ^
+       ;
+main.cpp:97:13: error: expected unqualified-id
+    T u = 2,2;
+            ^
+main.cpp:97:13: error: expected ';' at end of declaration
+    T u = 2,2;
+            ^
+            ;
+main.cpp:103:12: warning: expression result unused [-Wunused-value]
+    T u = (2,2);
+           ^
+1 warning and 3 errors generated.

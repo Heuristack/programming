@@ -1,0 +1,19 @@
+main.cpp:59:10: error: expected expression
+    T u =;
+         ^
+main.cpp:64:8: warning: empty parentheses interpreted as a function declaration [-Wvexing-parse]
+    T o();
+       ^~
+main.cpp:64:8: note: remove parentheses to declare a variable
+    T o();
+       ^~
+main.cpp:65:12: error: expected expression
+    T u = ();
+           ^
+main.cpp:71:7: error: chosen constructor is explicit in copy-initialization
+    T u = {};
+      ^   ~~
+main.cpp:20:5: note: constructor declared here
+    T()
+    ^
+1 warning and 3 errors generated.

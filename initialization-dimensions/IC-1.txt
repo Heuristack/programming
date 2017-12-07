@@ -1,0 +1,5 @@
+main.cpp:77:8: error: expected ';' at end of declaration
+    T o 1;
+       ^
+       ;
+1 error generated.
