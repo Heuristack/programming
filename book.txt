@@ -17,5 +17,6 @@ tadm    The Algorithm Design Manual
 tamp    The Art of Multiprocessor Programming
 tcpl    The C++ Programming Language
 tcsl    The C++ Standard Library
+tmpl    C++ Templates - The Complete Guide
 tlpi    The Linux Programming Interface
 unp1    Unix Network Programming Volume 1
