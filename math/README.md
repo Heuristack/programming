@@ -7,8 +7,8 @@ Math Structure: Set and Relation
 **Set operations:**
 **`IIUDS`**
 
-|Operation|Definition|
-|:--:|:--:|:--:|
+| Operation | Definition |
+|:---------:|:----------:|
 | `include`              |
 | `intersection`         |
 | `union`                |
@@ -18,15 +18,15 @@ Math Structure: Set and Relation
 **Set laws:**
 **`EICADAD`**
 
-|Law|Definition|
-|:--:|:--:|:--:|
-|`Emptiness`   |
-|`Idempotency` |
-|`Commutative` |
-|`Associative` |
-|`Distributive`|
-|`Absorption`  |
-|`DeMorgan's`  |
+| Law | Definition |
+|:---:|:----------:|
+| `Emptiness`      |
+| `Idempotency`    |
+| `Commutative`    |
+| `Associative`    |
+| `Distributive`   |
+| `Absorption`     |
+| `DeMorgan's`     |
 
 
 **Universe and Complement:** For universe `U` and set `S`, the complement set for `S` is `U - S`
