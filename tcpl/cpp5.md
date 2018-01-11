@@ -2,138 +2,111 @@
 ============================================
 
 Mnemonics
----------
-* **`SESE = Standard-Exception & System-Error`**
-* `[CIFA = Containers Iterators Functionals Algorithms]`
-[LMNR = Limmits Mathematics Numerics Randoms]
-[CCSR = Character-Classification String Regex]
-[IOSB = IO Streams & Buffers]
-[UTMR = Utilities Time Memory Resources]
+=========
+* **`[SESE = Standard-Exception & System-Error]`**
+* **`[CIFA = Containers Iterators Functionals Algorithms]`**
+* **`[LMNR = Limmits Mathematics Numerics Randoms]`**
+* **`[CCSR = Character-Classification String Regex]`**
+* **`[IOSB = IO Streams & Buffers]`**
+* **`[UTMR = Utilities Time Memory Resources]`**
+* **`[MSR = Match Search Replace]`**
+* **`[DED = Devices Engines Destributions]`**
+* **`[VUB = Void Unary Binary]`**
+* **`[PFP = Procedure Function Predicate]`**
+* **`[UBPNS = Uniform Bernoulli Poisson Normal Sampling]`**
+* **`[IOFBR = Input Ouput Forward Bidirectional Random]`**
+* `3.1415926-5358979`
+* `2.7182818-2845904`
+* `1.6180339-8874989`
 
-[MSR = Match Search Replace]
-[DED = Devices Engines Destributions]
-
-[VUB = Void Unary Binary]
-[PFP = Procedure Function Predicate]
-
-[UBPNS = Uniform Bernoulli Poisson Normal Sampling]
-[IOFBR = Input Ouput Forward Bidirectional Random]
-
-
-3.1415926-5358979
-2.7182818-2845904
-1.6180339-8874989
-
-
-=======
 Headers
 =======
-[exception][stdexcept][cerrno][system_error]
-[bitset]
-[array][vector][deque][forward_list][list][set][map][unordered_set][unordered_map]
-[stack][queue]
-[iterator][functional]
-[algorithm]
-[limits][cmath][numeric][random]
-[cctype][string][regex]
-[ios][istream][ostream][iostream][iomanip][sstream][fstream][streambuf]
-[utility][ratio][chrono][ctime][memory][scopped_allocator]
-
-[typeinfo][typeindex][type_traits]
-[tuple][any][optional][variant]
-
-
-===
- C
-===
-[cerrno][cassert][csetjmp]
-[climits][cfloat][cmath]
-[cctype][cstring]
-[ctime]
-[cstddef][cstdarg][cstdio][cstdlib]
+* `[exception][stdexcept][cerrno][system_error]`
+* `[bitset]`
+* `[array][vector][deque][forward_list][list][set][map][unordered_set][unordered_map]`
+* `[stack][queue]`
+* `[iterator][functional]`
+* `[algorithm]`
+* `[limits][cmath][numeric][random]`
+* `[cctype][string][regex]`
+* `[ios][istream][ostream][iostream][iomanip][sstream][fstream][streambuf]`
+* `[utility][ratio][chrono][ctime][memory][scopped_allocator]`
+* `[typeinfo][typeindex][type_traits]`
+* `[tuple][any][optional][variant]`
+* `[cerrno][cassert][csetjmp]`
+* `[climits][cfloat][cmath]`
+* `[cctype][cstring]`
+* `[ctime]`
+* `[cstddef][cstdarg][cstdio][cstdlib]`
 
 
-======
 Naming
 ======
-iterator: i,o,f,b,r
-sequence: [p,r) or [p,q] (p == r: zero element)(p == q: one element)
-middle: m = (upper_m = p + distance(p,r)/2) or (lower_m = p + distance(p,q)/2)
-bounds: l (lower_bound), u (upper_bound)
-function object: {v,u,b} x {proc,pred,func}
-device: d
-engine: e
-distribution: d = {u,b,p,n,s}
-stream: s, strm, m
-string: s, strn, a (alpha)
-array:  a, arr
-vector: v, vec
-deque:  d, deq
-set:    s, {tr,hs}s, set, {tree_, hash_}set
-map:    m, {tr,hs}m, map, {tree_, hash_}map
-stack:  s, lifo
-queue:  q, fifo
+* `iterator: i,o,f,b,r`
+* `sequence: [p,r) or [p,q] (p == r: zero element)(p == q: one element)`
+* `middle: m = (upper_m = p + distance(p,r)/2) or (lower_m = p + distance(p,q)/2)`
+* `bounds: l (lower_bound), u (upper_bound)`
+* `function object: {v,u,b} x {proc,pred,func}`
+* `device: d`
+* `engine: e`
+* `distribution: d = {u,b,p,n,s}`
+* `stream: s, strm, m`
+* `string: s, strn, a (alpha)`
+* `array:  a, arr`
+* `vector: v, vec`
+* `deque:  d, deq`
+* `set:    s, {tr,hs}s, set, {tree_, hash_}set`
+* `map:    m, {tr,hs}m, map, {tree_, hash_}map`
+* `stack:  s, lifo`
+* `queue:  q, fifo`
 
 
-========
 Concepts
 ========
-Erasable DefaultInsertable CopyInsertable MoveInsertable EmplaceConstructible
-Container SequenceContainer ContiguousContainer AssociativeContainer ReversibleContainer AllocatorAwareContainer
-Allocator
-Hash
-Iterator InputIterator OutputIterator ForwardIterator BidirectionalIterator RandomAccessIterator
-EqualityComparable LessThanComparable
-FunctionObject Predicate BinaryPredicate Compare
+* `Erasable DefaultInsertable CopyInsertable MoveInsertable EmplaceConstructible`
+* `Container SequenceContainer ContiguousContainer AssociativeContainer ReversibleContainer AllocatorAwareContainer`
+* `Allocator`
+* `Hash`
+* `Iterator InputIterator OutputIterator ForwardIterator BidirectionalIterator RandomAccessIterator`
+* `EqualityComparable LessThanComparable`
+* `FunctionObject Predicate BinaryPredicate Compare`
 
-
-======
 Traits
 ======
 
 
-================
 Functional Types
 ================
-optional;any;variant;pair;tuple;
+`optional;any;variant;pair;tuple;`
 
 
-======================
 Timepoint and Duration
 ======================
------
 clock
 -----
-chrono::{system_clock,steady_clock,high_resolution_clock}
+`chrono::{system_clock,steady_clock,high_resolution_clock}`
 
-----------
-time_point
-----------
+`time_point`
+------------
 
---------
 duration
 --------
 
 
-======
 Memory
 ======
 
 
-==========
 Exceptions
 ==========
-----------------
 language support
 ----------------
 
------------
-logic_error
------------
+`logic_error`
+-------------
 
--------------
-runtime_error;
--------------
+`runtime_error`
+---------------
 
 
 ===============
@@ -542,11 +515,12 @@ insert_after;erase_after;emplace_after;splice_after;
 -----------------
 Bucket Operations
 -----------------
-bucket_index bucket(value);
-bucket_count;
-bucket_size(bucket_index);
-{c}{begin,end}(bucket_index);
+* `bucket_index bucket(value);`
+* `bucket_count;`
+* `bucket_size(bucket_index);`
+* `{c}{begin,end}(bucket_index);`
 
+```C++
 template<UnorderedAssociativeContainer> void traverse_bucket(UnorderedAssociativeContainer c)
 {
 	for (auto bucket_index = 0; bucket_index < c.bucket_count(); bucket_index++) {
@@ -557,6 +531,7 @@ template<UnorderedAssociativeContainer> void traverse_bucket(UnorderedAssociativ
 		cout << endl;
 	}
 }
+```
 
 ---------------------------------------------------------------------------
 map.insert(element) -> <iterator,bool>: [i,r] = map.insert(); [since C++17]
@@ -614,13 +589,11 @@ Stream Iterators
 ----------------
 
 
-====================================================
 STL Algorithms by Categories - Sequence Manipulation
 ====================================================
-----------------
 Prefix Semantics
 ----------------
-{is,partial,inplace,stable}_
+`{is,partial,inplace,stable}_`
 
 ----------------
 Suffix Semantics
@@ -739,15 +712,13 @@ Inner Product
 -------------
 v inner_product(i,i,i,v,bfunc,bfunc);
 
------------------------------------------
 Partial Sum & Adjacent Diff : psum & adif
 -----------------------------------------
-o partial_sum(i,i,o,bfunc);
-o adjecent_difference(i,i,o,bfunc);
+* `o partial_sum(i,i,o,bfunc);`
+* `o adjecent_difference(i,i,o,bfunc);`
 
 
 
-=============================
 30	Standard-Library Overview
 =============================
 30.1	Introduction
@@ -776,7 +747,6 @@ o adjecent_difference(i,i,o,bfunc);
 30.5	Advice [15]
 
 
-======================
 31  STL Containers [C]
 ======================
 31.1	Introduction
@@ -813,7 +783,6 @@ o adjecent_difference(i,i,o,bfunc);
 31.6	Advice [39]
 
 
-===================================
 33  STL Iterators and Functors [IF]
 ===================================
 33.1	Introduction
@@ -831,7 +800,6 @@ o adjecent_difference(i,i,o,bfunc);
 33.6    Advice [18]
 
 
-======================
 32	STL Algorithms [A]
 ======================
 32.1	Introduction
@@ -866,7 +834,6 @@ o adjecent_difference(i,i,o,bfunc);
 32.8	Advice [16]
 
 
-===================
 40  Numerics [LMNR]
 ===================
 40.1	Introduction
@@ -886,7 +853,6 @@ o adjecent_difference(i,i,o,bfunc);
 40.8	Advice [15]
 
 
-=================
 36	Strings [CCS]
 =================
 36.1	Introduction
@@ -905,7 +871,6 @@ o adjecent_difference(i,i,o,bfunc);
 36.4	Advice [17]
 
 
-===========================
 37	Regular Expressions [R]
 ===========================
 37.1	Regular Expressions
@@ -923,7 +888,6 @@ o adjecent_difference(i,i,o,bfunc);
 37.6	Advice [11]
 
 
-======================
 38	I/O Streams [IOSB]
 ======================
 38.1	Introduction
@@ -950,7 +914,6 @@ o adjecent_difference(i,i,o,bfunc);
 38.7	Advice [31]
 
 
-=================
 35  Utilities [UT]
 =================
 35.1	Introduction
@@ -971,7 +934,6 @@ o adjecent_difference(i,i,o,bfunc);
 35.6	Advice [7]
 
 
-=============================
 34  Memory and Resources [MR]
 =============================
 34.1	Introduction
@@ -991,22 +953,16 @@ o adjecent_difference(i,i,o,bfunc);
 34.7	Advice [19]
 
 
-=========
 Questions
 =========
 
 
-=========
 Exercises
 =========
 
-
-=====
 Plans
 =====
 
-
-====
 TODO
 ====
 - [x] Utilities: messy ==> refactor refactor refactor ==> snippets can be find easily ==> cmake project ==> could be imported in xcode and clion
