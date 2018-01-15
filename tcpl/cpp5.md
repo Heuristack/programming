@@ -149,22 +149,22 @@ Merge
 
 Partition
 ---------
-* `b partition(b,b,upred);` 
-* `b stable_partition(b,b,upred);` 
+* `b partition(b,b,upred);`
+* `b stable_partition(b,b,upred);`
 * `partition_copy();`
 * `bool is_partitioned();`
 * `partition_point();`
 
 Order Statistics
 ----------------
-* `f min_element(f,f,bpred);` 
-* `f max_element(f,f,bpred);` 
+* `f min_element(f,f,bpred);`
+* `f max_element(f,f,bpred);`
 * `(f,f) minmax_element(f,f,bpred);`
-* `& min(&,&,bpred);` 
-* `& max(&,&,bpred);` 
+* `& min(&,&,bpred);`
+* `& max(&,&,bpred);`
 * `(&,&) minmax(&,&,bpred);`
-* `& min(initializer_list,bpred);` 
-* `& max(initializer_list,bpred);` 
+* `& min(initializer_list,bpred);`
+* `& max(initializer_list,bpred);`
 * `(&,&) minmax(initializer_list,bpred);`
 * **`nth_element(r,r,r,bpred);`**
 
@@ -484,7 +484,7 @@ Trigonometrics
 
 Nearest Integers
 ----------------
-* `floor` `ceil` 
+* `floor` `ceil`
 * `trunc` `round`
 
 
@@ -520,8 +520,8 @@ Character Classification
 * `toupper` `tolower`
 
 
-String Operations
-=================
+Strings
+=======
 
 Special Types and Values
 ------------------------
@@ -547,7 +547,7 @@ Container Operations
 * `replace`
 * `erase`
 * `clear`
-* `resize;`
+* `resize`
 
 SubString and AddString
 -----------------------
@@ -555,7 +555,7 @@ SubString and AddString
 `string operator+ (const string &, const string &);`
 
 ```C++
-string string::substr(index, size) 
+string string::substr(index, size)
 {
 	...
 	if (index > this->size()) {
