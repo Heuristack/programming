@@ -1,3 +1,48 @@
+Bucket Exploration
+------------------
+
+```C++
+#include <iostream>
+#include <string>
+#include <map>
+#include <unordered_map>
+#include <tuple>
+
+using namespace std;
+
+template<typename unordered_container>
+void print_bucket(ostream & s, unordered_container c)
+{
+    for (auto b = 0; b < c.bucket_count(); b++) {
+        s << "[" << b << "]: ";
+        for (auto i = c.begin(b); i != c.end(b); i++) {
+            s << get<0>(*i) << " ";
+        }
+        s << "\n";
+    }
+}
+
+template<typename unordered_container>
+void print_bucket_reverse(ostream & s, unordered_container c)
+{
+    for (auto i = c.begin(); i != c.end(); i++) {
+        auto key = get<0>(*i);
+        s << "[" << key << "]: " << c.bucket(key) << "\n";
+    }
+}
+
+
+int main()
+{
+    unordered_map<char,string> m = {{'O',"Ocean Park!"}};
+    if (auto [i,r] = m.insert({'D',"Disneyland!"}); !r) {
+        cout << get<0>(*i) << ": " << get<string>(*i) << endl;
+    }
+    print_bucket(cout, m);
+    print_bucket_reverse(cout, m);
+}
+```
+
 Tree Search: `BFS` and `DFS`
 ---------------------------
 
