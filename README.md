@@ -1,3 +1,41 @@
+Priority Queue: Sorting Criterion
+---------------------------------
+
+```C++
+struct z
+{
+    int x = 0; int y = 0;
+    z(int a): x{a}, y{a-1}{}
+    bool operator < (const z that) const { return x < that.x; }
+};
+ostream & operator << (ostream & s, z o) { s << "(" << o.x << "," << o.y << ")"; return s; }
+
+
+int main()
+{
+    priority_queue<z> q;
+    q.emplace(3); q.emplace(1); q.emplace(4); q.emplace(1); q.emplace(5);
+    while (!q.empty()) { cout << q.top() << endl; q.pop(); }
+}
+```
+
+```C++
+struct z
+{
+    int x = 0; int y = 0;
+    z(int a): x{a}, y{a-1}{}
+    struct lessthan { bool operator ()(z a, z b){ return a.x < b.x; } };
+};
+ostream & operator << (ostream & s, z o) { s << "(" << o.x << "," << o.y << ")"; return s; }
+
+int main()
+{
+    priority_queue<z, vector<z>, z::lessthan> q;
+    q.emplace(3); q.emplace(1); q.emplace(4); q.emplace(1); q.emplace(5);
+    while (!q.empty()) { cout << q.top() << endl; q.pop(); }
+}
+```
+
 Bucket Exploration
 ------------------
 
