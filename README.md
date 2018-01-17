@@ -1,3 +1,28 @@
+Parameterize Random Number Generation
+-------------------------------------
+
+```C++
+#include <iostream>
+#include <random>
+
+using namespace std;
+
+template <typename device = random_device, typename engine = default_random_engine, typename distribution = normal_distribution<double>>
+typename distribution::result_type generate()
+{
+    static device dev;
+    engine eng(dev());
+    distribution dis;
+
+    return dis(eng);
+}
+
+int main()
+{
+    for (int i = 0; i < 10; i++) std::cout << generate() << std::endl;
+}
+
+```
 Priority Queue: Sorting Criterion
 ---------------------------------
 
