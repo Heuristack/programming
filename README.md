@@ -41,12 +41,18 @@ Bucket Exploration
 
 ```C++
 #include <iostream>
-#include <string>
-#include <map>
 #include <unordered_map>
-#include <tuple>
+#include <unordered_set>
+#include <utility>
 
 using namespace std;
+
+template <typename K, typename V>
+ostream & operator << (ostream & s, pair<K,V> p)
+{
+    s << "(" << get<0>(p) << ", " << get<1>(p) << ")";
+    return s;
+}
 
 template<typename unordered_container>
 void print_bucket(ostream & s, unordered_container c)
@@ -54,7 +60,7 @@ void print_bucket(ostream & s, unordered_container c)
     for (auto b = 0; b < c.bucket_count(); b++) {
         s << "[" << b << "]: ";
         for (auto i = c.begin(b); i != c.end(b); i++) {
-            s << get<0>(*i) << " ";
+            s << *i;
         }
         s << "\n";
     }
@@ -64,7 +70,14 @@ template<typename unordered_container>
 void print_bucket_reverse(ostream & s, unordered_container c)
 {
     for (auto i = c.begin(); i != c.end(); i++) {
-        auto key = get<0>(*i);
+        typename unordered_container::key_type key;
+        if constexpr (is_same<typename unordered_container::key_type,
+                              typename unordered_container::value_type>::value) {
+            key = *i;
+        }
+        else {
+            key = get<0>(*i);
+        }
         s << "[" << key << "]: " << c.bucket(key) << "\n";
     }
 }
@@ -78,6 +91,13 @@ int main()
     }
     print_bucket(cout, m);
     print_bucket_reverse(cout, m);
+
+    unordered_set<string> s = {"O"};
+    if (auto [i,r] = s.insert("D"); !r) {
+        cout << *i << endl;
+    }
+    print_bucket(cout, s);
+    print_bucket_reverse(cout, s);
 }
 ```
 
