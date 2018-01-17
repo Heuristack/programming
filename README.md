@@ -40,15 +40,15 @@ Bucket Exploration
 ------------------
 
 ```C++
-#include <iostream>
 #include <unordered_map>
 #include <unordered_set>
+#include <iostream>
 #include <utility>
 
 using namespace std;
 
-template <typename K, typename V>
-ostream & operator << (ostream & s, pair<K,V> p)
+template <typename key_type, typename value_type>
+ostream & operator << (ostream & s, pair<key_type,value_type> p)
 {
     s << "(" << get<0>(p) << ", " << get<1>(p) << ")";
     return s;
