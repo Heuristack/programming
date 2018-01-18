@@ -1,3 +1,68 @@
+Lambda: Function Procedure Thread Task
+======================================
+
+```C++
+#include <iostream>
+#include <thread>
+#include <future>
+
+using namespace std;
+
+int main()
+{
+    //--------------
+    // Pure Function
+    //--------------
+    {
+        cout << [](int i)->int{ return i*i; }(10) << endl;
+    }
+
+    //----------------------
+    // Side-Effect Procefure
+    //----------------------
+    {
+        int r = 0;
+        [&r](int i){ r = i*i; }(10);
+        cout << r << endl;
+    }
+
+    //-----------------------------
+    // Thread Binds a Pure Function
+    //-----------------------------
+    {
+        thread z([](int i)->int{ return i*i; }, 10);
+        z.join();
+    }
+
+    //------------------------------------
+    // Thread Bind a Side-Effect Procedure
+    //------------------------------------
+    {
+        int r = 0;
+        thread z{[&r](int i){ r = i*i; }, 10};
+        z.join();
+        cout << r << endl;
+    }
+
+    //--------------
+    // Packaged Task
+    //--------------
+    {
+        packaged_task<int(int)> t{[](int i)->int{ return i*i; }};
+        t(10);
+        cout << t.get_future().get() << endl;
+    }
+    //------
+    // async
+    //------
+    {
+        auto f = async(std::launch::async, [](int i)->int{ return i*i; }, 10);
+        cout << f.get() << endl;
+    }
+    return 0;
+}
+```
+
 Parameterize Random Number Generation
 -------------------------------------
 
