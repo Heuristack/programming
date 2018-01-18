@@ -1,3 +1,61 @@
+CCIA File Name Parser
+=====================
+
+```C++
+#include <iostream>
+#include <iterator>
+#include <vector>
+#include <algorithm>
+#include <tuple>
+#include <sstream>
+#include <cctype>
+
+int main()
+{
+    std::istream_iterator<std::string> e;
+    std::istream_iterator<std::string> i(std::cin);
+    std::ostream_iterator<std::string> o(std::cout, " ");
+
+    std::vector<std::string> names;
+    std::copy(i, e, std::back_inserter(names));
+
+    auto seperate = [](const std::string & name) -> std::tuple<std::string, std::string, std::string>
+    {
+        std::string h,m,t;
+
+        auto pu = name.find("_");
+        auto pd = name.rfind(".");
+        if (pu != std::string::npos && pd != std::string::npos) {
+            h = name.substr(0, pu);
+            m = name.substr(pu + 1, (pd - pu - 1));
+            t = name.substr(pd, name.size());
+        }
+
+        return std::make_tuple(h,m,t);
+    };
+
+    auto align = [](std::string & s)
+    {
+        auto c = s[0];
+        if (std::isdigit(c)) { s.insert(0, "0"); }
+        if (std::isalpha(c)) { s[0] = std::toupper(c); s.insert(0, "A"); }
+    };
+
+    for (const auto & n : names) {
+        std::stringstream stream(std::get<1>(seperate(n)));
+        std::string chapter, section;
+        std::getline(stream, chapter, '.');
+        std::getline(stream, section, '.');
+
+        if (std::max(chapter.size(), section.size()) >= 3) continue;
+        if (chapter.size() == 1) { align(chapter); }
+        if (section.size() == 1) { align(section); }
+
+        std::cout << chapter << section << std::endl;
+    }
+}
+```
+
 Lambda: Function Procedure Thread Task
 ======================================
 
