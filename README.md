@@ -1,3 +1,20 @@
+Precision on Stream
+===================
+
+```C++
+#include <iostream>
+#include <iomanip>
+
+int main(int n, char * v[])
+try {
+    std::cout << std::fixed << std::setprecision(std::stoi(std::string(v[2]))) << std::stod(std::string(v[1])) << std::endl;
+}
+catch(std::exception & e) {
+    std::cout << "exception: " << e.what() << std::endl;
+    std::cout << "usage: " << v[0] << " double precision" << std::endl;
+}
+```
+
 Count Words using Unique-Map
 ============================
 
