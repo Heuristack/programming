@@ -1,3 +1,24 @@
+Stream Iterators and Transform Algorithm
+========================================
+```C++
+#include <algorithm>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <iostream>
+using namespace std;
+int main()
+{
+    istream_iterator<string> e,i(cin);
+    ostream_iterator<string> o(cout);
+    vector<string> names;
+    copy(i,e,back_inserter(names));
+    vector<string> lines;
+    transform(names.begin(),names.end(),back_inserter(lines),[](string const & s){ return s + "\n"; });
+    copy(lines.begin(),lines.end(),o);
+}
+```
+
 CCIA File Name Parser
 =====================
 
