@@ -1,3 +1,87 @@
+Compile-Time Recurrence: Factorial Numbers
+==========================================
+
+```C++
+#include <iostream>
+
+template<int n> struct Factorial
+{
+    static const int value = Factorial<n-1>::value * n;
+};
+
+template<> class Factorial<0>
+{
+    static const int value = 1;
+};
+
+int main()
+{
+    std::cout << "Factorial(5): " << Factorial<5>::value << std::endl;
+}
+```
+
+Template and Inheritance Open Mind
+==================================
+
+```C++
+template<typename T> struct B {};
+template<typename T> struct C {};
+
+template<typename T> struct D : public B<D<T>> { template<typename U> void procedure(U u){}; };
+
+template<typename T> struct D<B<T>> {};
+template<typename T> struct D<C<T>> {};
+
+int main(){}
+```
+
+Comparison between Signed and Unsigned Integers
+===============================================
+
+```C++
+#include <iostream>
+#include <iomanip>
+#include <functional>
+
+bool less (int a, unsigned b)
+{
+    if ( (a < 0) || (static_cast<unsigned>(a) < b) )
+        return true;
+    return false;
+}
+
+int main(int n, char * v[])
+{
+    int a = -1;
+    unsigned b = 1u;
+
+    std::cout << less(a, b) << std::endl;
+    std::cout << (a < b) << std::endl;
+    std::cout << std::less<int>()(a, b) << std::endl;
+    std::cout << std::less<unsigned>()(a, b) << std::endl;
+}
+```
+
+Offset of Structure Field
+=========================
+
+```C++
+#include <stddef.h>
+#include <stdio.h>
+
+int main(int argc, char ** argv)
+{
+    struct user
+    {
+        char name[50];
+        char nick[50];
+        long level;
+    };
+
+    printf("'level' is the %lu byte in 'user' structure\n", offsetof(user, level));
+}
+```
+
 Decay: Array as Function Argument
 =================================
 
