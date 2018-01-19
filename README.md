@@ -1,3 +1,41 @@
+Count Words using Unique-Map
+============================
+
+```C++
+#include <iostream>
+#include <iterator>
+#include <vector>
+#include <map>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    istream_iterator<string> e, i(cin);
+    vector<string> v;
+    copy(i, e, back_inserter(v));
+    cout << "N = " << v.size() << endl;
+    sort(v.begin(), v.end());
+    unique(v.begin(), v.end());
+
+    map<string, long> m;
+    for (const auto & w : v) {
+        auto p = m.find(w);
+        if (p != m.end()) {
+            p->second++;
+        }
+        else {
+            m.insert(std::make_pair(w,1));
+        }
+    }
+
+    vector<pair<long, string>> s;
+    for (const auto & p : m) { s.push_back(make_pair(p.second, p.first)); }
+    sort(s.begin(), s.end(), [](decltype(s)::value_type a, decltype(s)::value_type b){ return a.first > b.first; });
+    for (const auto & p : s) { cout << p.first << ": " << p.second << endl; }
+}
+```
+
 Stream Iterators and Transform Algorithm
 ========================================
 ```C++
