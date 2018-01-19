@@ -1,3 +1,25 @@
+Run-Time Assert on Word Size
+============================
+
+```C++
+#include <iostream>
+#include <iterator>
+#include <set>
+#include <algorithm>
+#include <cassert>
+using namespace std;
+
+int main()
+{
+    istream_iterator<string> e, i(cin);
+    set<string> s;
+    copy(i, e, inserter(s,s.end()));
+    assert(all_of(s.begin(), s.end(), [](decltype(s)::value_type v){
+        return v.size() == 5;
+    }));
+}
+```
+
 Precision on Stream
 ===================
 
