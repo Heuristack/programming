@@ -1,3 +1,40 @@
+Endianness
+==========
+
+```C++
+#include <arpa/inet.h>
+uint32_t htonl(uint32_t);
+uint32_t ntohl(uint32_t);
+
+bool is_big_endian()
+{
+	return 1L == htonl(1L);
+}
+```
+
+```C++
+bool is_big_endian() {
+	union
+	{
+		uint32_t integer;
+		char bytes[4];
+	}
+	word = {0x01020304};
+	return word.bytes[0] == 0x01;
+}
+```
+
+Alignment
+=========
+```C++
+int main()
+{
+    class T {};
+    cout << alignment_of<T>::value << endl;
+    cout << alignment_of<int>() << endl;
+}
+```
+
 Compile-Time Computation: Factorial Numbers
 ===========================================
 
