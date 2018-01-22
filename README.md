@@ -1,3 +1,18 @@
+Compile-Time Computation: Factorial Numbers
+===========================================
+
+```C++
+inline constexpr unsigned int Factorial(unsigned int n)
+{
+    return n <= 1 ? n : Factorial(n-1) * n;
+}
+
+int main()
+{
+    cout << "Factorial(10) = " << Factorial(10) << endl;
+}
+```
+
 Type Traits: Common Type
 ========================
 
