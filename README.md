@@ -1,3 +1,24 @@
+decltype(auto)
+==============
+
+```C++
+const string & greeting()
+{
+	static string s = "Hello,World!";
+	return s;
+}
+
+int main()
+{
+    auto a = greeting();
+    a = "Bye!";
+    cout << a << endl;
+
+    decltype(auto) b = greeting();
+    cout << b << endl;
+}
+```
+
 Endianness
 ==========
 
