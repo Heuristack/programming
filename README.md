@@ -2,21 +2,27 @@ decltype(auto)
 ==============
 
 ```C++
-const string & greeting()
+string const & greet()
 {
-	static string s = "Hello,World!";
-	return s;
+    static string s {"Hello,World!"};
+    return s;
 }
 
 int main()
 {
-    auto a = greeting();
-    a = "Bye!";
-    cout << a << endl;
+    decltype(auto) a = greet();
+    cout << "const: " << is_const<remove_reference<decltype(a)>::type>::value << endl;
+    cout << "  ref: " << is_reference<decltype(a)>::value << endl;
 
-    decltype(auto) b = greeting();
-    cout << b << endl;
+    auto b = greet();
+    cout << "const: " << is_const<remove_reference<decltype(b)>::type>::value << endl;
+    cout << "  ref: " << is_reference<decltype(b)>::value << endl;
+
+    auto const & c = greet();
+    cout << "const: " << is_const<remove_reference<decltype(c)>::type>::value << endl;
+    cout << "  ref: " << is_reference<decltype(c)>::value << endl;
 }
+
 ```
 
 Endianness
