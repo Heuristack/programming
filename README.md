@@ -121,6 +121,7 @@ int main()
 {
     std::cout << "Factorial(5): " << Factorial<5>::value << std::endl;
 }
+//g++ main.cpp -std=c++1z -Q -pipe -pthread -Ofast
 ```
 
 Template and Inheritance Open Mind
