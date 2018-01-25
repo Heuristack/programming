@@ -15,6 +15,7 @@ BOOK
 * **`oodp`**    Design Patterns - Elements of Reusable Object-Oriented Software (GoF)
 * **`oopc`**    Object-Oriented Programming in C
 * **`pcsd`**    Principles of Computer System Design
+* **`pcpp`**    Professional C++
 * **`sicp`**    Structure and Interpretation of Computer Programs
 * **`spec`**    Structured Parallel Programming Patterns for Effecient Computation
 * **`tadm`**    The Algorithm Design Manual
