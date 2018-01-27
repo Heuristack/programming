@@ -1,5 +1,5 @@
-5 Programming C++: Standard Template Library
-============================================
+Programming C++: Standard Template Library
+==========================================
 
 
 Mnemonics
