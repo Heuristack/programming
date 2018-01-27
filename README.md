@@ -1,3 +1,11 @@
+Function Attributes
+===================
+
+```C++
+[[clang::no_sanitize("address", "thread", "memory", "dataflow", "leak", "undefined"), noreturn, gnu::nothrow]] void f()
+{ throw 1; }
+```
+
 decltype(auto)
 ==============
 
