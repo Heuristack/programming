@@ -1,3 +1,23 @@
+Test Cases
+==========
+
+```
+#include <functional>
+#include <algorithm>
+#include <vector>
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+int main()
+{
+    vector<function<bool()>> tests;
+    tests.push_back([]()->bool{ return 1; });
+    tests.push_back([]()->bool{ return 0; });
+    assert(all_of(begin(tests),end(tests),[](auto f){ return f(); }));
+}
+```
+
 Function Attributes
 ===================
 
