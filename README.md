@@ -1,6 +1,6 @@
 Decompose Embedded Declaration List
 ===================================
-```
+```C++
 #include <iostream>
 #include <utility>
 
@@ -16,7 +16,7 @@ int main()
 
 Interpret Input Stream
 ======================
-```
+```C++
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -50,7 +50,7 @@ int main()
 
 Inline Friends
 ==============
-```
+```C++
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -75,7 +75,7 @@ int main()
 Test Cases
 ==========
 
-```
+```C++
 #include <functional>
 #include <algorithm>
 #include <vector>
