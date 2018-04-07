@@ -1,3 +1,77 @@
+Decompose Embedded Declaration List
+===================================
+```
+#include <iostream>
+#include <utility>
+
+using namespace std;
+
+int main()
+{
+    auto [_,c] = make_pair(make_pair(1,2),3);
+    auto [a,b] = _;
+    cout << a << b << c << endl;
+}
+```
+
+Interpret Input Stream
+======================
+```
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+int main()
+{
+    for (string s; getline(cin,s);) {
+        stringstream stream(s);
+        string source;
+        string target;
+        double weight;
+        stream >> source >> target >> weight;
+        cout << source << "-" << target << ": " << weight << endl;
+    }
+}
+
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+int main()
+{
+    string source;
+    string target;
+    double weight;
+    while (cin >> source >> target >> weight) {
+        cout << source << "-" << target << ": " << weight << endl;
+    }
+}
+```
+
+Inline Friends
+==============
+```
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+
+struct T
+{
+    string m;
+    friend ostream & operator <<(ostream & s, T & object) { return s << object.m; }
+    friend istream & operator >>(istream & s, T & object) { return s >> object.m; }
+};
+
+int main()
+{
+    stringstream stream {"Hello!"};
+    T object;
+    stream >> object;
+    cout << object << endl;
+}
+```
+
 Test Cases
 ==========
 
