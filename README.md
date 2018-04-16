@@ -1,3 +1,27 @@
+Chrono: Clock;Duration;TimePoint;
+=================================
+```C++
+#include <iostream>
+#include <chrono>
+
+using namespace std;
+
+int main()
+{
+    chrono::high_resolution_clock clock;
+
+    auto b = clock.now();
+    for (int i = 0; i < 100; i++) {
+        i * i;
+    }
+    auto e = clock.now();
+
+    chrono::duration<long long, nano> d {e - b};
+
+    cout << d.count() << endl;
+}
+```
+
 Decompose Embedded Declaration List
 ===================================
 ```C++
