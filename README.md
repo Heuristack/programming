@@ -1,3 +1,49 @@
+Priority Queue: Sorting Criterion
+---------------------------------
+```C++
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+struct T
+{
+    long a;
+    long b;
+
+    bool operator < (T const & that) const { return a < that.a; }
+
+    friend ostream & operator << (ostream & s, T const & o)  { return s << o.a << "," << o.b; }
+};
+
+int main()
+{
+cout << "Compare is defined by type itself: " << endl;
+{
+    priority_queue<T> q;
+    q.push(T{1,2});
+    q.push(T{2,1});
+    while (!q.empty()) {
+        cout << q.top() << endl;
+        q.pop();
+    }
+}
+cout << "Pass compare to constructor: " << endl;
+{
+    auto compare = [](T const & x, T const & y){ return x.b < y.b; };
+    priority_queue<T,vector<T>,decltype(compare)> q(compare);
+    q.push(T{1,2});
+    q.push(T{2,1});
+    while (!q.empty()) {
+        cout << q.top() << endl;
+        q.pop();
+    }
+}
+return 0;
+}
+
+```
+
 Chrono: Clock;Duration;TimePoint;
 =================================
 ```C++
