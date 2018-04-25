@@ -1,3 +1,53 @@
+Order;Equal;Hash;
+----------------
+```C++
+#include <iostream>
+#include <queue>
+#include <set>
+#include <unordered_set>
+#include <functional>
+
+using namespace std;
+
+struct T
+{
+    int a;
+    int b;
+
+    bool operator <  (T const & that) const { return a <  that.a; }
+    bool operator == (T const & that) const { return b == that.b; }
+
+    friend ostream & operator << (ostream & s, T const & o) { return s << o.a << "," << o.b; }
+};
+
+struct H
+{
+    size_t operator() (T const & o) const
+    {
+        return hash<int>{}(o.b);
+    }
+};
+
+int main()
+{
+    priority_queue<T> q;
+    q.push(T{1,1});
+    q.push(T{1,2});
+    q.push(T{2,1});
+    q.push(T{2,2});
+    while (!q.empty()) { cout << q.top() << endl; q.pop(); }
+    cout << endl;
+
+    unordered_set<T,H> s;
+    s.insert(T{1,1});
+    s.insert(T{2,1});
+    for (auto const & e : s) { cout << e << endl; }
+
+    auto compare = [](T const & a, T const & b){ return a.b < b.b; };
+    set<T,decltype(compare)> cool_set(compare);
+}
+```
+
 Priority Queue: Sorting Criterion
 ---------------------------------
 ```C++
