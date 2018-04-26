@@ -1,3 +1,17 @@
+Algorithm Sorting Criterion
+---------------------------
+```C++
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    vector<int> v = {3,1,4,1,5};
+    cout << *min_element(begin(v),end(v),[](auto const & a, auto const & b){ return a > b; }) << endl;
+}
+```
+
 Order;Equal;Hash;
 ----------------
 ```C++
