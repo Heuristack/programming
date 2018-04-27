@@ -475,7 +475,7 @@ Precision on Stream
 
 int main(int n, char * v[])
 try {
-    std::cout << std::fixed << std::setprecision(std::stoi(std::string(v[2]))) << std::stod(std::string(v[1])) << std::endl;
+    std::cout << std::setw(std::stoi(std::string(v[2]))+4) << std::setfill('0') << std::fixed << std::setprecision(std::stoi(std::string(v[2]))) << std::stod(std::string(v[1])) << std::endl;
 }
 catch(std::exception & e) {
     std::cout << "exception: " << e.what() << std::endl;
