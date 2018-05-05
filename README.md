@@ -150,7 +150,7 @@ return 0;
 ```
 
 Chrono: Clock;Duration;TimePoint;
-=================================
+---------------------------------
 ```C++
 #include <iostream>
 #include <chrono>
@@ -174,7 +174,7 @@ int main()
 ```
 
 Decompose Embedded Declaration List
-===================================
+-----------------------------------
 ```C++
 #include <iostream>
 #include <utility>
@@ -190,7 +190,7 @@ int main()
 ```
 
 Interpret Input Stream
-======================
+----------------------
 ```C++
 #include <iostream>
 #include <sstream>
@@ -224,7 +224,7 @@ int main()
 ```
 
 Inline Friends
-==============
+--------------
 ```C++
 #include <iostream>
 #include <sstream>
@@ -248,7 +248,7 @@ int main()
 ```
 
 Test Cases
-==========
+----------
 
 ```C++
 #include <functional>
@@ -268,7 +268,7 @@ int main()
 ```
 
 Function Attributes
-===================
+-------------------
 
 ```C++
 [[clang::no_sanitize("address", "thread", "memory", "dataflow", "leak", "undefined"), noreturn, gnu::nothrow]] void f()
@@ -276,7 +276,7 @@ Function Attributes
 ```
 
 decltype(auto)
-==============
+--------------
 
 ```C++
 string const & greet()
@@ -303,7 +303,7 @@ int main()
 ```
 
 Endianness
-==========
+----------
 
 ```C++
 #include <arpa/inet.h>
@@ -329,7 +329,7 @@ bool is_big_endian() {
 ```
 
 Alignment
-=========
+---------
 ```C++
 int main()
 {
@@ -340,7 +340,7 @@ int main()
 ```
 
 Compile-Time Computation: Factorial Numbers
-===========================================
+-------------------------------------------
 
 ```C++
 inline constexpr unsigned int Factorial(unsigned int n)
@@ -355,7 +355,7 @@ int main()
 ```
 
 Type Traits: Common Type
-========================
+------------------------
 
 ```C++
 template <class T>
@@ -379,7 +379,7 @@ int main()
 ```
 
 Compile-Time Recurrence: Factorial Numbers
-==========================================
+------------------------------------------
 
 ```C++
 #include <iostream>
@@ -402,7 +402,7 @@ int main()
 ```
 
 Template and Inheritance Open Mind
-==================================
+----------------------------------
 
 ```C++
 template<typename T> struct B {};
@@ -417,7 +417,7 @@ int main(){}
 ```
 
 Comparison between Signed and Unsigned Integers
-===============================================
+-----------------------------------------------
 
 ```C++
 #include <iostream>
@@ -444,7 +444,7 @@ int main(int n, char * v[])
 ```
 
 Offset of Structure Field
-=========================
+-------------------------
 
 ```C++
 #include <stddef.h>
@@ -464,7 +464,7 @@ int main(int argc, char ** argv)
 ```
 
 Decay: Array as Function Argument
-=================================
+---------------------------------
 
 ```C++
 #include <iostream>
@@ -486,7 +486,7 @@ int main()
 ```
 
 Run-Time Assert on Word Size
-============================
+----------------------------
 
 ```C++
 #include <iostream>
@@ -508,7 +508,7 @@ int main()
 ```
 
 Precision on Stream
-===================
+-------------------
 
 ```C++
 #include <iostream>
@@ -525,7 +525,7 @@ catch(std::exception & e) {
 ```
 
 Count Words using Unique-Map
-============================
+---------------------------
 
 ```C++
 #include <iostream>
@@ -563,7 +563,7 @@ int main()
 ```
 
 Stream Iterators and Transform Algorithm
-========================================
+----------------------------------------
 ```C++
 #include <algorithm>
 #include <iterator>
@@ -584,7 +584,7 @@ int main()
 ```
 
 CCIA File Name Parser
-=====================
+---------------------
 
 ```C++
 #include <iostream>
@@ -642,7 +642,7 @@ int main()
 ```
 
 Lambda: Function Procedure Thread Task
-======================================
+--------------------------------------
 
 ```C++
 #include <iostream>
