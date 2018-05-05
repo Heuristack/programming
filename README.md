@@ -1,3 +1,29 @@
+Resize: increase;decrease;
+--------------------------
+```C++
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+using namespace std;
+
+struct T
+{
+    T() { cout << "C"; }
+   ~T() { cout << "D"; }
+   int m = 0;
+};
+
+int main()
+{
+    atexit([](){ cout << endl; });
+    vector<T> container;
+    container.resize(20);
+    container.resize(10);
+    container.resize(20);
+    cout << endl;
+}
+```
+
 Infinity: max double value
 --------------------------
 ```C++
