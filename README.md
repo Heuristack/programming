@@ -735,37 +735,52 @@ Priority Queue: Sorting Criterion
 ---------------------------------
 
 ```C++
-struct z
-{
-    int x = 0; int y = 0;
-    z(int a): x{a}, y{a-1}{}
-    bool operator < (const z that) const { return x < that.x; }
-};
-ostream & operator << (ostream & s, z o) { s << "(" << o.x << "," << o.y << ")"; return s; }
+#include <iostream>
+#include <queue>
+using namespace std;
 
+struct T
+{
+    T(int a): x{a}, y{a-1} {}
+
+    int x = 0;
+    int y = 0;
+
+    friend ostream & operator << (ostream & s, T o)
+    {
+        s << "(" << o.x << "," << o.y << ")";
+        return s;
+    }
+
+    bool operator < (T const & that) const { return x < that.x; }
+
+    struct lessthan
+    {
+        bool operator () (T const & a, T const & b)
+        {
+            return a.x < b.x;
+        }
+    };
+};
 
 int main()
 {
-    priority_queue<z> q;
-    q.emplace(3); q.emplace(1); q.emplace(4); q.emplace(1); q.emplace(5);
-    while (!q.empty()) { cout << q.top() << endl; q.pop(); }
-}
-```
+    // 1. operator <
+    priority_queue<T> q1;
 
-```C++
-struct z
-{
-    int x = 0; int y = 0;
-    z(int a): x{a}, y{a-1}{}
-    struct lessthan { bool operator ()(z a, z b){ return a.x < b.x; } };
-};
-ostream & operator << (ostream & s, z o) { s << "(" << o.x << "," << o.y << ")"; return s; }
+    // 2. lessthan functor
+    priority_queue<T, vector<T>, T::lessthan> q2;
 
-int main()
-{
-    priority_queue<z, vector<z>, z::lessthan> q;
-    q.emplace(3); q.emplace(1); q.emplace(4); q.emplace(1); q.emplace(5);
-    while (!q.empty()) { cout << q.top() << endl; q.pop(); }
+    // 3. lambda as constructor parameter
+    auto order = [](T const & a, T const & b){
+        return a.x < b.x;
+    };
+    priority_queue<T, vector<T>, decltype(order)> q3(order);
+
+    for (auto q : {q1,q2,q3}) {
+        q.emplace(3); q.emplace(1); q.emplace(4); q.emplace(1); q.emplace(5);
+        while (!q.empty()) { cout << q.top() << endl; q.pop(); }
+    }
 }
 ```
 
