@@ -1,3 +1,25 @@
+Boost: Hana Heterogeneous Computation
+-------------------------------------
+```C++
+#include <boost/hana.hpp>
+#include <iostream>
+#include <string>
+namespace hana = boost::hana;
+using namespace std;
+
+struct T1 { string name; };
+struct T2 { string name; };
+struct T3 { string name; };
+
+int main()
+{
+    auto heterogeneous = hana::make_tuple(T1{"1"},T2{"2"}, T3{"3"});
+    hana::for_each(heterogeneous, [&](auto element){
+        cout << element.name << endl;
+    });
+}
+```
+
 Resize: increase;decrease;
 --------------------------
 ```C++
@@ -106,47 +128,59 @@ int main()
 Priority Queue: Sorting Criterion
 ---------------------------------
 ```C++
+#include <boost/hana.hpp>
 #include <iostream>
 #include <queue>
 
+namespace hana = boost::hana;
 using namespace std;
 
 struct T
 {
-    long a;
-    long b;
+    long a = 0;
+    long b = 0;
 
-    bool operator < (T const & that) const { return a < that.a; }
+    bool operator < (T const & that) const
+    {
+        return a < that.a;
+    }
 
-    friend ostream & operator << (ostream & s, T const & o)  { return s << o.a << "," << o.b; }
+    struct LessThan
+    {
+        bool operator () (T const & a, T const & b)
+        {
+            return a.a < b.a;
+        }
+    };
+
+    friend ostream & operator << (ostream & s, T const & o)
+    {
+        return s << o.a << "," << o.b;
+    }
 };
 
 int main()
 {
-cout << "Compare is defined by type itself: " << endl;
-{
-    priority_queue<T> q;
-    q.push(T{1,2});
-    q.push(T{2,1});
-    while (!q.empty()) {
-        cout << q.top() << endl;
-        q.pop();
-    }
-}
-cout << "Pass compare to constructor: " << endl;
-{
-    auto compare = [](T const & x, T const & y){ return x.b < y.b; };
-    priority_queue<T,vector<T>,decltype(compare)> q(compare);
-    q.push(T{1,2});
-    q.push(T{2,1});
-    while (!q.empty()) {
-        cout << q.top() << endl;
-        q.pop();
-    }
-}
-return 0;
-}
+    auto compare = [](T const & x, T const & y){
+        return x.b < y.b;
+    };
 
+    priority_queue<T> q1;
+    priority_queue<T,vector<T>,T::LessThan> q2;
+    priority_queue<T,vector<T>,decltype(compare)> q3(compare);
+
+    auto qs = hana::make_tuple(q1,q2,q3);
+    hana::for_each(qs,[](auto q){
+        q.push(T{1,2});
+        q.push(T{2,1});
+        while (!q.empty()) {
+            cout << q.top() << endl;
+            q.pop();
+        }
+    });
+
+    return 0;
+}
 ```
 
 Chrono: Clock;Duration;TimePoint;
@@ -729,60 +763,6 @@ int main()
 {
     for (int i = 0; i < 10; i++) std::cout << generate() << std::endl;
 }
-
-```
-Priority Queue: Sorting Criterion
----------------------------------
-
-```C++
-#include <iostream>
-#include <queue>
-using namespace std;
-
-struct T
-{
-    T(int a): x{a}, y{a-1} {}
-
-    int x = 0;
-    int y = 0;
-
-    friend ostream & operator << (ostream & s, T o)
-    {
-        s << "(" << o.x << "," << o.y << ")";
-        return s;
-    }
-
-    bool operator < (T const & that) const { return x < that.x; }
-
-    struct lessthan
-    {
-        bool operator () (T const & a, T const & b)
-        {
-            return a.x < b.x;
-        }
-    };
-};
-
-int main()
-{
-    // 1. operator <
-    priority_queue<T> q1;
-
-    // 2. lessthan functor
-    priority_queue<T, vector<T>, T::lessthan> q2;
-
-    // 3. lambda as constructor parameter
-    auto order = [](T const & a, T const & b){
-        return a.x < b.x;
-    };
-    priority_queue<T, vector<T>, decltype(order)> q3(order);
-
-    for (auto q : {q1,q2,q3}) {
-        q.emplace(3); q.emplace(1); q.emplace(4); q.emplace(1); q.emplace(5);
-        while (!q.empty()) { cout << q.top() << endl; q.pop(); }
-    }
-}
-```
 
 Bucket Exploration
 ------------------
