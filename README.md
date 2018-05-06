@@ -1,3 +1,34 @@
+Pass Function Template
+----------------------
+```C++
+#include <iostream>
+
+using namespace std;
+
+template <typename F>
+void run(F f)
+{
+    f();
+}
+
+void f()
+{
+    cout << "Function!" << endl;
+}
+
+template <typename T>
+void g()
+{
+    cout << "Template!" << endl;
+}
+
+int main()
+{
+    run(f);
+    run(g<int>);
+}
+```
+
 Boost: Hana Heterogeneous Computation
 -------------------------------------
 ```C++
