@@ -1,3 +1,28 @@
+Missing Posative
+----------------
+```C++
+#include <algorithm>
+#include <set>
+int missing(vector<int> & a)
+{
+    set<int> s(begin(a),end(a));
+    auto first = find_if(begin(s),end(s),[](auto e){ return e > 0; });
+    if (first == end(s)) {
+        return 1;
+    }
+    auto minp = *first;
+    if (minp > 1) {
+        return 1;
+    }
+    for (auto i = first; i != end(s); i++) {
+        if (*i == minp) {
+            minp++;
+        }
+    }
+    return minp;
+}
+```
+
 Sliding-Puzzle: 2x3
 -------------------
 ```C++
