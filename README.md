@@ -1,3 +1,25 @@
+Distinct
+--------
+```C++
+#include <algorithm>
+#include <vector>
+#include <cassert>
+
+using namespace std;
+
+int solution(vector<int> & a)
+{
+    sort(begin(a),end(a));
+    return distance(begin(a),unique(begin(a),end(a)));
+}
+
+int main()
+{
+    vector<int> A = {2,1,1,2,3,1};
+    assert(solution(A)==3);
+}
+```
+
 Triangle
 --------
 ```C++
