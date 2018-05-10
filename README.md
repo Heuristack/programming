@@ -1,3 +1,36 @@
+Triangle
+--------
+```C++
+#include <iostream>
+#include <cassert>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
+
+using namespace std;
+
+int solution(vector<int> & a)
+{
+    sort(begin(a),end(a));
+    for (long i = a.size()-1; i-2 >= 0; i--) {
+        if (a[i] - a[i-1] < a[i-2]) { return 1; }
+        else continue;
+    }
+    return 0;
+}
+
+int main()
+{
+    vector<int> A = {10,2,5,1,8,20};
+    vector<int> B = {10,50,5,1};
+    cout << solution(A) << endl;
+    cout << solution(B) << endl;
+}
+```
+
 Number of Intersections
 -----------------------
 ```C++
