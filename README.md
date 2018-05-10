@@ -1,3 +1,39 @@
+Rgith rotate K times
+--------------------
+```C++
+#include <algorithm>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+void right_rotate(vector<int> & A)
+{
+    auto N = static_cast<long>(A.size());
+    int t = 0;
+    for (long i = N-1; i - 1 >= 0; i--) {
+        if (i == N-1) { t = A[i]; }
+        A[i] = A[i-1];
+        if (i - 1 == 0) { A[i-1] = t; }
+    }
+}
+
+vector<int> solution(vector<int> & A, int K)
+{
+    for (auto i = 0; i < K; i++) {
+        right_rotate(A);
+    }
+    return A;
+}
+
+int main()
+{
+    vector<int> A = {3,8,9,7,6};
+    auto B = solution(A,3);
+    for (auto e : B) cout << e << endl;
+}
+```
+
 Odd Occurencies
 ---------------
 ```C++
