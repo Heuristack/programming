@@ -1,3 +1,54 @@
+Number of Intersections
+-----------------------
+```C++
+#include <iostream>
+#include <cassert>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
+
+using namespace std;
+
+int solution(vector<int> & a)
+{
+    struct segment
+    {
+        long p = 0; long q = 0;
+        bool operator < (segment const & that) const
+        {
+            return p < that.p;
+        }
+    };
+    vector<segment> segments;
+    for (long i = 0; i < a.size(); i++) {
+        segments.push_back(segment{i-a[i],i+a[i]});
+    }
+    sort(begin(segments),end(segments));
+
+    int n = 0;
+    for (long i = 0; i < segments.size(); i++) {
+        for (long j = i+1; j < segments.size(); j++) {
+            if (segments[j].p <= segments[i].q) {
+                if (n++ > 10'000'000) return -1;
+            }
+            else break;
+
+        }
+    }
+
+    return n;
+}
+
+int main()
+{
+    vector<int> A = {1,2'147'483'647,0};
+    assert((solution(A)==2));
+}
+```
+
 Missing Posative
 ----------------
 ```C++
