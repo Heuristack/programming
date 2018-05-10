@@ -1,3 +1,23 @@
+Odd Occurencies
+---------------
+```C++
+#include <algorithm>
+#include <vector>
+#include <unordered_set>
+
+using namespace std;
+
+int solution(vector<int> & a)
+{
+    unordered_set<int> s;
+    for (unsigned long i = 0; i < a.size(); i++) {
+        if (s.find(a[i]) == s.end()) { s.insert(a[i]); }
+        else { s.erase(a[i]); }
+    }
+    return *s.begin();
+}
+```
+
 Maximum Product of Three
 ------------------------
 ```C++
