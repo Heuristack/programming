@@ -1,3 +1,31 @@
+Maximum Product of Three
+------------------------
+```C++
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<int> & a)
+{
+    sort(begin(a),end(a));
+    if (a[a.size()-1] > 0) {
+        return a[a.size()-1] * max(a[0]*a[1], a[a.size()-3]*a[a.size()-2]);
+    }
+    else {
+        return a[a.size()-1]*a[a.size()-2]*a[a.size()-3];
+    }
+}
+
+int main()
+{
+    vector<int> A = {-3,1,2,-1,5,6};
+    assert(solution(A)==60);
+    vector<int> B = {-5, -6, -4, -7, -10};
+    cout << solution(B) << endl;
+}
+```
+
 Distinct
 --------
 ```C++
