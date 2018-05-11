@@ -1,3 +1,29 @@
+Missing Element
+---------------
+```C++
+#include <iostream>
+#include <vector>
+#include <bitset>
+#include <algorithm>
+using namespace std;
+
+int solution(vector<int> & a)
+{
+    int presence = 0;
+    for (auto i = 0; i < a.size(); i++) {
+        presence ^= (i + 1);
+        presence ^= a[i];
+    }
+    return presence ^= (a.size() + 1);
+}
+
+int main()
+{
+    vector<int> A = {2,3,1,5};
+    cout << solution(A) << endl;
+}
+```
+
 Tape Equilibrium
 ----------------
 ```C++
