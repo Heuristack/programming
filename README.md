@@ -1,3 +1,27 @@
+Permutation Check
+-----------------
+```C++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int solution(vector<int> & A)
+{
+    int presence = 0;
+    for (auto i = 0u; i < A.size(); i++) {
+        presence ^= (i+1);
+        presence ^= A[i];
+    }
+    return !presence;
+}
+
+int main()
+{
+    vector<int> A = {4,1,3,2};
+    cout << solution(A) << endl;
+}
+```
+
 Missing Element
 ---------------
 ```C++
