@@ -272,6 +272,7 @@ int missing(vector<int> & a)
 
 Sliding-Puzzle: 2x3
 -------------------
+`Not Finished Yet`
 ```C++
 #include <iostream>
 #include <vector>
