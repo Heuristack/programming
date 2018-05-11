@@ -1,3 +1,34 @@
+Tape Equilibrium
+----------------
+```C++
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int solution(vector<int> & a)
+{
+    vector<int> s(a.size(),0);
+    for (auto i = 0; i < a.size(); i++) {
+        s[0] -= a[i];
+    }
+    for (auto i = 1; i < a.size(); i++) {
+        s[i] = s[i-1] + 2*a[i-1];
+    }
+    for (auto i = 1; i < s.size(); i++) {
+        s[i] = abs(s[i]);
+    }
+    return *min_element(begin(s)+1,end(s));
+}
+
+int main()
+{
+    vector<int> A = {3,1,2,4,3,};
+    cout << solution(A) << endl;
+}
+```
+
 Rgith rotate K times
 --------------------
 ```C++
