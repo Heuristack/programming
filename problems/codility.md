@@ -302,6 +302,96 @@ Lesson 13 - Fibonacci Numbers
 Lesson 14 - Binary Search
 =========
 
+Binary Search
+-------------
+```C++
+#include <cassert>
+#include <vector>
+
+using namespace std;
+
+int binary_search_iterative(vector<int> & a, int e)
+{
+    int p = 0;
+    int r = a.size();
+    int d = r-p;
+    int m = p+d/2;
+    while (d > 0) {
+        if      (e < a[m]) r = m;
+        else if (e > a[m]) p = m+1;
+        else return m;
+        d = r-p;
+        m = p+d/2;
+    }
+    return -1;
+}
+
+int main()
+{
+    vector<int> A = {1,2,3,4,5,6,7,8,9};
+    for (int i = 0; i < A.size(); i++) {
+        assert(binary_search_iterative(A,i+1) == i);
+    }
+}
+```
+
+Nailing Planks
+--------------
+[BF:RESULT](https://app.codility.com/demo/results/trainingJMKUCA-AYF)
+
+```C++
+#include <vector>
+
+using namespace std;
+
+bool check(vector<int> & A, vector<int> & B, vector<int> & C, unsigned J, vector<unsigned> & mem)
+{
+    for (unsigned i = 0u; i < A.size(); i++) {
+        if (mem[i] < J) continue;
+        unsigned j;
+        for (j = 0u; j <= J; j++) {
+            if (A[i] <= C[j] && C[j] <= B[i]) {
+                mem[i] = j;
+                break;
+            }
+        }
+        if (j > J) return false;
+    }
+    return true;
+}
+
+int solution(vector<int> & A, vector<int> & B, vector<int> & C)
+{
+    vector<unsigned> mem(A.size(),30'001);
+    int p = 0;
+    int r = C.size();
+    int d = r-p;
+    int m = p+d/2;
+    int i = -1;
+    while (d > 0) {
+        if (check(A,B,C,m,mem)) {
+            r = m;
+            i = m;
+        }
+        else {
+            p = m+1;
+        }
+        d = r-p;
+        m = p+d/2;
+    }
+    if (i == -1) return i;
+    else return i+1;
+}
+
+int main()
+{
+    vector<int> A = {1,4,5,8};
+    vector<int> B = {4,5,9,10};
+    vector<int> C = {4,6,7,10,12};
+    cout << solution(A,B,C) << endl;
+}
+```
+
 Lesson 15 - Caterpillar Method
 =========
 
