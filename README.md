@@ -233,8 +233,10 @@ int main()
     auto e = clock.now();
 
     chrono::duration<long long, nano> d {e - b};
+    cout << d.count() << "(ns)" << endl;
 
-    cout << d.count() << endl;
+    chrono::duration<double> seconds {e - b};
+    cout << fixed << setprecision(9) << seconds.count() << "(s)" << endl;
 }
 ```
 
