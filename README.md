@@ -1,3 +1,35 @@
+Calculate Prices
+================
+```C++
+#include <iostream>
+
+using namespace std;
+
+double calculate_price(int32_t price, uint32_t num_decimals = 0)
+{
+    double den = 1.;
+    switch (num_decimals) {
+        case 0: den = 1.;       break;
+        case 1: den = 10.;      break;
+        case 2: den = 100.;     break;
+        case 3: den = 1000.;    break;
+        case 4: den = 10000.;   break;
+        case 5: den = 100000.;  break;
+        case 6: den = 1000000.; break;
+        default :
+            for (auto i = 0U; i < num_decimals; i++) {
+                den = den * 10;
+            }
+    }
+    return static_cast<double>(price)/den;
+}
+
+int main()
+{
+    cout << calculate_price(-5) << endl;
+}
+```
+
 Pass Function Template
 ----------------------
 ```C++
