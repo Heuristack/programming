@@ -1,5 +1,18 @@
+Output an integer as a character
+--------------------------------
+```C++
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main()
+{
+    cout << static_cast<char>(0x53) << endl;
+    printf("%c",0x53);
+}
+```
+
 Calculate Prices
-================
+----------------
 ```C++
 #include <iostream>
 
