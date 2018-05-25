@@ -3,11 +3,14 @@ Output an integer as a character
 ```C++
 #include <iostream>
 #include <cstdio>
+#include <string>
 using namespace std;
 int main()
 {
-    cout << static_cast<char>(0x53) << endl;
-    printf("%c",0x53);
+    cout << static_cast<char>(0x59) << endl;
+    printf("%c\n",0x59);
+    auto i = stoi("0x59",nullptr,16);
+    cout << static_cast<char>(i) << endl;
 }
 ```
 
