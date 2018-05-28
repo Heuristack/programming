@@ -2,6 +2,53 @@
 Lesson 01 - Iterations
 =========
 
+Triangle
+--------
+```C++
+#include <iostream>
+using namespace std;
+
+void triangle(int n)
+{
+    for (auto i = 0u; i < n; i++) {
+        for (auto j = 0u; j < i+1; j++) {
+            cout << '*' << ' ';
+        }
+        cout << '\n';
+    }
+}
+
+int main()
+{
+    triangle(4);
+}
+```
+
+Symmetric Triangle
+------------------
+```C++
+#include <iostream>
+using namespace std;
+
+void symmetric_triangle(int n)
+{
+    for (auto i = n; i > 0; i--) {
+        for (auto j = 0; j < (n - i); j++) {
+            cout << ' ' << ' ';
+        }
+        for (auto j = 0; j < 2*i - 1; j++) {
+            cout << '*' << ' ';
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    symmetric_triangle(4);
+}
+```
+
 Lesson 02 - Arrays
 =========
 
@@ -97,6 +144,31 @@ int main()
 
 Lesson 04 - Counting Elements
 =========
+
+Counting
+--------
+```C++
+#include <algorithm>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+vector<int> counting(vector<int> const & A, int m)
+{
+    vector<int> C(m+1,0);
+    for (auto const & e : A) {
+        C[e] += 1;
+    }
+    return C;
+}
+
+int main()
+{
+    vector<int> A = {0,0,4,2,4,5};
+    auto count = counting(A,*max_element(begin(A),end(A)));
+    for (auto const & e : count) { cout << e << endl; }
+}
+```
 
 Missing Posative
 ----------------
