@@ -170,6 +170,37 @@ int main()
 }
 ```
 
+Swap Equal
+----------
+```C++
+#include <algorithm>
+#include <numeric>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+bool is_swap_equal(vector<int> const & A, vector<int> const & B)
+{
+    auto sa = accumulate(begin(A),end(A),0);
+    auto sb = accumulate(begin(B),end(B),0);
+    for (auto i = 0u; i < A.size(); i++) {
+    for (auto j = 0u; j < B.size(); j++) {
+        if (sa - A[i] + B[j] == sb + A[i] - B[j]) {
+            return true;
+        }
+    }
+    }
+    return false;
+}
+
+int main()
+{
+    vector<int> A = {3,4,5};
+    vector<int> B = {3,4,5};
+    cout << is_swap_equal(A,B) << endl;
+}
+```
+
 Missing Posative
 ----------------
 ```C++
