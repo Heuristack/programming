@@ -384,6 +384,53 @@ int main()
 Lesson 07 - Stacks and Queues
 =========
 
+Circular Buffer
+------------
+```C++
+#include <iostream>
+#include <vector>
+#include <array>
+using namespace std;
+
+template<typename T>
+class Queue
+{
+public:
+    Queue(int n = 0): capacity{n}, storage{capacity,{}} {}
+
+// FIXME: handle exceptional cases
+    auto enqueue(T e) -> Queue & {
+        storage[tail] = e;
+        tail = (tail + 1) % capacity;
+        return *this;
+    }
+    auto dequeue() -> T {
+        auto e = storage[head];
+        head = (head + 1) % capacity;
+        return e;
+    }
+
+    int size() { return (tail - head + capacity ) % capacity; }
+    int empty() { return size() == 0; }
+
+private:
+    int head = 0;
+    int tail = 0;
+    int capacity = 0;
+    vector<T> storage;
+};
+
+int main()
+{
+    Queue<int> q(10);
+    q.enqueue(1).enqueue(2).enqueue(3);
+    cout << q.size() << endl;
+    auto e = q.dequeue();
+    cout << "e = " << e << endl;
+    cout << q.size() << endl;
+}
+```
+
 Lesson 08 - Leader
 =========
 
