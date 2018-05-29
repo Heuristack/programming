@@ -462,6 +462,35 @@ int main()
 Lesson 08 - Leader
 =========
 
+Leader: `count(leader) > n/2`
+-----------------------------
+```C++
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int leader(vector<int> const & A)
+{
+    unordered_map<int,int> M;
+    for (auto e : A) {
+        M[e]++;
+    }
+    for (auto [e,n] : M) {
+        if (n > A.size()/2) {
+            return e;
+        }
+    }
+    return -1;
+}
+
+int main()
+{
+    vector<int> A = {6,8,4,6,8,6,6};
+    cout << leader(A) << endl;
+}
+```
+
 Lesson 09 - Maximum Slice Problem
 =========
 
