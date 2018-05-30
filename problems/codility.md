@@ -581,6 +581,38 @@ int main()
 Lesson 11 - Sieve of Eratosthenes
 =========
 
+Sieve
+-----
+```C++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> sieve(int n)
+{
+    vector<int> s(n+1,1);
+    s[0] = s[1] = 0;
+    for (int i = 2; i * i <= n; i++) {
+        if (s[i] == 1) {
+            for (int k = i * i; k <= n; k += i) {
+                s[k] = 0;
+            }
+        }
+    }
+    return s;
+}
+
+int main()
+{
+    auto primes = sieve(17);
+    for (auto i = 2u; i < primes.size(); i++) {
+        if (primes[i] == 0) {
+            cout << i << endl;
+        }
+    }
+}
+```
+
 Lesson 12 - Euclidean Algorithm
 =========
 
