@@ -525,6 +525,35 @@ int main()
 Lesson 10 - Prime and Composite Numbers
 =========
 
+Count Divisors of a Number
+--------------------------
+```C++
+#include <iostream>
+using namespace std;
+
+unsigned divisors(unsigned a)
+{
+    unsigned n = 0;
+    unsigned i;
+    for (i = 1; i * i < a; i++) {
+        if (a % i == 0) {
+            n += 2;
+        }
+    }
+    if (i * i == a) {
+        n += 1;
+    }
+    return n;
+}
+
+int main()
+{
+    cout << divisors(3) << endl;
+    cout << divisors(4) << endl;
+    cout << divisors(5) << endl;
+}
+```
+
 Lesson 11 - Sieve of Eratosthenes
 =========
 
