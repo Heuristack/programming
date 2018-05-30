@@ -494,6 +494,34 @@ int main()
 Lesson 09 - Maximum Slice Problem
 =========
 
+Maximum Slice Summation
+-----------------------
+```C++
+#include <algorithm>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int max_slice(vector<int> const & A)
+{
+    int maxsum = 0;
+    for (unsigned i = 0; i < A.size(); i++) {
+        int sum = 0;
+        for (unsigned j = i; j < A.size(); j++) {
+            sum += A[j];
+            maxsum = max({maxsum,sum});
+        }
+    }
+    return maxsum;
+}
+
+int main()
+{
+    vector<int> A = {5,-7,3,5,-2,4,-1};
+    cout << max_slice(A) << endl;
+}
+```
+
 Lesson 10 - Prime and Composite Numbers
 =========
 
