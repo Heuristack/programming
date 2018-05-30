@@ -1,3 +1,18 @@
+IOTA
+---
+```C++
+#include <numeric>
+#include <vector>
+#include <iostream>
+using namespace std;
+int main()
+{
+    vector<int> v(10);
+    iota(begin(v),end(v),10);
+    for (auto i : v) { cout << i << endl; }
+}
+```
+
 Mutable Lambda Capture
 ----------------------
 ```C++
