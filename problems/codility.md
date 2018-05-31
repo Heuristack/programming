@@ -616,6 +616,52 @@ int main()
 Lesson 12 - Euclidean Algorithm
 =========
 
+Euclidean algorithm by subtraction
+----------------------------------
+```C++
+#include <iostream>
+using namespace std;
+
+int gcd(int a, int b)
+{
+    if      (a < b) return gcd(a, b - a);
+    else if (a > b) return gcd(a - b, b);
+    else            return a;
+}
+
+int main()
+{
+    cout << gcd(6,9) << endl;
+}
+```
+
+Euclidean algorithm by division
+-------------------------------
+```C++
+#include <iostream>
+using namespace std;
+
+int gcd(int a, int b)
+{
+    if      (a < b) return gcd(b, a);
+    else if (a % b) return gcd(b, a % b);
+    else            return b;
+}
+
+long long GCD(long long x, long long y)
+{
+    return y == 0 ? x : GCD(y, x % y);
+}
+
+int main()
+{
+    cout << gcd(6,9) << endl;
+    cout << gcd(9,6) << endl;
+    cout << GCD(6,9) << endl;
+    cout << GCD(9,6) << endl;
+}
+```
+
 Lesson 13 - Fibonacci Numbers
 =========
 
