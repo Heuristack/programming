@@ -742,6 +742,35 @@ int main()
 }
 ```
 
+```C++
+#include <iostream>
+#include <iterator>
+#include <vector>
+using namespace std;
+
+template<typename I, typename T>
+I BinarySearch(I p, I r, T k)
+{
+    static auto e = r;
+    for (auto d = distance(p,r); d > 0; d = distance(p,r)) {
+         auto m = p + d/2;
+         if (k == *m) return m;
+         else if (k < *m) { r = m; }
+         else if (k > *m) { p = m + 1; }
+    }
+    return e;
+}
+
+int main()
+{
+    vector<int> A = {2,3,4,5,6,8};
+    auto i = BinarySearch(begin(A),end(A),5);
+    if (i != A.end()) {
+        cout << *i << endl;
+    }
+}
+```
+
 Nailing Planks
 --------------
 [BF:RESULT](https://app.codility.com/demo/results/trainingJMKUCA-AYF)
