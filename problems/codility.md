@@ -665,6 +665,47 @@ int main()
 Lesson 13 - Fibonacci Numbers
 =========
 
+Recursive Fibonacci
+-------------------
+```C++
+#include <iostream>
+using namespace std;
+
+int fibonacci(int n)
+{
+    if (n <= 1) return n;
+    else return fibonacci(n - 2) + fibonacci(n - 1);
+}
+
+int main()
+{
+    cout << fibonacci(10) << endl;
+}
+```
+
+Dynamic Fibonacci
+-----------------
+```C++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int fibonacci(int n)
+{
+    vector<int> fib(n + 1, 0);
+    fib[1] = 1;
+    for (auto i = 2u; i < n + 1; i++) {
+        fib[i] = fib[i-2] + fib[i-1];
+    }
+    return fib[n];
+}
+
+int main()
+{
+    cout << fibonacci(10) << endl;
+}
+```
+
 Lesson 14 - Binary Search
 =========
 
