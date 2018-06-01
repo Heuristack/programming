@@ -831,6 +831,42 @@ int main()
 Lesson 15 - Caterpillar Method
 =========
 
+Caterpillar Method
+------------------
+```C++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool CaterpillarMethod(vector<int> const & A, int s)
+{
+    int n = A.size();
+    int k = 0;
+    int i = 0;
+    int t = 0;
+    while (k < n) {
+        while (i < n) {
+            if (t + A[i] <= s) {
+                t = t + A[i++];
+                continue;
+            }
+            break;
+        }
+        if (t == s) {
+            return true;
+        }
+        t = t - A[k++];
+    }
+    return false;
+}
+
+int main()
+{
+    vector<int> A = {6,2,7,4,1,3,6};
+    cout << CaterpillarMethod(A,12) << endl;
+}
+```
+
 Lesson 16 - Greedy Algorithms
 =========
 
