@@ -867,6 +867,67 @@ int main()
 }
 ```
 
+Triangle Counting
+------------------
+```C++
+#include <algorithm>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int triangles(vector<int> const & A)
+{
+    auto t = 0;
+    for (auto i = 0u;    i < A.size(); i++) {
+    for (auto j = i + 1; j < A.size(); j++) {
+    for (auto k = j + 1; k < A.size(); k++) {
+        if (A[i] + A[j] > A[k]) {
+            t++;
+            continue;
+        }
+        break;
+    }
+    }
+    }
+    return t;
+}
+
+int main()
+{
+    vector<int> A = {10,2,5,1,8,12};
+    sort(begin(A),end(A));
+    cout << triangles(A) << endl;
+}
+```
+
+Triangle Counting
+-----------------
+```C++
+#include <algorithm>
+#include <iterator>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int triangles(vector<int> & A)
+{
+    sort(begin(A),end(A));
+    auto t = 0;
+    for (auto i = A.begin(); i < A.end(); i++) {
+    for (auto j = next(i);   j < A.end(); j++) {
+        t += lower_bound(next(j), A.end(), *i + *j) - j - 1;
+    }
+    }
+    return t;
+}
+
+int main()
+{
+    vector<int> A = {10,2,5,1,8,12};
+    cout << triangles(A) << endl;
+}
+```
+
 Lesson 16 - Greedy Algorithms
 =========
 
