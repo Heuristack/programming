@@ -962,6 +962,59 @@ int main()
 }
 ```
 
+Canoeist
+--------
+```C++
+#include <algorithm>
+#include <vector>
+#include <deque>
+#include <iostream>
+using namespace std;
+
+int greedy_canoesit(vector<int> weights, int maxload)
+{
+    auto n = weights.size();
+    deque<int> fatsos;
+    deque<int> skinny;
+    for (auto i = 0u; i < n-1; i++) {
+        if (weights[i] + weights[n-1] <= maxload) {
+            skinny.push_back(weights[i]);
+        }
+        else {
+            fatsos.push_back(weights[i]);
+        }
+    }
+    fatsos.push_back(weights[n-1]);
+#if 00
+    cout << "fatsos: "; for (auto f : fatsos) cout << f; cout << endl;
+    cout << "skinny: "; for (auto s : skinny) cout << s; cout << endl;
+#endif
+    auto canoes = 0;
+    while (!fatsos.empty() || !skinny.empty()) {
+        if (!skinny.empty()) {
+            skinny.pop_back();
+        }
+        fatsos.pop_back();
+        canoes++;
+        if (fatsos.empty() && !skinny.empty()) {
+            fatsos.push_back(skinny.back());
+            skinny.pop_back();
+        }
+        while ((fatsos.size() > 1) && (fatsos.back() + fatsos.front() <= maxload)) {
+            skinny.push_back(skinny.front());
+            fatsos.pop_front();
+        }
+    }
+    return canoes;
+}
+
+int main()
+{
+    vector<int> weights = {1,2,3,4};
+    cout << greedy_canoesit(weights,5) << endl;
+}
+```
+
 Lesson 17 - Dynamic Programming
 =========
 
