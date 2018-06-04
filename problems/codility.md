@@ -254,8 +254,8 @@ int main()
 Lesson 05 - Prefix Sums
 =========
 
-Partial Sum
------------
+Prefix Partial Sum
+-------------------
 ```C++
 #include <iostream>
 #include <numeric>
@@ -264,20 +264,15 @@ using namespace std;
 
 int slice_sum(vector<int> const & A, int i, int j)
 {
-// FIXME: assert [i,j] is valid range
     vector<int> S(A.size(),{});
     partial_sum(begin(A),end(A),begin(S));
-    if (i > 0) {
-        return S[j] - S[i];
-    }
-    else {
-        return S[j];
-    }
+    if (!i) return S[j];
+    return S[j] - S[i-1];
 }
 
 int main()
 {
-    vector<int> A = {1,2,3,4,5,6,7,8,9};
+    vector<int> A = {0,1,2,3,4,5,6,7,8,9};
     cout << slice_sum(A,3,5) << endl;
 }
 ```
