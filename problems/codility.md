@@ -277,6 +277,86 @@ int main()
 }
 ```
 
+Max Mushrooms
+-------------
+```C++
+#include <algorithm>
+#include <vector>
+#include <limits>
+#include <iostream>
+using namespace std;
+
+int slice_sum(vector<int> const & A, int i, int j)
+{
+    int s = 0;
+    for (auto k = i; k <= j; k++) {
+        s += A[k];
+    }
+    return s;
+}
+
+vector<int> generate_route(int p, int q, int k, int m, int turn, int advance)
+{
+    if (!((p <= k) && (k <= q)) ||
+        !((0 < m) && (m <= q - p + 1)) ||
+        !((0 < turn) && (turn <= m))) {
+        cout << "Illegal Arguments" << endl;
+            return {};
+    }
+    vector<int> route = {k};
+    bool is_turned = false;
+    while (m--) {
+        if (p == k || k == q || turn-- == 0) {
+            if (!is_turned) {
+                advance = -advance;
+                is_turned = true;
+            }
+        }
+        k += advance;
+        route.push_back(k);
+    }
+    return route;
+}
+
+int mushrooms(vector<int> const & A, int k, int m)
+{
+    int n = A.size() - 1;
+    int s = 0;
+
+    for (auto t = 1u; t <= min(m,n-k); t++) {
+        auto R = A;
+        int rs = 0;
+        for (auto i : generate_route(0,n,k,m,t,+1)) {
+            cout << i;
+            rs += R[i];
+            R[i] = 0;
+        }
+        cout << ": " << rs << endl;
+        s = max(rs,s);
+    }
+
+    for (auto t = 1u; t <= min(m,k-0); t++) {
+        auto L = A;
+        int ls = 0;
+        for (auto i : generate_route(0,n,k,m,t,-1)) {
+            cout << i;
+            ls += L[i];
+            L[i] = 0;
+        }
+        cout << ": " << ls << endl;
+        s = max(ls,s);
+    }
+
+    return s;
+}
+
+int main()
+{
+    vector<int> A = {2,3,7,5,1,3,9};
+    cout << mushrooms(A,4,6) << endl;
+}
+```
+
 Lesson 06 - Sorting
 =========
 
