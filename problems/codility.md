@@ -410,6 +410,34 @@ int main()
 }
 ```
 
+```C++
+#include <algorithm>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int distinct(vector<int> A)
+{
+    if (A.empty()) return 0;
+    int n = 1;
+    sort(begin(A),end(A));
+    for (auto i = 1u; i < A.size(); i++) {
+        if (A[i] != A[i-1]) {
+            n++;
+        }
+    }
+    return n;
+}
+
+int main()
+{
+    vector<int> A = {3,1,4,1,5,9,2,6,5,3,5,8};
+    cout << distinct(A) << endl;
+    sort(begin(A),end(A));
+    cout << distance(begin(A),unique(begin(A),end(A))) << endl;
+}
+```
+
 Triangle
 --------
 ```C++
