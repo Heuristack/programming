@@ -625,6 +625,32 @@ int main()
 }
 ```
 
+Golden Maximum Slice Summation
+------------------------------
+```C++
+#include <algorithm>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int max_slice(vector<int> const & A)
+{
+    int x = 0;
+    int m = 0;
+    for (auto i = 0u; i < A.size(); i++) {
+        x = max(0,x+A[i]);
+        m = max(m,x);
+    }
+    return m;
+}
+
+int main()
+{
+    vector<int> A = {5,-7,3,5,-2,4,-1};
+    cout << max_slice(A) << endl;
+}
+```
+
 Lesson 10 - Prime and Composite Numbers
 =========
 
