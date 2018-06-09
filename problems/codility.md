@@ -1,4 +1,3 @@
-
 Lesson 01 - Iterations
 =========
 
@@ -591,6 +590,35 @@ int main()
 {
     vector<int> A = {6,8,4,6,8,6,6};
     cout << leader(A) << endl;
+}
+```
+
+Dominator
+---------
+```C++
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int solution(vector<int> & A)
+{
+    unordered_map<int,vector<int>> M;
+    for (auto i = 0u; i < A.size(); i++) {
+        M[A[i]].push_back(i);
+    }
+    for (auto [e,v] : M) {
+        if (v.size() > A.size()/2) {
+            return v.back();
+        }
+    }
+    return -1;
+}
+
+int main()
+{
+    vector<int> A = {3,4,3,2,3,-1,3,3};
+    cout << solution(A) << endl;
 }
 ```
 
