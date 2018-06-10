@@ -1085,6 +1085,33 @@ int main()
 }
 ```
 
+Three Parts
+-----------
+```C++
+#include <algorithm>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int solution(vector<int> & A)
+{
+    int m = numeric_limits<int>::max();
+    for (unsigned p = 0 + 1; p < A.size() - 3; p++) {
+    for (unsigned q = p + 2; q < A.size() - 1; q++) {
+        m = min(A[p] + A[q], m);
+        cout << "(" << p << "," << q << "): " << A[p] + A[q] << endl;
+    }
+    }
+    return m;
+}
+
+int main()
+{
+    vector<int> A = {5,2,4,6,3,7};
+    cout << solution(A) << endl;
+}
+```
+
 Lesson 16 - Greedy Algorithms
 =========
 
