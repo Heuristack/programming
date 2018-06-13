@@ -8,6 +8,49 @@ Prototype
 ---------
 Singleton
 ---------
+```C++
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Singleton
+{
+public:
+    Singleton(string const & a): m{a}{}
+
+    static Singleton & instance()
+    {
+        if (m_instance == nullptr) {
+            cout << "Constructing on First Use ... " << endl;
+            m_instance = make_unique<Singleton>("The Unique Instance!");
+        }
+        return *m_instance;
+    }
+
+public:
+    Singleton & set(string const & a)
+    {
+        m = a;
+        return *this;
+    }
+    string const & get() const
+    {
+        return m;
+    }
+
+private:
+    string m;
+    static unique_ptr<Singleton> m_instance;
+};
+unique_ptr<Singleton> Singleton::m_instance = nullptr;
+
+int main()
+{
+    cout << Singleton::instance().get() << endl;
+    cout << Singleton::instance().get() << endl;
+    cout << Singleton::instance().set("Hello,World!").get() << endl;
+}
+```
 
 Adapter
 -------
