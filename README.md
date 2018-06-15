@@ -1,3 +1,53 @@
+Primality Check in Compile-Time
+-------------------------------
+```C++
+#include <iostream>
+using namespace std;
+
+template <int N, int i>
+struct PrimeTypeFunction
+{
+    static constexpr bool value = (N % i != 0) &&
+        PrimeTypeFunction<N, i-1>::value;
+};
+
+template <int N>
+struct PrimeTypeFunction<N, 1>
+{
+    static constexpr bool value = 1;
+};
+
+template <int A>
+struct is_prime
+{
+    static constexpr bool value = PrimeTypeFunction<A, A-1>::value;
+};
+
+template <>
+struct is_prime<0>
+{
+    static constexpr bool value = 0;
+};
+
+template <>
+struct is_prime<1>
+{
+    static constexpr bool value = 0;
+};
+
+int main()
+{
+    static_assert(is_prime<0>::value == 0, "0 is not prime");
+    static_assert(is_prime<1>::value == 0, "1 is not prime");
+    static_assert(is_prime<2>::value == 1, "2 is prime");
+    static_assert(is_prime<3>::value == 1, "3 is prime");
+
+    static_assert(is_prime<13>::value == 1, "13 is prime");
+    static_assert(is_prime<24>::value == 0, "24 is not prime");
+}
+
+```
+
 Parameter Pack
 --------------
 ```C++
