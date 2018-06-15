@@ -1,3 +1,24 @@
+Parameter Pack
+--------------
+```C++
+#include <iostream>
+#include <utility>
+#include <tuple>
+using namespace std;
+
+template <typename T, T... ints>
+void process_integer_sequence(integer_sequence<T, ints...>)
+{
+    ((cout << ints << endl),...);
+}
+
+int main()
+{
+    process_integer_sequence(integer_sequence<int,3,1,4,1,5>{});
+}
+
+```
+
 IOTA
 ---
 ```C++
@@ -11,6 +32,7 @@ int main()
     iota(begin(v),end(v),10);
     for (auto i : v) { cout << i << endl; }
 }
+
 ```
 
 Mutable Lambda Capture
@@ -25,6 +47,7 @@ int main()
         cout << pi << endl;
     }();
 }
+
 ```
 
 Output an integer as a character
@@ -41,6 +64,7 @@ int main()
     auto i = stoi("0x59",nullptr,16);
     cout << static_cast<char>(i) << endl;
 }
+
 ```
 
 Calculate Prices
@@ -73,6 +97,7 @@ int main()
 {
     cout << calculate_price(-5) << endl;
 }
+
 ```
 
 Pass Function Template
@@ -104,6 +129,7 @@ int main()
     run(f);
     run(g<int>);
 }
+
 ```
 
 Boost: Hana Heterogeneous Computation
@@ -126,6 +152,7 @@ int main()
         cout << element.name << endl;
     });
 }
+
 ```
 
 Resize: increase;decrease;
@@ -152,6 +179,7 @@ int main()
     container.resize(20);
     cout << endl;
 }
+
 ```
 
 Infinity: max double value
@@ -181,6 +209,7 @@ int main()
     vector<int> v = {3,1,4,1,5};
     cout << *min_element(begin(v),end(v),[](auto const & a, auto const & b){ return a > b; }) << endl;
 }
+
 ```
 
 Order;Equal;Hash;
@@ -231,6 +260,7 @@ int main()
     auto compare = [](T const & a, T const & b){ return a.b < b.b; };
     set<T,decltype(compare)> cool_set(compare);
 }
+
 ```
 
 Priority Queue: Sorting Criterion
@@ -289,6 +319,7 @@ int main()
 
     return 0;
 }
+
 ```
 
 Chrono: Clock;Duration;TimePoint;
@@ -315,6 +346,7 @@ int main()
     chrono::duration<double> seconds {e - b};
     cout << fixed << setprecision(9) << seconds.count() << "(s)" << endl;
 }
+
 ```
 
 Decompose Embedded Declaration List
@@ -331,6 +363,7 @@ int main()
     auto [a,b] = _;
     cout << a << b << c << endl;
 }
+
 ```
 
 Interpret Input Stream
@@ -365,6 +398,7 @@ int main()
         cout << source << "-" << target << ": " << weight << endl;
     }
 }
+
 ```
 
 Inline Friends
@@ -389,6 +423,7 @@ int main()
     stream >> object;
     cout << object << endl;
 }
+
 ```
 
 Test Cases
@@ -409,6 +444,7 @@ int main()
     tests.push_back([]()->bool{ return 0; });
     assert(all_of(begin(tests),end(tests),[](auto f){ return f(); }));
 }
+
 ```
 
 Function Attributes
@@ -444,6 +480,7 @@ int main()
     cout << "  ref: " << is_reference<decltype(c)>::value << endl;
 }
 
+
 ```
 
 Endianness
@@ -458,6 +495,7 @@ bool is_big_endian()
 {
 	return 1L == htonl(1L);
 }
+
 ```
 
 ```C++
@@ -470,6 +508,7 @@ bool is_big_endian() {
 	word = {0x01020304};
 	return word.bytes[0] == 0x01;
 }
+
 ```
 
 Alignment
@@ -481,6 +520,7 @@ int main()
     cout << alignment_of<T>::value << endl;
     cout << alignment_of<int>() << endl;
 }
+
 ```
 
 Compile-Time Computation: Factorial Numbers
@@ -496,6 +536,7 @@ int main()
 {
     cout << "Factorial(10) = " << Factorial(10) << endl;
 }
+
 ```
 
 Type Traits: Common Type
@@ -520,6 +561,7 @@ int main()
     Number<double> d1 = {2.3}, d2 = {3.5};
     cout << "i1i2: " << (i1 + i2).n << "\ni1d2: " << (i1 + d2).n << '\n' << "d1i2: " << (d1 + i2).n << "\nd1d2: " << (d1 + d2).n << '\n';
 }
+
 ```
 
 Compile-Time Recurrence: Factorial Numbers
@@ -585,6 +627,7 @@ int main(int n, char * v[])
     std::cout << std::less<int>()(a, b) << std::endl;
     std::cout << std::less<unsigned>()(a, b) << std::endl;
 }
+
 ```
 
 Offset of Structure Field
@@ -605,6 +648,7 @@ int main(int argc, char ** argv)
 
     printf("'level' is the %lu byte in 'user' structure\n", offsetof(user, level));
 }
+
 ```
 
 Decay: Array as Function Argument
@@ -627,6 +671,7 @@ int main()
     int a[3];
     func(a);
 }
+
 ```
 
 Run-Time Assert on Word Size
@@ -649,6 +694,7 @@ int main()
         return v.size() == 5;
     }));
 }
+
 ```
 
 Precision on Stream
@@ -666,6 +712,7 @@ catch(std::exception & e) {
     std::cout << "exception: " << e.what() << std::endl;
     std::cout << "usage: " << v[0] << " double precision" << std::endl;
 }
+
 ```
 
 Count Words using Unique-Map
@@ -704,6 +751,7 @@ int main()
     sort(s.begin(), s.end(), [](decltype(s)::value_type a, decltype(s)::value_type b){ return a.first > b.first; });
     for (const auto & p : s) { cout << p.first << ": " << p.second << endl; }
 }
+
 ```
 
 Stream Iterators and Transform Algorithm
@@ -725,6 +773,7 @@ int main()
     transform(names.begin(),names.end(),back_inserter(lines),[](string const & s){ return s + "\n"; });
     copy(lines.begin(),lines.end(),o);
 }
+
 ```
 
 CCIA File Name Parser
@@ -783,6 +832,7 @@ int main()
         std::cout << chapter << section << std::endl;
     }
 }
+
 ```
 
 Lambda: Function Procedure Thread Task
@@ -848,6 +898,7 @@ int main()
     }
     return 0;
 }
+
 ```
 
 Parameterize Random Number Generation
@@ -937,6 +988,7 @@ int main()
     print_bucket(cout, s);
     print_bucket_reverse(cout, s);
 }
+
 ```
 
 Tree Search: `BFS` and `DFS`
@@ -1011,5 +1063,6 @@ int main()
     bfs(g,0); cout << endl;
     dfs(g,0); cout << endl;
 }
+
 ```
 
