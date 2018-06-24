@@ -3,54 +3,70 @@
 **Lesson 01 - Iterations**
 - [Triangle](#triangle)
 - [Symmetric Triangle](#symmetric-triangle)
+
 **Lesson 02 - Arrays**
 - [Rgith Rotation](#right-rotation)
 - [Odd Occurrences](#odd-occurrences)
+
 **Lesson 03 - Time Complexity**
 - [Tape Equilibrium](#tape-equilibrium)
 - [Counting](#couting)
+
 **Lesson 04 - Counting Elements**
 - [Swap Equal](#swap-equal)
 - [Missing Posative](#missing-posative)
 - [Permutation Check](#permutation-check)
+
 **Lesson 05 - Prefix Sums**
 - [Prefix Partial Sum](#prefix-partial-sum)
 - [Max Mushrooms](#max-mushrooms)
+
 **Lesson 06 - Sorting**
 - [Maximum Product of Three](#maximum-product-of-three)
 - [Distinct](#distinct)
 - [Triangle Inequality](#triangle-inequality)
 - [Number of Intersections](#number-of-itersections)
+
 **Lesson 07 - Stacks and Queues**
 - [Circular Buffer](#circular-buffer)
+
 **Lesson 08 - Leader**
-- [Leader: `count(leader) > n/2`](#leader)
+- [Leader](#leader)
 - [Dominator](#dominator)
+
 **Lesson 09 - Maximum Slice Problem**
 - [Maximum Slice Summation](#maximum-slice-summation)
 - [Golden Maximum Slice Summation](#golden-maximum-slice-summation)
+
 **Lesson 10 - Prime and Composite Numbers**
 - [Count Divisors of a Number](#count-divisors-of-a-number)
 - [Primality Test](#primality-test)
+
 **Lesson 11 - Sieve of Eratosthenes**
 - [Sieve](#sieve)
+
 **Lesson 12 - Euclidean Algorithm**
 - [Euclidean algorithm by subtraction](#euclidean-algorithm-by-subtraction)
 - [Euclidean algorithm by division](#euclidean-algorithm-by-division)
+
 **Lesson 13 - Fibonacci Numbers**
 - [Recursive Fibonacci](#recursive-fibonacci)
 - [Dynamic Fibonacci](#dynamic-fibonacci)
+
 **Lesson 14 - Binary Search**
 - [Binary Search](#binary-search)
 - [Nailing Planks](#nailing-planks)
+
 **Lesson 15 - Caterpillar Method**
 - [Caterpillar Method](#caterpillar-method)
 - [Triangle Counting](#triangle-counting)
 - [Triangle Counting Improved](#triangle-counting-improved)
 - [Three Parts](#three-parts)
+
 **Lesson 16 - Greedy Algorithms**
 - [Greedy Coin Changing](#greedy-coin-changing)
 - [Canoeist](#canoeist)
+
 **Lesson 17 - Dynamic Programming**
 - [Dynamic Coin Changing](#dynamic-coin-changing)
 
@@ -597,7 +613,7 @@ int main()
 
 ## Lesson 08 - Leader
 
-### Leader: `count(leader) > n/2`
+### Leader
 ```C++
 #include <iostream>
 #include <vector>
