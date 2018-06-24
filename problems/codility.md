@@ -1,11 +1,63 @@
+# Codility Lessons
 
-[Triangle](#triangle)
+**Lesson 01 - Iterations**
+- [Triangle](#triangle)
+- [Symmetric Triangle](#symmetric-triangle)
+**Lesson 02 - Arrays**
+- [Rgith Rotation](#right-rotation)
+- [Odd Occurrences](#odd-occurrences)
+**Lesson 03 - Time Complexity**
+- [Tape Equilibrium](#tape-equilibrium)
+- [Counting](#couting)
+**Lesson 04 - Counting Elements**
+- [Swap Equal](#swap-equal)
+- [Missing Posative](#missing-posative)
+- [Permutation Check](#permutation-check)
+**Lesson 05 - Prefix Sums**
+- [Prefix Partial Sum](#prefix-partial-sum)
+- [Max Mushrooms](#max-mushrooms)
+**Lesson 06 - Sorting**
+- [Maximum Product of Three](#maximum-product-of-three)
+- [Distinct](#distinct)
+- [Triangle Inequality](#triangle-inequality)
+- [Number of Intersections](#number-of-itersections)
+**Lesson 07 - Stacks and Queues**
+- [Circular Buffer](#circular-buffer)
+**Lesson 08 - Leader**
+- [Leader: `count(leader) > n/2`](#leader)
+- [Dominator](#dominator)
+**Lesson 09 - Maximum Slice Problem**
+- [Maximum Slice Summation](#maximum-slice-summation)
+- [Golden Maximum Slice Summation](#golden-maximum-slice-summation)
+**Lesson 10 - Prime and Composite Numbers**
+- [Count Divisors of a Number](#count-divisors-of-a-number)
+- [Primality Test](#primality-test)
+**Lesson 11 - Sieve of Eratosthenes**
+- [Sieve](#sieve)
+**Lesson 12 - Euclidean Algorithm**
+- [Euclidean algorithm by subtraction](#euclidean-algorithm-by-subtraction)
+- [Euclidean algorithm by division](#euclidean-algorithm-by-division)
+**Lesson 13 - Fibonacci Numbers**
+- [Recursive Fibonacci](#recursive-fibonacci)
+- [Dynamic Fibonacci](#dynamic-fibonacci)
+**Lesson 14 - Binary Search**
+- [Binary Search](#binary-search)
+- [Nailing Planks](#nailing-planks)
+**Lesson 15 - Caterpillar Method**
+- [Caterpillar Method](#caterpillar-method)
+- [Triangle Counting](#triangle-counting)
+- [Triangle Counting Improved](#triangle-counting-improved)
+- [Three Parts](#three-parts)
+**Lesson 16 - Greedy Algorithms**
+- [Greedy Coin Changing](#greedy-coin-changing)
+- [Canoeist](#canoeist)
+**Lesson 17 - Dynamic Programming**
+- [Dynamic Coin Changing](#dynamic-coin-changing)
 
-Lesson 01 - Iterations
-=========
 
-Triangle
---------
+## Lesson 01 - Iterations
+
+### Triangle
 ```C++
 #include <iostream>
 using namespace std;
@@ -26,8 +78,7 @@ int main()
 }
 ```
 
-Symmetric Triangle
-------------------
+### Symmetric Triangle
 ```C++
 #include <iostream>
 using namespace std;
@@ -51,11 +102,9 @@ int main()
 }
 ```
 
-Lesson 02 - Arrays
-=========
+## Lesson 02 - Arrays
 
-Rgith Rotation
---------------
+### Rgith Rotation
 ```C++
 #include <algorithm>
 #include <vector>
@@ -90,8 +139,7 @@ int main()
 }
 ```
 
-Odd Occurrences
----------------
+### Odd Occurrences
 ```C++
 #include <algorithm>
 #include <vector>
@@ -110,11 +158,9 @@ int solution(vector<int> & a)
 }
 ```
 
-Lesson 03 - Time Complexity
-=========
+## Lesson 03 - Time Complexity
 
-Tape Equilibrium
-----------------
+### Tape Equilibrium
 ```C++
 #include <iostream>
 #include <vector>
@@ -144,11 +190,9 @@ int main()
 }
 ```
 
-Lesson 04 - Counting Elements
-=========
+## Lesson 04 - Counting Elements
 
-Counting
---------
+### Counting
 ```C++
 #include <algorithm>
 #include <vector>
@@ -172,8 +216,7 @@ int main()
 }
 ```
 
-Swap Equal
-----------
+### Swap Equal
 ```C++
 #include <algorithm>
 #include <numeric>
@@ -203,8 +246,7 @@ int main()
 }
 ```
 
-Missing Posative
-----------------
+### Missing Posative
 ```C++
 #include <algorithm>
 #include <set>
@@ -229,8 +271,7 @@ int missing(vector<int> & a)
 }
 ```
 
-Permutation Check
------------------
+### Permutation Check
 ```C++
 #include <iostream>
 #include <vector>
@@ -253,11 +294,9 @@ int main()
 }
 ```
 
-Lesson 05 - Prefix Sums
-=========
+## Lesson 05 - Prefix Sums
 
-Prefix Partial Sum
--------------------
+### Prefix Partial Sum
 ```C++
 #include <iostream>
 #include <numeric>
@@ -279,8 +318,7 @@ int main()
 }
 ```
 
-Max Mushrooms
--------------
+### Max Mushrooms
 ```C++
 #include <algorithm>
 #include <vector>
@@ -359,11 +397,9 @@ int main()
 }
 ```
 
-Lesson 06 - Sorting
-=========
+## Lesson 06 - Sorting
 
-Maximum Product of Three
-------------------------
+### Maximum Product of Three
 ```C++
 #include <algorithm>
 #include <vector>
@@ -390,8 +426,7 @@ int main()
 }
 ```
 
-Distinct
---------
+### Distinct
 ```C++
 #include <algorithm>
 #include <vector>
@@ -440,8 +475,7 @@ int main()
 }
 ```
 
-Triangle
---------
+### Triangle Inequality
 ```C++
 #include <algorithm>
 #include <vector>
@@ -468,8 +502,7 @@ int main()
 }
 ```
 
-Number of Intersections
------------------------
+### Number of Intersections
 ```C++
 #include <algorithm>
 #include <vector>
@@ -514,11 +547,9 @@ int main()
 }
 ```
 
-Lesson 07 - Stacks and Queues
-=========
+## Lesson 07 - Stacks and Queues
 
-Circular Buffer
-------------
+### Circular Buffer
 ```C++
 #include <iostream>
 #include <vector>
@@ -564,11 +595,9 @@ int main()
 }
 ```
 
-Lesson 08 - Leader
-=========
+## Lesson 08 - Leader
 
-Leader: `count(leader) > n/2`
------------------------------
+### Leader: `count(leader) > n/2`
 ```C++
 #include <iostream>
 #include <vector>
@@ -596,8 +625,7 @@ int main()
 }
 ```
 
-Dominator
----------
+### Dominator
 ```C++
 #include <iostream>
 #include <vector>
@@ -625,11 +653,9 @@ int main()
 }
 ```
 
-Lesson 09 - Maximum Slice Problem
-=========
+## Lesson 09 - Maximum Slice Problem
 
-Maximum Slice Summation
------------------------
+### Maximum Slice Summation
 ```C++
 #include <algorithm>
 #include <vector>
@@ -656,8 +682,7 @@ int main()
 }
 ```
 
-Golden Maximum Slice Summation
-------------------------------
+### Golden Maximum Slice Summation
 ```C++
 #include <algorithm>
 #include <vector>
@@ -682,11 +707,9 @@ int main()
 }
 ```
 
-Lesson 10 - Prime and Composite Numbers
-=========
+## Lesson 10 - Prime and Composite Numbers
 
-Count Divisors of a Number
---------------------------
+### Count Divisors of a Number
 ```C++
 #include <iostream>
 using namespace std;
@@ -714,8 +737,7 @@ int main()
 }
 ```
 
-Primality Test
---------------
+### Primality Test
 ```C++
 #include <iostream>
 using namespace std;
@@ -738,11 +760,9 @@ int main()
 }
 ```
 
-Lesson 11 - Sieve of Eratosthenes
-=========
+## Lesson 11 - Sieve of Eratosthenes
 
-Sieve
------
+### Sieve
 ```C++
 #include <iostream>
 #include <vector>
@@ -773,11 +793,9 @@ int main()
 }
 ```
 
-Lesson 12 - Euclidean Algorithm
-=========
+## Lesson 12 - Euclidean Algorithm
 
-Euclidean algorithm by subtraction
-----------------------------------
+### Euclidean algorithm by subtraction
 ```C++
 #include <iostream>
 using namespace std;
@@ -795,8 +813,7 @@ int main()
 }
 ```
 
-Euclidean algorithm by division
--------------------------------
+### Euclidean algorithm by division
 ```C++
 #include <iostream>
 using namespace std;
@@ -822,11 +839,9 @@ int main()
 }
 ```
 
-Lesson 13 - Fibonacci Numbers
-=========
+## Lesson 13 - Fibonacci Numbers
 
-Recursive Fibonacci
--------------------
+### Recursive Fibonacci
 ```C++
 #include <iostream>
 using namespace std;
@@ -843,8 +858,7 @@ int main()
 }
 ```
 
-Dynamic Fibonacci
------------------
+### Dynamic Fibonacci
 ```C++
 #include <iostream>
 #include <vector>
@@ -866,11 +880,9 @@ int main()
 }
 ```
 
-Lesson 14 - Binary Search
-=========
+## Lesson 14 - Binary Search
 
-Binary Search
--------------
+### Binary Search
 ```C++
 #include <cassert>
 #include <vector>
@@ -931,8 +943,7 @@ int main()
 }
 ```
 
-Nailing Planks
---------------
+### Nailing Planks
 [BF:RESULT](https://app.codility.com/demo/results/trainingJMKUCA-AYF)
 
 ```C++
@@ -988,11 +999,9 @@ int main()
 }
 ```
 
-Lesson 15 - Caterpillar Method
-=========
+## Lesson 15 - Caterpillar Method
 
-Caterpillar Method
-------------------
+### Caterpillar Method
 ```C++
 #include <iostream>
 #include <vector>
@@ -1027,8 +1036,7 @@ int main()
 }
 ```
 
-Triangle Counting
-------------------
+### Triangle Counting
 ```C++
 #include <algorithm>
 #include <vector>
@@ -1060,8 +1068,7 @@ int main()
 }
 ```
 
-Triangle Counting
------------------
+### Triangle Counting Improved
 ```C++
 #include <algorithm>
 #include <iterator>
@@ -1088,8 +1095,7 @@ int main()
 }
 ```
 
-Three Parts
------------
+### Three Parts
 ```C++
 #include <algorithm>
 #include <vector>
@@ -1115,11 +1121,9 @@ int main()
 }
 ```
 
-Lesson 16 - Greedy Algorithms
-=========
+## Lesson 16 - Greedy Algorithms
 
-Greedy Coin Changing
---------------------
+### Greedy Coin Changing
 ```C++
 #include <iostream>
 #include <numeric>
@@ -1149,8 +1153,7 @@ int main()
 }
 ```
 
-Canoeist
---------
+### Canoeist
 ```C++
 #include <algorithm>
 #include <vector>
@@ -1202,11 +1205,9 @@ int main()
 }
 ```
 
-Lesson 17 - Dynamic Programming
-=========
+## Lesson 17 - Dynamic Programming
 
-Dynamic Coin Changing
----------------------
+### Dynamic Coin Changing
 ```C++
 #include <iostream>
 #include <vector>
