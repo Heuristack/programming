@@ -1,3 +1,6 @@
+
+[Triangle](#triangle)
+
 Lesson 01 - Iterations
 =========
 
