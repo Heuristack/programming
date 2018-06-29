@@ -1,3 +1,26 @@
+Formatted Message Creator
+-------------------------
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+string message(string const & object, string const & content)
+{
+    string m(100, ' ');
+    snprintf(m.data(), m.size(), "%10s : %s", object.data(), content.data());
+    return m;
+}
+
+int main()
+{
+    cout << message("Factory","Produce Product") << endl;
+}
+
+```
+
 Primality Check in Compile-Time
 -------------------------------
 ```C++
