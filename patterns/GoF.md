@@ -148,3 +148,16 @@ Template Method
 Visitor
 -------
 
+Message Printer
+---------------
+```C++
+string make_message(string const & object = "", string const & content = "")
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%-10s: %s", object.data(), content.data());
+    return message;
+}
+
+```
+
