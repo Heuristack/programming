@@ -74,56 +74,75 @@ Command
 -------
 ```C++
 #include <iostream>
+#include <string>
+#include <cstdio>
+
 using namespace std;
 
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%-10s: %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+// Receiver
 class Receiver1
 {
 public:
     void action1()
     {
-        cout << "Receiver1: Hello, World!" << endl;
+        print_message("Receiver1", "Hello World!");
     }
 };
 
+// Command
 class Command
 {
 public:
     virtual void execute() = 0;
+    virtual ~Command() {}
 };
 
 class Command1 : public Command
 {
 public:
-    Command1(Receiver1 & receiver1): receiver1(receiver1) {}
-
     void execute() override
     {
-        cout << "Command1: Performing the request ..." << endl;
-        receiver1.action1();
+        print_message("Command1", "Performing (carrying out) the request ... ");
+        receiver1_ptr->action1();
     }
 
+public:
+    explicit Command1(Receiver1 * receiver1_ptr): receiver1_ptr{receiver1_ptr} {}
+    ~Command1() override { delete receiver1_ptr; }
+
 private:
-    Receiver1 & receiver1;
+    Receiver1 * receiver1_ptr = nullptr;
 };
 
+// Invoker
 class Invoker
 {
 public:
-    Invoker(Command & command): command(command) {}
-
     void operation()
     {
-        cout << "Invoker  : Calling execute on the installed command ...  " << endl;
-        command.execute();
+        print_message("Invoker", "Calling 'execute' on the installed command ... ");
+        command_ptr->execute();
     }
 
+public:
+    explicit Invoker(Command * command_ptr): command_ptr{command_ptr} {}
+    ~Invoker() { delete command_ptr; }
+
 private:
-    Command & command;
+    Command * command_ptr = nullptr;
 };
 
 int main()
 {
-    Invoker invoker{*(new Command1{*(new Receiver1{})})};
+    Invoker invoker {new Command1{new Receiver1{}}};
     invoker.operation();
 }
 
@@ -147,17 +166,4 @@ Template Method
 ---------------
 Visitor
 -------
-
-Message Printer
----------------
-```C++
-string make_message(string const & object = "", string const & content = "")
-{
-    string message(200,0);
-    snprintf(message.data(), message.size(),
-            "%-10s: %s", object.data(), content.data());
-    return message;
-}
-
-```
 
