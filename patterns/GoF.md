@@ -70,6 +70,137 @@ Proxy
 
 Chain of Responsibility
 -----------------------
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+// Handler
+class Handler
+{
+public:
+    Handler() {}
+    Handler(Handler * successor): successor{successor} {}
+
+public:
+    virtual auto handle_request() -> void
+    {
+        if (successor != nullptr) {
+            successor->handle_request();
+        }
+    }
+
+    virtual auto can_handle() -> bool
+    {
+        return 0;
+    }
+
+private:
+    Handler * successor = nullptr;
+};
+
+// Receiver
+class Receiver1 : public Handler
+{
+public:
+    Receiver1(): Handler{} {}
+    Receiver1(Handler * successor): Handler{successor} {}
+
+public:
+    auto handle_request() -> void override
+    {
+        if (can_handle()) {
+            print_message("Receiver1", "Handling the request ... ");
+        }
+        else {
+            print_message("Receiver1", "Passing the request along the chain ... ");
+            Handler::handle_request();
+        }
+    }
+
+    auto can_handle() -> bool override
+    {
+        return 0;
+    }
+};
+
+class Receiver2 : public Handler
+{
+public:
+    Receiver2(): Handler{} {}
+    Receiver2(Handler * successor): Handler{successor} {}
+
+public:
+    auto handle_request() -> void override
+    {
+        if (can_handle()) {
+            print_message("Receiver2", "Handling the request ... ");
+        }
+        else {
+            print_message("Receiver2", "Passing the request along the chain ... ");
+            Handler::handle_request();
+        }
+    }
+
+    auto can_handle() -> bool override
+    {
+        return 0;
+    }
+};
+
+class Receiver3 : public Handler
+{
+public:
+    Receiver3(): Handler{} {}
+    Receiver3(Handler * successor): Handler{successor} {}
+
+public:
+    auto handle_request() -> void override
+    {
+        if (can_handle()) {
+            print_message("Receiver3", "Handling the request ... ");
+        }
+        else {
+            print_message("Receiver3", "Passing the request along the chain ... ");
+            Handler::handle_request();
+        }
+    }
+
+    auto can_handle() -> bool override
+    {
+        return 1;
+    }
+};
+
+// Sender
+class Sender
+{
+public:
+    static void main()
+    {
+        Handler * handler = new Handler{new Receiver1{new Receiver2{new Receiver3{}}}};
+        print_message("Sender", "Issuing a request to a handler object ... ");
+        handler->handle_request();
+        delete handler;
+    }
+};
+
+int main()
+{
+    Sender::main();
+}
+
+```
 Command
 -------
 ```C++
@@ -83,7 +214,7 @@ auto print_message(string const & object = "", string const & content = "") -> v
 {
     string message(200,0);
     snprintf(message.data(), message.size(),
-            "%-10s: %s", object.data(), content.data());
+            "%10s : %s", object.data(), content.data());
     cout << message << endl;
 }
 
