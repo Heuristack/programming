@@ -11,44 +11,42 @@ Singleton
 ```C++
 #include <iostream>
 #include <string>
+#include <cstdio>
+
 using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
 
 class Singleton
 {
 public:
-    Singleton(string const & a): m{a}{}
 
-    static Singleton & instance()
+    static Singleton * get_instance()
     {
-        if (m_instance == nullptr) {
-            cout << "Constructing on First Use ... " << endl;
-            m_instance = make_unique<Singleton>("The Unique Instance!");
+        static Singleton * instance_ptr = nullptr;
+        if (instance_ptr == nullptr) {
+            instance_ptr = new Singleton();
         }
-        return *m_instance;
-    }
-
-public:
-    Singleton & set(string const & a)
-    {
-        m = a;
-        return *this;
-    }
-    string const & get() const
-    {
-        return m;
+        return instance_ptr;
     }
 
 private:
-    string m;
-    static unique_ptr<Singleton> m_instance;
+    Singleton() {}
 };
-unique_ptr<Singleton> Singleton::m_instance = nullptr;
 
 int main()
 {
-    cout << Singleton::instance().get() << endl;
-    cout << Singleton::instance().get() << endl;
-    cout << Singleton::instance().set("Hello,World!").get() << endl;
+    Singleton * instance_ptr1 = Singleton::get_instance();
+    Singleton * instance_ptr2 = Singleton::get_instance();
+    if (instance_ptr1 == instance_ptr2) {
+        print_message("Singleton", "instantiated only once");
+    }
 }
 
 ```
@@ -85,7 +83,6 @@ auto print_message(string const & object = "", string const & content = "") -> v
     cout << message << endl;
 }
 
-// Handler
 class Handler
 {
 public:
@@ -109,7 +106,6 @@ private:
     Handler * successor = nullptr;
 };
 
-// Receiver
 class Receiver1 : public Handler
 {
 public:
@@ -182,7 +178,6 @@ public:
     }
 };
 
-// Sender
 class Sender
 {
 public:
@@ -218,7 +213,6 @@ auto print_message(string const & object = "", string const & content = "") -> v
     cout << message << endl;
 }
 
-// Receiver
 class Receiver1
 {
 public:
@@ -228,7 +222,6 @@ public:
     }
 };
 
-// Command
 class Command
 {
 public:
@@ -253,7 +246,6 @@ private:
     Receiver1 * receiver1_ptr = nullptr;
 };
 
-// Invoker
 class Invoker
 {
 public:
@@ -281,6 +273,100 @@ int main()
 
 Interpreter
 -----------
+```C++
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstdio>
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Context
+{};
+
+class AbstractExpression
+{
+public:
+    AbstractExpression(string const & name): name{name} {}
+    virtual ~AbstractExpression() = default;
+
+public:
+    virtual void interpret(Context const & context) = 0;
+    virtual void add(AbstractExpression * expression) {}
+    string const & get_name() const { return name; }
+
+private:
+    string name;
+};
+
+class NonTerminalExpression : public AbstractExpression
+{
+public:
+   ~NonTerminalExpression() { for (auto expression : expressions)  delete expression;  }
+    NonTerminalExpression(string const & name): AbstractExpression{name} {}
+
+public:
+    void interpret(Context const & context) override
+    {
+        print_message(get_name(), "");
+        for (auto expression : expressions) {
+            print_message("", "interpreting ... " + expression->get_name());
+            expression->interpret(context);
+        }
+        print_message(get_name(), "finished");
+    }
+
+    void add(AbstractExpression * expression) override
+    {
+        expressions.push_back(expression);
+    }
+
+private:
+    vector<AbstractExpression *> expressions;
+};
+
+class TerminalExpression : public AbstractExpression
+{
+public:
+    TerminalExpression(string const & name): AbstractExpression{name} {}
+public:
+    void interpret(Context const & context) override
+    {}
+};
+
+class Client
+{
+public:
+    static void main()
+    {
+        AbstractExpression * nt_expr2 = new NonTerminalExpression("ntExpr2");
+        nt_expr2->add(new TerminalExpression(" tExpr3"));
+        nt_expr2->add(new TerminalExpression(" tExpr4"));
+        nt_expr2->add(new TerminalExpression(" tExpr5"));
+        AbstractExpression * nt_expr1 = new NonTerminalExpression("ntExpr1");
+        nt_expr1->add(new TerminalExpression(" tExpr1"));
+        nt_expr1->add(nt_expr2);
+        nt_expr1->add(new TerminalExpression(" tExpr2"));
+        Context context;
+        nt_expr1->interpret(context);
+        delete nt_expr1;
+    }
+};
+
+int main()
+{
+    Client::main();
+}
+
+```
+
 Iterator
 --------
 Mediator
