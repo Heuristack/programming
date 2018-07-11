@@ -371,6 +371,122 @@ Iterator
 --------
 Mediator
 --------
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Mediator;
+class Colleague;
+
+class Mediator
+{
+public:
+    virtual void mediate(Colleague * colleague) = 0;
+};
+
+class Colleague
+{
+public:
+    Colleague(Mediator * mediator): mediator{mediator} {}
+    Mediator * mediator;
+};
+
+class Colleague1 : public Colleague
+{
+public:
+    Colleague1(Mediator * mediator): Colleague{mediator} {}
+    string const & get_state() const { return state; }
+    void set_state(string const & state)
+    {
+        if (this->state != state) {
+            this->state = state;
+            print_message("Colleague1", "My state changed to " + state + " Calling my mediator ... ");
+            mediator->mediate(this);
+        }
+    }
+    void action1(string state)
+    {
+        this->state = state;
+        print_message("Colleague1", "My state is synchronized to " + state);
+    }
+
+private:
+    string state;
+};
+
+class Colleague2 : public Colleague
+{
+public:
+    Colleague2(Mediator * mediator): Colleague{mediator} {}
+    string const & get_state() const { return state; }
+
+    void set_state(string const & state)
+    {
+        if (this->state != state) {
+            this->state = state;
+            print_message("Colleague2", "My state changed to " + state + " Calling my mediator ... ");
+            mediator->mediate(this);
+        }
+    }
+    void action2(string state)
+    {
+        this->state = state;
+        print_message("Colleague2", "My state is synchronized to " + state);
+    }
+
+private:
+    string state;
+};
+
+class Mediator1 : public Mediator
+{
+public:
+    Colleague1 * colleague1 = nullptr;
+    Colleague2 * colleague2 = nullptr;
+
+    void set_colleagues(Colleague1 * colleague1, Colleague2 * colleague2)
+    {
+        this->colleague1 = colleague1;
+        this->colleague2 = colleague2;
+    }
+
+    void mediate(Colleague * colleague)
+    {
+        if (colleague == colleague1) {
+            colleague2->action2(colleague1->get_state());
+        }
+        if (colleague == colleague2) {
+            colleague1->action1(colleague2->get_state());
+        }
+    }
+};
+
+int main()
+{
+    Mediator1 mediator1;
+    Colleague1 colleague1(&mediator1);
+    Colleague2 colleague2(&mediator1);
+    mediator1.set_colleagues(&colleague1, &colleague2);
+
+    print_message("(1)", "Changing state of colleague1");
+    colleague1.set_state("(1): Hello,World!");
+
+    print_message("(2)", "Changing state of colleague2");
+    colleague2.set_state("(2): Hello,World!");
+}
+
+```
 Memento
 -------
 Observer
