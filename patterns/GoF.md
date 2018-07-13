@@ -489,6 +489,74 @@ int main()
 ```
 Memento
 -------
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Originator
+{
+public:
+    class Memento
+    {
+    public:
+        void set_state(string const & s) { state = s; }
+        string const & get_state() const { return state; }
+    private:
+        string state;
+    };
+
+public:
+    Memento create_memento() { Memento memento; memento.set_state(state); return memento; }
+    void restore(Memento const & memento) { state = memento.get_state(); }
+
+    void set_state(string const & s) { state = s; }
+    string const & get_state() const { return state; }
+
+private:
+    string state;
+};
+
+
+class Caretaker
+{
+public:
+    static void main()
+    {
+        Originator originator;
+        vector<Originator::Memento> mementos;
+
+        originator.set_state("A");
+        mementos.push_back(originator.create_memento());
+        print_message("(1)", "Saving current state ...... : " + originator.get_state());
+
+        originator.set_state("B");
+        mementos.push_back(originator.create_memento());
+        print_message("(2)", "Saving current state ...... : " + originator.get_state());
+
+        originator.restore(mementos[0]);
+        print_message("(3)", "Restoring to previous state : " + originator.get_state());
+    }
+};
+
+int main()
+{
+    Caretaker::main();
+}
+
+```
+
 Observer
 --------
 State
