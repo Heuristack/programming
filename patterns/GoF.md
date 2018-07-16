@@ -563,6 +563,75 @@ State
 -----
 Strategy
 --------
+```C++
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Strategy
+{
+public:
+    virtual int algorithm() = 0;
+};
+
+class Strategy1 : public Strategy
+{
+public:
+    int algorithm() override
+    {
+        return 1;
+    }
+};
+
+class Strategy2 : public Strategy
+{
+public:
+    int algorithm() override
+    {
+        return 2;
+    }
+};
+
+class Context
+{
+public:
+    Context(Strategy * s): strategy_ptr{s} {}
+    void set_strategy(Strategy * s) { strategy_ptr = s; }
+
+    string operation()
+    {
+        stringstream s;
+        s << "Context: Delegating an algorithm to a strategy: Result = " << strategy_ptr->algorithm();
+        return s.str();
+    }
+
+private:
+    Strategy * strategy_ptr;
+};
+
+int main()
+{
+    Strategy1 s1;
+    Strategy2 s2;
+    Context context(&s1);
+    print_message("(1)", context.operation());
+    context.set_strategy(&s2);
+    print_message("(2)", context.operation());
+}
+
+```
+
 Template Method
 ---------------
 Visitor
