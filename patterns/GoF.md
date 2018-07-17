@@ -559,8 +559,108 @@ int main()
 
 Observer
 --------
+
 State
 -----
+Allow an object to alter its behavior when its internal state changes.
+The object will appear to change its class.
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Context;
+
+class State
+{
+public:
+    virtual string operation(Context * context) = 0;
+};
+
+class Context
+{
+public:
+    Context(State * s) : state_ptr{s} {}
+    string operation()
+    {
+        string s = "Context: Delegating state-specific behavior to the current State object.\n";
+        return s + state_ptr->operation(this);
+    }
+    void set_state(State * s)
+    {
+        if (s != nullptr) {
+            state_ptr = s;
+        }
+    }
+
+private:
+    State * state_ptr = nullptr;
+};
+
+class State1 : public State
+{
+public:
+    static State1 * get_instance()
+    {
+        static State1 state1;
+        return & state1;
+    }
+
+    string operation(Context * context);
+
+private:
+    State1() {}
+};
+
+class State2 : public State
+{
+public:
+    static State2 * get_instance()
+    {
+        static State2 state2;
+        return & state2;
+    }
+
+    string operation(Context * context);
+
+private:
+    State2() {}
+};
+
+string State1::operation(Context * context)
+{
+    string s = "    State1 : Hello World1!  Changing current state of Context to State2.";
+    context->set_state(State2::get_instance());
+    return s;
+}
+
+string State2::operation(Context * context)
+{
+    string s = "    State2 : Hello World1!  Changing current state of Context to State1.";
+    context->set_state(State1::get_instance());
+    return s;
+}
+
+int main()
+{
+    Context * context_ptr = new Context(State1::get_instance());
+    print_message("(1)", context_ptr->operation());
+    print_message("(2)", context_ptr->operation());
+    delete context_ptr;
+}
+
+```
+
 Strategy
 --------
 Define a family of algorithms, encapsulate each one, and make them interchangeable.
