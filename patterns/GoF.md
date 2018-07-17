@@ -377,6 +377,127 @@ int main()
 
 Iterator
 --------
+Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <exception>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+template <typename Element>
+class Iterator
+{
+public:
+    virtual ~Iterator() {}
+    virtual Element next() = 0;
+    virtual bool has_next() = 0;
+};
+
+template <typename Element>
+class Aggregate
+{
+public:
+    virtual ~Aggregate() {}
+    virtual Iterator<Element> * create_iterator() = 0;
+    virtual bool add(Element const & e) = 0;
+};
+
+template <typename Element>
+class Aggregate1 : public Aggregate<Element>
+{
+public:
+    class Iterator1 : public Iterator<Element>
+    {
+    public:
+        Iterator1(Element * base, int size) : base{base}, size{size} {}
+
+        Element next() override
+        {
+            if (cursor < size) {
+                return base[cursor++];
+            }
+            return {};
+        }
+
+        bool has_next() override
+        {
+            return cursor < size;
+        }
+
+    private:
+        int cursor = 0;
+        int size = 0;
+        Element * base = nullptr;
+    };
+
+public:
+    Aggregate1(int n)
+    {
+        if (n > N) {
+            throw exception {};
+        }
+        capacity = n;
+    }
+
+    bool add(Element const & e) override
+    {
+        if (size < capacity) {
+            elements[size++] = e;
+            return true;
+        }
+        return false;
+    }
+
+    Iterator<Element> * create_iterator() override
+    {
+        Iterator<Element> * i = new Iterator1(elements, size);
+        return i;
+    }
+
+private:
+    static constexpr int N = 0xFFFF;
+    int capacity = 0;
+    int size = 0;
+    Element elements[N];
+};
+
+class Client
+{
+public:
+    static void main()
+    {
+        Aggregate<string> * aggretate = new Aggregate1<string>(5);
+        aggretate->add("Element A");
+        aggretate->add("Element B");
+        aggretate->add("Element C");
+
+        Iterator<string> * iterator = aggretate->create_iterator();
+        print_message("Client", "Traversing the aggregate front-to-back:");
+        while (iterator->has_next()) {
+            print_message("", iterator->next());
+        }
+        delete iterator;
+        delete aggretate;
+    }
+};
+
+int main()
+{
+    Client::main();
+}
+
+```
 
 Mediator
 --------
