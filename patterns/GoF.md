@@ -559,6 +559,114 @@ int main()
 
 Observer
 --------
+Define a one-to-many dependency between objects so that when
+one object changes state, all its dependents are notified and updated automatically.
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Observer
+{
+public:
+    virtual ~Observer() {}
+    virtual void update() = 0;
+};
+
+class Subject
+{
+public:
+    void attach(Observer * optr)
+    {
+        observers.push_back(optr);
+    }
+
+    void notify_observers()
+    {
+        for (auto optr : observers) {
+            optr->update();
+        }
+    }
+
+private:
+    vector<Observer *> observers;
+};
+
+class Subject1 : public Subject
+{
+public:
+    string const & get_state() const { return state; }
+    void set_state(string const & s)
+    {
+        state = s;
+        print_message("Subject1", "State changed to " + state);
+        print_message("", "Notifying observers ...");
+        notify_observers();
+    }
+
+private:
+    string state;
+};
+
+class Observer1 : public Observer
+{
+public:
+    Observer1(Subject1 * sptr): subject_ptr{sptr}
+    {
+        subject_ptr->attach(this);
+    }
+
+    void update() override
+    {
+        state = subject_ptr->get_state();
+        print_message("Observer1", "State updated to : " + state);
+    }
+
+private:
+    Subject1 * subject_ptr = nullptr;
+    string state;
+};
+
+class Observer2 : public Observer
+{
+public:
+    Observer2(Subject1 * sptr): subject_ptr{sptr}
+    {
+        subject_ptr->attach(this);
+    }
+
+    void update() override
+    {
+        state = subject_ptr->get_state();
+        print_message("Observer2", "State updated to : " + state);
+    }
+
+private:
+    Subject1 * subject_ptr = nullptr;
+    string state;
+};
+
+int main()
+{
+    Subject1 subject1;
+    Observer1 observer1(&subject1);
+    Observer2 observer2(&subject1);
+    print_message("main", "Changing state of Subject1 ... ");
+    subject1.set_state("100");
+}
+
+```
 
 State
 -----
