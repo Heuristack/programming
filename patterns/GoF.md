@@ -68,6 +68,9 @@ Proxy
 
 Chain of Responsibility
 -----------------------
+Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request.
+Chain the receiving objects and pass the request along the chain until an object handles it.
+
 ```C++
 #include <iostream>
 #include <string>
@@ -196,8 +199,11 @@ int main()
 }
 
 ```
+
 Command
 -------
+Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations.
+
 ```C++
 #include <iostream>
 #include <string>
@@ -273,6 +279,8 @@ int main()
 
 Interpreter
 -----------
+Given a language, define a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language.
+
 ```C++
 #include <iostream>
 #include <vector>
@@ -369,8 +377,12 @@ int main()
 
 Iterator
 --------
+
 Mediator
 --------
+Define an object that encapsulates how a set of objects interact.
+Mediator promotes loose coupling by keeping objects from referring to each other explicitly, and it lets you vary their interaction independently.
+
 ```C++
 #include <iostream>
 #include <string>
@@ -489,6 +501,8 @@ int main()
 ```
 Memento
 -------
+Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later.
+
 ```C++
 #include <iostream>
 #include <string>
@@ -561,6 +575,7 @@ Observer
 --------
 Define a one-to-many dependency between objects so that when
 one object changes state, all its dependents are notified and updated automatically.
+
 ```C++
 #include <iostream>
 #include <string>
@@ -672,6 +687,7 @@ State
 -----
 Allow an object to alter its behavior when its internal state changes.
 The object will appear to change its class.
+
 ```C++
 #include <iostream>
 #include <string>
@@ -773,6 +789,7 @@ Strategy
 --------
 Define a family of algorithms, encapsulate each one, and make them interchangeable.
 Strategy lets the algorithm vary independently from clients that use it.
+
 ```C++
 #include <iostream>
 #include <sstream>
