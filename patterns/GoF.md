@@ -636,4 +636,112 @@ Template Method
 ---------------
 Visitor
 -------
+Represent an operation to be performed on the elements of an object structure.
+Visitor lets you define a new operation without changing the classes of the elements on which it operates.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Visitor;
+class ElementA;
+class ElementB;
+
+class Element
+{
+public:
+    virtual ~Element() {}
+    virtual void accept(Visitor * visitor) = 0;
+};
+
+class Visitor
+{
+public:
+    virtual ~Visitor() {}
+    virtual void visit(ElementA * e) = 0;
+    virtual void visit(ElementB * e) = 0;
+};
+
+class ElementA : public Element
+{
+public:
+    void accept(Visitor * visitor) override
+    {
+        visitor->visit(this);
+    }
+
+    string operation()
+    {
+        return "Hello World from ElementA!";
+    }
+};
+
+class ElementB : public Element
+{
+public:
+    void accept(Visitor * visitor) override
+    {
+        visitor->visit(this);
+    }
+
+    string operation()
+    {
+        return "Hello World from ElementB!";
+    }
+};
+
+class Visitor1 : public Visitor
+{
+public:
+    void visit(ElementA * e) override
+    {
+        print_message("Visitor1",
+                "Visiting (doing something on) ElementA : " + e->operation());
+    }
+    void visit(ElementB * e) override
+    {
+        print_message("Visitor1",
+                "Visiting (doing something on) ElementB : " + e->operation());
+    }
+};
+
+class Client
+{
+public:
+    static void main()
+    {
+        vector<Element *> elements;
+        elements.push_back(new ElementA);
+        elements.push_back(new ElementB);
+
+        Visitor * visitor = new Visitor1();
+        for (auto element : elements) {
+            element->accept(visitor);
+        }
+
+        for (auto element : elements) {
+            delete element;
+        }
+        delete visitor;
+    }
+};
+
+int main()
+{
+    Client::main();
+}
+
+```
 
