@@ -155,6 +155,103 @@ int main()
 
 Facade
 ------
+Provide an unified interface to a set of interfaces in a subsystem.
+Facade defines a higher-level interface that makes the subsystem easier to use.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Class1
+{
+public:
+    string operation1()
+    {
+        return "Class1 ";
+    }
+};
+
+class Class2
+{
+public:
+    string operation2()
+    {
+        return "Class2 ";
+    }
+};
+
+class Class3
+{
+public:
+    string operation3()
+    {
+        return "Class3 ";
+    }
+};
+
+class Facade
+{
+public:
+    virtual ~Facade() {}
+    virtual string operation() = 0;
+};
+
+class Facade1 : public Facade
+{
+public:
+    Facade1(Class1 * o1, Class2 * o2, Class3 * o3):
+        object1{o1}, object2{o2}, object3{o3} {}
+
+   ~Facade1() override
+    {
+        delete object1;
+        delete object2;
+        delete object3;
+    }
+
+    string operation() override
+    {
+        return "Facade forwards operation to ... "
+                + object1->operation1()
+                + object2->operation2()
+                + object3->operation3();
+    }
+
+private:
+    Class1 * object1;
+    Class2 * object2;
+    Class3 * object3;
+};
+
+class Client
+{
+public:
+    static void main()
+    {
+        Facade * facade = new Facade1(new Class1(), new Class2(), new Class3());
+        print_message("Facade", facade->operation());
+        delete facade;
+    }
+};
+
+int main()
+{
+    Client::main();
+}
+
+```
+
 Flyweight
 ---------
 Proxy
