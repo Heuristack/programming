@@ -58,12 +58,171 @@ Composite
 ---------
 Decorator
 ---------
+Attach additional responsibilities to an object dynamically.
+Decorators provide a flexible alternative to subclassing for extending functionality.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Component
+{
+public:
+    virtual ~Component() {}
+    virtual string operation() = 0;
+};
+
+class Component1 : public Component
+{
+public:
+    string operation() override
+    {
+        return "Hello World from Component1!";
+    }
+};
+
+class Decorator : public Component
+{
+public:
+    Decorator(Component * c): component_ptr{c} {}
+   ~Decorator() override { delete component_ptr; }
+    string operation() override
+    {
+        return component_ptr->operation();
+    }
+private:
+    Component * component_ptr = nullptr;
+};
+
+class Decorator1 : public Decorator
+{
+public:
+    using Decorator::Decorator;
+    string operation() override
+    {
+        return add_behavior(Decorator::operation());
+    }
+    string add_behavior(string const & s)
+    {
+        return "***" + s + "***";
+    }
+};
+
+class Decorator2 : public Decorator
+{
+public:
+    using Decorator::Decorator;
+    string operation() override
+    {
+        return add_behavior(Decorator::operation());
+    }
+    string add_behavior(string const & s)
+    {
+        return " --- " + s + " --- ";
+    }
+};
+
+class Client
+{
+public:
+    static void main()
+    {
+        Component * component = new Component1();
+        print_message("(1)", component->operation());
+        component = new Decorator1(new Decorator2(component));
+        print_message("(2)", component->operation());
+        delete component;
+    }
+};
+
+int main()
+{
+    Client::main();
+}
+
+```
+
 Facade
 ------
 Flyweight
 ---------
 Proxy
 -----
+Provide a surrogate or placeholder for another object to control access to it.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Subject
+{
+public:
+    virtual ~Subject() {}
+    virtual string operation() = 0;
+};
+
+class RealSubject : public Subject
+{
+public:
+    string operation() override
+    {
+        return "RealSubject!";
+    }
+};
+
+class Proxy : public Subject
+{
+public:
+    Proxy(RealSubject * r): subject{r} {}
+   ~Proxy() override { delete subject; }
+    string operation() override
+    {
+        return "Hello World from Proxy and " + subject->operation();
+    }
+private:
+    RealSubject * subject;
+};
+
+
+class Client
+{
+public:
+    static void main()
+    {
+        Proxy * proxy = new Proxy(new RealSubject());
+        print_message("Proxy", proxy->operation());
+        delete proxy;
+    }
+};
+
+int main()
+{
+    Client::main();
+}
+
+```
 
 Chain of Responsibility
 -----------------------
