@@ -634,6 +634,63 @@ int main()
 
 Template Method
 ---------------
+Define the skeleton of an algorithm in an operation, deferring some steps to sub-classes.
+Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class AbstractClass
+{
+public:
+    virtual ~AbstractClass() {}
+
+    void template_method()
+    {
+        primitive1();
+        primitive2();
+    }
+
+protected:
+    virtual void primitive1() = 0;
+    virtual void primitive2() = 0;
+};
+
+class SubClass1 : public AbstractClass
+{
+protected:
+    void primitive1() override
+    {
+        print_message("SubClass1", "Executing primitive1 ... ");
+    }
+
+    void primitive2() override
+    {
+        print_message("SubClass1", "Executing primitive2 ... ");
+    }
+};
+
+int main()
+{
+    AbstractClass * object_ptr = new SubClass1();
+    object_ptr->template_method();
+    delete  object_ptr;
+}
+
+```
+
 Visitor
 -------
 Represent an operation to be performed on the elements of an object structure.
