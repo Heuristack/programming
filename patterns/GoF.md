@@ -8,6 +8,8 @@ Prototype
 ---------
 Singleton
 ---------
+Ensure a class only has one instance, and provide a global point of access to it.
+
 ```C++
 #include <iostream>
 #include <string>
@@ -29,11 +31,8 @@ public:
 
     static Singleton * get_instance()
     {
-        static Singleton * instance_ptr = nullptr;
-        if (instance_ptr == nullptr) {
-            instance_ptr = new Singleton();
-        }
-        return instance_ptr;
+        static Singleton instance;
+        return & instance;
     }
 
 private:
