@@ -352,6 +352,98 @@ int main()
 
 Flyweight
 ---------
+Use sharing to support large numbers of fine-grained objects efficiently.
+
+```C++
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <cstdio>
+#include <unordered_map>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Flyweight
+{
+public:
+    virtual ~Flyweight() {}
+    virtual string operation(int extrinsic_state) = 0;
+};
+
+class Flyweight1 : public Flyweight
+{
+public:
+    Flyweight1(string const & intrinsic_state): intrinsic_state{intrinsic_state} {}
+    string operation(int extrinsic_state) override
+    {
+        stringstream s;
+        s << "performing an operation on the flyweight with intrinsic state = " << intrinsic_state
+          << " and passed in extrinsic state = " << to_string(extrinsic_state) << ".";
+        return s.str();
+    }
+
+private:
+    string intrinsic_state;
+};
+
+class FlyweightFactory
+{
+public:
+    static FlyweightFactory * get_instance()
+    {
+        static FlyweightFactory flyweight_factory;
+        return & flyweight_factory;
+    }
+
+    Flyweight * get_flyweight(string const & key)
+    {
+        if (flyweights.find(key) == flyweights.end()) {
+            print_message("Creating", "a flyweight with key = " + key);
+            flyweights[key] = new Flyweight1(key);
+        }
+        else {
+            print_message("Sharing", "a flyweight with key = " + key);
+            flyweights[key] = new Flyweight1(key);
+        }
+        return flyweights[key];
+    }
+
+    auto get_size() { return flyweights.size(); }
+
+private:
+    FlyweightFactory() = default;
+    unordered_map<string, Flyweight *> flyweights;
+};
+
+class Client
+{
+public:
+    static void main()
+    {
+        FlyweightFactory * flyweight_factory = FlyweightFactory::get_instance();
+        Flyweight * flyweight = nullptr;
+        flyweight = flyweight_factory->get_flyweight("A");
+        print_message("", flyweight->operation(100));
+        flyweight = flyweight_factory->get_flyweight("A");
+        print_message("", flyweight->operation(200));
+    }
+};
+
+int main()
+{
+    Client::main();
+}
+
+```
+
 Proxy
 -----
 Provide a surrogate or placeholder for another object to control access to it.
