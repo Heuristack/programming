@@ -131,6 +131,70 @@ int main()
 
 Bridge
 ------
+Decouple an abstraction from its implementation so that the two can vary independently.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Abstraction
+{
+public:
+    virtual ~Abstraction() {}
+    virtual string operation() = 0;
+};
+
+class Implementor
+{
+public:
+    virtual ~Implementor() {}
+    virtual string operation_impl() = 0;
+};
+
+class Abstraction1 : public Abstraction
+{
+public:
+    Abstraction1(Implementor * impl): impl{impl} {}
+   ~Abstraction1() { delete impl; }
+    string operation() override
+    {
+        return "Abstraction1: Delegating implementation to an implementor. -> "
+            + impl->operation_impl();
+    }
+
+private:
+    Implementor * impl;
+};
+
+class Implementor1 : public Implementor
+{
+public:
+    string operation_impl()
+    {
+        return "Implementor1: Hello World1!";
+    }
+};
+
+int main()
+{
+    Abstraction * abstraction = new Abstraction1(new Implementor1);
+    print_message("", abstraction->operation());
+    delete abstraction;
+}
+
+```
+
 Composite
 ---------
 Compose objects into tree structures to represent part-whole hierarchies.
