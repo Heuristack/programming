@@ -52,6 +52,83 @@ int main()
 
 Adapter
 -------
+Convert the interface of a class into another interface clients expect.
+Adapter lets classes work together that couldn't otherwise because of incompatible interfaces.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%15s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Target
+{
+public:
+    virtual ~Target() {}
+    virtual string operation() = 0;
+};
+
+class Adaptee
+{
+public:
+    string specific_operation() const
+    {
+        return "Hello World from Adaptee!";
+    }
+};
+
+class ObjectAdapter : public Target
+{
+public:
+    ObjectAdapter(Adaptee * a): adaptee{a} {}
+   ~ObjectAdapter() { delete adaptee; }
+    string operation() override
+    {
+        return adaptee->specific_operation();
+    }
+
+private:
+    Adaptee * adaptee;
+};
+
+class ClassAdapter : public Target, public Adaptee
+{
+public:
+    string operation() override
+    {
+        return specific_operation();
+    }
+};
+
+class Client
+{
+public:
+    static void main()
+    {
+        Target * object_target = new ObjectAdapter(new Adaptee());
+        print_message("ObjectAdapter", object_target->operation());
+        Target * class_target = new ClassAdapter();
+        print_message("ClassAdapter", class_target->operation());
+        delete object_target;
+    }
+};
+
+int main()
+{
+    Client::main();
+}
+
+```
+
 Bridge
 ------
 Composite
