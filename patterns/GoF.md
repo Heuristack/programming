@@ -56,6 +56,104 @@ Bridge
 ------
 Composite
 ---------
+Compose objects into tree structures to represent part-whole hierarchies.
+Composite lets clients treat individual objects and compositions of objects uniformly.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Component
+{
+public:
+    explicit Component(string const & name): name{name} {}
+    virtual ~Component() {}
+    virtual string operation() = 0;
+    virtual void add(Component *) = 0;
+    string const & get_name() const { return name; }
+
+private:
+    string name;
+};
+
+class Leaf : public Component
+{
+public:
+    using Component::Component;
+    string operation() override
+    {
+        return get_name();
+    }
+    void add(Component *) override {}
+};
+
+class Composite : public Component
+{
+public:
+    using Component::Component;
+    ~Composite() override
+    {
+        for (auto child : children) {
+            delete child;
+        }
+    }
+    string operation() override
+    {
+        string s = get_name();
+        for (auto child : children) {
+            s += "(" + child->operation() + ")";
+        }
+        return s;
+    }
+    void add(Component * c) override
+    {
+        children.push_back(c);
+    }
+
+private:
+    vector<Component *> children;
+};
+
+class Client
+{
+public:
+    static void main()
+    {
+        Component * composite2 = new Composite("composite2");
+        composite2->add(new Leaf("leaf3"));
+        composite2->add(new Leaf("leaf4"));
+        composite2->add(new Leaf("leaf5"));
+        Component * composite1 = new Composite("composite1");
+        composite1->add(new Leaf("leaf1"));
+        composite1->add(composite2);
+        composite1->add(new Leaf("leaf2"));
+
+        print_message("(1)", composite1->operation());
+        print_message("(2)", composite2->operation());
+
+        delete composite1;
+    }
+};
+
+int main()
+{
+    Client::main();
+}
+
+```
+
 Decorator
 ---------
 Attach additional responsibilities to an object dynamically.
