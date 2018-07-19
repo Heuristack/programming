@@ -81,6 +81,84 @@ int main()
 
 Prototype
 ---------
+Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Product
+{
+public:
+    virtual ~Product() {}
+    virtual string get_name() = 0;
+};
+
+class Prototype
+{
+public:
+    virtual ~Prototype() {}
+    virtual Product * clone() = 0;
+};
+
+class Product1 : public Product, public Prototype
+{
+public:
+    Product1(string const & name): name{name} {}
+    Product1(Product1 const * p): name{p->name} {}
+
+    string get_name() override
+    {
+        return name;
+    }
+
+    Product * clone() override
+    {
+        print_message("Prototype", "cloning " + get_name());
+        return new Product1(this);
+    }
+
+private:
+    string name;
+};
+
+class Client
+{
+public:
+    Client(Prototype * p): prototype{p} {}
+   ~Client() { if (product) delete product; delete prototype; }
+
+    void operation()
+    {
+        product = prototype->clone();
+        print_message("Client:", product->get_name() + " cloned");
+    }
+
+private:
+    Product * product;
+    Prototype * prototype;
+};
+
+int main()
+{
+    Client * client = new Client(new Product1("Product1"));
+    client->operation();
+    delete client;
+}
+
+```
+
 Singleton
 ---------
 Ensure a class only has one instance, and provide a global point of access to it.
