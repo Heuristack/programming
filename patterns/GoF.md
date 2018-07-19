@@ -1,5 +1,141 @@
 Abstract Factory
 ----------------
+Provide an interface for creating families of related or dependent objects
+without specifying their concrete classes
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class ProductA
+{
+public:
+    virtual ~ProductA() {}
+    virtual string get_name() = 0;
+};
+
+class ProductA1 : public ProductA
+{
+public:
+    string get_name() override
+    {
+        return "ProductA1";
+    }
+};
+
+class ProductA2 : public ProductA
+{
+public:
+    string get_name() override
+    {
+        return "ProductA2";
+    }
+};
+
+class ProductB
+{
+public:
+    virtual ~ProductB() {}
+    virtual string get_name() = 0;
+};
+
+class ProductB1 : public ProductB
+{
+public:
+    string get_name() override
+    {
+        return "ProductB1";
+    }
+};
+
+class ProductB2 : public ProductB
+{
+public:
+    string get_name() override
+    {
+        return "ProductB2";
+    }
+};
+
+class AbstractFactory
+{
+public:
+    virtual ~AbstractFactory() {}
+    virtual ProductA * create_product_a() = 0;
+    virtual ProductB * create_product_b() = 0;
+};
+
+class Factory1 : public AbstractFactory
+{
+public:
+    ProductA * create_product_a() override
+    {
+        print_message("Factory1", "Creating a ProductA1 object.");
+        return new ProductA1();
+    }
+
+    ProductB * create_product_b() override
+    {
+        print_message("Factory1", "Creating a ProductB1 object.");
+        return new ProductB1();
+    }
+};
+
+class Factory2 : public AbstractFactory
+{
+public:
+    ProductA * create_product_a() override
+    {
+        print_message("Factory2", "Creating a ProductA2 object.");
+        return new ProductA2();
+    }
+
+    ProductB * create_product_b() override
+    {
+        print_message("Factory2", "Creating a ProductB2 object.");
+        return new ProductB2();
+    }
+};
+
+class Client
+{
+public:
+    Client(AbstractFactory * factory): factory{factory} {}
+   ~Client() { delete factory; if (product_a) delete product_a; if (product_b) delete product_b; }
+    string operation()
+    {
+        print_message("Client", "Delegating creating objects to a factory object.");
+        product_a = factory->create_product_a();
+        product_b = factory->create_product_b();
+        return "Hello World from " + product_a->get_name() + " and " + product_b->get_name() + "!";
+    }
+
+private:
+    AbstractFactory * factory;
+    ProductA * product_a;
+    ProductB * product_b;
+};
+
+int main()
+{
+    Client * client = new Client(new Factory1());
+    print_message("Client", client->operation());
+    delete client;
+}
+
+```
+
 Builder
 -------
 Separate the construction of a complex object from its representation so that
@@ -203,6 +339,7 @@ int main()
 {
     Creator * creator = new Creator1();
     creator->operation();
+    delete creator;
 }
 
 ```
