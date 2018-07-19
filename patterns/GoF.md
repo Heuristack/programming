@@ -4,6 +4,81 @@ Builder
 -------
 Factory Method
 --------------
+Define an interface for creating an object, but let subclasses decide which class to instantiate.
+Factory Method lets a class defer instantiation to subclasses.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Product
+{
+public:
+    virtual ~Product() {}
+    virtual string get_name() = 0;
+};
+
+class Creator
+{
+public:
+    virtual ~Creator() { delete product; }
+    virtual Product * factory_method() = 0;
+    void operation()
+    {
+        product = factory_method();
+        print_message("Creator", product->get_name() + " is created");
+    }
+
+private:
+    Product * product;
+};
+
+class Product1 : public Product
+{
+public:
+    string get_name() override
+    {
+        return "Product1";
+    }
+};
+
+class Product2 : public Product
+{
+public:
+    string get_name() override
+    {
+        return "Product2";
+    }
+};
+
+class Creator1 : public Creator
+{
+public:
+    Product * factory_method() override
+    {
+        return new Product1();
+    }
+};
+
+int main()
+{
+    Creator * creator = new Creator1();
+    creator->operation();
+}
+
+```
+
 Prototype
 ---------
 Singleton
