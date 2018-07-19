@@ -2,6 +2,134 @@ Abstract Factory
 ----------------
 Builder
 -------
+Separate the construction of a complex object from its representation so that
+the same construction process can create different representations.
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+
+auto print_message(string const & object = "", string const & content = "") -> void
+{
+    string message(200,0);
+    snprintf(message.data(), message.size(),
+            "%10s : %s", object.data(), content.data());
+    cout << message << endl;
+}
+
+class Product
+{
+public:
+    virtual ~Product() {}
+    virtual string get_name() = 0;
+};
+
+class ProductA : public Product
+{};
+
+class ProductB : public Product
+{};
+
+class ProductA1 : public ProductA
+{
+public:
+    string get_name() override { return "ProductA1"; }
+};
+
+class ProductB1 : public ProductB
+{
+public:
+    string get_name() override { return "ProductB1"; }
+};
+
+class ComplexObject
+{
+public:
+   ~ComplexObject() { for (auto * p : children) delete p; }
+
+    string get_parts() const
+    {
+        string parts = "ComplexObject made up of ";
+        for (auto * p : children) { parts += p->get_name() + " "; }
+        return parts;
+    }
+
+    void add(Product * p)
+    {
+        if (p == nullptr) return;
+        children.push_back(p);
+    }
+
+private:
+    vector<Product *> children;
+};
+
+class Builder
+{
+public:
+    virtual ~Builder() {}
+    virtual ComplexObject * get_result() = 0;
+    virtual void build_part_a() = 0;
+    virtual void build_part_b() = 0;
+};
+
+class Builder1 : public Builder
+{
+public:
+    Builder1() { complex_object = new ComplexObject(); }
+
+    void build_part_a() override
+    {
+        complex_object->add(new ProductA1());
+    }
+
+    void build_part_b() override
+    {
+        complex_object->add(new ProductB1());
+    }
+
+    ComplexObject * get_result() override
+    {
+        return complex_object;
+    }
+
+private:
+    ComplexObject * complex_object;
+};
+
+class Director
+{
+public:
+    Director(Builder * b): builder{b} {}
+   ~Director() { delete builder; }
+
+    string construct()
+    {
+        print_message("Director", "Delegating constructing a complex object to builder object.");
+        builder->build_part_a();
+        builder->build_part_b();
+        complex_object = builder->get_result();
+        return "Hello World from " + complex_object->get_parts() + "objects!";
+    }
+
+private:
+    ComplexObject * complex_object;
+    Builder * builder;
+};
+
+int main()
+{
+    Director * director = new Director(new Builder1());
+    print_message("", director->construct());
+    delete director;
+}
+
+```
+
 Factory Method
 --------------
 Define an interface for creating an object, but let subclasses decide which class to instantiate.
