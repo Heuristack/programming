@@ -1,5 +1,6 @@
 Traits
 ------
+A traits class provides a way of associating information with a compile-time entity (a type, integral constant, or address).
 
 ```C++
 template <class Iterator>
@@ -26,6 +27,20 @@ void my_reverse(BidirectionalIterator first, BidirectionalIterator last)
         n -= 2;
     }
 }
+
+```
+
+Mixins
+------
+A mixin is a fragment of a class that is intended to be composed with other classes or mixins.
+
+Parameterized inheritance-based mixin
+```C++
+template <typename Base>
+class Mixin : public Base
+{
+   // ...
+};
 
 ```
 
