@@ -1,3 +1,52 @@
+Parse Simple Grammar
+--------------------
+```C++
+#include <iostream>
+#include <string>
+#include <stack>
+#include <deque>
+#include <algorithm>
+using namespace std;
+
+string expand(string const & input)
+{
+    string s;
+    stack<char> lifo;
+    for (auto c : input) {
+        if (c == ']') {
+            deque<char> temp;
+            while (lifo.top() != '[') {
+                temp.push_front(lifo.top());
+                lifo.pop();
+            }
+            lifo.pop();
+            int n = lifo.top() - '0';
+            lifo.pop();
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < temp.size(); j++) {
+                    lifo.push(temp[j]);
+                }
+            }
+            continue;
+        }
+        lifo.push(c);
+    }
+    while (!lifo.empty()) {
+        s += lifo.top();
+        lifo.pop();
+    }
+    reverse(begin(s),end(s));
+    return s;
+}
+
+int main()
+{
+    string s = "a3[b2[c1[d]]]e";
+    cout << expand(s) << endl;
+}
+
+```
+
 Formatted Message Creator
 -------------------------
 ```C++
