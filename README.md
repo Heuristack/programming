@@ -1,48 +1,46 @@
 Parse Simple Grammar
 --------------------
 ```C++
-#include <iostream>
-#include <string>
-#include <stack>
-#include <deque>
 #include <algorithm>
+#include <vector>
+#include <list>
+#include <string>
+#include <iostream>
 using namespace std;
 
-string expand(string const & input)
+string decode(string const & code)
 {
-    string s;
-    stack<char> lifo;
-    for (auto c : input) {
+    vector<char> stack;
+    for (auto c : code) {
         if (c == ']') {
-            deque<char> temp;
-            while (lifo.top() != '[') {
-                temp.push_front(lifo.top());
-                lifo.pop();
+            list<char> temp;
+
+            while (stack.back() != '[') {
+                temp.push_front(stack.back());
+                stack.pop_back();
             }
-            lifo.pop();
-            int n = lifo.top() - '0';
-            lifo.pop();
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < temp.size(); j++) {
-                    lifo.push(temp[j]);
+            stack.pop_back();
+
+            int n = stack.back() - '0';
+            stack.pop_back();
+
+            while (n--) {
+                for (auto c : temp) {
+                    stack.push_back(c);
                 }
             }
-            continue;
         }
-        lifo.push(c);
+        else {
+            stack.push_back(c);
+        }
     }
-    while (!lifo.empty()) {
-        s += lifo.top();
-        lifo.pop();
-    }
-    reverse(begin(s),end(s));
-    return s;
+    return string(begin(stack), end(stack));
 }
 
 int main()
 {
     string s = "a3[b2[c1[d]]]e";
-    cout << expand(s) << endl;
+    cout << decode(s) << endl;
 }
 
 ```
@@ -141,8 +139,8 @@ int main()
 
 ```
 
-IOTA
----
+iota
+----
 ```C++
 #include <numeric>
 #include <vector>
