@@ -1,3 +1,39 @@
+Mutual Recursion
+----------------
+```C++
+#include <iostream>
+using namespace std;
+
+bool is_even(unsigned int n);
+bool is_odd(unsigned int n);
+
+bool is_even(unsigned int n)
+{
+    if (n == 0) {
+        return true;
+    }
+    else {
+        return is_odd(n - 1);
+    }
+}
+
+bool is_odd(unsigned int n)
+{
+    if (n == 0) {
+        return false;
+    }
+    else {
+        return is_even(n - 1);
+    }
+}
+
+int main()
+{
+    cout << is_even(8) << endl;
+}
+
+```
+
 Parse Simple Grammar
 --------------------
 ```C++
