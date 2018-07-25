@@ -1,3 +1,52 @@
+Integeral Constant and Compile-Time Loop
+----------------------------------------
+```C++
+#include <iostream>
+using namespace std;
+
+template <int I>
+struct Integer
+{
+    static int constexpr value = I;
+};
+
+template <int I, int N, typename F>
+struct Loop
+{
+    static void run()
+    {
+        F::template visit<I>();
+        Loop<I+1,N,F>::run();
+    }
+};
+
+template<int N, typename F>
+struct Loop<N,N,F>
+{
+    static void run()
+    {}
+};
+
+struct Visitor
+{
+    template <int I>
+    static void visit()
+    {
+        cout << I << endl;
+    }
+};
+
+int main()
+{
+    cout << Integer<3>::value << endl;
+    cout << Integer<2>::value << endl;
+    cout << Integer<1>::value << endl;
+
+    Loop<1,5,Visitor>::run();
+}
+
+```
+
 Explicit cast to underlying type of scoped enum
 -----------------------------------------------
 ```C++
