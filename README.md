@@ -1,3 +1,25 @@
+Integral Constant
+-----------------
+```C++
+#include <type_traits>
+using namespace std;
+int main()
+{
+    using I2 = integral_constant<int,2>;
+    using I4 = integral_constant<int,4>;
+    static_assert(I2::value * I2::value == I4::value, "2*2 != 4");
+    static_assert(is_same<I2,I4>::value, "I2 != I4");
+
+    enum class Enumeration : int { Enumerator2 = 2, Enumerator4 = 4};
+    using E2 = integral_constant<Enumeration, Enumeration::Enumerator2>;
+    using E4 = integral_constant<Enumeration, Enumeration::Enumerator4>;
+
+    static_assert(E2::value * E2::value == E4::value, "2*2 != 4");
+    static_assert(is_same<E2,E4>::value, "E1 != E2");
+}
+
+```
+
 Integeral Constant and Compile-Time Loop
 ----------------------------------------
 ```C++
