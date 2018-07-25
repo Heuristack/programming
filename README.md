@@ -1,3 +1,30 @@
+Explicit cast to underlying type of scoped enum
+-----------------------------------------------
+```C++
+#include <type_traits>
+#include <iostream>
+using namespace std;
+
+enum class E : int { O = 1, T = 2 };
+int f(int i) { return i - 1; }
+
+template <typename E> constexpr auto to_underlying(E e) noexcept
+{
+    return static_cast<std::underlying_type_t<E>>(e);
+}
+
+int main()
+{
+    if (f(2) == static_cast<int>(E::T)) {
+        cout << "oops" << endl;
+    }
+    if (f(2) == to_underlying(E::O)) {
+        cout << "good" << endl;
+    }
+}
+
+```
+
 Mutual Recursion
 ----------------
 ```C++
