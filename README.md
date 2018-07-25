@@ -13,7 +13,6 @@ int main()
     enum class Enumeration : int { Enumerator2 = 2, Enumerator4 = 4};
     using E2 = integral_constant<Enumeration, Enumeration::Enumerator2>;
     using E4 = integral_constant<Enumeration, Enumeration::Enumerator4>;
-
     static_assert(E2::value * E2::value == E4::value, "2*2 != 4");
     static_assert(is_same<E2,E4>::value, "E1 != E2");
 }
