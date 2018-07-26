@@ -17,12 +17,21 @@ using namespace std;
  * The nice thing is that the traits class T<C> lets us
  * record such extra information about a class C,
  * without requiring any change at all to C.
+ * - Herb Sutter
  *
- * In the following example, trait class 'template<> struct supports_optimised_implementation<ObjectB>'
+ * The following example is from "An introduction to C++ Traits - Overload Journal #43 - Jun 2001"
+ * - Thaddaeus Frogley
+ *
+ * In the example, trait class 'template<> struct supports_optimised_implementation<ObjectB>'
  * is an instance of template 'template <typename T> struct supports_optimised_implementation'
  * used to carry extra information "is 'optimised_implementation' is implemented"
  * - especially information that another template 'template <bool b> struct algorithm_selector' can use  -
  * about the type 'ObjectB' on which the traits template is instantiated.
+ *
+ *
+ * Think of a trait as a small object whose main purpose is to carry information
+ * used by another object or algorithm to determine "policy" or "implementation details".
+ * - Bjarne Stroustrup
  *
 **/
 
