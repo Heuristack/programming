@@ -1,3 +1,21 @@
+Scientific Floating-Point Number
+--------------------------------
+```C++
+#include <iostream>
+#include <iomanip>
+using namespace std;
+int main()
+{
+    double micro = 1.0e-6;
+    cout << micro << endl;
+    cout << defaultfloat << micro << endl;
+    cout << fixed << micro << endl;
+    cout << scientific << micro << endl;
+    cout << hexfloat << micro << endl;
+}
+
+```
+
 Integral Constant
 -----------------
 ```C++
@@ -681,7 +699,6 @@ int main()
 
 Test Cases
 ----------
-
 ```C++
 #include <functional>
 #include <algorithm>
@@ -702,15 +719,14 @@ int main()
 
 Function Attributes
 -------------------
-
 ```C++
 [[clang::no_sanitize("address", "thread", "memory", "dataflow", "leak", "undefined"), noreturn, gnu::nothrow]] void f()
 { throw 1; }
+
 ```
 
 decltype(auto)
 --------------
-
 ```C++
 string const & greet()
 {
@@ -738,7 +754,6 @@ int main()
 
 Endianness
 ----------
-
 ```C++
 #include <arpa/inet.h>
 uint32_t htonl(uint32_t);
@@ -778,7 +793,6 @@ int main()
 
 Compile-Time Computation: Factorial Numbers
 -------------------------------------------
-
 ```C++
 inline constexpr unsigned int Factorial(unsigned int n)
 {
@@ -794,7 +808,6 @@ int main()
 
 Type Traits: Common Type
 ------------------------
-
 ```C++
 template <class T>
 struct Number
@@ -819,7 +832,6 @@ int main()
 
 Compile-Time Recurrence: Factorial Numbers
 ------------------------------------------
-
 ```C++
 #include <iostream>
 
@@ -838,11 +850,11 @@ int main()
     std::cout << "Factorial(5): " << Factorial<5>::value << std::endl;
 }
 //g++ main.cpp -std=c++1z -Q -pipe -pthread -Ofast
+
 ```
 
 Template and Inheritance Open Mind
 ----------------------------------
-
 ```C++
 template<typename T> struct B {};
 template<typename T> struct C {};
@@ -853,11 +865,11 @@ template<typename T> struct D<B<T>> {};
 template<typename T> struct D<C<T>> {};
 
 int main(){}
+
 ```
 
 Comparison between Signed and Unsigned Integers
 -----------------------------------------------
-
 ```C++
 #include <iostream>
 #include <iomanip>
@@ -885,7 +897,6 @@ int main(int n, char * v[])
 
 Offset of Structure Field
 -------------------------
-
 ```C++
 #include <stddef.h>
 #include <stdio.h>
@@ -906,7 +917,6 @@ int main(int argc, char ** argv)
 
 Decay: Array as Function Argument
 ---------------------------------
-
 ```C++
 #include <iostream>
 
@@ -929,7 +939,6 @@ int main()
 
 Run-Time Assert on Word Size
 ----------------------------
-
 ```C++
 #include <iostream>
 #include <iterator>
@@ -952,7 +961,6 @@ int main()
 
 Precision on Stream
 -------------------
-
 ```C++
 #include <iostream>
 #include <iomanip>
@@ -970,7 +978,6 @@ catch(std::exception & e) {
 
 Count Words using Unique-Map
 ---------------------------
-
 ```C++
 #include <iostream>
 #include <iterator>
@@ -1031,7 +1038,6 @@ int main()
 
 CCIA File Name Parser
 ---------------------
-
 ```C++
 #include <iostream>
 #include <iterator>
@@ -1090,7 +1096,6 @@ int main()
 
 Lambda: Function Procedure Thread Task
 --------------------------------------
-
 ```C++
 #include <iostream>
 #include <thread>
@@ -1156,7 +1161,6 @@ int main()
 
 Parameterize Random Number Generation
 -------------------------------------
-
 ```C++
 #include <iostream>
 #include <random>
@@ -1178,9 +1182,10 @@ int main()
     for (int i = 0; i < 10; i++) std::cout << generate() << std::endl;
 }
 
+```
+
 Bucket Exploration
 ------------------
-
 ```C++
 #include <unordered_map>
 #include <unordered_set>
@@ -1246,7 +1251,6 @@ int main()
 
 Tree Search: `BFS` and `DFS`
 ---------------------------
-
 ```C++
 #include <iostream>
 #include <vector>
