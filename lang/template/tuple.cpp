@@ -5,12 +5,17 @@ using namespace std;
 /**
  * Recursion => Contain-Relation
  *
- * list => list,value
- *      => epsilon
+ * list := list,value
+ *      := epsilon
  *
- * T2{T1{T0{value},value},value}
+ * list := {{{value},value},value}
  *
+**/
+
+/**
  * Subobject contain-relation can be used to imitate recursion
+ *
+ * T0{T1{T2{value},value},value}
  *
 **/
 struct T2 { T2(string const & s): value{s} {} string value; };
@@ -21,11 +26,11 @@ auto get1(T0 const & T) { return T.T1::value; }
 auto get2(T0 const & T) { return T.T2::value; }
 
 /**
- * Subobject contain-relation can be implemented by class template
+ * Subobject contain-relation can be implemented by class template hierarchy
  *
- * Tuple<string>
- * Tuple<double,string> : Tuple<string>
- * Tuple<int,double,string> : Tuple<double,string>
+ * Tuple<string> { string value; }
+ * Tuple<double,string> : Tuple<string> { double value; }
+ * Tuple<int,double,string> : Tuple<double,string> { int value; }
  *
 **/
 template <typename T, typename ... Ts>
