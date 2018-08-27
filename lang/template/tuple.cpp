@@ -66,9 +66,16 @@ struct Value<0,T,Ts...>
 };
 
 template <int i, typename T, typename ... Ts>
-auto get(Tuple<T,Ts...> const & t)
+auto Get(Tuple<T,Ts...> const & t)
 {
     return Value<i,T,Ts...>::value(&t);
+}
+
+template <int i, typename T, typename ... Ts>
+auto get(Tuple<T,Ts...> const & t)
+{
+    if constexpr (i == 0) { return t.value; }
+    else { return get<i-1,Ts...>(t); }
 }
 
 int main()
