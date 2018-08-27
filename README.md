@@ -1,3 +1,39 @@
+Tuple
+-----
+```C++
+#include <iostream>
+#include <string>
+using namespace std;
+
+template <typename T, typename ... Ts>
+struct Tuple : Tuple<Ts...>
+{
+    Tuple(T v, Ts ... vs): Tuple<Ts...>(vs...), value(v) {}
+    T value;
+};
+
+template <typename T>
+struct Tuple<T>
+{
+    Tuple(T v): value(v) {}
+    T value;
+};
+
+template <int i, typename T, typename ... Ts>
+auto get(Tuple<T,Ts...> const & o)
+{
+    if constexpr (i == 0) { return o.value; }
+    else { return get<i-1,Ts...>(o); }
+}
+
+int main()
+{
+    Tuple<int,double,string> o {0,1.2,"3"};
+    cout << get<0>(o) << get<1>(o) << get<2>(o) << endl;
+}
+
+```
+
 Scientific Floating-Point Number
 --------------------------------
 ```C++
