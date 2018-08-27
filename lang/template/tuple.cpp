@@ -5,17 +5,17 @@ using namespace std;
 /**
  * Recursion => Contain-Relation
  *
- * list := list,value
+ * list := value,list
  *      := epsilon
  *
- * list := {{{value},value},value}
+ * list := {value,{value,{value,{}}}}
  *
 **/
 
 /**
  * Subobject contain-relation can be used to imitate recursion
  *
- * T0{T1{T2{value},value},value}
+ * T0{value,T1{value,T2{value}}}
  *
 **/
 struct T2 { T2(string const & s): value{s} {} string value; };
