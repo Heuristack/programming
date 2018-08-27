@@ -13,19 +13,19 @@ using namespace std;
  * Subobject contain-relation can be used to imitate recursion
  *
 **/
-struct T0 { int value; };
-struct T1 : T0 { double value; };
-struct T2 : T1 { string value; };
-auto get0(T2 const & T) { return T.T0::value; }
-auto get1(T2 const & T) { return T.T1::value; }
-auto get2(T2 const & T) { return T.T2::value; }
+struct T2 { T2(string const & s): value{s} {} string value; };
+struct T1 : T2 { T1(double d, string const & s): T2{s}, value{d} {} double value; };
+struct T0 : T1 { T0(int v, double d, string const & s): T1{d,s}, value{v} {}  int value; };
+auto get0(T0 const & T) { return T.T0::value; }
+auto get1(T0 const & T) { return T.T1::value; }
+auto get2(T0 const & T) { return T.T2::value; }
 
 /**
  * Subobject contain-relation can be implemented by class template
  *
- * Tuple<int>
- * Tuple<int,double> : Tuple<int>
- * Tuple<int,double,string> : Tuple<int,double>
+ * Tuple<string>
+ * Tuple<double,string> : Tuple<string>
+ * Tuple<int,double,string> : Tuple<double,string>
  *
 **/
 template <typename T, typename ... Ts>
@@ -68,7 +68,7 @@ auto get(Tuple<T,Ts...> const & t)
 
 int main()
 {
-    T2 object {1,2.3,"4"};
+    T0 object {1,2.3,"4"};
     cout << get0(object) << get1(object) << get2(object) << endl;
 
     Tuple<int,double,string> t{1,2.3,"4"};
