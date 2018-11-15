@@ -2,9 +2,8 @@
 #include <boost/lockfree/queue.hpp>
 #include <boost/lockfree/stack.hpp>
 #include <boost/atomic.hpp>
-#include <thread>
-#include <optional>
 #include <iostream>
+#include <thread>
 
 using namespace std;
 
@@ -50,5 +49,4 @@ int main(int argc, char* argv[])
     cout << "produced " << producer_count << " objects." << endl;
     cout << "consumed " << consumer_count << " objects." << endl;
 }
-//clang++ -g -std=c++1z spsc.cpp -lboost_system
 
