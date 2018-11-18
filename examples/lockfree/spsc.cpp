@@ -7,9 +7,10 @@
 
 using namespace std;
 
-int producer_count = 0;
-boost::atomic_int consumer_count (0);
 boost::lockfree::spsc_queue<int, boost::lockfree::capacity<1024> > spsc_queue;
+
+int producer_count = 0;
+boost::atomic_int consumer_count(0);
 
 const int iterations = 10000000;
 
@@ -21,7 +22,7 @@ void producer(void)
     }
 }
 
-boost::atomic<bool> done (false);
+boost::atomic_bool done(false);
 
 void consumer(void)
 {

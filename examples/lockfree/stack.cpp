@@ -1,11 +1,11 @@
-#include <boost/lockfree/queue.hpp>
+#include <boost/lockfree/stack.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/atomic.hpp>
 #include <iostream>
 
 using namespace std;
 
-boost::lockfree::queue<int> queue(128);
+boost::lockfree::stack<int> stack(128);
 
 boost::atomic_int producer_count(0);
 boost::atomic_int consumer_count(0);
@@ -13,34 +13,34 @@ boost::atomic_int consumer_count(0);
 const int producer_thread_count = 4;
 const int consumer_thread_count = 4;
 
-const int iterations = 10000000;
+const int iterations = 1000000;
 
-void producer()
+void producer(void)
 {
     for (int i = 0; i != iterations; ++i) {
         int value = ++producer_count;
-        while (!queue.push(value));
+        while (!stack.push(value));
     }
 }
 
-boost::atomic_bool done(false);
+boost::atomic_bool done (false);
 
-void consumer()
+void consumer(void)
 {
     int value;
     while (!done) {
-        while (queue.pop(value))
+        while (stack.pop(value))
             ++consumer_count;
     }
 
-    while (queue.pop(value))
+    while (stack.pop(value))
         ++consumer_count;
 }
 
 int main(int argc, char* argv[])
 {
-    cout << "boost::lockfree::queue is ";
-    if (!queue.is_lock_free()) cout << "not ";
+    cout << "boost::lockfree::stack is ";
+    if (!stack.is_lock_free()) cout << "not ";
     cout << "lockfree" << endl;
 
     boost::thread_group producer_threads, consumer_threads;
