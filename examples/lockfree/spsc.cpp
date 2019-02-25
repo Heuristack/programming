@@ -28,12 +28,14 @@ void consumer(void)
 {
     int value;
     while (!done) {
-        while (spsc_queue.pop(value))
+        while (spsc_queue.pop(value)) {
             ++consumer_count;
+        }
     }
 
-    while (spsc_queue.pop(value))
+    while (spsc_queue.pop(value)) {
         ++consumer_count;
+    }
 }
 
 int main(int argc, char* argv[])

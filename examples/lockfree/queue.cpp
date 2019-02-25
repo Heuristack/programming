@@ -29,12 +29,14 @@ void consumer()
 {
     int value;
     while (!done) {
-        while (queue.pop(value))
+        while (queue.pop(value)) {
             ++consumer_count;
+        }
     }
 
-    while (queue.pop(value))
+    while (queue.pop(value)) {
         ++consumer_count;
+    }
 }
 
 int main(int argc, char* argv[])

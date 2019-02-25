@@ -15,7 +15,7 @@ const int consumer_thread_count = 4;
 
 const int iterations = 1000000;
 
-void producer(void)
+void producer()
 {
     for (int i = 0; i != iterations; ++i) {
         int value = ++producer_count;
@@ -25,16 +25,18 @@ void producer(void)
 
 boost::atomic_bool done (false);
 
-void consumer(void)
+void consumer()
 {
     int value;
     while (!done) {
-        while (stack.pop(value))
+        while (stack.pop(value)) {
             ++consumer_count;
+        }
     }
 
-    while (stack.pop(value))
+    while (stack.pop(value)) {
         ++consumer_count;
+    }
 }
 
 int main(int argc, char* argv[])
