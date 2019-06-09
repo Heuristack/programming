@@ -1,3 +1,34 @@
+Hello, OO: Operator Overloading
+-------------------------------
+```C++
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class T
+{
+public:
+   ~T() = default;
+    T() = default;
+
+    string operator()() const
+    {
+        return s;
+    }
+
+private:
+    string s = "Hello,World!";
+};
+
+int main()
+{
+    T object;
+    cout << object() << endl;
+}
+
+```
+
 Tuple
 -----
 ```C++
