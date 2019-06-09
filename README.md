@@ -1,3 +1,34 @@
+I will never give up
+--------------------
+```C++
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class T
+{
+public:
+   ~T() = default;
+    T() = default;
+
+    string operator()() const
+    {
+        return s;
+    }
+
+private:
+    string s = "Never give up!";
+};
+
+int main()
+{
+    T object;
+    cout << object() << endl;
+}
+
+```
+
 Hello, OO: Operator Overloading
 -------------------------------
 ```C++
