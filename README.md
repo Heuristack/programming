@@ -1,3 +1,19 @@
+concept recap: enum class, static_assert, is_same_v, underlying_type_t, etc
+---------------------------------------------------------------------------
+```C++
+#include <type_traits>
+using namespace std;
+
+int main()
+{
+    enum class PitchNote : unsigned int { A, B, C, D, E, F, G };
+    static_assert(is_same_v<underlying_type_t<PitchNote>, unsigned int>);
+
+    PitchNote c{PitchNote::C};
+}
+
+```
+
 I will never give up
 --------------------
 ```C++
