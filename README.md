@@ -1,4 +1,4 @@
-concept recap: enum class, static_assert, is_same_v, underlying_type_t, etc
+concept recap: `enum class`, `static_assert`, `is_same_v`, `underlying_type_t`, etc
 ---------------------------------------------------------------------------
 ```C++
 #include <type_traits>
