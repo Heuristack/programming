@@ -1,3 +1,41 @@
+enable_shared_from_this and shared_ptr: use_count, lock, expired, etc
+---------------------------------------------------------------------
+```C++
+#include <iostream>
+#include <memory>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+class shared_object : public enable_shared_from_this<shared_object>
+{
+public:
+   ~shared_object() { cout << "]"; }
+    shared_object() { cout << "["; }
+    shared_object(char const * s): m{s} { cout << "["; }
+    shared_ptr<shared_object> get_ptr() { return shared_from_this(); }
+private:
+    string m;
+};
+
+template <typename Object>
+void observe(weak_ptr<Object> ptr)
+{
+    cout << "reference(use) count: " << ptr.use_count() << "; ";
+    if (ptr.expired()) return;
+    ptr.lock(),
+    cout << "reference(use) count: " << ptr.use_count() << "; ";
+}
+
+int main()
+{
+    atexit([](){ cout << endl; });
+    auto ptr1 = make_shared<shared_object>();
+    auto ptr2 = ptr1->get_ptr();
+    observe<shared_object>(ptr1);
+}
+```
+
 concept recap: `enum class`, `static_assert`, `is_same_v`, `underlying_type_t`, etc
 ---------------------------------------------------------------------------
 ```C++
