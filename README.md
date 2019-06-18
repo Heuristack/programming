@@ -1,3 +1,36 @@
+owner_before relationship in shared_ptr
+---------------------------------------
+```C++
+#include <iostream>
+#include <memory>
+
+using namespace std;
+
+struct T
+{
+    T(int m, int n): m{m}, n{n} {}
+    int m = 0;
+    int n = 0;
+};
+
+int main()
+{
+    auto ptr0 = make_shared<T>(1,2);
+
+    shared_ptr<int> ptr1(ptr0, &ptr0->m);
+    shared_ptr<int> ptr2(ptr0, &ptr0->n);
+    cout << "(ptr1 < ptr2) = " << (ptr1 < ptr2) << endl;
+    cout << "(ptr2 < ptr1) = " << (ptr2 < ptr1) << endl;
+    cout << "ptr1.owner_before(ptr2) = " << ptr1.owner_before(ptr2) << endl;
+    cout << "ptr2.owner_before(ptr1) = " << ptr2.owner_before(ptr1) << endl;
+
+    weak_ptr<int> wptr1(ptr1);
+    weak_ptr<int> wptr2(ptr2);
+    cout << "wptr1.owner_before(wptr2) = " << wptr1.owner_before(wptr2) << endl;
+    cout << "wptr2.owner_before(wptr1) = " << wptr2.owner_before(wptr1) << endl;
+}
+```
+
 enable_shared_from_this and shared_ptr: use_count, lock, expired, etc
 ---------------------------------------------------------------------
 ```C++
