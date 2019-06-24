@@ -1,3 +1,77 @@
+Poker Suit Class
+----------------
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Suit
+{
+public:
+    using value_type = unsigned int;
+
+    static constexpr size_t size = 4;
+    static constexpr value_type min_value = 0;
+    static constexpr value_type max_value = size - 1;
+
+    static inline vector<Suit> all()
+    {
+        vector<Suit> all_suits;
+        for (auto const & v : all_values()) {
+            all_suits.emplace_back(v);
+        }
+        return all_suits;
+    }
+
+    static inline vector<value_type> const & all_values()
+    {
+        if (values.size() != size) {
+            for (value_type v = min_value; v <= max_value; v++) {
+                values.push_back(v);
+            }
+        }
+        return values;
+    }
+
+    static inline char name(value_type v)
+    {
+        return names[v];
+    }
+
+    static inline vector<value_type> values;
+    static inline string names = "CDHS";
+
+public:
+    Suit(value_type v): value{v} {}
+    Suit(char n)
+    {
+        for (auto const & v : all_values()) {
+            if (n == name(v)) {
+                value = v;
+            }
+        }
+    }
+    Suit() = delete;
+
+    char name() const { return name(value); }
+
+private:
+    value_type value;
+};
+
+int main()
+{
+    for(auto const & suit : Suit::all()) {
+        cout << suit.name() << endl;
+    }
+    Suit s('S');
+    cout << s.name() << endl;
+}
+
+```
+
 owner_before relationship in shared_ptr
 ---------------------------------------
 ```C++
