@@ -1,3 +1,18 @@
+parameterize a string literal size using constexpr function and argument deduction tricks
+-----------------------------------------------------------------------------------------
+```C++
+#include <iostream>
+using namespace std;
+
+template<size_t N> constexpr size_t size_of_string_literal(char const (&a)[N]) { return N-1; }
+
+int main()
+{
+    static_assert(size_of_string_literal("HelloWorld") == 10);
+}
+
+```
+
 Poker Suit Class
 ----------------
 ```C++
