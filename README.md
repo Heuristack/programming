@@ -25,12 +25,14 @@ using namespace std;
 class Suit
 {
 public:
-    using value_type = unsigned int;
+    using value_type = size_t;
 
     static constexpr size_t size = 4;
+    static constexpr value_type not_value = static_cast<value_type>(-1);
     static constexpr value_type min_value = 0;
     static constexpr value_type max_value = size - 1;
 
+public:
     static inline vector<Suit> all()
     {
         vector<Suit> all_suits;
@@ -38,6 +40,11 @@ public:
             all_suits.emplace_back(v);
         }
         return all_suits;
+    }
+
+    static inline string const & all_names()
+    {
+        return names;
     }
 
     static inline vector<value_type> const & all_values()
@@ -55,25 +62,29 @@ public:
         return names[v];
     }
 
+    static inline value_type value(char n)
+    {
+        for (auto const & v : all_values()) {
+            if (name(v) == n) {
+                return v;
+            }
+        }
+        return not_value;
+    }
+
     static inline vector<value_type> values;
     static inline string names = "CDHS";
 
 public:
-    Suit(value_type v): value{v} {}
-    Suit(char n)
-    {
-        for (auto const & v : all_values()) {
-            if (n == name(v)) {
-                value = v;
-            }
-        }
-    }
+    Suit(value_type v): value_{v} {}
+    Suit(char n): Suit{value(n)} {}
     Suit() = delete;
 
-    char name() const { return name(value); }
+    char name() const { return name(value_); }
+    value_type value() const { return value_; }
 
 private:
-    value_type value;
+    value_type value_;
 };
 
 int main()
