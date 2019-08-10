@@ -1,3 +1,20 @@
+double precision loses precision when timing large numbers
+----------------------------------------------------------
+```C++
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+int main()
+{
+    double a = 342.4 * 1e8;
+    double b = 327.6 * 1e8;
+    cout << "a = " << fixed << a << " = " << llrint(a) << endl;
+    cout << "b = " << fixed << b << " = " << llrint(b) << endl;
+}
+
+```
+
 parameterize a string literal size using constexpr function and argument deduction tricks
 -----------------------------------------------------------------------------------------
 ```C++
