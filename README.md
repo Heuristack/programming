@@ -1057,20 +1057,21 @@ uint32_t ntohl(uint32_t);
 
 bool is_big_endian()
 {
-	return 1L == htonl(1L);
+    return 1L == htonl(1L);
 }
 
 ```
 
 ```C++
-bool is_big_endian() {
-	union
-	{
-		uint32_t integer;
-		char bytes[4];
-	}
-	word = {0x01020304};
-	return word.bytes[0] == 0x01;
+bool is_big_endian()
+{
+    union
+    {
+        uint32_t integer;
+        char bytes[4];
+    }
+    word = {0x01020304};
+    return word.bytes[0] == 0x01;
 }
 
 ```
@@ -1490,7 +1491,9 @@ Parameterize Random Number Generation
 
 using namespace std;
 
-template <typename device = random_device, typename engine = default_random_engine, typename distribution = normal_distribution<double>>
+template <typename device = random_device,
+          typename engine = default_random_engine,
+          typename distribution = normal_distribution<double>>
 typename distribution::result_type generate()
 {
     static device dev;
