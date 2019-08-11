@@ -1,10 +1,12 @@
-double precision loses precision when timing large numbers
-----------------------------------------------------------
+Precision loss in 'double' when timing large number
+---------------------------------------------------
 ```C++
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+
 using namespace std;
+
 int main()
 {
     double a = 342.4 * 1e8;
@@ -15,10 +17,11 @@ int main()
 
 ```
 
-parameterize a string literal size using constexpr function and argument deduction tricks
------------------------------------------------------------------------------------------
+Parameterization: figure out string literal size in compile-time
+----------------------------------------------------------------
 ```C++
 #include <iostream>
+
 using namespace std;
 
 template<size_t N> constexpr size_t size_of_string_literal(char const (&a)[N]) { return N-1; }
@@ -115,8 +118,8 @@ int main()
 
 ```
 
-owner_before relationship in shared_ptr
----------------------------------------
+Owner-Before relationship
+-------------------------
 ```C++
 #include <iostream>
 #include <memory>
@@ -146,10 +149,11 @@ int main()
     cout << "wptr1.owner_before(wptr2) = " << wptr1.owner_before(wptr2) << endl;
     cout << "wptr2.owner_before(wptr1) = " << wptr2.owner_before(wptr1) << endl;
 }
+
 ```
 
-enable_shared_from_this and shared_ptr: use_count, lock, expired, etc
----------------------------------------------------------------------
+Observe shared-pointer internals
+--------------------------------
 ```C++
 #include <iostream>
 #include <memory>
@@ -186,10 +190,11 @@ int main()
 }
 ```
 
-concept recap: `enum class`, `static_assert`, `is_same_v`, `underlying_type_t`, etc
----------------------------------------------------------------------------
+Inherit from fundamental types
+------------------------------
 ```C++
 #include <type_traits>
+
 using namespace std;
 
 int main()
@@ -202,39 +207,8 @@ int main()
 
 ```
 
-I will never give up
---------------------
-```C++
-#include <iostream>
-#include <string>
-
-using namespace std;
-
-class T
-{
-public:
-   ~T() = default;
-    T() = default;
-
-    string operator()() const
-    {
-        return s;
-    }
-
-private:
-    string s = "Never give up!";
-};
-
-int main()
-{
-    T object;
-    cout << object() << endl;
-}
-
-```
-
-Hello, OO: Operator Overloading
--------------------------------
+Yet another OO: Operator Overloading
+------------------------------------
 ```C++
 #include <iostream>
 #include <string>
@@ -269,6 +243,7 @@ Tuple
 ```C++
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 template <typename T, typename ... Ts>
@@ -305,7 +280,9 @@ Scientific Floating-Point Number
 ```C++
 #include <iostream>
 #include <iomanip>
+
 using namespace std;
+
 int main()
 {
     double micro = 1.0e-6;
@@ -322,7 +299,9 @@ Integral Constant
 -----------------
 ```C++
 #include <type_traits>
+
 using namespace std;
+
 int main()
 {
     using I2 = integral_constant<int,2>;
@@ -343,6 +322,7 @@ Integeral Constant and Compile-Time Loop
 ----------------------------------------
 ```C++
 #include <iostream>
+
 using namespace std;
 
 template <int I>
@@ -393,6 +373,7 @@ Explicit cast to underlying type of scoped enum
 ```C++
 #include <type_traits>
 #include <iostream>
+
 using namespace std;
 
 enum class E : int { O = 1, T = 2 };
@@ -400,7 +381,7 @@ int f(int i) { return i - 1; }
 
 template <typename E> constexpr auto to_underlying(E e) noexcept
 {
-    return static_cast<std::underlying_type_t<E>>(e);
+    return static_cast<underlying_type_t<E>>(e);
 }
 
 int main()
@@ -419,6 +400,7 @@ Mutual Recursion
 ----------------
 ```C++
 #include <iostream>
+
 using namespace std;
 
 bool is_even(unsigned int n);
@@ -459,6 +441,7 @@ Parse Simple Grammar
 #include <list>
 #include <string>
 #include <iostream>
+
 using namespace std;
 
 string decode(string const & code)
@@ -592,13 +575,15 @@ int main()
 
 ```
 
-iota
-----
+'iota' function
+---------------
 ```C++
 #include <numeric>
 #include <vector>
 #include <iostream>
+
 using namespace std;
+
 int main()
 {
     vector<int> v(10);
@@ -629,7 +614,9 @@ Output an integer as a character
 #include <iostream>
 #include <cstdio>
 #include <string>
+
 using namespace std;
+
 int main()
 {
     cout << static_cast<char>(0x59) << endl;
@@ -711,6 +698,7 @@ Boost: Hana Heterogeneous Computation
 #include <boost/hana.hpp>
 #include <iostream>
 #include <string>
+
 namespace hana = boost::hana;
 using namespace std;
 
@@ -734,6 +722,7 @@ Resize: increase;decrease;
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+
 using namespace std;
 
 struct T
@@ -761,7 +750,9 @@ Infinity: max double value
 #include <iostream>
 #include <iomanip>
 #include <limits>
+
 using namespace std;
+
 int main()
 {
     cout << fixed << numeric_limits<double>::max() << endl;
@@ -776,11 +767,13 @@ Algorithm Sorting Criterion
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
 using namespace std;
+
 int main()
 {
     vector<int> v = {3,1,4,1,5};
-    cout << *min_element(begin(v),end(v),[](auto const & a, auto const & b){ return a > b; }) << endl;
+    cout << *min_element(begin(v),end(v), [](auto const & a, auto const & b){ return a > b; }) << endl;
 }
 
 ```
@@ -980,6 +973,7 @@ Inline Friends
 #include <iostream>
 #include <sstream>
 #include <string>
+
 using namespace std;
 
 struct T
@@ -1084,6 +1078,10 @@ bool is_big_endian() {
 Alignment
 ---------
 ```C++
+#include <iostream>
+
+using namespace std;
+
 int main()
 {
     class T {};
@@ -1096,6 +1094,10 @@ int main()
 Compile-Time Computation: Factorial Numbers
 -------------------------------------------
 ```C++
+#include <iostream>
+
+using namespace std;
+
 inline constexpr unsigned int Factorial(unsigned int n)
 {
     return n <= 1 ? n : Factorial(n-1) * n;
@@ -1111,6 +1113,10 @@ int main()
 Type Traits: Common Type
 ------------------------
 ```C++
+#include <iostream>
+
+using namespace std;
+
 template <class T>
 struct Number
 {
@@ -1118,7 +1124,7 @@ struct Number
 };
 
 template <class T, class U>
-Number<typename std::common_type<T,U>::type> operator+(const Number<T>& lhs,const Number<U>& rhs)
+Number<typename common_type<T,U>::type> operator+(const Number<T>& lhs,const Number<U>& rhs)
 {
     return {lhs.n + rhs.n};
 }
@@ -1137,6 +1143,8 @@ Compile-Time Recurrence: Factorial Numbers
 ```C++
 #include <iostream>
 
+using namespace std;
+
 template<int n> struct Factorial
 {
     static const int value = Factorial<n-1>::value * n;
@@ -1149,10 +1157,13 @@ template<> class Factorial<0>
 
 int main()
 {
-    std::cout << "Factorial(5): " << Factorial<5>::value << std::endl;
+    cout << "Factorial(5): " << Factorial<5>::value << endl;
 }
-//g++ main.cpp -std=c++1z -Q -pipe -pthread -Ofast
 
+```
+
+```
+g++ main.cpp -std=c++1z -Q -pipe -pthread -Ofast
 ```
 
 Template and Inheritance Open Mind
@@ -1177,6 +1188,8 @@ Comparison between Signed and Unsigned Integers
 #include <iomanip>
 #include <functional>
 
+using namespace std;
+
 bool less (int a, unsigned b)
 {
     if ( (a < 0) || (static_cast<unsigned>(a) < b) )
@@ -1189,10 +1202,10 @@ int main(int n, char * v[])
     int a = -1;
     unsigned b = 1u;
 
-    std::cout << less(a, b) << std::endl;
-    std::cout << (a < b) << std::endl;
-    std::cout << std::less<int>()(a, b) << std::endl;
-    std::cout << std::less<unsigned>()(a, b) << std::endl;
+    cout << less(a, b) << endl;
+    cout << (a < b) << endl;
+    cout << less<int>()(a, b) << endl;
+    cout << less<unsigned>()(a, b) << endl;
 }
 
 ```
@@ -1247,6 +1260,7 @@ Run-Time Assert on Word Size
 #include <set>
 #include <algorithm>
 #include <cassert>
+
 using namespace std;
 
 int main()
@@ -1267,25 +1281,28 @@ Precision on Stream
 #include <iostream>
 #include <iomanip>
 
+using namespace std;
+
 int main(int n, char * v[])
 try {
-    std::cout << std::setw(std::stoi(std::string(v[2]))+4) << std::setfill('0') << std::fixed << std::setprecision(std::stoi(std::string(v[2]))) << std::stod(std::string(v[1])) << std::endl;
+    cout << setw(stoi(string(v[2]))+4) << setfill('0') << fixed << setprecision(stoi(string(v[2]))) << stod(string(v[1])) << endl;
 }
-catch(std::exception & e) {
-    std::cout << "exception: " << e.what() << std::endl;
-    std::cout << "usage: " << v[0] << " double precision" << std::endl;
+catch(exception & e) {
+    cout << "exception: " << e.what() << endl;
+    cout << "usage: " << v[0] << " double precision" << endl;
 }
 
 ```
 
 Count Words using Unique-Map
----------------------------
+----------------------------
 ```C++
 #include <iostream>
 #include <iterator>
 #include <vector>
 #include <map>
 #include <algorithm>
+
 using namespace std;
 
 int main()
@@ -1304,7 +1321,7 @@ int main()
             p->second++;
         }
         else {
-            m.insert(std::make_pair(w,1));
+            m.insert(make_pair(w,1));
         }
     }
 
@@ -1324,7 +1341,9 @@ Stream Iterators and Transform Algorithm
 #include <vector>
 #include <string>
 #include <iostream>
+
 using namespace std;
+
 int main()
 {
     istream_iterator<string> e,i(cin);
@@ -1349,48 +1368,50 @@ CCIA File Name Parser
 #include <sstream>
 #include <cctype>
 
+using namespace std;
+
 int main()
 {
-    std::istream_iterator<std::string> e;
-    std::istream_iterator<std::string> i(std::cin);
-    std::ostream_iterator<std::string> o(std::cout, " ");
+    istream_iterator<string> e;
+    istream_iterator<string> i(cin);
+    ostream_iterator<string> o(cout, " ");
 
-    std::vector<std::string> names;
-    std::copy(i, e, std::back_inserter(names));
+    vector<string> names;
+    copy(i, e, back_inserter(names));
 
-    auto seperate = [](const std::string & name) -> std::tuple<std::string, std::string, std::string>
+    auto seperate = [](const string & name) -> tuple<string, string, string>
     {
-        std::string h,m,t;
+        string h,m,t;
 
         auto pu = name.find("_");
         auto pd = name.rfind(".");
-        if (pu != std::string::npos && pd != std::string::npos) {
+        if (pu != string::npos && pd != string::npos) {
             h = name.substr(0, pu);
             m = name.substr(pu + 1, (pd - pu - 1));
             t = name.substr(pd, name.size());
         }
 
-        return std::make_tuple(h,m,t);
+        return make_tuple(h,m,t);
     };
 
-    auto align = [](std::string & s)
+    auto align = [](string & s)
     {
         auto c = s[0];
-        if (std::isdigit(c)) { s.insert(0, "0"); }
-        if (std::isalpha(c)) { s[0] = std::toupper(c); s.insert(0, "A"); }
+        if (isdigit(c)) { s.insert(0, "0"); }
+        if (isalpha(c)) { s[0] = toupper(c); s.insert(0, "A"); }
     };
 
     for (const auto & n : names) {
-        std::stringstream stream(std::get<1>(seperate(n)));
-        std::string chapter, section;
-        std::getline(stream, chapter, '.');
-        std::getline(stream, section, '.');
+        stringstream stream(get<1>(seperate(n)));
+        string chapter, section;
+        getline(stream, chapter, '.');
+        getline(stream, section, '.');
 
-        if (std::max(chapter.size(), section.size()) >= 3) continue;
+        if (max(chapter.size(), section.size()) >= 3) continue;
         if (chapter.size() == 1) { align(chapter); }
         if (section.size() == 1) { align(section); }
 
-        std::cout << chapter << section << std::endl;
+        cout << chapter << section << endl;
     }
 }
 
@@ -1453,7 +1474,7 @@ int main()
     // async
     //------
     {
-        auto f = async(std::launch::async, [](int i)->int{ return i*i; }, 10);
+        auto f = async(launch::async, [](int i)->int{ return i*i; }, 10);
         cout << f.get() << endl;
     }
     return 0;
@@ -1481,7 +1502,7 @@ typename distribution::result_type generate()
 
 int main()
 {
-    for (int i = 0; i < 10; i++) std::cout << generate() << std::endl;
+    for (int i = 0; i < 10; i++) cout << generate() << endl;
 }
 
 ```
