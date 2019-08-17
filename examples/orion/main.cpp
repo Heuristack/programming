@@ -10,7 +10,7 @@ int main()
   boost::asio::deadline_timer t(io, boost::posix_time::seconds(5));
   t.wait();
 
-  YAML::Node node  = YAML::LoadFile("../etc/itch5.yaml");
+  YAML::Node node  = YAML::LoadFile("itch5.yaml");
   std::cout << node << std::endl;
 
   return 0;
