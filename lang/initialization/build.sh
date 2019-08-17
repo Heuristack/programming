@@ -12,8 +12,8 @@ function build()
             options+="-D${LH[j]}${RH[i]} ";
         done
         command=${command}${options}
-        echo $command
-        eval $command &> ${1}-${RH[i]}.txt
+        echo ${command}
+        eval ${command} &> ${1}-${RH[i]}.txt
     done
 }
 
