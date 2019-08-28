@@ -1,4 +1,4 @@
-MAIN = pncpp.pdf
+MAIN = main.pdf
 main: $(MAIN)
 
 %.pdf: %.tex
