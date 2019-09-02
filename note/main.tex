@@ -1,7 +1,39 @@
 \documentclass[a4paper,12pt]{report}
-\usepackage{fullpage,color,xcolor,natbib}
+\usepackage{fullpage}
+\usepackage{color,xcolor}
+\usepackage{natbib}
+\usepackage{listings}
+\usepackage{algorithm}
 \bibliographystyle{unsrt}
 \color{black}
+
+%
+% Code Style Definition
+%
+\lstset{
+    language=C++,
+    backgroundcolor=\color{black!5},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=lines,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    keywordstyle=\color{blue}\bfseries,
+    stringstyle=\color{green!50!black},
+    commentstyle=\color{gray}\itshape,
+    tabsize=4,
+    numbers=none,
+    numberstyle=\ttfamily\scriptsize\color{blue},
+    captionpos=b,
+    escapeinside={\%*}{*)}
+}
+%
+%\input{codestyle}
+%
+
+
 \title{Programming Notes in C++}
 \author{Heuristack}
 
@@ -16,14 +48,34 @@
 \begin{center}
 \end{center}
 
-\paragraph{Paragraph}
-This is a test paragraph to figure out the structure of this documents.
-$\alpha\beta\gamma$
+%
+% Feature Tests (Comment Out for Final Documents)
+%
 
+% -----
+% Paragraph with Title
+% -----
 \paragraph{Test}
-This a another paragraph.
+This a paragraph.
+%
+% Greeks (lower and upper case)
+%
+$\alpha\beta\gamma$
 $\Sigma\sigma$
+%
+% Poker Symbol
+%
 $\clubsuit \diamondsuit \heartsuit \spadesuit$
+
+%
+% Font (Too complicated)
+%
+%\fontencoding{}\fontfamily{}\fontseries{}\fontshape{}\fontsize{}\linespread{}\selectfont Some Text.
+
+%
+% Include Source Code
+%
+\lstinputlisting{helloworld.cpp}
 
 \end{document}
 
