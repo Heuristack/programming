@@ -7,9 +7,18 @@
 \bibliographystyle{unsrt}
 \color{black}
 
+\title{Programming Notes in C++}
+\author{Heuristack}
+
 %
-% Code Style Definition
+% Identation (TODO: Doesn't Work)
 %
+%\setlength{\parindent}{0pt}
+
+%
+% Source Code Commands & Environments
+%
+\newcommand{\codeblocksetup}{
 \lstset{
     language=C++,
     backgroundcolor=\color{black!5},
@@ -29,13 +38,16 @@
     captionpos=b,
     escapeinside={\%*}{*)}
 }
-%
-%\input{codestyle}
-%
+}
+\lstnewenvironment{codeblock}{\codeblocksetup}{}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\memo}[2]{\noindent\small\code{#1 = #2}\break}
+\newcommand{\mnemonics}[2]{\memo{#1}{#2}}
 
-
-\title{Programming Notes in C++}
-\author{Heuristack}
+%
+% Font (TODO: Too complicated)
+%
+%\fontencoding{}\fontfamily{}\fontseries{}\fontshape{}\fontsize{}\linespread{}\selectfont Some Text.
 
 \begin{document}
 %\maketitle
@@ -49,33 +61,46 @@
 \end{center}
 
 %
-% Feature Tests (Comment Out for Final Documents)
-%
-
-% -----
 % Paragraph with Title
-% -----
-\paragraph{Test}
-This a paragraph.
+%
+\paragraph{Greeks}
 %
 % Greeks (lower and upper case)
 %
 $\alpha\beta\gamma$
 $\Sigma\sigma$
+
+\paragraph{Poker Suit}
 %
 % Poker Symbol
 %
-$\clubsuit \diamondsuit \heartsuit \spadesuit$
-
-%
-% Font (Too complicated)
-%
-%\fontencoding{}\fontfamily{}\fontseries{}\fontshape{}\fontsize{}\linespread{}\selectfont Some Text.
+$\heartsuit\spadesuit\clubsuit\diamondsuit$
 
 %
 % Include Source Code
 %
+\paragraph{\code{litinputlisting}}
+This is a included code.
+\codeblocksetup
 \lstinputlisting{helloworld.cpp}
+
+\paragraph{\code{codeblock}}
+The \code{main} function is the entry point.
+\begin{codeblock}
+#include <iostream>
+
+int main()
+{
+    std::cout << "From CodeBlock!" << std::endl;
+}
+
+\end{codeblock}
+
+\memo{TVV}{Types Variables Values}
+\memo{COS}{Classes Objects States}
+\memo{RP}{References Pointers}
+\memo{AS}{Arrays Structures}
+\memo{EU}{Enumerations Unions}
 
 \end{document}
 
