@@ -1,10 +1,10 @@
 \version "2.18.2"
 
-#(set-global-staff-size 30)
+#(set-global-staff-size 26)
 
 \paper {
   top-margin = #10
-  indent = #25
+  indent = #10
 }
 
 \header {
@@ -91,3 +91,35 @@ lower_tue = \absolute {
     \new Staff = "lower" \lower_tue
   >>
 }
+
+upper_wed = \absolute {
+  \clef treble
+  \signature
+  \bar ""
+  \measure
+  a'2 
+  d''4-5 d''2-5 
+  d''4-5 c''2-4 a'4-2
+  a'4-3 g'4 f'4-1
+  e'2.-2 (e'2.-2)
+}
+
+lower_wed = \absolute {
+  \clef bass
+  \signature
+  \pedal
+  d4-5\sustainOn f4-3 a4-1
+  d4-5\sustainOff\sustainOn f4-3 a4-1
+  c4-5\sustainOff\sustainOn f4-2 a4-1
+  f4-2\sustainOff e4-3 d4-4
+  c4-5\sustainOn e4-3 g4-1
+  c4-5 e4-3 g4-1
+}
+
+\score {
+  \new PianoStaff <<
+    \new Staff = "upper" \upper_wed
+    \new Staff = "lower" \lower_wed
+  >>
+}
+
