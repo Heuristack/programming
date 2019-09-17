@@ -1,10 +1,10 @@
 \version "2.18.2"
 
-#(set-global-staff-size 26)
+#(set-global-staff-size 22)
 
 \paper {
   top-margin = #10
-  indent = #10
+  indent = #0
 }
 
 \header {
@@ -31,55 +31,25 @@ measure = {
   \set Score.barNumberVisibility = #(every-nth-bar-number-visible 1)
 }
 
-upper_mon = \absolute {
+upper = \absolute {
   \clef treble
   \signature
-% R4*3*2
-% \break
+  R4*3*2
   \measure
-  d'2-1 d'4-1
-  a'2-5 a'4-5
-  e'4.-2 f'8-3 e'4-2
-  d'2.-1
+  d'2-1 d'4-1 a'2-5 a'4 -5
+  e'4.-2 f'8-3 e'4-2 d'2.-1 (d'4-1)
+  a'4-2 c''4-4 d''2-5 c''4-4 a'4-2 
+  b'4-3 g'4-1 a'2.-2
 }
 
-lower_mon = \absolute {
+lower = \absolute {
   \clef bass
   \signature
   \pedal
-% d4-5\sustainOn f4-3 a4-1
-% d4-5 f4-3 a4-1
-% \break
-  \bar ""
-  d4-5\sustainOn f4-3 a4-1
-  \repeat unfold 1 { d4-5 f4-3 a4-1 }
+  d4-5\sustainOn f4-3 a4-1 \repeat unfold 3 { d4-5 f4-3 a4-1 }
   c4-5\sustainOff\sustainOn e4-3 g4-1
   d4-5\sustainOff\sustainOn f4-3 a4-1
-}
-
-\score {
-  \new PianoStaff <<
-    \new Staff = "upper" \upper_mon
-    \new Staff = "lower" \lower_mon
-  >>
-}
-
-upper_tue = \absolute {
-  \clef treble
-  \signature
-  \bar ""
-  \measure
-  d'4 a'4-2 c''4-4
-  d''2 c''4
-  a'4 b'4 g'4
-  a'2.
-}
-
-lower_tue = \absolute {
-  \clef bass
-  \signature
-  \pedal
-  d4-5\sustainOn f4-3 a4-1
+  d4-5 f4-3 a4-1
   d4-5\sustainOff\sustainOn f4-3 a4-1
   d4-5\sustainOff\sustainOn g4-2 b4-1
   d4-5\sustainOff\sustainOn f4-3 a4-1
@@ -87,12 +57,25 @@ lower_tue = \absolute {
 
 \score {
   \new PianoStaff <<
-    \new Staff = "upper" \upper_tue
-    \new Staff = "lower" \lower_tue
+    \new Staff = "upper" \upper
+    \new Staff = "lower" \lower
   >>
+  \header {
+    piece = "Scarborough Fair"
+    opus = "Week 38 2019"
+  }
+  \layout {
+  }
 }
+\markup {
+  Sing: DD-AA-EF-ED ACD-CA-BGA
+}
+\markup {}
+\markup {}
+\markup {}
+\markup {}
 
-upper_wed = \absolute {
+upper_today = \absolute {
   \clef treble
   \signature
   \bar ""
@@ -104,7 +87,7 @@ upper_wed = \absolute {
   e'2.-2 (e'2.-2)
 }
 
-lower_wed = \absolute {
+lower_today = \absolute {
   \clef bass
   \signature
   \pedal
@@ -118,8 +101,15 @@ lower_wed = \absolute {
 
 \score {
   \new PianoStaff <<
-    \new Staff = "upper" \upper_wed
-    \new Staff = "lower" \lower_wed
+    \new Staff = "upper" \upper_today
+    \new Staff = "lower" \lower_today
   >>
+  \header {
+    piece = "Wednesday"
+    opus = "09/18/2019"
+  }
+}
+\markup {
+  Sing: DD-DC-AA-GFE
 }
 
