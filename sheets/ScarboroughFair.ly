@@ -36,14 +36,30 @@ upper = \absolute {
   \signature
   R4*3*2
   \measure
-  d'2-1 d'4-1 a'2-5 a'4 -5
-  e'4.-2 f'8-3 e'4-2 d'2.-1 (d'4-1)
-  a'4-2 c''4-4 d''2-5 c''4-4 a'4-2 
-  b'4-3 g'4-1 a'2.-2 (a'2-1) 
-  d''4-5 d''2-5 
-  d''4-5 c''2-4 a'4-2
+  \bar ".|:"
+  d'2-1( d'4-1 
+  a'2-5 a'4 -5
+  e'4.-2 f'8-3 e'4-2 
+  d'2.-1~ 
+  d'4-1)
+  a'4-2( c''4-4 d''2-5 
+  c''4-4 a'4-2
+  b'4-3 g'4-1 
+  a'2.-2~ 
+  a'2-2) d''4-5(
+  d''2-5 d''4-5 
+  c''2-4 a'4-2
   a'4-3 g'4 f'4-1
-  e'2.-2 (e'2.-2)
+  e'2.-2~
+  e'2.-2)
+  d'2-1( a'4-5
+  g'2-4 f'4-3
+  e'4-2 d'4-1 c'4-2
+  d'2.-3~d'2.-3)
+  \bar ":|."
+  <f'-1 d''-5>2.~ 
+  <f'-1 d''-5>2.
+  \bar "|."
 }
 
 lower = \absolute {
@@ -63,6 +79,13 @@ lower = \absolute {
   f4-2\sustainOff e4-3 d4-4
   c4-5\sustainOn e4-3 g4-1
   c4-5 e4-3 g4-1
+  d4-5\sustainOff\sustainOn f4-3 a4-1
+  c4-5\sustainOff\sustainOn e4-3 g4-1
+  c4-5\sustainOff\sustainOn e4-3 g4-1
+  d4-5\sustainOff\sustainOn f4-3 a4-1
+  d4-5 f4-3 a4-1
+  d4-5 f4-3 a4-1
+  d2.-5
 }
 
 \score {
@@ -78,7 +101,7 @@ lower = \absolute {
   }
 }
 \markup {
-  Sing: DD-AA-EF-ED ACD-CA-BGA DD-DC-AA-GFE
+  Sing: DD-AA-EF-ED ACD-CA-BGA DD-DC-AA-GFE DA-GF-EDC-D
 }
 \markup {}
 \markup {}
@@ -90,21 +113,12 @@ upper_today = \absolute {
   \signature
   \bar ""
   \measure
-  d'2-1 a'4-5
-  g'2-4 f'4-3
-  e'4-2 d'4-1 c'4-2
-  d'2.-3 (d'2.-3)
 }
 
 lower_today = \absolute {
   \clef bass
   \signature
   \pedal
-  d4-5\sustainOn f4-3 a4-1
-  c4-5\sustainOff\sustainOn e4-3 g4-1
-  c4-5\sustainOff\sustainOn e4-3 g4-1
-  d4-5\sustainOff\sustainOn f4-3 a4-1
-  d4-5 f4-3 a4-1
 }
 
 \score {
@@ -113,11 +127,9 @@ lower_today = \absolute {
     \new Staff = "lower" \lower_today
   >>
   \header {
-    piece = "Thursday"
-    opus = "09/19/2019"
+    piece = "Friday"
+    opus = "09/20/2019"
   }
 }
 \markup {
-  Sing: DA-GF-EDC-D
 }
-
