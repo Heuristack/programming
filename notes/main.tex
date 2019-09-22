@@ -1,0 +1,106 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage{fullpage}
+\usepackage{color,xcolor}
+\usepackage{natbib}
+\usepackage{listings}
+\usepackage{algorithm}
+\bibliographystyle{unsrt}
+\color{black}
+
+\title{Programming Notes in C++}
+\author{Heuristack}
+
+%
+% Identation (TODO: Doesn't Work)
+%
+%\setlength{\parindent}{0pt}
+
+%
+% Source Code Commands & Environments
+%
+\newcommand{\codeblocksetup}{
+\lstset{
+    language=C++,
+    backgroundcolor=\color{black!5},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=lines,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    keywordstyle=\color{blue}\bfseries,
+    stringstyle=\color{green!50!black},
+    commentstyle=\color{gray}\itshape,
+    tabsize=4,
+    numbers=none,
+    numberstyle=\ttfamily\scriptsize\color{blue},
+    captionpos=b,
+    escapeinside={\%*}{*)}
+}
+}
+\lstnewenvironment{codeblock}{\codeblocksetup}{}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\memo}[2]{\noindent\small\code{#1 = #2}\break}
+\newcommand{\mnemonics}[2]{\memo{#1}{#2}}
+
+%
+% Font (TODO: Too complicated)
+%
+%\fontencoding{}\fontfamily{}\fontseries{}\fontshape{}\fontsize{}\linespread{}\selectfont Some Text.
+
+\begin{document}
+%\maketitle
+%\include{part1}
+%\include{part2}
+%\include{part3}
+%\include{part4}
+%\include{part5}
+
+\begin{center}
+\end{center}
+
+%
+% Paragraph with Title
+%
+\paragraph{Greeks}
+%
+% Greeks (lower and upper case)
+%
+$\alpha\beta\gamma$
+$\Sigma\sigma$
+
+\paragraph{Poker Suit}
+%
+% Poker Symbol
+%
+$\heartsuit\spadesuit\clubsuit\diamondsuit$
+
+%
+% Include Source Code
+%
+\paragraph{\code{litinputlisting}}
+This is a included code.
+\codeblocksetup
+\lstinputlisting{helloworld.cpp}
+
+\paragraph{\code{codeblock}}
+The \code{main} function is the entry point.
+\begin{codeblock}
+#include <iostream>
+
+int main()
+{
+    std::cout << "From CodeBlock!" << std::endl;
+}
+
+\end{codeblock}
+
+\memo{TVV}{Types Variables Values}
+\memo{COS}{Classes Objects States}
+\memo{RP}{References Pointers}
+\memo{AS}{Arrays Structures}
+\memo{EU}{Enumerations Unions}
+
+\end{document}
+
