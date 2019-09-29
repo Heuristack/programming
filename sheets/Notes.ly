@@ -16,8 +16,8 @@
   tagline = "ACE-BD-GF Version 20190926"
 }
 
-\markup{Notes on Clef: ACE-BD-GF, [F]G-A[B]C[D]E-F[G]}
-\absolute 
+
+\absolute
 {
   \clef treble
   \time 3/4
@@ -43,7 +43,7 @@
   <g'' f'''>
   \bar "|."
 }
-\absolute 
+\absolute
 {
   \clef bass
   \time 3/4
@@ -69,6 +69,7 @@
   <g f'>
   \bar "|."
 }
+\markup{Notes on Clef: ACE-BD-GF, [F]G-A[B]C[D]E-F[G]}
 
 \markup
 {
@@ -102,7 +103,7 @@
 
 \markup
 {
-  Cleff: 
+  Cleff:
   Lowest Line = Uppest Space,
   Lowest Space = Uppest Line
 }
@@ -148,4 +149,22 @@
   5th Notes Sequence:
   F-C-G-D-A-E-B
 }
+
+\markup
+{
+  Chords: Note(1),Note(3),Note(5),Note(7),1-3-5,1-3-7,
+  Primary Chords: I, IV, V7,
+}
+
+\markup
+{
+  Chord(I) = root, Chord(V) = Note(4)+Num(Fingers)-1=Note(8)=Octave(root), Chord(V7) = Finger(5)
+}
+
+\markup
+{
+  Chord(I)-Chord(IV) = Right-Shift on Finger(5),
+  Chord(IV)-Chord(V7) = Left-Shift on Finter(2)
+}
+
 
