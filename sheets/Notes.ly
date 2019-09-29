@@ -1,21 +1,21 @@
 \version "2.18.2"
 
 #(set-global-staff-size 22)
+versiondate = #(strftime "Version %Y%m%d" (localtime (current-time)))
 
 \paper {
   top-margin = #10
-  indent = #10
+  indent = #0
 }
 \header {
-  title = ""
-  subtitle = ""
-  poet = ""
-  composer = ""
+  title = "Music Notes"
+  subtitle = "concise expression of music theory for recapping"
+  poet = "Mnemonics"
+  composer = "Lance Li"
   meter = ""
   arranger = ""
-  tagline = "ACE-BD-GF Version 20190926"
+  tagline = \versiondate
 }
-
 
 \absolute
 {
@@ -110,7 +110,9 @@
 
 \markup
 {
-  Middle C: C4, (C1)-C2-C3-[C4]-C5-C6-(C7)
+  Middle-C: C4, 
+  (C1)-C2-C3-[C4]-C5-C6-(C7),
+  A-C-E,F-C-G,B-C-D
 }
 
 \markup
@@ -128,18 +130,14 @@
 
 \markup
 {
-  F-C-G,
+  Scales: F-C-G (Middle-C position LH-RH),
   Major Scales: C,G,F,
   Minor Scales: A,E,D
 }
 
 \markup
 {
-  Minor Note: The note right next to the hand of major note
-}
-
-\markup
-{
+  Minor: right next to a hand of major
   Major Note + 5 = Minor Note,
   Major Note - 2 = Minor Note
 }
