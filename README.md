@@ -1,3 +1,24 @@
+Type Identity Transformation
+----------------------------
+```C++
+#include <iostream>
+using namespace std;
+
+template <typename T> struct type_identity { using type = T; };
+template <typename T> using type_identity_t = typename type_identity<T>::type;
+template <typename T> auto f(T a, T b) -> T { return a * b; }
+template <typename T> auto g(T a, typename type_identity<T>::type b) -> type_identity_t<T> { return a * b; }
+
+int main()
+{
+//  cout << f(3.14, 42) << endl;    // KO
+//  cout << f(42, 3.14) << endl;    // KO
+    cout << g(3.14, 42) << endl;    // OK
+    cout << g(42, 3.14) << endl;    // OK but lose precision
+}
+
+```
+
 Precision loss in 'double' when timing large number
 ---------------------------------------------------
 ```C++
