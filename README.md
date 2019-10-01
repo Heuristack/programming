@@ -1,3 +1,17 @@
+template argument for template template parameter must be a class template or type alias template
+-------------------------------------------------------------------------------------------------
+```C++
+template <typename T1, typename T2> class TypenameParameterizedTemplateClass {};
+template <typename T1, typename T2, template <typename = T1, typename = T2> typename TT = TypenameParameterizedTemplateClass> class TemplateParameterizedTemplateClass {};
+
+template class TypenameParameterizedTemplateClass<bool,long>;
+template class TemplateParameterizedTemplateClass<bool,long>;
+template class TemplateParameterizedTemplateClass<long,bool,TypenameParameterizedTemplateClass>;
+
+int main() {}
+
+```
+
 Type Identity Transformation
 ----------------------------
 ```C++
