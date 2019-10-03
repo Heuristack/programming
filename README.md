@@ -1,3 +1,31 @@
+The concept of emptiness - optional
+-----------------------------------
+```C++
+#include <iostream>
+#include <optional>
+#include <variant>
+using namespace std;
+
+constexpr int nullint = 0x80000000;
+
+optional<int> get(int i)
+{
+    if (i == nullint) return nullopt;
+    else return i;
+}
+
+int main()
+{
+    if (auto i = get(0x8000); i.has_value()) {
+        cout << i.value() << endl;
+    }
+    else cout << "empty" << endl;
+
+    cout << get(nullint).value_or(0) << endl;
+}
+
+```
+
 template argument for template template parameter must be a class template or type alias template
 -------------------------------------------------------------------------------------------------
 ```C++
