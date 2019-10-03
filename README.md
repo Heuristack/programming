@@ -1,3 +1,24 @@
+dispatch: blocks and queues
+---------------------------
+```C++
+#include <dispatch/dispatch.h>
+#include <iostream>
+#include <iterator>
+#include <numeric>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    dispatch_queue_t main_q = dispatch_get_main_queue();
+    vector<int> v(20); iota(begin(v),end(v),10);
+    for (auto i : v) { dispatch_async(main_q, ^{ cout << i << ','; }); }
+    dispatch_async(main_q, ^{ cout << "Hello,World!" << endl; exit(0); });
+    dispatch_main();
+}
+
+```
+
 The concept of emptiness - optional
 -----------------------------------
 ```C++
