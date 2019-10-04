@@ -1,3 +1,41 @@
+template: para_type, this_type, base_type
+-----------------------------------------
+```C++
+#include <type_traits>
+using namespace std;
+
+template <typename T>
+class B
+{
+public:
+    typedef T para_type;
+    typedef B<para_type> this_type;
+};
+
+template <typename T>
+struct D : B<T>
+{
+public:
+    typedef T para_type;
+    typedef D<para_type> this_type;
+    typedef B<para_type> base_type;
+};
+
+template class B<long>;
+template class D<long>;
+
+typedef B<long> b_type;
+typedef D<long> d_type;
+
+static_assert(is_same<b_type::para_type, d_type::para_type>::value);
+static_assert(is_same<b_type::this_type, d_type::base_type>::value);
+static_assert(is_base_of<b_type, d_type>::value);
+
+int main()
+{}
+
+```
+
 dispatch: blocks and queues
 ---------------------------
 ```C++
