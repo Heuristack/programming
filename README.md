@@ -1,5 +1,5 @@
-template: para_type, this_type, base_type
------------------------------------------
+Template: 'this_type' and 'base_type'
+-------------------------------------
 ```C++
 #include <type_traits>
 using namespace std;
@@ -36,7 +36,7 @@ int main()
 
 ```
 
-dispatch: blocks and queues
+Dispatch: blocks and queues
 ---------------------------
 ```C++
 #include <dispatch/dispatch.h>
@@ -57,8 +57,8 @@ int main()
 
 ```
 
-The concept of emptiness - optional
------------------------------------
+The concept of emptiness - 'optional'
+-------------------------------------
 ```C++
 #include <iostream>
 #include <optional>
@@ -85,7 +85,7 @@ int main()
 
 ```
 
-template argument for template template parameter must be a class template or type alias template
+Template argument for template template parameter must be a class template or type alias template
 -------------------------------------------------------------------------------------------------
 ```C++
 template <typename T1, typename T2> class TypenameParameterizedTemplateClass {};
@@ -99,7 +99,7 @@ int main() {}
 
 ```
 
-Type Identity Transformation
+Type identity transformation
 ----------------------------
 ```C++
 #include <iostream>
@@ -1583,7 +1583,7 @@ int main()
         t(10);
         cout << t.get_future().get() << endl;
     }
-    
+
     // async
     {
         auto f = async(launch::async, [](int i)->int{ return i*i; }, 10);
