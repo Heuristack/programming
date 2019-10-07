@@ -1,11 +1,11 @@
 \newcommand{\setupcode}{
 \lstset{
   language=C++,
-  backgroundcolor=\color{black!5},
+% backgroundcolor=\color{black!5},
   basicstyle=\ttfamily\small,
   breaklines=true,
   prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
-  frame=lines,
+% frame=lines,
   showtabs=false,
   showspaces=false,
   showstringspaces=false,
@@ -22,4 +22,5 @@
 \lstnewenvironment{code}{\setupcode}{}
 \newcommand{\inputcode}[1]{\setupcode\lstinputlisting{#1}}
 \newcommand{\inlinecode}[1]{\texttt{#1}}
+\newcommand{\cplusplus}{\inlinecode{C++}}
 
