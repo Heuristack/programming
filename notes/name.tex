@@ -1,3 +1,4 @@
-\newenvironment{nametable}{\begin{tabular}{c|l}\hline}{\end{tabular}}
-\newcommand{\name}[2]{\inlinecode{\textbf{#1}}&\inlinecode{#2}\\\hline}
+\newenvironment{nametable}{\begin{tabular}{l r}\toprule}{\bottomrule\end{tabular}}
+\newcommand{\name}[2]{\inlinecode{\textbf{#1}}&\inlinecode{#2}\\}
+\newcommand{\nameline}{\midrule}
 

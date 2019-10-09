@@ -1,3 +1,4 @@
-\newenvironment{memotable}{\begin{tabular}{c|l}\hline}{\end{tabular}}
-\newcommand{\memo}[2]{\inlinecode{\textbf{#1}}&#2\\\hline}
+\newenvironment{memotable}{\begin{tabular}{c l}\toprule}{\bottomrule\end{tabular}}
+\newcommand{\memo}[2]{\inlinecode{\textbf{#1}}&#2\\}
+\newcommand{\memoline}{\midrule}
 
