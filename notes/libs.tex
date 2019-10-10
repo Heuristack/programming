@@ -55,3 +55,80 @@
 \name{bucket}{b, i}
 \end{nametablel}
 
+\subsection*{Algorithm Categories}
+\paragraph{Fill and Generate}{.}
+\begin{code}
+fill(f,f,&);fill_n(o,n,&);generate(f,f,vfunc);generate_n(o,n,vfunc);
+\end{code}
+
+\paragraph{\inlinecode{rm;cp;mv;tr;sw;}}{.}
+\begin{code}
+f remove(f,f,&); o copy(i,i,o); o move(i,i,o);
+o transform(i,i,o,ufunc);
+swap_ranges(f,f,f); swap(&,&); iter_swap(f,f);
+remove_if(f,f,upred); copy_if(); copy_n(); copy_backward;
+\end{code}
+
+\paragraph{Visit}{.}
+\begin{code}
+ufunc for_each(i,i,ufunc);
+\end{code}
+
+\paragraph{Predicates}{.}
+\begin{code}
+bool none_of(i,i,upred);
+bool any_of(i,i,upred);
+bool all_of(i,i,upred);
+\end{code}
+
+\paragraph{Sequence Comparison}{.}
+\begin{code}
+bool equal(i,i,i); bool equal(i,i,i,bpred);
+(i,i) mismatch(i,i,i); (i,i) mismatch(i,i,i,bpred);
+b lexicographical_compare(i,i,i,i);
+\end{code}
+
+\paragraph{Permutation}{.}
+\begin{code}
+bool next_permutation(b,b,bpred);
+bool prev_permutation(b,b,bpred);
+bool is_permutation(f,f,f,f,bpred);
+\end{code}
+
+\subsection*{STL Container Operations}
+\paragraph{Element Access}{.}
+\begin{code}
+at;operator[];front;back;
+\end{code}
+
+\paragraph{Element Search}{.}
+\begin{code}
+find;count;lower_bound;upper_bound;equal_range;
+\end{code}
+
+\paragraph{List Operations}{.}
+\begin{code}
+reverse;sort;unique;remove;splice;
+\end{code}
+
+\paragraph{Forward List Operations}{.}
+\begin{code}
+insert_after;erase_after;emplace_after;splice_after;
+\end{code}
+
+\paragraph{Associated Container Insertion}{.}
+\begin{code}
+(unordered_)set.insert(element) -> <iterator,bool>
+(unordered_)map.insert(element) -> <iterator,bool>
+[i,r] = (unordered_){set,map}.insert(element);
+
+int main()
+{
+  map<char,string> m = {{'H',"Ocean Park!"}};
+  if (auto [i,r] = m.insert({'H',"Disneyland!"}); !r) {
+    cout << get<0>(*i) << ": " << get<string>(*i) << endl;
+  }
+}
+
+\end{code}
+
