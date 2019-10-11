@@ -1,0 +1,156 @@
+\section*{Concurrent Programming}
+\subsection*{Mnemonics}
+\begin{memotable}
+\memo{TMCV}{Thread, Mutex, Condition-Variable}
+\memo{PFPT}{Promise, Future, Packaged-Task}
+\memo{AVMM}{Atomic, Volatile, Memory-Model}
+\memoline
+\memo{TSYNC}{Thread Synchronization}
+\memo{ASYNC}{Asynchronization}
+\end{memotable}
+
+\subsection*{Naming}
+\begin{nametablel}
+\name{p}{promise}
+\name{f}{future}
+\name{t}{packaged task}
+\name{z}{thread}
+\name{m}{mutex}
+\name{c}{condition variable}
+\end{nametablel}
+
+\subsection*{Lambda: Function, Procedure, Thread, Task}
+\paragraph{Pure Function}{.}
+\begin{code}
+cout << [](int i) -> int { return i*i; }(10) << endl;
+\end{code}
+
+\paragraph{Procedure: Side Effect}{.}
+\begin{code}
+int r = 0;
+[&r](int i){ r = i*i; }(10);
+cout << r << endl;
+\end{code}
+
+\paragraph{Thread Binds Pure Function}{.}
+\begin{code}
+thread z([](int i) -> int { return i*i; }, 10);
+z.join();
+\end{code}
+
+\paragraph{Thread Binds Procedure}{.}
+\begin{code}
+int r = 0;
+thread z{[&r](int i){ r = i*i; }, 10};
+z.join();
+cout << r << endl;
+\end{code}
+
+\paragraph{Packaged Task}{.}
+\begin{code}
+packaged_task<int(int)> t{[](int i)->int{ return i*i; }};
+t(10);
+cout << t.get_future().get() << endl;
+\end{code}
+
+\paragraph{async}{.}
+\begin{code}
+auto f = async(std::launch::async, [](int i)->int{ return i*i; }, 10);
+cout << f.get() << endl;
+\end{code}
+
+\subsection*{Thread}
+
+\begin{nametablel}
+\name{ID}{Identification}
+\name{CD}{Construction and Destruction}
+\name{JD}{Join and Detach}
+\end{nametablel}
+
+\begin{code}
+template <typename Func, typename Args..., class = typename
+enable_if<!is_same<typename decay<Func>::type, thread>::value>::type>
+explicit thread(Func && func, Args && ... args);
+
+void hello()
+{
+  cout << "Hello, Concurrency World!" << endl;
+}
+
+int main()
+{
+  thread t(hello);
+  t.join();
+}
+\end{code}
+
+\paragraph{Identification}{.}
+\begin{code}
+typename std::thread::id;
+\end{code}
+
+\paragraph{Construction and Destruction}{.}
+\begin{code}
+\end{code}
+
+\paragraph{Join and Detach}{.}
+\begin{code}
+if (get_id() != std::thread::id{}) {
+  cout << "joinable: " << endl;
+}
+\end{code}
+
+\paragraph{This Thread}{.}
+\begin{code}
+namespace std::this_thread
+{
+  get_id(); yield(); sleep_for(); sleep_util();
+}
+\end{code}
+
+\subsection*{Thread Synchronization}
+\paragraph{Exclusive Access}{.}
+\begin{code}
+[{recursive_}{timed_}mutex][lock][unkock][try_lock]
+[lock_guard][unique_lock][lock(locks);try_lock(locks);]
+\end{code}
+
+\paragraph{Notification}{.}
+\begin{code}
+[condition_variable][notify][wait]
+\end{code}
+
+\paragraph{Once}{.}
+\begin{code}
+once_flag once{}; call_once(once, f, args);
+\end{code}
+
+\subsection*{Promise and Future}
+\paragraph{Set}{.}
+\begin{code}
+promise::set_value(); promise::set_exception();
+\end{code}
+
+\paragraph{Get}{.}
+\begin{code}
+promise::get_future(); future::get();
+\end{code}
+
+\paragraph{Async}{.}
+\begin{code}
+template <class Func, class... Args>
+future<typename result_of<typename decay<Func>::type(typename decay<Args>::type...)>::type>
+async(Func && func, Args && ... args);
+\end{code}
+
+\subsection*{atomic}
+\paragraph{Acquire}{\inlinecode{acquire : [ ...}}
+\begin{code}
+ensure [ before subsequent operations ...
+\end{code}
+
+\paragraph{Release}{\inlinecode{release : ... ]}}
+\begin{code}
+ensure ] after  subsequent operations ...
+\end{code}
+
