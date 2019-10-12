@@ -1,5 +1,3 @@
-\newcommand{\feature}[3]{
-  \paragraph{#1}{#2}
-  \inputcode{#3}
-}
+\lstnewenvironment{feature}[2]{\paragraph{#1}{#2}\setupcode}{}
+\newcommand{\inputfeature}[3]{\paragraph{#1}{#2}\inputcode{#3}}
 
