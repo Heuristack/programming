@@ -5,9 +5,9 @@
 \memo{CIFA}{Containers \& Iterators \& Functors \& Algorithms}
 \memo{LMNR}{Limits \& Mathematics \& Numerics \& Randoms}
 \memo{CCSR}{Character-Classification \& String \&  Regex}
-\memo{IOSB}{IO Stream \& Buffers}
+\memo{IOSB}{IO Streams \& Buffers}
 \memo{TMTU}{Time \& Memory \& Types \& Utilities}
-\memo{SESE}{Standard Exceptions \& System Errors}
+\memo{SESE}{Standard-Exceptions \& System-Errors}
 \memoline
 \memo{VUB}{Void Unary Binary}
 \memo{PFP}{Procedures Functions Predicates}
@@ -17,43 +17,41 @@
 \memo{CDT}{Clock Duration Timepoint}
 \memoline
 \memo{IOFBR}{Input Output Forward Bidirectional Random}
+\memoline
 \memo{NZQRC}{Natural Integral Rational Real Complex}
 \memo{UBPNS}{Uniform Bernoulli Poisson Normal Sampling}
 \end{memotabler}
 
 \subsection*{Naming}
-\begin{nametablel}
+\begin{nametabler}
+\name{array}{a, arr}
+\name{vector}{v, vec}
+\name{deque}{d, deq}
+\name{stack}{s, lifo}
+\name{queue}{s, fifo}
+\name{set}{s, (tree,hash)set}
+\name{map}{m, (tree,hash)map}
+\name{bucket}{b, i}
+\nameline
 \name{iterator}{i,o,f,b,r}
-\nameline
-\name{sequence}{[p,q] (p==q) $\rightarrow$ 1 element}
-\name{        }{[p,r) (p==r) $\rightarrow$ 0 element}
-\nameline
-\name{middle}{lower middle = p + distance(p,q)/2}
-\name{      }{upper middle = p + distance(p,r)/2}
-\nameline
-\name{bounds}{lower bound - l}
-\name{      }{upper bound - u}
-\nameline
 \name{functors}{(v,u,b) * (proc,pred,func)}
 \nameline
 \name{device}{d, dev}
 \name{engine}{e, eng}
 \name{distribution}{d = (u,b,p,n,s), dis}
 \nameline
-\name{stream}{s, strm, m}
-\name{string}{s, strn, a(alpha)}
+\name{stream}{s, s, strm}
+\name{string}{a(alpha), s, strn}
 \nameline
-\name{array}{a, arr}
-\name{vector}{v, vec}
-\name{deque}{d, deq}
-\name{stack}{s, lifo}
-\name{queue}{s, fifo}
+\name{sequence}{[p,q] : (p==q) $\rightarrow$ 1 element}
+\name{        }{[p,r) : (p==r) $\rightarrow$ 0 element}
 \nameline
-\name{set}{s, (tree,hash)set}
-\name{map}{m, (tree,hash)map}
+\name{middle}{lower\_middle = p + distance(p,q)/2}
+\name{      }{upper\_middle = p + distance(p,r)/2}
 \nameline
-\name{bucket}{b, i}
-\end{nametablel}
+\name{bounds}{lower\_bound: l}
+\name{      }{upper\_bound: u}
+\end{nametabler}
 
 \subsection*{Algorithm Categories}
 \paragraph{Fill and Generate}{.}
@@ -96,9 +94,12 @@ bool is_permutation(f,f,f,f,bpred);
 \end{code}
 
 \subsection*{STL Containers}
-\begin{nametablel}
-\name{4}{vector;deque;forward list;list;}
-\end{nametablel}
+\begin{nametabler}
+\name{4}{vector;deque;forward\_list;list;}
+\name{8}{(unordered\_)(multi)\{set,map\};}
+\name{3}{stack;queue;priority\_queue;}
+\name{3}{array;bitset;vector<bool>;}
+\end{nametabler}
 
 \begin{code}
 template <typename K, typename V,
