@@ -65,6 +65,7 @@ cout << f.get() << endl;
 \name{ID}{Identification}
 \name{CD}{Construction \& Destruction}
 \name{JD}{Join \& Detach}
+\name{TT}{This Thread}
 \end{nametabler}
 
 \begin{code}
@@ -138,7 +139,7 @@ promise::get_future(); future::get();
 
 \paragraph{Async}{.}
 \begin{code}
-template <class Func, class... Args>
+template <class Func, class ... Args>
 future<typename result_of<typename decay<Func>::type(typename decay<Args>::type...)>::type>
 async(Func && func, Args && ... args);
 \end{code}
