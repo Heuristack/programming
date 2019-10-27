@@ -1,5 +1,5 @@
-example of an order template using some template programming techniques
------------------------------------------------------------------------
+An order template using some template programming techniques
+------------------------------------------------------------
 ```C++
 #include <iostream>
 using std::ostream;
