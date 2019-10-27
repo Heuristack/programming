@@ -1,3 +1,67 @@
+example of an order template using some template programming techniques
+-----------------------------------------------------------------------
+```C++
+#include <iostream>
+using std::ostream;
+
+template <typename price_t, typename quant_t>
+class order_base
+{
+public:
+    typedef price_t price_type;
+    typedef quant_t quant_type;
+    typedef enum { bid, ask } side_type;
+    typedef uint32_t id_type;
+    typedef order_base<price_type, quant_type> this_type;
+
+public:
+    order_base(id_type i, side_type s, price_type p, quant_type q);
+
+public:
+    template <typename price, typename quant>
+    friend auto operator << (ostream & s, order_base<price,quant> const & o) -> ostream &;
+
+private:
+    id_type id_;
+    side_type side_;
+    price_type price_;
+    quant_type quant_;
+};
+
+#define template_order_base template <typename price_t, typename quant_t>
+#define typename_order_base order_base<price_t, quant_t>
+#define order_base_template auto typename_order_base
+
+template_order_base
+typename_order_base::order_base(id_type i, side_type s, price_type p, quant_type q)
+    : id_(i), side_(s), price_(p), quant_(q)
+{}
+
+template_order_base
+auto operator << (ostream & s, typename_order_base const & o) -> ostream &
+{
+    s << "[" << o.id_ << ":" << o.side_ << ":" << o.price_ << ":" << o.quant_ << "]";
+    return s;
+}
+
+#undef order_base_template
+#undef typename_order_base
+#undef template_order_base
+
+class order : public order_base<double, long>
+{
+public:
+    using order_base<double, long>::order_base;
+};
+
+int main()
+{
+    order o (0, order::side_type::bid, 100, 10);
+    std::cout << o << std::endl;
+}
+
+```
+
 Template: 'this_type' and 'base_type'
 -------------------------------------
 ```C++
