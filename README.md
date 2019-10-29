@@ -1,3 +1,25 @@
+Out-of-line definition of template template class member function
+-----------------------------------------------------------------
+```C++
+#include <iostream>
+#include <string>
+
+template <typename T1, typename T2> class TypenameParameterizedTemplateClass {};
+
+template <typename T1, typename T2, template <typename = T1, typename = T2> typename TT = TypenameParameterizedTemplateClass>
+class TemplateParameterizedTemplateClass { public: auto echo() const -> std::string; };
+
+template <typename T1, typename T2, template <typename = T1, typename = T2> typename TT>
+auto TemplateParameterizedTemplateClass<T1,T2,TT>::echo() const -> std::string { return "Hello!"; }
+
+int main()
+{
+    TemplateParameterizedTemplateClass<long,bool> object;
+    std::cout << object.echo() << std::endl;
+}
+
+```
+
 An order template using some template programming techniques
 ------------------------------------------------------------
 ```C++
