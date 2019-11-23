@@ -1,0 +1,88 @@
+\section{Principles}
+
+\subsection*{The Purpose Matters}
+The purpose of programming matters in terms of how to derive it, for example,
+to code a small program to illustrate how to use a particular language feature
+such as \inlinecode{std::future}, it should not be the same as
+hacking and accomplishing a particular task in a large projects such as Tbricks.
+Also different from competitive sport programming where resolving
+the problem in time is the most important thing to ensure.
+This applies in several aspects of programming activities, such as naming,
+parentheses and indent styles, etc.
+
+\subsection*{Systematic Naming}
+How to name data types, functions, variables, namespaces, files, etc.
+There should be some styles of nameing depending on the types and purposes
+of programs being developed.
+
+\subsection*{Elegantly Typing and Navigating}
+How to program elegantly step by step, for example, to develop a function different kinds of
+parentheses are required to how to insert them without too many backward movement.
+
+\subsection*{Abstraction Principle}
+Each significant piece of functionality in a program should be implemented
+in just one place in the source code. Where similar functions are carried out
+by distinct pieces of code, it is generally beneficial to combine them
+into one by abstracting out the varying parts.
+- Benjamin C. Pierce in Types and Programming Languages (2002).
+The phrases of any semantically meaningful syntactic class may be named.
+- David A. Schmidt in The Structure of Typed Programming Languages (1994).
+The acts of the mind, wherein it exerts its power over simple ideas,
+are chiefly these three: 1. Combining several simple ideas into one
+compound one, and thus all complex ideas are made. 2. The second
+is bringing two ideas, whether simple or complex, together, and
+setting them by one another so as to take a view of them at once,
+without uniting them into one, by which it gets all its ideas of
+relations. 3. The third is separating them from all other ideas that
+accompany them in their real existence: this is called abstraction, and
+thus all its general ideas are made.
+- John Locke, An Essay Concerning Human Understanding (1690).
+\begin{code}
+Procedure Abstraction -> Function;
+Data Abstraction -> Compound (Structure);
+Class: Complete User-Defined Type;
+Template: Parameterized Incomplete Type;
+Alias: Class Alias; Template Alias;
+\end{code}
+
+\subsection*{DRY - Don't Repeat Yourself}
+The DRY principle is stated as \textquote{Every piece of knowledge must have a
+single, unambiguous, authoritative representation within a system.}
+The principle has been formulated by Andy Hunt and Dave Thomas
+in their book The Pragmatic Programmer.
+
+\subsection*{Type System vs File System}
+The \inlinecode{C++} programming language type system and operating file system
+are comparable in sematics, the basic manipulation unit of
+the former is type wihle the latter is file.
+\begin{code}
+namespace = directory
+class (struct) = file
+{namespace,class,struct,template} alias = symbolic link
+{private,protect,public} = ugo
+{member,friend,derived,users} = ugo
+{const,mutable} = rw(x)
+({namespace,class,struct}*{namespace,class,struct}) contain relation = {directory}*{directory,file}
+{class,struct}*{class,struct} inheritance relation = NONE
+\end{code}
+
+\subsection*{Semantics Network (Tree)}
+By organizing code snippets into a semantics tree structure can help
+to memorize and recall those snippets in \inlinecode{O(lg(n))} time,
+so as to improve productivity via replacement remembering and typing
+by finding and copying.
+
+\subsection*{\inlinecode{C++} 99 Questions}
+For those functional programming language, there are so called H-99, Q-99, etc. problems
+set for learners to explore the idioms for a partucular type of language dialects.
+But for \inlinecode{C++} there seemingly isn't such a problem set until now.
+
+\subsection*{Encapsulation is not Information Hiding}
+Encapsulation is a language construct that facilitates
+the bundling of data with the methods operating on that data.
+Information hiding is a design principle that strives to
+shield client classes from the internal workings of a class.
+Encapsulation facilitates, but does not guarantee, information hiding.
+Smearing the two into one concept prevents a clear understanding of either.
+
+
