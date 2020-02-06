@@ -1,3 +1,30 @@
+Problematic perfect-forwarding constructor resolved by enable_if
+----------------------------------------------------------------
+```C++
+#include <type_traits>
+#include <iostream>
+
+using namespace std;
+
+class C
+{
+public:
+    C(C const &) { cout << "cp" << endl; }
+    C(C &&) { cout << "mv" << endl; }
+    C() = default;
+
+    template <typename T>
+    C(typename enable_if<!is_same<T,C>::value,T>::type &&) { cout << "fw" << endl; }
+};
+
+int main()
+{
+    C object;
+    C another_object(object);
+}
+
+```
+
 Out-of-line definition of template template class member function
 -----------------------------------------------------------------
 ```C++
