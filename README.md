@@ -202,7 +202,8 @@ Template argument for template template parameter must be a class template or ty
 -------------------------------------------------------------------------------------------------
 ```C++
 template <typename T1, typename T2> class TypenameParameterizedTemplateClass {};
-template <typename T1, typename T2, template <typename = T1, typename = T2> typename TT = TypenameParameterizedTemplateClass> class TemplateParameterizedTemplateClass {};
+template <typename T1, typename T2, template <typename = T1, typename = T2> typename TT = TypenameParameterizedTemplateClass>
+class TemplateParameterizedTemplateClass {};
 
 template class TypenameParameterizedTemplateClass<bool,long>;
 template class TemplateParameterizedTemplateClass<bool,long>;
@@ -994,7 +995,6 @@ int main()
 }
 
 ```
-`179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.000000`
 
 Algorithm Sorting Criterion
 ---------------------------
