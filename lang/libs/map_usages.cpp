@@ -16,6 +16,7 @@ int main()
 
     auto node = m.extract(4);
     node.key() = 9;
+    node.mapped() = "Banana";
     if (auto const & insert_return = m.insert(move(node)); insert_return.inserted) {
         cout << get<string>(*insert_return.position) << ": "
              << get<0>(*insert_return.position) << endl;
