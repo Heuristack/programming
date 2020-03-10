@@ -86,7 +86,6 @@ int main()
     traverse(list,[](auto const & data){ cout << data; });
     cout << endl;
 
-
     remove_if(list,[](auto const & data){ return data == 1; });
     traverse(list,[](auto const & data){ cout << data; });
     cout << endl;
