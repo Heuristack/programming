@@ -1,7 +1,11 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
+
 using namespace std;
+
+// todo : implement permutation algorithm in backtracking
+
 int main()
 {
     string s = "abc";
