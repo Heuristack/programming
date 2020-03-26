@@ -15,18 +15,18 @@ auto merge_n(vector<vector<int>> a) -> vector<int>
         iterator end;
         bool operator < (index const & that) const { return *current > *that.current; }
     };
-    priority_queue<index> pq;
-    for (auto v : a) {
+    priority_queue<index> q;
+    for (auto & v : a) {
         if (!v.empty()) {
-            pq.emplace(begin(v),end(v));
+            q.emplace(begin(v),end(v));
         }
     }
-    while (!pq.empty()) {
-        auto i = pq.top();
-        pq.pop();
+    while (!q.empty()) {
+        auto i = q.top();
+        q.pop();
         if (i.current != i.end) {
             m.emplace_back(*i.current);
-            pq.emplace(next(i.current),i.end);
+            q.emplace(next(i.current),i.end);
         }
     }
     return m;
