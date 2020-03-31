@@ -2,6 +2,7 @@
 #include <string>
 #include <set>
 #include <map>
+#include <tuple>
 
 using namespace std;
 
@@ -15,21 +16,17 @@ struct basic_node
     basic_node(vertex_type v, weight_type w) : v(v), w(w) {}
     basic_node(vertex_type v) : basic_node(v,{}) {}
 
-    bool operator < (this_type const & that) const
-    {
-        return v < that.v;
-    }
+    bool operator < (this_type const & that) const { return v < that.v; }
 
     vertex_type v;
-    weight_type w;
+    weight_type w; // todo : enable_if
 };
 
-template <typename node>
+template <typename node> // todo : <vertex,weight>
 struct basic_edge
 {
     using node_type = node;
     using this_type = basic_edge<node_type>;
-
     using vertex_type = typename node_type::vertex_type;
     using weight_type = typename node_type::weight_type;
 
@@ -38,10 +35,7 @@ struct basic_edge
     basic_edge(node_type const & s, node_type const & t, weight_type w) : basic_edge(s.v, t.v, w) {}
     basic_edge(node_type const & s, node_type const & t) : basic_edge(s.v, t.v) {}
 
-    bool operator < (this_type const & that) const
-    {
-        return t < that.t;
-    }
+    bool operator < (this_type const & that) const { return tie(s,t) < tie(that.s,that.t); }
 
     vertex_type s;
     vertex_type t;
@@ -57,7 +51,14 @@ struct basic_graph : map<node,set<edge>>
     using set_type = set<edge_type>;
     using map_type = map<node_type,set_type>;
 
+    using base_type = map_type;
+    using this_type = basic_graph<node_type, edge_type, set, map>;
+
     using vertex_type = typename node_type::vertex_type;
+
+    auto operator [] (vertex_type v) -> set_type & { return base_type::operator[](node_type(v)); }
+    auto operator [] (node_type n) -> set_type & { return base_type::operator[](n); }
+
 };
 
 template <typename graph, typename function>
@@ -78,14 +79,14 @@ auto for_each_edge(graph & g, function f)
     }
 }
 
-template <typename edge> using set_template = std::set<edge>;
-template <typename node, typename set> using map_template = std::map<node,set>;
+template <typename edge> using template_set = std::set<edge>;
+template <typename node, typename set> using template_map = std::map<node,set>;
 using node = basic_node<string,int>;
 using edge = basic_edge<node>;
 ostream & operator << (ostream & s, node const & n) { return s << "(" << n.v << ")"; }
 ostream & operator << (ostream & s, edge const & e) { return s << "(" << e.s << "," << e.t << ")"; }
 
-using graph = basic_graph<node, edge, set_template, map_template>;
+using graph = basic_graph<node, edge, template_set, template_map>;
 ostream & operator << (ostream & s, graph const & g)
 {
     for (auto & [n,_] : g) {
@@ -117,5 +118,7 @@ int main()
     for_each_edge(g,[](auto const & e){ cout << e << endl; });
 
     cout << g;
+
+    for (auto e : g["a"]) { cout << e << endl; }
 }
 
