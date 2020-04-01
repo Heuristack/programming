@@ -18,11 +18,36 @@ struct node : weighted<weight> ...
     using vertex_type = vertex;
     static auto const num_mixins = sizeof...(weight);
     static_assert(num_mixins <= 1);
+    static constexpr bool is_weighted() { return num_mixins > 0; }
 
     explicit node(vertex_type const & v, weight const & ... w) : v(v), weighted<weight>(w) ... {}
     node() : weighted<weight>() ... {}
     vertex_type v{};
 };
+
+template <typename node>
+struct is_weighted
+{
+    static bool const value = false;
+};
+
+template <typename weight>
+struct is_weighted<weighted<weight>>
+{
+    static bool const value = true;
+};
+
+template <typename vertex, typename weight>
+struct is_weighted<node<vertex,weight>>
+{
+    static bool const value = true;
+};
+
+template <typename node>
+auto trait_test(node const &)
+{
+    cout << is_weighted<node>::value << endl;
+}
 
 int main()
 {
@@ -38,5 +63,15 @@ int main()
     cout << node<string,double>::num_mixins << endl;
 
     node<string,double> ok;
+    cout << node<string>::is_weighted() << endl;
+    cout << node<string,double>::is_weighted() << endl;
+
+    cout << is_weighted<node<string>>::value << endl;
+    cout << is_weighted<node<string,double>>::value << endl;
+    cout << is_weighted<weighted<int>>::value << endl;
+
+    trait_test(n);
+    trait_test(w);
+
 }
 
