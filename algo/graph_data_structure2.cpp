@@ -36,7 +36,7 @@ template <typename vertex, typename ... weight>
 struct edge : weighted<weight> ...
 {
     static_assert(sizeof...(weight) <= 1);
-    using this_type = node<vertex, weight...>;
+    using this_type = edge<vertex, weight...>;
     using vertex_type = vertex;
 
     edge(vertex_type const & s, vertex_type const & t, weight const & ... w) : s(s), t(t), weighted<weight>(w) ... {}
