@@ -2,6 +2,7 @@
 #include <string>
 #include <set>
 #include <map>
+#include <initializer_list>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ struct node : weighted<weight> ...
     using this_type = node<vertex, weight...>;
     using vertex_type = vertex;
 
-    explicit node(vertex_type const & v, weight const & ... w) : v(v), weighted<weight>(w) ... {}
+    node(vertex_type const & v, weight const & ... w) : v(v), weighted<weight>(w) ... {}
     node() : weighted<weight>() ... {}
 
     bool operator < (this_type const & that) const { return v < that.v; }
@@ -38,7 +39,7 @@ struct edge : weighted<weight> ...
     using this_type = node<vertex, weight...>;
     using vertex_type = vertex;
 
-    explicit edge(vertex_type const & s, vertex_type const & t, weight const & ... w) : s(s), t(t), weighted<weight>(w) ... {}
+    edge(vertex_type const & s, vertex_type const & t, weight const & ... w) : s(s), t(t), weighted<weight>(w) ... {}
     edge() : weighted<weight>() ... {}
 
     bool operator < (this_type const & that) const { return tie(s,t) < tie(that.s,that.t); }
@@ -52,15 +53,20 @@ struct graph : map<node,set<edge>>
 {
     static_assert(is_same<typename node::vertex_type, typename edge::vertex_type>::value);
     using vertex_type = typename node::vertex_type;
+    using node_type = node;
+    using edge_type = edge;
 
-    template <typename direction> graph() : graph(direction()) {}
-    graph(enum class directed) {}
-    graph(enum class undirect) {}
+    template <typename direction> graph(initializer_list<edge_type> edges) : graph(edges, direction()) {} // note : how to provide argument - templated constructor!
+    graph(initializer_list<edge_type> edges, enum class undirect) {}
+    graph(initializer_list<edge_type> edges, enum class directed) {}
 };
+template <typename e> using template_set = set<e>;
+template <typename n, typename s> using template_map = map<n,s>;
 
 int main()
 {
-    node<string,double> n;
-    edge<string,double> e;
+    using typename_node = node<string,int>;
+    using typename_edge = edge<string,int>;
+    graph<typename_node,typename_edge,template_set,template_map> g({{"A","B",10},{"B","C",10}},undirect{});
 }
 
