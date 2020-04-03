@@ -60,10 +60,10 @@ auto operator << (ostream & s, edge<vertex,weight...> const & e) -> ostream &
     return s << "(" << e.s << "," << e.t << w << ")";
 }
 
-template <typename e> using template_set = set<e>;
-template <typename n, typename s> using template_map = map<n,s>;
+template <typename e> using default_set = set<e>;
+template <typename n, typename s> using default_map = map<n,s>;
 
-template <typename node, typename edge, template<typename> typename set=template_set, template<typename,typename> typename map=template_map>
+template <typename node, typename edge, template<typename> typename set=default_set, template<typename,typename> typename map=default_map>
 struct graph : map<node,set<edge>>
 {
     static_assert(is_same<typename node::vertex_type, typename edge::vertex_type>::value);
