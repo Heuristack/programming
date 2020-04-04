@@ -1,124 +1,199 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <list>
 #include <set>
 #include <map>
-#include <tuple>
+#include <initializer_list>
 
 using namespace std;
 
-template <typename vertex, typename weight>
-struct basic_node
+template <typename weight>
+struct weighted
 {
-    using vertex_type = vertex;
     using weight_type = weight;
-    using this_type = basic_node<vertex_type,weight_type>;
 
-    basic_node(vertex_type v, weight_type w) : v(v), w(w) {}
-    basic_node(vertex_type v) : basic_node(v,{}) {}
+    explicit weighted(weight_type const & w) : w(w) {}
+    weighted() = default;
 
-    bool operator < (this_type const & that) const { return v < that.v; }
-
-    vertex_type v;
-    weight_type w; // todo : enable_if
+    weight_type w{};
 };
 
-template <typename node> // todo : <vertex,weight>
-struct basic_edge
+template <typename vertex, typename ... weight>
+struct node : weighted<weight> ...
 {
-    using node_type = node;
-    using this_type = basic_edge<node_type>;
-    using vertex_type = typename node_type::vertex_type;
-    using weight_type = typename node_type::weight_type;
+    static_assert(sizeof...(weight) <= 1);
+    using this_type = node<vertex, weight...>;
+    using vertex_type = vertex;
 
-    basic_edge(vertex_type s, vertex_type t, weight_type w) : s(s), t(t), w(w) {}
-    basic_edge(vertex_type s, vertex_type t) : basic_edge(s,t,{}) {}
-    basic_edge(node_type const & s, node_type const & t, weight_type w) : basic_edge(s.v, t.v, w) {}
-    basic_edge(node_type const & s, node_type const & t) : basic_edge(s.v, t.v) {}
+    node(vertex_type const & v, weight const & ... w) : v(v), weighted<weight>(w) ... {}
+    node() : weighted<weight>() ... {}
+
+    bool operator < (this_type const & that) const { return v < that.v; }       // requires order relation of vertex
+
+    vertex_type v{};
+};
+template <typename vertex, typename ... weight>
+auto operator << (ostream & s, node<vertex,weight...> const & n) -> ostream &
+{
+    return s << "(" << n.v << ")";
+}
+
+template <typename vertex, typename ... weight>
+struct edge : weighted<weight> ...
+{
+    static_assert(sizeof...(weight) <= 1);
+    using this_type = edge<vertex, weight...>;
+    using vertex_type = vertex;
+
+    edge(vertex_type const & s, vertex_type const & t, weight const & ... w) : s(s), t(t), weighted<weight>(w) ... {}
+    edge() : weighted<weight>() ... {}
+    auto reverse() -> this_type & { swap(s,t); return *this; }
 
     bool operator < (this_type const & that) const { return tie(s,t) < tie(that.s,that.t); }
 
-    vertex_type s;
-    vertex_type t;
-    weight_type w;
+    vertex_type s{};
+    vertex_type t{};
 };
+template <typename vertex, typename ... weight>
+auto operator << (ostream & s, edge<vertex,weight...> const & e) -> ostream &
+{
+    string w; if constexpr (sizeof...(weight)) { w = ":" + to_string(e.w); }
+    return s << "(" << e.s << "," << e.t << w << ")";
+}
 
-template <typename node, typename edge, template<typename> typename set, template<typename,typename> typename map>
-struct basic_graph : map<node,set<edge>>
+namespace properties {
+template <typename node>
+struct parent
 {
     using node_type = node;
-    using edge_type = edge;
-
-    using set_type = set<edge_type>;
-    using map_type = map<node_type,set_type>;
-
-    using base_type = map_type;
-    using this_type = basic_graph<node_type, edge_type, set, map>;
-
     using vertex_type = typename node_type::vertex_type;
+    parent(vertex_type const & p) : p(p) {}
+    parent() = default;
+    vertex_type p{};
+};
+}
 
-    auto operator [] (vertex_type v) -> set_type & { return base_type::operator[](node_type(v)); }
-    auto operator [] (node_type n) -> set_type & { return base_type::operator[](n); }
-
+template <typename base, typename ... properties>
+struct mixin : base, properties ...
+{
+    using base_type = base;
+    mixin(base_type const & b, properties const & ... p) : base_type(b), properties(p) ... {}
+    mixin(base_type const & b) : base_type(b) {}
 };
 
-template <typename graph, typename function>
-auto for_each_node(graph & g, function f)
+template <typename container>
+struct searchable : container
 {
-    for (auto & [n,_] : g) {
-        f(n);
+    auto contains(typename container::key_type const & k) const { return container::find(k) != container::end(); } // note : C++20 feature!
+};
+
+template <typename container>
+struct insertable : container
+{
+    auto insert(typename container::value_type const & v) { return container::push_back(v); }
+};
+
+template <typename item> using default_list = insertable<list<item>>;
+template <typename key> using default_set = searchable<set<key>>;
+template <typename key, typename value> using default_map = searchable<map<key,value>>;
+
+template <typename node, typename edge, template<typename> typename set=default_list, template<typename,typename> typename map=default_map>
+struct graph : searchable<map<node,set<edge>>>
+{
+    static_assert(is_same<typename node::vertex_type, typename edge::vertex_type>::value);
+    using vertex_type = typename node::vertex_type;
+    using node_type = node;
+    using edge_type = edge;
+    using this_type = graph<node,edge,set,map>;
+    using base_type = map<node,set<edge>>;
+
+    template <typename direction, typename storage = enum class adjacency_list>
+    static auto make_graph(initializer_list<edge_type> edges) -> this_type // note : how to provide argument to templated constructor!
+    {
+        return graph(edges,direction());
+    }
+
+    graph(initializer_list<edge_type> edges, enum class   directed) { for (auto const & e : edges) insert_edge(e.s,e); }
+    graph(initializer_list<edge_type> edges, enum class undirected) { for (auto const & e : edges) insert_edge(e); }
+
+    auto insert_edge(vertex_type const & v, edge_type const & e) { base_type::operator[](node_type(v)).insert(e); } // requires map searchable via operator[]
+    auto insert_edge(edge_type const & e) { insert_edge(e.s,e); insert_edge(e.t,edge_type{e}.reverse()); }
+};
+
+template <typename graph, template <typename> typename visitor>
+auto for_each(graph const & g, visitor<typename graph::node_type> bn, visitor<typename graph::edge_type> ce, visitor<typename graph::node_type> an)  // note : this doesn't work - make it work!
+{
+    for (auto const & [n,v] : g) {
+        invoke(bn,n);
+        for (auto const & e : v) {
+            invoke(ce,e);
+        }
+        invoke(an,n);
     }
 }
 
-template <typename graph, typename function>
-auto for_each_edge(graph & g, function f)
+template <typename graph, typename bnvistor, typename evistor, typename anvister>
+auto for_each(graph const & g, bnvistor bn, evistor ce, anvister an)
 {
-    for (auto & [n,_] : g) {
-        for (auto & e : _) {
-            f(e);
+    for (auto const & [n,v] : g) {
+        invoke(bn,n);
+        for (auto const & e : v) {
+            invoke(ce,e);
         }
+        invoke(an,n);
     }
 }
 
-template <typename edge> using template_set = std::set<edge>;
-template <typename node, typename set> using template_map = std::map<node,set>;
-using node = basic_node<string,int>;
-using edge = basic_edge<node>;
-ostream & operator << (ostream & s, node const & n) { return s << "(" << n.v << ")"; }
-ostream & operator << (ostream & s, edge const & e) { return s << "(" << e.s << "," << e.t << ")"; }
-
-using graph = basic_graph<node, edge, template_set, template_map>;
-ostream & operator << (ostream & s, graph const & g)
+template <typename node, typename edge, template<typename> typename set, template<typename,typename> typename map>
+auto operator << (ostream & s, graph<node,edge,set,map> const & g) -> ostream &
 {
-    for (auto & [n,_] : g) {
-        s << n << ": ";
-        for (auto & e : _) {
-            cout << e;
-        }
-        s << "\n";
-    }
+    for_each(g,
+        [&s](auto const & n){ s << n << ":"; },
+        [&s](auto const & e){ s << e; },
+        [&s](auto const & n){ s << "\n"; }
+    );
     return s;
 }
 
+template <typename graph, typename visitor>
+auto dfs(graph const & g, typename graph::node_type const & u, visitor const & c) -> void
+{
+    static searchable<set<mixin<typename graph::node_type,properties::parent<typename graph::node_type>>>> closed;
+    if (!g.contains(u)) return;
+    invoke(c,u);
+    closed.insert(u);
+    for (auto const & e : const_cast<graph&>(g)[u]) {
+        if (auto v = node(e.t);!closed.contains(v)) {
+            dfs(g,v,c);
+        }
+    }
+}
+
+static initializer_list<edge<string,int>> clrs2301 = {
+    {"A","B", 4}, {"A","H", 8},
+    {"B","H",11}, {"B","C", 8},
+    {"H","I", 7}, {"H","G", 1},
+    {"I","C", 2}, {"I","G", 6},
+    {"C","D", 7}, {"C","F", 4},
+    {"G","F", 2},
+    {"D","F",14}, {"D","E", 9},
+    {"E","F",10},
+};
+
+static initializer_list<edge<int>> manual0509 = {
+    {1,6}, {1,2}, {1,5},
+    {2,5}, {2,3},
+    {5,4},
+    {3,4},
+};
+
 int main()
 {
-    graph g;
-
-    node a("a");
-    node b("b");
-    node c("c");
-    node d("d");
-
-    g[a].insert(edge(a,b));
-    g[a].insert(edge(a,c));
-    g[b].insert(edge(b,d));
-    g[c].insert(edge(c,d));
-    g[d];
-
-    for_each_node(g,[](auto const & n){ cout << n << endl; });
-    for_each_edge(g,[](auto const & e){ cout << e << endl; });
-
-    cout << g;
-
-    for (auto e : g["a"]) { cout << e << endl; }
+    auto g = graph<node<string>,edge<string,int>>::make_graph<undirected>(clrs2301);
+    auto n = node<string>("A");
+    auto v = [](auto const & n){ cout << n; };
+    dfs(g,n,v);
+    cout << endl;
 }
 
