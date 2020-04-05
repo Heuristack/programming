@@ -4,6 +4,8 @@
 #include <list>
 #include <set>
 #include <map>
+#include <stack>
+#include <queue>
 #include <initializer_list>
 
 using namespace std;
@@ -63,6 +65,7 @@ auto operator << (ostream & s, edge<vertex,weight...> const & e) -> ostream &
 }
 
 namespace properties {
+
 template <typename node>
 struct parent
 {
@@ -72,6 +75,33 @@ struct parent
     parent() = default;
     vertex_type p{};
 };
+
+template <typename weight>
+struct length
+{
+    using weight_type = weight;
+    length(weight_type const & l) : l(l) {}
+    length() = default;
+    weight_type l{};
+};
+
+struct status
+{
+    enum status_type { discovered, expanding, processed };
+    status(status_type s) : s(s) {}
+    status() = default;
+    status_type s = discovered;
+};
+
+template <typename time = unsigned>
+struct access
+{
+    using time_type = time;
+    access() = default;
+    time_type enter{};
+    time_type leave{};
+};
+
 }
 
 template <typename base, typename ... properties>
@@ -103,10 +133,10 @@ struct graph : searchable<map<node,set<edge>>>
 {
     static_assert(is_same<typename node::vertex_type, typename edge::vertex_type>::value);
     using vertex_type = typename node::vertex_type;
-    using node_type = node;
-    using edge_type = edge;
     using this_type = graph<node,edge,set,map>;
     using base_type = map<node,set<edge>>;
+    using node_type = node;
+    using edge_type = edge;
 
     template <typename direction, typename storage = enum class adjacency_list>
     static auto make_graph(initializer_list<edge_type> edges) -> this_type // note : how to provide argument to templated constructor!
@@ -124,6 +154,7 @@ struct graph : searchable<map<node,set<edge>>>
 template <typename graph, template <typename> typename visitor>
 auto for_each(graph const & g, visitor<typename graph::node_type> bn, visitor<typename graph::edge_type> ce, visitor<typename graph::node_type> an)  // note : this doesn't work - make it work!
 {
+
     for (auto const & [n,v] : g) {
         invoke(bn,n);
         for (auto const & e : v) {
@@ -161,12 +192,54 @@ auto dfs(graph const & g, typename graph::node_type const & u, visitor const & c
 {
     static searchable<set<mixin<typename graph::node_type,properties::parent<typename graph::node_type>>>> closed;
     if (!g.contains(u)) return;
-    invoke(c,u);
     closed.insert(u);
+    invoke(c,u);
     for (auto const & e : const_cast<graph&>(g)[u]) {
         if (auto v = node(e.t);!closed.contains(v)) {
             dfs(g,v,c);
         }
+    }
+}
+
+template <typename item, template<typename> typename container>
+struct bag : container<item>
+{
+    using base_type = container<item>;
+    using value_type = typename base_type::value_type;
+    auto put(value_type const & v)
+    {
+        base_type::push(v);
+    }
+    auto get() -> value_type
+    {
+        value_type v;
+        if constexpr (is_same<base_type,std::stack<value_type>>::value) {
+            v = base_type::top();
+        }
+        if constexpr (is_same<base_type,std::queue<value_type>>::value) {
+            v = base_type::front();
+        }
+        base_type::pop();
+        return v;
+    }
+};
+
+template <typename graph, typename visitor, template<typename> typename bag>
+auto search(graph const & g, typename graph::node_type const & n, visitor const & c) -> void
+{
+    using base = typename graph::node_type;
+    using node = mixin<base, properties::parent<base>, properties::length<int>, properties::status, properties::access<>>;
+    searchable<set<node>> closed;
+    bag<node> open;
+    open.put(n);
+    while (!open.empty()) {
+        auto u = open.get();
+        for (auto const & e : const_cast<graph&>(g)[u]) {
+            if (auto v = node(e.t);!closed.contains(v)) {
+                open.put(v);
+            }
+        }
+        closed.insert(u);
     }
 }
 
