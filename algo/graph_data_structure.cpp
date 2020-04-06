@@ -110,6 +110,7 @@ struct mixin : base, properties ...
     using base_type = base;
     mixin(base_type const & b, properties const & ... p) : base_type(b), properties(p) ... {}
     mixin(base_type const & b) : base_type(b) {}
+    mixin() : base_type() {}
 };
 
 template <typename container>
@@ -201,41 +202,50 @@ auto dfs(graph const & g, typename graph::node_type const & u, visitor const & c
     }
 }
 
-template <typename item, template<typename> typename container>
-struct bag : container<item>
+template <typename container>
+struct adapter : container
 {
-    using base_type = container<item>;
+    using base_type = container;
     using value_type = typename base_type::value_type;
-    auto put(value_type const & v)
-    {
-        base_type::push(v);
-    }
     auto get() -> value_type
     {
         value_type v;
-        if constexpr (is_same<base_type,std::stack<value_type>>::value) {
+        if constexpr (is_same<base_type,stack<value_type>>::value) {
             v = base_type::top();
         }
-        if constexpr (is_same<base_type,std::queue<value_type>>::value) {
+        if constexpr (is_same<base_type,queue<value_type>>::value) {
             v = base_type::front();
         }
         base_type::pop();
         return v;
     }
+    auto put(value_type const & v)
+    {
+        base_type::push(v);
+    }
 };
 
-template <typename graph, typename visitor, template<typename> typename bag>
+struct strategies
+{
+    enum class DFS;
+    enum class BFS;
+};
+
+template <typename strategy, typename graph, typename visitor>
 auto search(graph const & g, typename graph::node_type const & n, visitor const & c) -> void
 {
     using base = typename graph::node_type;
     using node = mixin<base, properties::parent<base>, properties::length<int>, properties::status, properties::access<>>;
-    searchable<set<node>> closed;
-    bag<node> open;
-    open.put(n);
+    using container = typename conditional<is_same<strategy,strategies::DFS>::value,stack<node>,queue<node>>::type;
+    searchable<set<node>> closed; closed.insert(node(n));
+    adapter<container> open; open.put(node(n));
     while (!open.empty()) {
         auto u = open.get();
+        closed.insert(u);
+        invoke(c,u);
         for (auto const & e : const_cast<graph&>(g)[u]) {
             if (auto v = node(e.t);!closed.contains(v)) {
+                closed.insert(v);
                 open.put(v);
             }
         }
@@ -267,6 +277,10 @@ int main()
     auto n = node<string>("A");
     auto v = [](auto const & n){ cout << n; };
     dfs(g,n,v);
+    cout << endl;
+    search<strategies::BFS>(g,n,v);
+    cout << endl;
+    search<strategies::DFS>(g,n,v);
     cout << endl;
 }
 
