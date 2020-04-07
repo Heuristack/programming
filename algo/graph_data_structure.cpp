@@ -210,12 +210,8 @@ struct adapter : container
     auto get() -> value_type
     {
         value_type v;
-        if constexpr (is_same<base_type,stack<value_type>>::value) {
-            v = base_type::top();
-        }
-        if constexpr (is_same<base_type,queue<value_type>>::value) {
-            v = base_type::front();
-        }
+        if constexpr (is_same<base_type,stack<value_type>>::value) { v = base_type::top();   }
+        if constexpr (is_same<base_type,queue<value_type>>::value) { v = base_type::front(); }
         base_type::pop();
         return v;
     }
@@ -229,6 +225,12 @@ struct strategies
 {
     enum class DFS;
     enum class BFS;
+
+    template <typename strategy, typename node>
+    struct container
+    {
+        using type = adapter<typename conditional<is_same<strategy,strategies::DFS>::value,stack<node>,queue<node>>::type>;
+    };
 };
 
 template <typename strategy, typename graph, typename visitor>
@@ -236,9 +238,9 @@ auto search(graph const & g, typename graph::node_type const & n, visitor const 
 {
     using base = typename graph::node_type;
     using node = mixin<base, properties::parent<base>, properties::length<int>, properties::status, properties::access<>>;
-    using container = typename conditional<is_same<strategy,strategies::DFS>::value,stack<node>,queue<node>>::type;
     searchable<set<node>> closed; closed.insert(node(n));
-    adapter<container> open; open.put(node(n));
+    typename strategies::container<strategy,base>::type open;
+    open.put(n);
     while (!open.empty()) {
         auto u = open.get();
         closed.insert(u);
