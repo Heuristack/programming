@@ -20,6 +20,7 @@ struct weighted
 
     weight_type w{};
 };
+template <typename> struct is_weighted {};
 
 template <typename vertex, typename ... weight>
 struct node : weighted<weight> ...
@@ -35,11 +36,14 @@ struct node : weighted<weight> ...
 
     vertex_type v{};
 };
+template <typename vertex> struct is_weighted<node<vertex>> { static bool constexpr value = false; };
+template <typename vertex, typename ... weight> struct is_weighted<node<vertex,weight...>> { static bool constexpr value = true; };
 template <typename vertex, typename ... weight>
 auto operator << (ostream & s, node<vertex,weight...> const & n) -> ostream &
 {
     return s << "(" << n.v << ")";
 }
+
 
 template <typename vertex, typename ... weight>
 struct edge : weighted<weight> ...
@@ -57,6 +61,8 @@ struct edge : weighted<weight> ...
     vertex_type s{};
     vertex_type t{};
 };
+template <typename vertex> struct is_weighted<edge<vertex>> { static bool constexpr value = false; };
+template <typename vertex, typename ... weight> struct is_weighted<edge<vertex,weight...>> { static bool constexpr value = true; };
 template <typename vertex, typename ... weight>
 auto operator << (ostream & s, edge<vertex,weight...> const & e) -> ostream &
 {
@@ -117,6 +123,7 @@ template <typename container>
 struct searchable : container
 {
     auto contains(typename container::key_type const & k) const { return container::find(k) != container::end(); } // note : C++20 feature!
+    auto get(typename container::key_type & k) -> typename container::value_type & { return *container::find(k); }
 };
 
 template <typename container>
@@ -191,12 +198,12 @@ auto operator << (ostream & s, graph<node,edge,set,map> const & g) -> ostream &
 template <typename graph, typename visitor>
 auto dfs(graph const & g, typename graph::node_type const & u, visitor const & c) -> void
 {
-    static searchable<set<mixin<typename graph::node_type,properties::parent<typename graph::node_type>>>> closed;
+    static searchable<set<mixin<typename graph::node_type,properties::parent<typename graph::node_type>>>> close;
     if (!g.contains(u)) return;
-    closed.insert(u);
+    close.insert(u);
     invoke(c,u);
     for (auto const & e : const_cast<graph&>(g)[u]) {
-        if (auto v = node(e.t);!closed.contains(v)) {
+        if (auto v = node(e.t); !close.contains(v)) {
             dfs(g,v,c);
         }
     }
@@ -221,7 +228,7 @@ struct adapter : container
     }
 };
 
-struct strategies
+namespace strategies
 {
     enum class DFS;
     enum class BFS;
@@ -231,27 +238,30 @@ struct strategies
     {
         using type = adapter<typename conditional<is_same<strategy,strategies::DFS>::value,stack<node>,queue<node>>::type>;
     };
-};
+}
 
 template <typename strategy, typename graph, typename visitor>
 auto search(graph const & g, typename graph::node_type const & n, visitor const & c) -> void
 {
     using base = typename graph::node_type;
     using node = mixin<base, properties::parent<base>, properties::length<int>, properties::status, properties::access<>>;
-    searchable<set<node>> closed; closed.insert(node(n));
+
+    searchable<map<base,node>> close;
+    close[n] = node(n,typename base::vertex_type{},0,properties::status::discovered,{0,0});
+
     typename strategies::container<strategy,base>::type open;
     open.put(n);
     while (!open.empty()) {
-        auto u = open.get();
-        closed.insert(u);
+        auto & u = close[open.get()];
         invoke(c,u);
+        u.s = properties::status::expanding;
         for (auto const & e : const_cast<graph&>(g)[u]) {
-            if (auto v = node(e.t);!closed.contains(v)) {
-                closed.insert(v);
+            if (auto v = base(e.t); !close.contains(v)) {
+                close[v] = node(v,u.v,u.l+1,properties::status::discovered,{0,0});
                 open.put(v);
             }
         }
-        closed.insert(u);
+        u.s = properties::status::processed;
     }
 }
 
