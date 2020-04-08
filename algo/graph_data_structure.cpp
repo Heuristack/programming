@@ -246,21 +246,24 @@ auto search(graph const & g, typename graph::node_type const & n, visitor const 
     using base = typename graph::node_type;
     using node = mixin<base, properties::parent<base>, properties::length<int>, properties::status, properties::access<>>;
 
+    typename properties::access<>::time_type time = 0;
     searchable<map<base,node>> close;
-    close[n] = node(n,typename base::vertex_type{},0,properties::status::discovered,{0,0});
+    close[n] = node(n);
 
     typename strategies::container<strategy,base>::type open;
     open.put(n);
     while (!open.empty()) {
         auto & u = close[open.get()];
-        invoke(c,u);
         u.s = properties::status::expanding;
+        u.enter = time++;
         for (auto const & e : const_cast<graph&>(g)[u]) {
             if (auto v = base(e.t); !close.contains(v)) {
-                close[v] = node(v,u.v,u.l+1,properties::status::discovered,{0,0});
+                close[v] = node(v,u.v,u.l+1,{},{});
                 open.put(v);
             }
         }
+        invoke(c,u);
+        u.leave = time++;
         u.s = properties::status::processed;
     }
 }
