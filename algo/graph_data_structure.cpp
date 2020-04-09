@@ -7,6 +7,7 @@
 #include <stack>
 #include <queue>
 #include <initializer_list>
+#include <variant>
 
 using namespace std;
 
@@ -146,17 +147,33 @@ struct graph : searchable<map<node,set<edge>>>
     using node_type = node;
     using edge_type = edge;
 
-    template <typename direction, typename storage = enum class adjacency_list>
+    template <typename direction>
     static auto make_graph(initializer_list<edge_type> edges) -> this_type // note : how to provide argument to templated constructor!
     {
         return graph(edges,direction());
     }
+    template <typename direction>
+    graph(initializer_list<edge_type> edges, direction d)
+    {
+        for (auto const & e : edges) insert_edge(e,d);
+    }
 
-    graph(initializer_list<edge_type> edges, enum class   directed) { for (auto const & e : edges) insert_edge(e.s,e); }
-    graph(initializer_list<edge_type> edges, enum class undirected) { for (auto const & e : edges) insert_edge(e); }
+    template <typename direction>
+    static auto make_graph(initializer_list<variant<node_type,edge_type>> varis) -> this_type
+    {
+        return graph(varis,direction());
+    }
+    template <typename direction>
+    graph(initializer_list<variant<node_type,edge_type>> varis, direction d)
+    {
+        for (auto const & v : varis) { if (holds_alternative<node_type>(v)) insert_node(get<node_type>(v)); if (holds_alternative<edge_type>(v)) insert_edge(get<edge_type>(v),d); }
+    }
 
-    auto insert_edge(vertex_type const & v, edge_type const & e) { base_type::operator[](node_type(v)).insert(e); } // requires map searchable via operator[]
-    auto insert_edge(edge_type const & e) { insert_edge(e.s,e); insert_edge(e.t,edge_type{e}.reverse()); }
+    auto insert_node(vertex_type const & v) -> set<edge_type> & { return base_type::operator[](node_type(v)); }
+    auto insert_node(node_type const & n) { insert_node(n.v); }
+    auto insert_edge(vertex_type const & v, edge_type const & e) { insert_node(v).insert(e); }
+    auto insert_edge(edge_type const & e, enum class   directed) { insert_edge(e.s,e); }
+    auto insert_edge(edge_type const & e, enum class undirected) { insert_edge(e.s,e); insert_edge(e.t,edge_type{e}.reverse()); }
 };
 
 template <typename graph, template <typename> typename visitor>
@@ -230,13 +247,13 @@ struct adapter : container
 
 namespace strategies
 {
-    enum class DFS;
-    enum class BFS;
+    enum class dfs;
+    enum class bfs;
 
     template <typename strategy, typename node>
     struct container
     {
-        using type = adapter<typename conditional<is_same<strategy,strategies::DFS>::value,stack<node>,queue<node>>::type>;
+        using type = adapter<typename conditional<is_same<strategy,strategies::dfs>::value,stack<node>,queue<node>>::type>;
     };
 }
 
@@ -286,16 +303,23 @@ static initializer_list<edge<int>> manual0509 = {
     {3,4},
 };
 
+static initializer_list<variant<node<int>,edge<int>>> varis = {
+    variant<node<int>,edge<int>>{in_place_index_t<1>{},1,2},
+    edge<int>{2,3},
+    {4},
+//  {5,6}
+};
+
 int main()
 {
     auto g = graph<node<string>,edge<string,int>>::make_graph<undirected>(clrs2301);
     auto n = node<string>("A");
     auto v = [](auto const & n){ cout << n; };
-    dfs(g,n,v);
-    cout << endl;
-    search<strategies::BFS>(g,n,v);
-    cout << endl;
-    search<strategies::DFS>(g,n,v);
-    cout << endl;
+    dfs(g,n,v); cout << endl;
+    search<strategies::dfs>(g,n,v); cout << endl;
+    search<strategies::bfs>(g,n,v); cout << endl;
+
+    auto s = graph<node<int>,edge<int>>::make_graph<directed>(varis);
+    cout << s;
 }
 
