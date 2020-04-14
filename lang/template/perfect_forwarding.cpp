@@ -25,11 +25,13 @@ void print(string && value)      { cout << "r:" << value << endl; }
 
 template <typename type> void explicit_print(type && value) { print(explicit_return::forward<type>(value)); }
 template <typename type> void implicit_print(type && value) { print(implicit_return::forward<type>(value)); }
+template <typename type> void indirect_print(type && value) { print(explicit_return::forward<type>(explicit_return::forward<type>(value))); }
 
 int main()
 {
     string a("Perfect!");
     string b("Forward!");
+    string c("Hello,PF");
 
     explicit_print(a);
     explicit_print(move(a));
@@ -38,5 +40,9 @@ int main()
     implicit_print(b);
     implicit_print(move(b));
     implicit_print(move(string("Really?")));
+
+    indirect_print(c);
+    indirect_print(move(c));
+    indirect_print(move(string("Really?")));
 }
 
