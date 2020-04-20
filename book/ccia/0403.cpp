@@ -8,7 +8,7 @@ public:
     threadsafe_queue& operator=(const threadsafe_queue&) = delete;
 
     void push(T new_value);
-    
+
     bool try_pop(T& value);
     std::shared_ptr<T> try_pop();
 
@@ -20,3 +20,4 @@ public:
 
 int main()
 {}
+

@@ -3,7 +3,7 @@
 
 void hello()
 {
-    std::cout<<"Hello Concurrent World\n";
+    std::cout <<"Hello Concurrent World\n";
 }
 
 int main()
@@ -11,3 +11,4 @@ int main()
     std::thread t(hello);
     t.join();
 }
+

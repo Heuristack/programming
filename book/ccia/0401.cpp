@@ -8,16 +8,14 @@ bool more_data_to_prepare()
     return false;
 }
 
-struct data_chunk
-{};
+struct data_chunk {};
 
 data_chunk prepare_data()
 {
     return data_chunk();
 }
 
-void process(data_chunk&)
-{}
+void process(data_chunk&) {}
 
 bool is_last_chunk(data_chunk&)
 {
@@ -49,8 +47,7 @@ void data_processing_thread()
         data_queue.pop();
         lk.unlock();
         process(data);
-        if(is_last_chunk(data))
-            break;
+        if(is_last_chunk(data)) break;
     }
 }
 
@@ -58,7 +55,8 @@ int main()
 {
     std::thread t1(data_preparation_thread);
     std::thread t2(data_processing_thread);
-    
+
     t1.join();
     t2.join();
 }
+

@@ -3,13 +3,9 @@
 class hierarchical_mutex
 {
 public:
-    explicit hierarchical_mutex(unsigned level)
-    {}
-    
-    void lock()
-    {}
-    void unlock()
-    {}
+    explicit hierarchical_mutex(unsigned level) {}
+    void lock() {}
+    void unlock() {}
 };
 
 
@@ -21,17 +17,13 @@ int do_low_level_stuff()
     return 42;
 }
 
-
 int low_level_func()
 {
     std::lock_guard<hierarchical_mutex> lk(low_level_mutex);
     return do_low_level_stuff();
 }
 
-void high_level_stuff(int some_param)
-{}
-
-
+void high_level_stuff(int some_param) {}
 void high_level_func()
 {
     std::lock_guard<hierarchical_mutex> lk(high_level_mutex);
@@ -44,10 +36,7 @@ void thread_a()
 }
 
 hierarchical_mutex other_mutex(100);
-void do_other_stuff()
-{}
-
-
+void do_other_stuff() {}
 void other_stuff()
 {
     high_level_func();
@@ -62,3 +51,4 @@ void thread_b()
 
 int main()
 {}
+

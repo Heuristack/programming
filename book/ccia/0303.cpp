@@ -1,10 +1,12 @@
 #include <deque>
-template<typename T,typename Container=std::deque<T> >
+
+template<typename T,typename Container=std::deque<T>>
 class stack
 {
 public:
     explicit stack(const Container&);
     explicit stack(Container&& = Container());
+
     template <class Alloc> explicit stack(const Alloc&);
     template <class Alloc> stack(const Container&, const Alloc&);
     template <class Alloc> stack(Container&&, const Alloc&);
@@ -22,3 +24,4 @@ public:
 
 int main()
 {}
+

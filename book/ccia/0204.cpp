@@ -59,3 +59,4 @@ int main()
 {
     edit_document("bar.doc");
 }
+

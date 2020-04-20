@@ -9,7 +9,7 @@ struct empty_stack: std::exception
     {
         return "empty stack";
     }
-    
+
 };
 
 template<typename T>
@@ -36,7 +36,9 @@ public:
     {
         std::lock_guard<std::mutex> lock(m);
         if(data.empty()) throw empty_stack();
+
         std::shared_ptr<T> const res(std::make_shared<T>(data.top()));
+
         data.pop();
         return res;
     }
@@ -64,5 +66,6 @@ int main()
         int x;
         si.pop(x);
     }
-    
+
 }
+
