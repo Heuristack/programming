@@ -44,3 +44,4 @@ int main()
     d.join();
     assert(z.load()!=0);
 }
+

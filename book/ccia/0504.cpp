@@ -1,3 +1,4 @@
+#include <iostream>
 #include <atomic>
 #include <thread>
 #include <assert.h>
@@ -42,5 +43,7 @@ int main()
     b.join();
     c.join();
     d.join();
+    std::cout << z.load() << std::endl;
     assert(z.load()!=0);
 }
+

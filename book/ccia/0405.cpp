@@ -10,9 +10,9 @@ private:
     mutable std::mutex mut;
     std::queue<T> data_queue;
     std::condition_variable data_cond;
+
 public:
-    threadsafe_queue()
-    {}
+    threadsafe_queue() {}
     threadsafe_queue(threadsafe_queue const& other)
     {
         std::lock_guard<std::mutex> lk(other.mut);
@@ -46,8 +46,7 @@ public:
     bool try_pop(T& value)
     {
         std::lock_guard<std::mutex> lk(mut);
-        if(data_queue.empty)
-            return false;
+        if(data_queue.empty) return false;
         value=data_queue.front();
         data_queue.pop();
     }
@@ -55,8 +54,7 @@ public:
     std::shared_ptr<T> try_pop()
     {
         std::lock_guard<std::mutex> lk(mut);
-        if(data_queue.empty())
-            return std::shared_ptr<T>();
+        if(data_queue.empty()) return std::shared_ptr<T>();
         std::shared_ptr<T> res(std::make_shared<T>(data_queue.front()));
         data_queue.pop();
         return res;

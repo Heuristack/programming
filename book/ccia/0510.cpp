@@ -2,6 +2,7 @@
 #include <thread>
 #include <atomic>
 #include <assert.h>
+
 struct X
 {
     int i;
@@ -23,12 +24,12 @@ void create_x()
 void use_x()
 {
     X* x;
-    while(!(x=p.load(std::memory_order_consume)))
-        std::this_thread::sleep_for(std::chrono::microseconds(1));
+    while(!(x=p.load(std::memory_order_consume))) std::this_thread::sleep_for(std::chrono::microseconds(1));
     assert(x->i==42);
     assert(x->s=="hello");
     assert(a.load(std::memory_order_relaxed)==99);
 }
+
 int main()
 {
     std::thread t1(create_x);

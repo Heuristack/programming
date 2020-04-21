@@ -15,3 +15,4 @@ int main()
 {
     foo(get_num(),get_num());
 }
+

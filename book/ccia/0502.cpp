@@ -5,7 +5,7 @@
 #include <thread>
 
 std::vector<int> data;
-std::atomic_bool data_ready(false);
+std::atomic_bool data_ready(false); // why non atomic is not ok here?
 
 void reader_thread()
 {
@@ -15,8 +15,10 @@ void reader_thread()
     }
     std::cout<<"The answer="<<data[0]<<"\n";
 }
+
 void writer_thread()
 {
     data.push_back(42);
     data_ready=true;
 }
+

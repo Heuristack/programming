@@ -5,7 +5,7 @@
 #include <utility>
 
 std::mutex m;
-std::deque<std::packaged_task<void()> > tasks;
+std::deque<std::packaged_task<void()>> tasks;
 
 bool gui_shutdown_message_received();
 void get_and_process_gui_message();
@@ -18,9 +18,8 @@ void gui_thread()
         std::packaged_task<void()> task;
         {
             std::lock_guard<std::mutex> lk(m);
-            if(tasks.empty())
-                continue;
-            task=std::move(tasks.front());
+            if(tasks.empty()) continue;
+            task=std::move(tasks.front());  // note : std::move
             tasks.pop_front();
         }
         task();
@@ -38,3 +37,4 @@ std::future<void> post_task_for_gui_thread(Func f)
     tasks.push_back(std::move(task));
     return res;
 }
+

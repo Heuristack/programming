@@ -12,7 +12,7 @@ void atm::getting_pin()
                     state=&atm::verifying_pin;
                 }
             }
-            )
+        )
         .handle<clear_last_pressed>(
             [&](clear_last_pressed const& msg)
             {
@@ -21,11 +21,12 @@ void atm::getting_pin()
                     pin.resize(pin.length()-1);
                 }
             }
-            )
+        )
         .handle<cancel_pressed>(
             [&](cancel_pressed const& msg)
             {
                 state=&atm::done_processing;
             }
-            );
+        );
 }
+

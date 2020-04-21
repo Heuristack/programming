@@ -10,15 +10,16 @@ struct read_values
 {
     int x,y,z;
 };
+
 read_values values1[loop_count];
 read_values values2[loop_count];
 read_values values3[loop_count];
 read_values values4[loop_count];
 read_values values5[loop_count];
+
 void increment(std::atomic<int>* var_to_inc,read_values* values)
 {
-    while(!go)
-        std::this_thread::yield();
+    while(!go) std::this_thread::yield();
     for(unsigned i=0;i<loop_count;++i)
     {
         values[i].x=x.load(std::memory_order_relaxed);
@@ -31,8 +32,7 @@ void increment(std::atomic<int>* var_to_inc,read_values* values)
 
 void read_vals(read_values* values)
 {
-    while(!go)
-        std::this_thread::yield();
+    while(!go) std::this_thread::yield();
     for(unsigned i=0;i<loop_count;++i)
     {
         values[i].x=x.load(std::memory_order_relaxed);
@@ -46,8 +46,7 @@ void print(read_values* v)
 {
     for(unsigned i=0;i<loop_count;++i)
     {
-        if(i)
-            std::cout<<",";
+        if(i) std::cout<<",";
         std::cout<<"("<<v[i].x<<","<<v[i].y<<","<<v[i].z<<")";
     }
     std::cout<<std::endl;
@@ -72,3 +71,4 @@ int main()
     print(values4);
     print(values5);
 }
+

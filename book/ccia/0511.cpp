@@ -12,7 +12,7 @@ void populate_queue()
     {
         queue_data.push_back(i);
     }
-    
+
     count.store(number_of_items,std::memory_order_release);
 }
 
@@ -39,3 +39,4 @@ int main()
     b.join();
     c.join();
 }
+

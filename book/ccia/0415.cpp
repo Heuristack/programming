@@ -2,6 +2,7 @@ struct card_inserted
 {
     std::string account;
 };
+
 class atm
 {
     messaging::receiver incoming;
@@ -13,18 +14,18 @@ class atm
     void waiting_for_card()
     {
         interface_hardware.send(display_enter_card());
-        incoming.wait()
-            .handle<card_inserted>(
-                [&](card_inserted const& msg)
-                {
-                    account=msg.account;
-                    pin="";
-                    interface_hardware.send(display_enter_pin());
-                    state=&atm::getting_pin;
-                }
-                );
+        incoming.wait().handle<card_inserted>(
+            [&](card_inserted const& msg)
+            {
+                account=msg.account;
+                pin="";
+                interface_hardware.send(display_enter_pin());
+                state=&atm::getting_pin;
+            }
+        );
     }
     void getting_pin();
+
 public:
     void run()
     {
@@ -36,8 +37,7 @@ public:
                 (this->*state)();
             }
         }
-        catch(messaging::close_queue const&)
-        {
-        }
+        catch(messaging::close_queue const&) {}
     }
 };
+

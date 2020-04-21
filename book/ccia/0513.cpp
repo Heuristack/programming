@@ -17,8 +17,7 @@ void read_y_then_x()
 {
     while(!y.load(std::memory_order_relaxed));
     std::atomic_thread_fence(std::memory_order_acquire);
-    if(x)
-        ++z;
+    if(x) ++z;
 }
 
 int main()
@@ -32,3 +31,4 @@ int main()
     b.join();
     assert(z.load()!=0);
 }
+
