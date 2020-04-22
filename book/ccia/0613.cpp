@@ -10,29 +10,22 @@ class threadsafe_list
         std::shared_ptr<T> data;
         std::unique_ptr<node> next;
 
-        node():
-            next()
-        {}
-        
-        node(T const& value):
-            data(std::make_shared<T>(value))
-        {}
+        node(): next() {}
+        node(T const& value): data(std::make_shared<T>(value)) {}
     };
-    
+
     node head;
 
 public:
-    threadsafe_list()
-    {}
 
-    ~threadsafe_list()
+   ~threadsafe_list()
     {
         remove_if([](T const&){return true;});
     }
-
+    threadsafe_list() {}
     threadsafe_list(threadsafe_list const& other)=delete;
     threadsafe_list& operator=(threadsafe_list const& other)=delete;
-    
+
     void push_front(T const& value)
     {
         std::unique_ptr<node> new_node(new node(value));

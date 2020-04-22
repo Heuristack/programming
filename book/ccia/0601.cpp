@@ -17,6 +17,7 @@ class threadsafe_stack
 private:
     std::stack<T> data;
     mutable std::mutex m;
+
 public:
     threadsafe_stack(){}
     threadsafe_stack(const threadsafe_stack& other)
@@ -31,6 +32,7 @@ public:
         std::lock_guard<std::mutex> lock(m);
         data.push(std::move(new_value));
     }
+
     std::shared_ptr<T> pop()
     {
         std::lock_guard<std::mutex> lock(m);
@@ -40,6 +42,7 @@ public:
         data.pop();
         return res;
     }
+
     void pop(T& value)
     {
         std::lock_guard<std::mutex> lock(m);
@@ -47,6 +50,7 @@ public:
         value=std::move(data.top());
         data.pop();
     }
+
     bool empty() const
     {
         std::lock_guard<std::mutex> lock(m);

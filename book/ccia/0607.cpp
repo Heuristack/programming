@@ -7,16 +7,15 @@ private:
         std::shared_ptr<T> data;
         std::unique_ptr<node> next;
     };
-    
+
     std::mutex head_mutex;
     std::unique_ptr<node> head;
     std::mutex tail_mutex;
     node* tail;
     std::condition_variable data_cond;
+
 public:
-    threadsafe_queue():
-        head(new node),tail(head.get())
-    {}
+    threadsafe_queue(): head(new node),tail(head.get()) {}
     threadsafe_queue(const threadsafe_queue& other)=delete;
     threadsafe_queue& operator=(const threadsafe_queue& other)=delete;
 
@@ -27,3 +26,4 @@ public:
     void push(T new_value);
     void empty();
 };
+

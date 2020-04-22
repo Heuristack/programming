@@ -1,9 +1,9 @@
 #include <vector>
 #include <memory>
-#include <mutex>
 #include <functional>
 #include <list>
 #include <utility>
+#include <mutex>
 #include <boost/thread/shared_mutex.hpp>
 
 template<typename Key,typename Value,typename Hash=std::hash<Key> >
@@ -26,18 +26,20 @@ private:
                 [&](bucket_value const& item)
                 {return item.first==key;});
         }
+
     public:
         Value value_for(Key const& key,Value const& default_value) const
         {
-            boost::shared_lock<boost::shared_mutex> lock(mutex);
+
+            boost::shared_lock<boost::shared_mutex> lock(mutex); // shared lock
+
             bucket_iterator const found_entry=find_entry_for(key);
-            return (found_entry==data.end())?
-                default_value : found_entry->second;
+            return (found_entry==data.end()) ? default_value : found_entry->second;
         }
 
         void add_or_update_mapping(Key const& key,Value const& value)
         {
-            std::unique_lock<boost::shared_mutex> lock(mutex);
+            std::unique_lock<boost::shared_mutex> lock(mutex);  // mix shared mutex and unique lock
             bucket_iterator const found_entry=find_entry_for(key);
             if(found_entry==data.end())
             {
@@ -48,7 +50,7 @@ private:
                 found_entry->second=value;
             }
         }
-    
+
         void remove_mapping(Key const& key)
         {
             std::unique_lock<boost::shared_mutex> lock(mutex);
@@ -59,7 +61,7 @@ private:
             }
         }
     };
-    
+
     std::vector<std::unique_ptr<bucket_type> > buckets;
     Hash hasher;
 
@@ -73,10 +75,8 @@ public:
     typedef Key key_type;
     typedef Value mapped_type;
     typedef Hash hash_type;
-    
-    threadsafe_lookup_table(
-        unsigned num_buckets=19, Hash const& hasher_=Hash()):
-        buckets(num_buckets),hasher(hasher_)
+
+    threadsafe_lookup_table(unsigned num_buckets=19, Hash const& hasher_=Hash()): buckets(num_buckets),hasher(hasher_)
     {
         for(unsigned i=0;i<num_buckets;++i)
         {
@@ -85,24 +85,21 @@ public:
     }
 
     threadsafe_lookup_table(threadsafe_lookup_table const& other)=delete;
-    threadsafe_lookup_table& operator=(
-        threadsafe_lookup_table const& other)=delete;
-    
-    Value value_for(Key const& key,
-        Value const& default_value=Value()) const
+    threadsafe_lookup_table& operator=(threadsafe_lookup_table const& other)=delete;
+
+    Value value_for(Key const& key, Value const& default_value=Value()) const
     {
         return get_bucket(key).value_for(key,default_value);
     }
-    
+
     void add_or_update_mapping(Key const& key,Value const& value)
     {
         get_bucket(key).add_or_update_mapping(key,value);
     }
-    
+
     void remove_mapping(Key const& key)
     {
         get_bucket(key).remove_mapping(key);
     }
 };
-
 

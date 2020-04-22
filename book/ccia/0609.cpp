@@ -34,7 +34,7 @@ private:
         value=std::move(*head->data);
         return pop_head();
     }
-        
+
 public:
     std::shared_ptr<T> wait_and_pop()
     {
@@ -47,3 +47,4 @@ public:
         std::unique_ptr<node> const old_head=wait_pop_head(value);
     }
 };
+

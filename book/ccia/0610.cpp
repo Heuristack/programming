@@ -42,3 +42,4 @@ public:
         return (head==get_tail());
     }
 };
+
