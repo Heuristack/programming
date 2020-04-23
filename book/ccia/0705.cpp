@@ -5,6 +5,7 @@ class lock_free_stack
 {
 private:
     std::atomic<node*> to_be_deleted;
+
     static void delete_nodes(node* nodes)
     {
         while(nodes)
@@ -14,6 +15,7 @@ private:
             nodes=next;
         }
     }
+
     void try_reclaim(node* old_head)
     {
         if(threads_in_pop==1)
@@ -35,6 +37,7 @@ private:
             --threads_in_pop;
         }
     }
+
     void chain_pending_nodes(node* nodes)
     {
         node* last=nodes;
@@ -44,6 +47,7 @@ private:
         }
         chain_pending_nodes(nodes,last);
     }
+
     void chain_pending_nodes(node* first,node* last)
     {
         last->next=to_be_deleted;
@@ -55,3 +59,4 @@ private:
         chain_pending_nodes(n,n);
     }
 };
+

@@ -29,3 +29,4 @@ public:
         return old_head ? old_head->data : std::shared_ptr<T>();
     }
 };
+

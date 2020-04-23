@@ -18,3 +18,4 @@ void push(T new_value)
         }
     }
 }
+

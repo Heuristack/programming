@@ -21,6 +21,11 @@ project(programming)
 add_subdirectory(examples/kqueue)
 
 #
+# Lock Free Data Structures
+#
+add_subdirectory(examples/lockfree)
+
+#
 # Bloomberg B-PIPE
 #
 add_subdirectory(examples/bpipe)

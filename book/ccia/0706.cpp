@@ -15,10 +15,11 @@ std::shared_ptr<T> pop()
             old_head=head.load();
         } while(old_head!=temp);
     }
-    while(old_head &&
-          !head.compare_exchange_strong(old_head,old_head->next));
+    while(old_head && !head.compare_exchange_strong(old_head,old_head->next));
+
     hp.store(nullptr);
     std::shared_ptr<T> res;
+
     if(old_head)
     {
         res.swap(old_head->data);
@@ -34,3 +35,4 @@ std::shared_ptr<T> pop()
     }
     return res;
 }
+

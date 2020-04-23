@@ -60,3 +60,4 @@ public:
         tail.store(p);
     }
 };
+

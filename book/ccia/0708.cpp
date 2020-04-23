@@ -5,6 +5,7 @@ void do_delete(void* p)
 {
     delete static_cast<T*>(p);
 }
+
 struct data_to_reclaim
 {
     void* data;
@@ -21,17 +22,20 @@ struct data_to_reclaim
         deleter(data);
     }
 };
+
 std::atomic<data_to_reclaim*> nodes_to_reclaim;
 void add_to_reclaim_list(data_to_reclaim* node)
 {
     node->next=nodes_to_reclaim.load();
     while(!nodes_to_reclaim.compare_exchange_weak(node->next,node));
 }
+
 template<typename T>
 void reclaim_later(T* data)
 {
     add_to_reclaim_list(new data_to_reclaim(data));
 }
+
 void delete_nodes_with_no_hazards()
 {
     data_to_reclaim* current=nodes_to_reclaim.exchange(nullptr);
@@ -49,3 +53,4 @@ void delete_nodes_with_no_hazards()
         current=next;
     }
 }
+

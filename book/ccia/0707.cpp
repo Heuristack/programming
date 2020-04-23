@@ -7,15 +7,16 @@ struct hazard_pointer
     std::atomic<std::thread::id> id;
     std::atomic<void*> pointer;
 };
+
 hazard_pointer hazard_pointers[max_hazard_pointers];
+
 class hp_owner
 {
     hazard_pointer* hp;
 public:
     hp_owner(hp_owner const&)=delete;
     hp_owner operator=(hp_owner const&)=delete;
-    hp_owner():
-        hp(nullptr)
+    hp_owner(): hp(nullptr)
     {
         for(unsigned i=0;i<max_hazard_pointers;++i)
         {
@@ -42,8 +43,10 @@ public:
         hp->id.store(std::thread::id());
     }
 };
+
 std::atomic<void*>& get_hazard_pointer_for_current_thread()
 {
     thread_local static hp_owner hazard;
     return hazard.get_pointer();
 }
+

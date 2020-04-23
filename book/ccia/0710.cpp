@@ -22,11 +22,13 @@ private:
         {}
     };
     std::atomic<counted_node_ptr> head;
+
 public:
     ~lock_free_stack()
     {
         while(pop());
     }
+
     void push(T const& data)
     {
         counted_node_ptr new_node;
@@ -36,3 +38,4 @@ public:
         while(!head.compare_exchange_weak(new_node.ptr->next,new_node));
     }
 };
+
