@@ -6,8 +6,7 @@ private:
                       counted_node_ptr const &new_tail)
     {
         node* const current_tail_ptr=old_tail.ptr;
-        while(!tail.compare_exchange_weak(old_tail,new_tail) &&
-              old_tail.ptr==current_tail_ptr);
+        while(!tail.compare_exchange_weak(old_tail,new_tail) && old_tail.ptr==current_tail_ptr);
         if(old_tail.ptr==current_tail_ptr)
             free_external_counter(old_tail);
         else
@@ -25,12 +24,10 @@ public:
         {
             increase_external_count(tail,old_tail);
             T* old_data=nullptr;
-            if(old_tail.ptr->data.compare_exchange_strong(
-                   old_data,new_data.get()))
+            if(old_tail.ptr->data.compare_exchange_strong(old_data,new_data.get()))
             {
                 counted_node_ptr old_next={0};
-                if(!old_tail.ptr->next.compare_exchange_strong(
-                       old_next,new_next))
+                if(!old_tail.ptr->next.compare_exchange_strong(old_next,new_next))
                 {
                     delete new_next.ptr;
                     new_next=old_next;
@@ -42,8 +39,7 @@ public:
             else
             {
                 counted_node_ptr old_next={0};
-                if(old_tail.ptr->next.compare_exchange_strong(
-                       old_next,new_next))
+                if(old_tail.ptr->next.compare_exchange_strong(old_next,new_next))
                 {
                     old_next=new_next;
                     new_next.ptr=new node;
