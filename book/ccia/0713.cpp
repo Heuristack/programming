@@ -26,9 +26,7 @@ private:
         return old_head;
     }
 public:
-    lock_free_queue():
-        head(new node),tail(head.load())
-    {}
+    lock_free_queue(): head(new node),tail(head.load()) {}
     lock_free_queue(const lock_free_queue& other)=delete;
     lock_free_queue& operator=(const lock_free_queue& other)=delete;
     ~lock_free_queue()

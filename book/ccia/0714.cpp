@@ -8,8 +8,7 @@ void push(T new_value)
     {
         node* const old_tail=tail.load();
         T* old_data=nullptr;
-        if(old_tail->data.compare_exchange_strong(
-               old_data,new_data.get()))
+        if(old_tail->data.compare_exchange_strong(old_data,new_data.get()))
         {
             old_tail->next=new_next;
             tail.store(new_next.ptr);

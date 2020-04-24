@@ -6,6 +6,7 @@ private:
     {
         void release_ref();
     };
+
 public:
     std::unique_ptr<T> pop()
     {
@@ -29,3 +30,4 @@ public:
         }
     }
 };
+
