@@ -46,16 +46,11 @@ struct sorter
         result.splice(result.begin(),chunk_data,chunk_data.begin());
         T const& partition_val=*result.begin();
 
-        typename std::list<T>::iterator divide_point=
-            std::partition(chunk_data.begin(),chunk_data.end(),
-                           [&](T const& val){return val<partition_val;});
+        typename std::list<T>::iterator divide_point=std::partition(chunk_data.begin(),chunk_data.end(), [&](T const& val){return val<partition_val;});
         chunk_to_sort new_lower_chunk;
-        new_lower_chunk.data.splice(new_lower_chunk.data.end(),
-                                    chunk_data,chunk_data.begin(),
-                                    divide_point);
+        new_lower_chunk.data.splice(new_lower_chunk.data.end(), chunk_data,chunk_data.begin(), divide_point);
 
-        std::future<std::list<T> > new_lower=
-            new_lower_chunk.promise.get_future();
+        std::future<std::list<T> > new_lower=new_lower_chunk.promise.get_future();
         chunks.push(std::move(new_lower_chunk));
         if(threads.size()<max_thread_count)
         {
@@ -65,8 +60,7 @@ struct sorter
         std::list<T> new_higher(do_sort(chunk_data));
 
         result.splice(result.end(),new_higher);
-        while(new_lower.wait_for(std::chrono::seconds(0)) !=
-              std::future_status::ready)
+        while(new_lower.wait_for(std::chrono::seconds(0)) != std::future_status::ready)
         {
             try_sort_chunk();
         }
@@ -100,3 +94,4 @@ std::list<T> parallel_quick_sort(std::list<T> input)
     sorter<T> s;
     return s.do_sort(input);
 }
+

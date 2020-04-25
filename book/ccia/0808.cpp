@@ -15,10 +15,9 @@ void parallel_for_each(Iterator first,Iterator last,Func f)
     else
     {
         Iterator const mid_point=first+length/2;
-        std::future<void> first_half=
-            std::async(&parallel_for_each<Iterator,Func>,
-                       first,mid_point,f);
+        std::future<void> first_half= std::async(&parallel_for_each<Iterator,Func>, first,mid_point,f);
         parallel_for_each(mid_point,last,f);
         first_half.get();
     }
 }
+

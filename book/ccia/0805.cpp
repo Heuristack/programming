@@ -11,10 +11,9 @@ T parallel_accumulate(Iterator first,Iterator last,T init)
     {
         Iterator mid_point=first;
         std::advance(mid_point,length/2);
-        std::future<T> first_half_result=
-            std::async(parallel_accumulate<Iterator,T>,
-                       first,mid_point,init);
+        std::future<T> first_half_result=std::async(parallel_accumulate<Iterator,T>, first,mid_point,init);
         T second_half_result=parallel_accumulate(mid_point,last,T());
         return first_half_result.get()+second_half_result;
     }
 }
+

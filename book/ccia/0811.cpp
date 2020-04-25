@@ -4,9 +4,7 @@ void parallel_partial_sum(Iterator first,Iterator last)
     typedef typename Iterator::value_type value_type;
     struct process_chunk
     {
-        void operator()(Iterator begin,Iterator last,
-                        std::future<value_type>* previous_end_value,
-                        std::promise<value_type>* end_value)
+        void operator()(Iterator begin,Iterator last, std::future<value_type>* previous_end_value, std::promise<value_type>* end_value)
         {
             try
             {
@@ -46,29 +44,18 @@ void parallel_partial_sum(Iterator first,Iterator last)
     };
 
     unsigned long const length=std::distance(first,last);
-
-    if(!length)
-        return last;
-
+    if(!length) return last;
     unsigned long const min_per_thread=25;
-    unsigned long const max_threads=
-        (length+min_per_thread-1)/min_per_thread;
-
-    unsigned long const hardware_threads=
-        std::thread::hardware_concurrency();
-
-    unsigned long const num_threads=
-        std::min(hardware_threads!=0?hardware_threads:2,max_threads);
-
+    unsigned long const max_threads=(length+min_per_thread-1)/min_per_thread;
+    unsigned long const hardware_threads=std::thread::hardware_concurrency();
+    unsigned long const num_threads=std::min(hardware_threads!=0?hardware_threads:2,max_threads);
     unsigned long const block_size=length/num_threads;
 
     typedef typename Iterator::value_type value_type;
 
     std::vector<std::thread> threads(num_threads-1);
-    std::vector<std::promise<value_type> >
-        end_values(num_threads-1);
-    std::vector<std::future<value_type> >
-        previous_end_values;
+    std::vector<std::promise<value_type>> end_values(num_threads-1);
+    std::vector<std::future<value_type>> previous_end_values;
     previous_end_values.reserve(num_threads-1);
     join_threads joiner(threads);
 
@@ -77,17 +64,13 @@ void parallel_partial_sum(Iterator first,Iterator last)
     {
         Iterator block_last=block_start;
         std::advance(block_last,block_size-1);
-        threads[i]=std::thread(process_chunk(),
-                               block_start,block_last,
-                               (i!=0)?&previous_end_values[i-1]:0,
-                               &end_values[i]);
+        threads[i]=std::thread(process_chunk(), block_start,block_last, (i!=0)?&previous_end_values[i-1]:0, &end_values[i]);
         block_start=block_last;
         ++block_start;
         previous_end_values.push_back(end_values[i].get_future());
     }
     Iterator final_element=block_start;
     std::advance(final_element,std::distance(block_start,last)-1);
-    process_chunk()(block_start,final_element,
-                    (num_threads>1)?&previous_end_values.back():0,
-                    0);
+    process_chunk()(block_start,final_element,(num_threads>1)?&previous_end_values.back():0, 0);
 }
+

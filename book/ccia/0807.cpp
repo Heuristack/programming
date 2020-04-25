@@ -7,15 +7,9 @@ void parallel_for_each(Iterator first,Iterator last,Func f)
         return;
 
     unsigned long const min_per_thread=25;
-    unsigned long const max_threads=
-        (length+min_per_thread-1)/min_per_thread;
-
-    unsigned long const hardware_threads=
-        std::thread::hardware_concurrency();
-
-    unsigned long const num_threads=
-        std::min(hardware_threads!=0?hardware_threads:2,max_threads);
-
+    unsigned long const max_threads=(length+min_per_thread-1)/min_per_thread;
+    unsigned long const hardware_threads=std::thread::hardware_concurrency();
+    unsigned long const num_threads=std::min(hardware_threads!=0?hardware_threads:2,max_threads);
     unsigned long const block_size=length/num_threads;
 
     std::vector<std::future<void> > futures(num_threads-1);
@@ -42,3 +36,4 @@ void parallel_for_each(Iterator first,Iterator last,Func f)
         futures[i].get();
     }
 }
+
