@@ -16,10 +16,8 @@ void background_thread(int disk_id)
 
 void start_background_processing()
 {
-    background_threads.push_back(
-        interruptible_thread(background_thread,disk_1));
-    background_threads.push_back(
-        interruptible_thread(background_thread,disk_2));
+    background_threads.push_back(interruptible_thread(background_thread,disk_1));
+    background_threads.push_back(interruptible_thread(background_thread,disk_2));
 }
 
 int main()
@@ -36,3 +34,4 @@ int main()
         background_threads[i].join();
     }
 }
+

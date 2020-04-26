@@ -1,28 +1,26 @@
 class thread_pool
 {
-    thread_safe_queue<function_wrapper> pool_work_queue;
-
     typedef std::queue<function_wrapper> local_queue_type;
-    static thread_local std::unique_ptr<local_queue_type>
-        local_work_queue;
-   
+    static thread_local std::unique_ptr<local_queue_type> local_work_queue;
+
     void worker_thread()
     {
         local_work_queue.reset(new local_queue_type);
-        
+
         while(!done)
         {
             run_pending_task();
         }
     }
 
+    thread_safe_queue<function_wrapper> pool_work_queue;
+
 public:
     template<typename FunctionType>
-    std::future<std::result_of<FunctionType()>::type>
-        submit(FunctionType f)
+    auto submit(FunctionType f) -> std::future<std::result_of<FunctionType()>::type>
     {
         typedef std::result_of<FunctionType()>::type result_type;
-        
+
         std::packaged_task<result_type()> task(f);
         std::future<result_type> res(task.get_future());
         if(local_work_queue)
@@ -54,5 +52,5 @@ public:
             std::this_thread::yield();
         }
     }
-    // rest as before
 };
+

@@ -6,10 +6,7 @@ class interrupt_flag
     std::mutex set_clear_mutex;
 
 public:
-    interrupt_flag():
-        Interrupting threads
-        thread_cond(0),thread_cond_any(0)
-    {}
+    interrupt_flag(): Interrupting threads thread_cond(0),thread_cond_any(0) {}
 
     void set()
     {
@@ -33,10 +30,13 @@ public:
             interrupt_flag* self;
             Lockable& lk;
 
-            custom_lock(interrupt_flag* self_,
-                        std::condition_variable_any& cond,
-                        Lockable& lk_):
-                self(self_),lk(lk_)
+           ~custom_lock()
+            {
+                self->thread_cond_any=0;
+                self->set_clear_mutex.unlock();
+            }
+
+            custom_lock(interrupt_flag* self_, std::condition_variable_any& cond, Lockable& lk_): self(self_),lk(lk_)
             {
                 self->set_clear_mutex.lock();
                 self->thread_cond_any=&cond;
@@ -52,12 +52,6 @@ public:
             {
                 std::lock(self->set_clear_mutex,lk);
             }
-
-            ~custom_lock()
-            {
-                self->thread_cond_any=0;
-                self->set_clear_mutex.unlock();
-            }
         };
 
         custom_lock cl(this,cv,lk);
@@ -65,13 +59,11 @@ public:
         cv.wait(cl);
         interruption_point();
     }
-
-    // rest as before
 };
 
 template<typename Lockable>
-void interruptible_wait(std::condition_variable_any& cv,
-                        Lockable& lk)
+void interruptible_wait(std::condition_variable_any& cv, Lockable& lk)
 {
     this_thread_interrupt_flag.wait(cv,lk);
 }
+

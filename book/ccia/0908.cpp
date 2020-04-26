@@ -1,16 +1,18 @@
 class thread_pool
 {
     typedef function_wrapper task_type;
-    
-    std::atomic_bool done;
+
     thread_safe_queue<task_type> pool_work_queue;
-    std::vector<std::unique_ptr<work_stealing_queue> > queues;
     std::vector<std::thread> threads;
     join_threads joiner;
 
+    std::vector<std::unique_ptr<work_stealing_queue>> queues;
+
+    std::atomic_bool done;
+
     static thread_local work_stealing_queue* local_work_queue;
     static thread_local unsigned my_index;
-   
+
     void worker_thread(unsigned my_index_)
     {
         my_index=my_index_;
@@ -41,13 +43,12 @@ class thread_pool
                 return true;
             }
         }
-        
+
         return false;
     }
 
 public:
-    thread_pool():
-        joiner(threads),done(false)
+    thread_pool() : joiner(threads), done(false)
     {
         unsigned const thread_count=std::thread::hardware_concurrency();
 
@@ -55,10 +56,8 @@ public:
         {
             for(unsigned i=0;i<thread_count;++i)
             {
-                queues.push_back(std::unique_ptr<work_stealing_queue>(
-                                     new work_stealing_queue));
-                threads.push_back(
-                    std::thread(&thread_pool::worker_thread,this,i));
+                queues.push_back(std::unique_ptr<work_stealing_queue>(new work_stealing_queue));
+                threads.push_back(std::thread(&thread_pool::worker_thread,this,i));
             }
         }
         catch(...)
@@ -67,21 +66,19 @@ public:
             throw;
         }
     }
-    
-    ~thread_pool()
+
+   ~thread_pool()
     {
         done=true;
     }
 
-    template<typename ResultType>
-    using task_handle=std::unique_future<ResultType>;
+    template<typename ResultType> using task_handle=std::unique_future<ResultType>;
 
     template<typename FunctionType>
-    task_handle<std::result_of<FunctionType()>::type> submit(
-        FunctionType f)
+    auto submit(FunctionType f) -> task_handle<std::result_of<FunctionType()>::type>
     {
         typedef std::result_of<FunctionType()>::type result_type;
-        
+
         std::packaged_task<result_type()> task(f);
         task_handle<result_type> res(task.get_future());
         if(local_work_queue)
@@ -98,9 +95,7 @@ public:
     void run_pending_task()
     {
         task_type task;
-        if(pop_task_from_local_queue(task) ||
-           pop_task_from_pool_queue(task) ||
-           pop_task_from_other_thread_queue(task))
+        if(pop_task_from_local_queue(task) || pop_task_from_pool_queue(task) || pop_task_from_other_thread_queue(task))
         {
             task();
         }
@@ -110,3 +105,4 @@ public:
         }
     }
 };
+
