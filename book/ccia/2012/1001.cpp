@@ -2,8 +2,11 @@ void test_concurrent_push_and_pop_on_empty_queue()
 {
     threadsafe_queue<int> q;
 
-    std::promise<void> go,push_ready,pop_ready;
+    std::promise<void> go;
     std::shared_future<void> ready(go.get_future());
+
+    std::promise<void> push_ready;
+    std::promise<void> pop_ready;
 
     std::future<void> push_done;
     std::future<int> pop_done;
@@ -18,6 +21,7 @@ void test_concurrent_push_and_pop_on_empty_queue()
                                  q.push(42);
                              }
             );
+
         pop_done=std::async(std::launch::async,
                             [&q,ready,&pop_ready]()
                             {
@@ -26,12 +30,15 @@ void test_concurrent_push_and_pop_on_empty_queue()
                                 return q.pop();
                             }
             );
+
         push_ready.get_future().wait();
         pop_ready.get_future().wait();
+
         go.set_value();
 
         push_done.get();
         assert(pop_done.get()==42);
+
         assert(q.empty());
     }
     catch(...)
@@ -40,3 +47,4 @@ void test_concurrent_push_and_pop_on_empty_queue()
         throw;
     }
 }
+

@@ -6,6 +6,7 @@
 <condition_variable>
 <queue>
 <memory>
+
 namespace messaging
 {
     struct message_base
@@ -48,3 +49,4 @@ namespace messaging
         }
     };
 }
+
