@@ -23,7 +23,7 @@ add_subdirectory(examples/kqueue)
 #
 # Lock Free Data Structures
 #
-add_subdirectory(examples/lockfree)
+add_subdirectory(examples/lkfree)
 
 #
 # Bloomberg B-PIPE
