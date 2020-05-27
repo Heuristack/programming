@@ -1,3 +1,38 @@
+iterator passing issue
+----------------------
+```C++
+#include <iostream>
+#include <iomanip>
+#include <numeric>
+#include <vector>
+
+using namespace std;
+
+template <typename container, typename iterator = typename container::iterator>
+auto expell(container c, iterator i) -> container
+{
+    cout << distance(begin(c),i) << endl;
+    cout << distance(begin(c),next(begin(c),4)) << endl;
+    container r(c);
+    for (typename iterator_traits<iterator>::difference_type d = 0; d < distance(begin(c),i); d++) {
+        auto t = begin(r) + d;
+        auto p = prev(i,d+1);
+        auto n = next(i,d+1);
+        *t = *p;
+        *(next(t)) = *n;
+    }
+    return r;
+}
+
+int main()
+{
+    vector<int> v(100);
+    iota(begin(v),end(v),1);
+    expell(v,next(begin(v),4));
+}
+
+```
+
 Problematic perfect-forwarding constructor resolved by enable_if
 ----------------------------------------------------------------
 ```C++
