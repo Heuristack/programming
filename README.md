@@ -1,3 +1,41 @@
+expelled
+--------
+```C++
+#include <iostream>
+#include <iomanip>
+#include <numeric>
+#include <vector>
+
+using namespace std;
+
+auto printv(vector<int> v)
+{
+    for (auto e : v) cout << setw(2) << e << ", "; cout << endl;
+}
+
+auto expell(vector<int> v, int i) -> vector<int>
+{
+    vector<int> r(v);
+    for (int k = 0; k < i; k++) {
+        r[2*k+0] = v[i-(k+1)];
+        r[2*k+1] = v[i+(k+1)];
+    }
+    r.erase(next(begin(r),2*i));
+    return r;
+}
+
+int main()
+{
+    vector<int> v(200);
+    iota(begin(v),end(v),1);
+    for (int i = 1; i < 20; i++) {
+        v = expell(v,(i-1));
+        if (v[i] == 75) cout << "!" << endl;
+    }
+}
+
+```
+
 iterator passing issue
 ----------------------
 ```C++
