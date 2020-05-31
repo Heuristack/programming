@@ -802,7 +802,7 @@ int main()
 {
     auto primes = sieve(17);
     for (auto i = 2u; i < primes.size(); i++) {
-        if (primes[i] == 0) {
+        if (primes[i] != 0) {
             cout << i << endl;
         }
     }
