@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.12)
+set(CMAKE_CXX_STANDARD 17)
+include_directories(/usr/local/include)
+link_directories(/usr/local/lib)
+add_executable(timestamp_counter timestamp_counter.cpp)

@@ -35,3 +35,8 @@ add_subdirectory(examples/bpipe)
 #
 add_subdirectory(examples/orion)
 
+#
+# Read Timestamp Counter
+#
+add_subdirectory(examples/rdtsc)
+
