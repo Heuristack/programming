@@ -1,4 +1,4 @@
-/* source: 2019/0101.cpp */
+/* 2019/0101.cpp */
 #include <iostream>
 #include <thread>
 
@@ -13,7 +13,7 @@ int main()
     t.join();
 }
 
-/* source: 2019/0201.cpp */
+/* 2019/0201.cpp */
 #include <thread>
 
 void do_something(int& i)
@@ -50,7 +50,7 @@ int main()
     oops();
 }
 
-/* source: 2019/0202.cpp */
+/* 2019/0202.cpp */
 #include <thread>
 
 void do_something(int& i)
@@ -98,7 +98,7 @@ int main()
     f();
 }
 
-/* source: 2019/0203.cpp */
+/* 2019/0203.cpp */
 #include <thread>
 
 class thread_guard
@@ -158,7 +158,7 @@ int main()
     f();
 }
 
-/* source: 2019/0204.cpp */
+/* 2019/0204.cpp */
 #include <thread>
 #include <string>
 
@@ -221,7 +221,7 @@ int main()
     edit_document("bar.doc");
 }
 
-/* source: 2019/0205.cpp */
+/* 2019/0205.cpp */
 #include <thread>
 
 void some_function()
@@ -250,7 +250,7 @@ int main()
     t2.join();
 }
 
-/* source: 2019/0206.cpp */
+/* 2019/0206.cpp */
 #include <thread>
 #include <utility>
 
@@ -308,7 +308,7 @@ int main()
     f();
 }
 
-/* source: 2019/0207.cpp */
+/* 2019/0207.cpp */
 #include <vector>
 #include <thread>
 #include <algorithm>
@@ -333,7 +333,7 @@ int main()
     f();
 }
 
-/* source: 2019/0208.cpp */
+/* 2019/0208.cpp */
 #include <thread>
 #include <numeric>
 #include <algorithm>
@@ -402,7 +402,7 @@ int main()
     std::cout<<"sum="<<sum<<std::endl;
 }
 
-/* source: 2019/0301.cpp */
+/* 2019/0301.cpp */
 #include <list>
 #include <mutex>
 #include <algorithm>
@@ -430,7 +430,7 @@ int main()
     std::cout<<"contains(1)="<<list_contains(1)<<", contains(42)="<<list_contains(42)<<std::endl;
 }
 
-/* source: 2019/0302.cpp */
+/* 2019/0302.cpp */
 #include <mutex>
 
 class some_data
@@ -476,7 +476,7 @@ int main()
     foo();
 }
 
-/* source: 2019/0303.cpp */
+/* 2019/0303.cpp */
 #include <deque>
 #include <cstddef>
 template<typename T,typename Container=std::deque<T> >
@@ -503,7 +503,7 @@ public:
 int main()
 {}
 
-/* source: 2019/0304.cpp */
+/* 2019/0304.cpp */
 #include <exception>
 #include <memory>
 
@@ -529,7 +529,7 @@ public:
 int main()
 {}
 
-/* source: 2019/0305.cpp */
+/* 2019/0305.cpp */
 #include <exception>
 #include <stack>
 #include <mutex>
@@ -599,7 +599,7 @@ int main()
     
 }
 
-/* source: 2019/0306.cpp */
+/* 2019/0306.cpp */
 #include <mutex>
 
 class some_big_object
@@ -630,7 +630,7 @@ public:
 int main()
 {}
 
-/* source: 2019/0307.cpp */
+/* 2019/0307.cpp */
 #include <mutex>
 
 class hierarchical_mutex
@@ -696,7 +696,7 @@ void thread_b()
 int main()
 {}
 
-/* source: 2019/0308.cpp */
+/* 2019/0308.cpp */
 #include <mutex>
 #include <stdexcept>
 #include <climits>
@@ -754,7 +754,7 @@ int main()
     
 }
 
-/* source: 2019/0309.cpp */
+/* 2019/0309.cpp */
 #include <mutex>
 
 class some_big_object
@@ -785,7 +785,7 @@ public:
 int main()
 {}
 
-/* source: 2019/0310.cpp */
+/* 2019/0310.cpp */
 #include <mutex>
 class Y
 {
@@ -814,7 +814,7 @@ public:
 int main()
 {}
 
-/* source: 2019/0311.cpp */
+/* 2019/0311.cpp */
 #include <memory>
 #include <mutex>
 
@@ -844,7 +844,7 @@ int main()
     foo();
 }
 
-/* source: 2019/0312.cpp */
+/* 2019/0312.cpp */
 #include <mutex>
 
 struct connection_info
@@ -902,7 +902,7 @@ public:
 int main()
 {}
 
-/* source: 2019/0313.cpp */
+/* 2019/0313.cpp */
 #include <map>
 #include <string>
 #include <mutex>
@@ -934,7 +934,7 @@ public:
 int main()
 {}
 
-/* source: 2019/0401.cpp */
+/* 2019/0401.cpp */
 #include <mutex>
 #include <condition_variable>
 #include <thread>
@@ -1000,7 +1000,7 @@ int main()
     t2.join();
 }
 
-/* source: 2019/0402.cpp */
+/* 2019/0402.cpp */
 #include <deque>
 #include <cstddef>
 template <class T, class Container = std::deque<T> >
@@ -1035,7 +1035,7 @@ public:
 int main()
 {}
 
-/* source: 2019/0403.cpp */
+/* 2019/0403.cpp */
 #include <memory>
 template<typename T>
 class threadsafe_queue
@@ -1059,7 +1059,7 @@ public:
 int main()
 {}
 
-/* source: 2019/0404.cpp */
+/* 2019/0404.cpp */
 #include <mutex>
 #include <condition_variable>
 #include <queue>
@@ -1119,7 +1119,7 @@ void data_processing_thread()
     }
 }
 
-/* source: 2019/0405.cpp */
+/* 2019/0405.cpp */
 #include <mutex>
 #include <condition_variable>
 #include <queue>
@@ -1195,7 +1195,7 @@ public:
 int main()
 {}
 
-/* source: 2019/0406.cpp */
+/* 2019/0406.cpp */
 #include <future>
 #include <iostream>
 int find_the_answer_to_ltuae()
@@ -1213,7 +1213,7 @@ int main()
     std::cout<<"The answer is "<<the_answer.get()<<std::endl;
 }
 
-/* source: 2019/0407.cpp */
+/* 2019/0407.cpp */
 #include <string>
 #include <future>
 
@@ -1249,7 +1249,7 @@ public:
 };
 auto f5=std::async(move_only());
 
-/* source: 2019/0408.cpp */
+/* 2019/0408.cpp */
 #include <string>
 #include <vector>
 #include <future>
@@ -1263,7 +1263,7 @@ public:
     void operator()(std::vector<char>*,int);
 };
 
-/* source: 2019/0409.cpp */
+/* 2019/0409.cpp */
 #include <deque>
 #include <mutex>
 #include <future>
@@ -1305,7 +1305,7 @@ std::future<void> post_task_for_gui_thread(Func f)
     return res;
 }
 
-/* source: 2019/0410.cpp */
+/* 2019/0410.cpp */
 #include <future>
 	
 class connection_set  {
@@ -1338,7 +1338,7 @@ void process_connections(connection_set& connections)
     }
 }
 
-/* source: 2019/0411.cpp */
+/* 2019/0411.cpp */
 #include <condition_variable>
 #include <mutex>
 #include <chrono>
@@ -1358,7 +1358,7 @@ bool wait_loop()
     return done;
 }
 
-/* source: 2019/0412.cpp */
+/* 2019/0412.cpp */
 #include <list>
 #include <algorithm>
 template<typename T>
@@ -1386,7 +1386,7 @@ std::list<T> sequential_quick_sort(std::list<T> input)
 }
 
 
-/* source: 2019/0413.cpp */
+/* 2019/0413.cpp */
 #include <list>
 #include <algorithm>
 #include <future>
@@ -1414,7 +1414,7 @@ std::list<T> parallel_quick_sort(std::list<T> input)
     return result;
 }
 
-/* source: 2019/0414.cpp */
+/* 2019/0414.cpp */
 #include <future>
 template<typename F,typename A>
 std::future<std::result_of<F(A&&)>::type>
@@ -1429,7 +1429,7 @@ spawn_task(F&& f,A&& a)
     return res;
 }
 
-/* source: 2019/0415.cpp */
+/* 2019/0415.cpp */
 #include <string>
 
 struct card_inserted
@@ -1477,7 +1477,7 @@ public:
     }
 };
 
-/* source: 2019/0416.cpp */
+/* 2019/0416.cpp */
 void atm::getting_pin()
 {
     incoming.wait()
@@ -1510,7 +1510,7 @@ void atm::getting_pin()
             );
 }
 
-/* source: 2019/0417.cpp */
+/* 2019/0417.cpp */
 #include <experimental/future>
 template<typename Func>
 std::experimental::future<decltype(std::declval<Func>()())>
@@ -1531,7 +1531,7 @@ spawn_async(Func&& func){
     return res;
 }
 
-/* source: 2019/0418.cpp */
+/* 2019/0418.cpp */
 #include <string>
 void process_login(std::string const& username,std::string const& password)
 {
@@ -1544,7 +1544,7 @@ void process_login(std::string const& username,std::string const& password)
     }
 }
 
-/* source: 2019/0419.cpp */
+/* 2019/0419.cpp */
 #include <future>
 #include <string>
 std::future<void> process_login(
@@ -1562,7 +1562,7 @@ std::future<void> process_login(
     });
 }
 
-/* source: 2019/0420.cpp */
+/* 2019/0420.cpp */
 #include <experimental/future>
 std::experimental::future<void> process_login(
     std::string const& username,std::string const& password)
@@ -1580,7 +1580,7 @@ std::experimental::future<void> process_login(
     });
 }
 
-/* source: 2019/0421.cpp */
+/* 2019/0421.cpp */
 std::experimental::future<void> process_login(
     std::string const& username,std::string const& password)
 {
@@ -1596,7 +1596,7 @@ std::experimental::future<void> process_login(
         });
 }
 
-/* source: 2019/0422.cpp */
+/* 2019/0422.cpp */
 #include <future>
 std::future<FinalResult> process_data(std::vector<MyData>& vec)
 {
@@ -1620,7 +1620,7 @@ std::future<FinalResult> process_data(std::vector<MyData>& vec)
     });
 }
 
-/* source: 2019/0423.cpp */
+/* 2019/0423.cpp */
 std::experimental::future<FinalResult> process_data(
     std::vector<MyData>& vec)
 {
@@ -1651,7 +1651,7 @@ std::experimental::future<FinalResult> process_data(
         });
 }
 
-/* source: 2019/0424.cpp */
+/* 2019/0424.cpp */
 #include <atomic>
 #include <experimental/future>
 #include <memory>
@@ -1724,7 +1724,7 @@ find_and_process_value(std::vector<MyData> &data) {
     return final_result->get_future();
 }
 
-/* source: 2019/0425.cpp */
+/* 2019/0425.cpp */
 void foo(){
     unsigned const thread_count=...;
     latch done(thread_count);                     
@@ -1740,7 +1740,7 @@ void foo(){
     process_data(data,thread_count);               
 }
 
-/* source: 2019/0426.cpp */
+/* 2019/0426.cpp */
 #include <experimental/barrier>
 #include <thread>
 #include <vector>
@@ -1807,7 +1807,7 @@ void process_data(data_source &source, data_sink &sink) {
     }
 }
 
-/* source: 2019/0427.cpp */
+/* 2019/0427.cpp */
 #include <experimental/barrier>
 #include <thread>
 #include <vector>
@@ -1880,7 +1880,7 @@ void process_data(data_source &source, data_sink &sink) {
     }
 }
 
-/* source: 2019/0501.cpp */
+/* 2019/0501.cpp */
 #include <atomic>
 class spinlock_mutex
 {
@@ -1899,7 +1899,7 @@ public:
     }
 };
 
-/* source: 2019/0502.cpp */
+/* 2019/0502.cpp */
 #include <vector>
 #include <atomic>
 #include <iostream>
@@ -1923,7 +1923,7 @@ void writer_thread()
     data_ready=true;
 }
 
-/* source: 2019/0503.cpp */
+/* 2019/0503.cpp */
 #include <iostream>
 
 void foo(int a,int b)
@@ -1942,7 +1942,7 @@ int main()
     foo(get_num(),get_num());
 }
 
-/* source: 2019/0504.cpp */
+/* 2019/0504.cpp */
 #include <atomic>
 #include <thread>
 #include <assert.h>
@@ -1990,7 +1990,7 @@ int main()
     assert(z.load()!=0);
 }
 
-/* source: 2019/0505.cpp */
+/* 2019/0505.cpp */
 #include <atomic>
 #include <thread>
 #include <assert.h>
@@ -2023,7 +2023,7 @@ int main()
     assert(z.load()!=0);
 }
 
-/* source: 2019/0506.cpp */
+/* 2019/0506.cpp */
 #include <thread>
 #include <atomic>
 #include <iostream>
@@ -2099,7 +2099,7 @@ int main()
     print(values5);
 }
 
-/* source: 2019/0507.cpp */
+/* 2019/0507.cpp */
 #include <atomic>
 #include <thread>
 #include <assert.h>
@@ -2147,7 +2147,7 @@ int main()
     assert(z.load()!=0);
 }
 
-/* source: 2019/0508.cpp */
+/* 2019/0508.cpp */
 #include <atomic>
 #include <thread>
 #include <assert.h>
@@ -2180,7 +2180,7 @@ int main()
     assert(z.load()!=0);
 }
 
-/* source: 2019/0509.cpp */
+/* 2019/0509.cpp */
 #include <atomic>
 #include <thread>
 #include <assert.h>
@@ -2224,7 +2224,7 @@ int main()
     t3.join();
 }
 
-/* source: 2019/0510.cpp */
+/* 2019/0510.cpp */
 #include <string>
 #include <thread>
 #include <atomic>
@@ -2265,7 +2265,7 @@ int main()
 }
 
 
-/* source: 2019/0511.cpp */
+/* 2019/0511.cpp */
 #include <atomic>
 #include <thread>
 #include <vector>
@@ -2311,7 +2311,7 @@ int main()
     c.join();
 }
 
-/* source: 2019/0512.cpp */
+/* 2019/0512.cpp */
 #include <atomic>
 #include <thread>
 #include <assert.h>
@@ -2346,7 +2346,7 @@ int main()
     assert(z.load()!=0);
 }
 
-/* source: 2019/0513.cpp */
+/* 2019/0513.cpp */
 #include <atomic>
 #include <thread>
 #include <assert.h>
@@ -2382,7 +2382,7 @@ int main()
     assert(z.load()!=0);
 }
 
-/* source: 2019/0601.cpp */
+/* 2019/0601.cpp */
 #include <exception>
 #include <stack>
 #include <mutex>
@@ -2439,7 +2439,7 @@ public:
     }
 };
 
-/* source: 2019/0602.cpp */
+/* 2019/0602.cpp */
 #include <queue>
 #include <mutex>
 #include <condition_variable>
@@ -2513,7 +2513,7 @@ int main()
     threadsafe_queue<int> rq;
 }
 
-/* source: 2019/0603.cpp */
+/* 2019/0603.cpp */
 #include <queue>
 #include <mutex>
 #include <condition_variable>
@@ -2583,7 +2583,7 @@ public:
 
 };
 
-/* source: 2019/0604.cpp */
+/* 2019/0604.cpp */
 #include <memory>
 
 template<typename T>
@@ -2643,7 +2643,7 @@ public:
 };
 
 
-/* source: 2019/0605.cpp */
+/* 2019/0605.cpp */
 #include <memory>
 template<typename T>
 class queue
@@ -2690,7 +2690,7 @@ public:
     }
 };
 
-/* source: 2019/0606.cpp */
+/* 2019/0606.cpp */
 #include <memory>
 #include <mutex>
 
@@ -2755,7 +2755,7 @@ public:
     }
 };
 
-/* source: 2019/0607.cpp */
+/* 2019/0607.cpp */
 #include <memory>
 #include <mutex>
 #include <condition_variable>
@@ -2790,7 +2790,7 @@ public:
     bool empty();
 };
 
-/* source: 2019/0608.cpp */
+/* 2019/0608.cpp */
 template<typename T>
 void threadsafe_queue<T>::push(T new_value)
 {
@@ -2807,7 +2807,7 @@ void threadsafe_queue<T>::push(T new_value)
     data_cond.notify_one();
 }
 
-/* source: 2019/0609.cpp */
+/* 2019/0609.cpp */
 #include <memory>
 #include <mutex>
 #include <atomic>
@@ -2866,7 +2866,7 @@ public:
     }
 };
 
-/* source: 2019/0610.cpp */
+/* 2019/0610.cpp */
 #include <memory>
 #include <mutex>
 template<typename T>
@@ -2914,7 +2914,7 @@ public:
     }
 };
 
-/* source: 2019/0611.cpp */
+/* 2019/0611.cpp */
 #include <vector>
 #include <memory>
 #include <mutex>
@@ -3023,7 +3023,7 @@ public:
 };
 
 
-/* source: 2019/0612.cpp */
+/* 2019/0612.cpp */
 #include <map>
 #include <vector>
 #include <shared_mutex>
@@ -3053,7 +3053,7 @@ std::map<Key,Value> threadsafe_lookup_table::get_map() const
     return res;
 }
 
-/* source: 2019/0613.cpp */
+/* 2019/0613.cpp */
 #include <memory>
 #include <mutex>
 
@@ -3155,7 +3155,7 @@ public:
     }
 };
 
-/* source: 2019/0701.cpp */
+/* 2019/0701.cpp */
 #include <atomic>
 
 class spinlock_mutex
@@ -3175,7 +3175,7 @@ public:
     }
 };
 
-/* source: 2019/0702.cpp */
+/* 2019/0702.cpp */
 #include <atomic>
 
 template<typename T>
@@ -3200,7 +3200,7 @@ public:
     }
 };
 
-/* source: 2019/0703.cpp */
+/* 2019/0703.cpp */
 #include <atomic>
 #include <memory>
 
@@ -3233,7 +3233,7 @@ public:
     }
 };
 
-/* source: 2019/0704.cpp */
+/* 2019/0704.cpp */
 #include <atomic>
 #include <memory>
 
@@ -3260,7 +3260,7 @@ public:
     }
 };
 
-/* source: 2019/0705.cpp */
+/* 2019/0705.cpp */
 #include <atomic>
 
 template<typename T>
@@ -3319,7 +3319,7 @@ private:
     }
 };
 
-/* source: 2019/0706.cpp */
+/* 2019/0706.cpp */
 #include <atomic>
 #include <memory>
 
@@ -3357,7 +3357,7 @@ std::shared_ptr<T> pop()
     return res;
 }
 
-/* source: 2019/0707.cpp */
+/* 2019/0707.cpp */
 #include <atomic>
 #include <thread>
 
@@ -3408,7 +3408,7 @@ std::atomic<void*>& get_hazard_pointer_for_current_thread()
     return hazard.get_pointer();
 }
 
-/* source: 2019/0708.cpp */
+/* 2019/0708.cpp */
 #include <atomic>
 #include <functional>
 template<typename T>
@@ -3464,7 +3464,7 @@ void delete_nodes_with_no_hazards()
     }
 }
 
-/* source: 2019/0709.cpp */
+/* 2019/0709.cpp */
 template<typename T>
 class lock_free_stack
 {
@@ -3502,7 +3502,7 @@ public:
     }
 };
 
-/* source: 2019/0710.cpp */
+/* 2019/0710.cpp */
 template<typename T>
 class lock_free_stack
 {
@@ -3540,7 +3540,7 @@ public:
     }
 };
 
-/* source: 2019/0711.cpp */
+/* 2019/0711.cpp */
 #include <atomic>
 #include <memory>
 
@@ -3580,7 +3580,7 @@ public:
     }
 };
 
-/* source: 2019/0712.cpp */
+/* 2019/0712.cpp */
 #include <memory>
 #include <atomic>
 
@@ -3638,7 +3638,7 @@ public:
     }
 };
 
-/* source: 2019/0713.cpp */
+/* 2019/0713.cpp */
 #include <atomic>
 #include <memory>
 
@@ -3728,7 +3728,7 @@ public:
     }
 };
 
-/* source: 2019/0714.cpp */
+/* 2019/0714.cpp */
 #include <memory>
 #include <atomic>
 
@@ -3792,7 +3792,7 @@ public:
     }
 };
 
-/* source: 2019/0715.cpp */
+/* 2019/0715.cpp */
 void push(T new_value)
 {
     std::unique_ptr<T> new_data(new T(new_value));
@@ -3814,7 +3814,7 @@ void push(T new_value)
     }
 }
 
-/* source: 2019/0716.cpp */
+/* 2019/0716.cpp */
 #include <atomic>
 #include <memory>
 template<typename T>
@@ -3875,7 +3875,7 @@ public:
     }
 };
 
-/* source: 2019/0717.cpp */
+/* 2019/0717.cpp */
 #include <memory>
 #include <atomic>
 template<typename T>
@@ -3915,7 +3915,7 @@ public:
     }
 };
 
-/* source: 2019/0718.cpp */
+/* 2019/0718.cpp */
 #include <memory>
 #include <atomic>
 template<typename T>
@@ -3968,7 +3968,7 @@ private:    struct node;
 
 };
 
-/* source: 2019/0719.cpp */
+/* 2019/0719.cpp */
 template<typename T>
 class lock_free_queue
 {
@@ -3990,7 +3990,7 @@ private:
     }
 };
 
-/* source: 2019/0720.cpp */
+/* 2019/0720.cpp */
 template<typename T>
 class lock_free_queue
 {
@@ -4019,7 +4019,7 @@ private:
     }
 };
 
-/* source: 2019/0721.cpp */
+/* 2019/0721.cpp */
 #include <atomic>
 template<typename T>
 class lock_free_queue
@@ -4055,7 +4055,7 @@ public:
     }
 };
 
-/* source: 2019/0722.cpp */
+/* 2019/0722.cpp */
 template<typename T>
 class lock_free_queue
 {
@@ -4112,7 +4112,7 @@ public:
     }
 };
 
-/* source: 2019/0801.cpp */
+/* 2019/0801.cpp */
 #include <thread>
 #include <vector>
 #include <future>
@@ -4220,7 +4220,7 @@ std::list<T> parallel_quick_sort(std::list<T> input)
     return s.do_sort(input);
 }
 
-/* source: 2019/0802.cpp */
+/* 2019/0802.cpp */
 #include <vector>
 #include <thread>
 #include <algorithm>
@@ -4274,7 +4274,7 @@ T parallel_accumulate(Iterator first,Iterator last,T init)
     return std::accumulate(results.begin(),results.end(),init);
 }
 
-/* source: 2019/0803.cpp */
+/* 2019/0803.cpp */
 #include <algorithm>
 #include <thread>
 #include <vector>
@@ -4336,7 +4336,7 @@ T parallel_accumulate(Iterator first,Iterator last,T init)
     return result;
 }
 
-/* source: 2019/0804.cpp */
+/* 2019/0804.cpp */
 #include <iterator>
 #include <vector>
 #include <thread>
@@ -4402,7 +4402,7 @@ T parallel_accumulate(Iterator first,Iterator last,T init)
     return result;
 }
 
-/* source: 2019/0805.cpp */
+/* 2019/0805.cpp */
 #include <future>
 #include <algorithm>
 template<typename Iterator,typename T>
@@ -4426,7 +4426,7 @@ T parallel_accumulate(Iterator first,Iterator last,T init)
     }
 }
 
-/* source: 2019/0806.cpp */
+/* 2019/0806.cpp */
 #include <future>
 #include <algorithm>
 #include <thread>
@@ -4481,7 +4481,7 @@ void process(event_data const& event)
     }
 }
 
-/* source: 2019/0807.cpp */
+/* 2019/0807.cpp */
 #include <future>
 #include <algorithm>
 struct join_threads
@@ -4535,7 +4535,7 @@ void parallel_for_each(Iterator first,Iterator last,Func f)
     }
 }
 
-/* source: 2019/0808.cpp */
+/* 2019/0808.cpp */
 #include <future>
 #include <algorithm>
 template<typename Iterator,typename Func>
@@ -4563,7 +4563,7 @@ void parallel_for_each(Iterator first,Iterator last,Func f)
     }
 }
 
-/* source: 2019/0809.cpp */
+/* 2019/0809.cpp */
 #include <future>
 #include <algorithm>
 struct join_threads
@@ -4650,7 +4650,7 @@ Iterator parallel_find(Iterator first,Iterator last,MatchType match)
 }
 
 
-/* source: 2019/0810.cpp */
+/* 2019/0810.cpp */
 #include <atomic>
 #include <future>
 template<typename Iterator,typename MatchType>
@@ -4699,7 +4699,7 @@ Iterator parallel_find(Iterator first,Iterator last,MatchType match)
     return parallel_find_impl(first,last,match,done);
 }
 
-/* source: 2019/0811.cpp */
+/* 2019/0811.cpp */
 #include <future>
 #include <algorithm>
 #include <vector>
@@ -4803,7 +4803,7 @@ void parallel_partial_sum(Iterator first,Iterator last)
                     0);
 }
 
-/* source: 2019/0812.cpp */
+/* 2019/0812.cpp */
 #include <thread>
 #include <atomic>
 class barrier
@@ -4832,7 +4832,7 @@ public:
 };
 
 
-/* source: 2019/0813.cpp */
+/* 2019/0813.cpp */
 #include <atomic>
 #include <thread>
 #include <vector>
@@ -4932,7 +4932,7 @@ void parallel_partial_sum(Iterator first,Iterator last)
     process_element()(first,last,buffer,length-1,b);
 }
 
-/* source: 2019/0901.cpp */
+/* 2019/0901.cpp */
 #include <thread>
 #include <vector>
 #include <atomic>
@@ -4996,7 +4996,7 @@ public:
     }
 };
 
-/* source: 2019/0902.cpp */
+/* 2019/0902.cpp */
 #include <deque>
 #include <future>
 #include <memory>
@@ -5060,7 +5060,7 @@ public:
     // rest as before
 };
 
-/* source: 2019/0903.cpp */
+/* 2019/0903.cpp */
 #include <vector>
 #include <future>
 #include <thread>
@@ -5097,7 +5097,7 @@ T parallel_accumulate(Iterator first,Iterator last,T init)
     return result;
 }
 
-/* source: 2019/0904.cpp */
+/* 2019/0904.cpp */
 void thread_pool::run_pending_task()
 {
     function_wrapper task;
@@ -5111,7 +5111,7 @@ void thread_pool::run_pending_task()
     }
 }
 
-/* source: 2019/0905.cpp */
+/* 2019/0905.cpp */
 #include <list>
 #include <algorithm>
 #include <vector>
@@ -5175,7 +5175,7 @@ std::list<T> parallel_quick_sort(std::list<T> input)
     return s.do_sort(input);
 }
 
-/* source: 2019/0906.cpp */
+/* 2019/0906.cpp */
 class thread_pool
 {
     thread_safe_queue<function_wrapper> pool_work_queue;
@@ -5235,7 +5235,7 @@ public:
     // rest as before
 };
 
-/* source: 2019/0907.cpp */
+/* 2019/0907.cpp */
 #include <deque>
 #include <mutex>
 #include <memory>
@@ -5330,7 +5330,7 @@ public:
     }
 };
 
-/* source: 2019/0908.cpp */
+/* 2019/0908.cpp */
 #include <vector>
 #include <atomic>
 #include <thread>
@@ -5447,7 +5447,7 @@ public:
     }
 };
 
-/* source: 2019/0909.cpp */
+/* 2019/0909.cpp */
 #include <thread>
 #include <future>
 #include <mutex>
@@ -5509,7 +5509,7 @@ public:
     }
 };
 
-/* source: 2019/0910.cpp */
+/* 2019/0910.cpp */
 void interruptible_wait(std::condition_variable& cv,
                         std::unique_lock<std::mutex>& lk)
 {
@@ -5520,7 +5520,7 @@ void interruptible_wait(std::condition_variable& cv,
     interruption_point();
 }
 
-/* source: 2019/0911.cpp */
+/* 2019/0911.cpp */
 #include <future>
 #include <algorithm>
 void interruption_point(){};
@@ -5583,7 +5583,7 @@ void interruptible_wait(std::condition_variable& cv,
     interruption_point();
 }
 
-/* source: 2019/0912.cpp */
+/* 2019/0912.cpp */
 #include <algorithm>
 #include <atomic>
 #include <condition_variable>
@@ -5664,7 +5664,7 @@ void interruptible_wait(std::condition_variable_any& cv,
     this_thread_interrupt_flag.wait(cv,lk);
 }
 
-/* source: 2019/0913.cpp */
+/* 2019/0913.cpp */
 #include <vector>
 #include <mutex>
 #include <thread>
@@ -5741,7 +5741,7 @@ int main()
     }
 }
 
-/* source: 2019/1001.cpp */
+/* 2019/1001.cpp */
 class X{
     mutable std::mutex m;
     int data;
@@ -5763,7 +5763,7 @@ void increment_all(std::vector<X>& v){
         });
 }
 
-/* source: 2019/1002.cpp */
+/* 2019/1002.cpp */
 class Y{
     int data;
 public:
@@ -5798,7 +5798,7 @@ void increment_all(ProtectedY& data){
         });
 }
 
-/* source: 2019/1003.cpp */
+/* 2019/1003.cpp */
 #include <vector>
 #include <string>
 #include <unordered_map>
@@ -5850,7 +5850,7 @@ count_visits_per_page(std::vector<std::string> const &log_lines) {
         visit_map_type(), combine_visits(), parse_log_line);
 }
 
-/* source: 2019/1101.cpp */
+/* 2019/1101.cpp */
 void test_concurrent_push_and_pop_on_empty_queue()
 {
     threadsafe_queue<int> q;
@@ -5894,7 +5894,7 @@ void test_concurrent_push_and_pop_on_empty_queue()
     }
 }
 
-/* source: 2019/AA01.cpp */
+/* 2019/AA01.cpp */
 class X
 {
 private:
@@ -5919,7 +5919,7 @@ public:
     }
 };
 
-/* source: 2019/AA02.cpp */
+/* 2019/AA02.cpp */
 class move_only
 {
     std::unique_ptr<my_class> data;
@@ -5939,7 +5939,7 @@ move_only m1;
 move_only m2(m1);
 move_only m3(std::move(m1));
 
-/* source: 2019/AA03.cpp */
+/* 2019/AA03.cpp */
 class CX
 {
 private:
@@ -5964,7 +5964,7 @@ public:
     }
 };
 
-/* source: 2019/AA04.cpp */
+/* 2019/AA04.cpp */
 std::condition_variable cond;
 bool data_ready;
 std::mutex m;
@@ -5974,7 +5974,7 @@ void wait_for_data()
     cond.wait(lk,[]{return data_ready;});
 }
 
-/* source: 2019/AC01.cpp */
+/* 2019/AC01.cpp */
 #include <mutex>
 #include <condition_variable>
 #include <queue>
@@ -6021,7 +6021,7 @@ namespace messaging
     };
 }
 
-/* source: 2019/AC02.cpp */
+/* 2019/AC02.cpp */
 namespace messaging
 {
     class sender
@@ -6045,7 +6045,7 @@ namespace messaging
     };
 }
 
-/* source: 2019/AC03.cpp */
+/* 2019/AC03.cpp */
 namespace messaging
 {
     class receiver
@@ -6063,7 +6063,7 @@ namespace messaging
     };
 }
 
-/* source: 2019/AC04.cpp */
+/* 2019/AC04.cpp */
 namespace messaging
 {
     class close_queue
@@ -6130,7 +6130,7 @@ namespace messaging
     };
 }
 
-/* source: 2019/AC05.cpp */
+/* 2019/AC05.cpp */
 namespace messaging
 {
     template<typename PreviousDispatcher,typename Msg,typename Func>
@@ -6203,7 +6203,7 @@ namespace messaging
     };
 }
 
-/* source: 2019/AC06.cpp */
+/* 2019/AC06.cpp */
 struct withdraw
 {
     std::string account;
@@ -6323,7 +6323,7 @@ struct display_balance
 struct balance_pressed
 {};
 
-/* source: 2019/AC07.cpp */
+/* 2019/AC07.cpp */
 class atm
 {
     messaging::receiver incoming;
@@ -6512,7 +6512,7 @@ public:
     }
 };
 
-/* source: 2019/AC08.cpp */
+/* 2019/AC08.cpp */
 class bank_machine
 {
     messaging::receiver incoming;
@@ -6587,7 +6587,7 @@ public:
     }
 };
 
-/* source: 2019/AC09.cpp */
+/* 2019/AC09.cpp */
 class interface_machine
 {
     messaging::receiver incoming;
@@ -6706,7 +6706,7 @@ public:
     }
 };
 
-/* source: 2019/AC10.cpp */
+/* 2019/AC10.cpp */
 int main()
 {
     bank_machine bank;

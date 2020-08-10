@@ -8,7 +8,7 @@ cat /dev/null > ${combine}.cpp
 for (( i=0; i<${#sources[@]}; i=i+1 ))
 do
     source=${sources[$((i+0))]}
-    echo "/* source: ${source} */" >> s.cpp
+    echo "/* ${source} */" >> s.cpp
     cat ${source} >> s.cpp
     echo "" >> s.cpp
     cat ${combine}.cpp s.cpp > t.cpp && mv t.cpp ${combine}.cpp
