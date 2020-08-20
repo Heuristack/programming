@@ -40,3 +40,8 @@ add_subdirectory(examples/orion)
 #
 add_subdirectory(examples/rdtsc)
 
+#
+# Program Options (Boost)
+#
+add_subdirectory(examples/program_options)
+
