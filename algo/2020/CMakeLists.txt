@@ -35,4 +35,5 @@ add_subdirectory(graph)
 #
 # 05 Sorting - ISBHMQ
 #
+add_subdirectory(sorting)
 
