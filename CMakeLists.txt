@@ -7,5 +7,5 @@ link_directories(/usr/local/lib)
 project(programming)
 
 add_subdirectory(algo)
-add_subdirectory(book/ecpp)
+add_subdirectory(books/ecpp)
 add_subdirectory(examples)
