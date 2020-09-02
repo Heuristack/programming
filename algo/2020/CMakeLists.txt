@@ -3,6 +3,7 @@
 #
 cmake_minimum_required(VERSION 3.12)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "-O0")
 
 #
 # Include and Link Directories
@@ -26,7 +27,9 @@ project(algo)
 #
 # 03 Graph - BDKPBD
 #
-add_subdirectory(graph)
+include_directories(graph)
+add_executable(graph_traverse graph/examples/traverse.cpp)
+add_executable(graph_clrs2404 graph/examples/clrs2404.cpp)
 
 #
 # 04 Searching - BT
@@ -35,5 +38,7 @@ add_subdirectory(graph)
 #
 # 05 Sorting - ISBHMQ
 #
-add_subdirectory(sorting)
+#add_subdirectory(sorting)
+include_directories(sorting)
+add_executable(sorting_compete sorting/examples/compete.cpp)
 
