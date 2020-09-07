@@ -12,33 +12,40 @@ include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 
 #
-# Project - DAGSS
+# Project - DASSG
 #
 project(algo)
 
 #
 # 01 Data Structures - AHLBHUSQ
 #
+add_executable(array structure/array/partition.cpp)
+add_executable(heap structure/heap/merge.cpp)
+add_executable(linked_list structure/linked_list/linked_list.cpp)
+add_executable(binary_tree structure/binary_tree/binary_tree_depth_order_traverse.cpp)
+add_executable(hash_table structure/hash_table/hash_string.cpp)
+#add_executable(union_find structure/union_find/)
+#add_executable(stack structure/stack)
+#add_executable(queue structure/queue)
 
 #
 # 02 Algo Techniques - BDBGDB
 #
 
 #
-# 03 Graph - BDKPBD
+# 03 Searching - BT
+#
+
+#
+# 04 Sorting - ISBHMQ
+#
+include_directories(sorting)
+add_executable(sorting_compete sorting/examples/compete.cpp)
+
+#
+# 05 Graph - BDKPBD
 #
 include_directories(graph)
 add_executable(graph_traverse graph/examples/traverse.cpp)
 add_executable(graph_clrs2404 graph/examples/clrs2404.cpp)
-
-#
-# 04 Searching - BT
-#
-
-#
-# 05 Sorting - ISBHMQ
-#
-#add_subdirectory(sorting)
-include_directories(sorting)
-add_executable(sorting_compete sorting/examples/compete.cpp)
 
