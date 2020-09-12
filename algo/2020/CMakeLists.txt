@@ -25,8 +25,8 @@ add_executable(linked_list structure/linked_list/linked_list.cpp)
 add_executable(binary_tree structure/binary_tree/binary_tree_depth_order_traverse.cpp)
 add_executable(hash_table structure/hash_table/hash_string.cpp)
 #add_executable(union_find structure/union_find/)
-#add_executable(stack structure/stack)
-#add_executable(queue structure/queue)
+add_executable(stack structure/stack/stack.cpp)
+add_executable(queue structure/queue/queue.cpp)
 
 #
 # 02 Algo Techniques - BDBGDB

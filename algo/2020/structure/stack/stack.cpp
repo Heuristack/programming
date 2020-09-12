@@ -1,10 +1,8 @@
-#include <iostream>
-#include <stack>
-#include <exception>
 #include <stdexcept>
+#include <stack>
+#include <iostream>
 
-namespace algo
-{
+namespace algo {
 
 template <typename element_t>
 class stack
@@ -13,18 +11,22 @@ public:
     using element_type = element_t;
     using this_type = stack<element_type>;
 
-    struct max_power { element_type max; int power; };
+    struct maximum_statistics
+    {
+        element_type max;
+        int count;
+    };
 
 public:
     auto push(element_type e) -> this_type &
     {
         data.push(e);
 
-        if ((!powers.empty()) && (e <= powers.top().max)) {
-            powers.top().power++;
+        if ((!max_stat.empty()) && (e <= max_stat.top().max)) {
+            max_stat.top().count++;
         }
         else {
-            powers.push({e,1});
+            max_stat.push({e,1});
         }
 
         return *this;
@@ -38,11 +40,11 @@ public:
 
         auto e = data.top();
 
-        if (powers.top().power > 1) {
-            powers.top().power--;
+        if (max_stat.top().count > 1) {
+            max_stat.top().count--;
         }
         else {
-            powers.pop();
+            max_stat.pop();
         }
 
         data.pop();
@@ -51,10 +53,10 @@ public:
 
     auto max() -> element_type
     {
-        if (powers.empty()) {
+        if (max_stat.empty()) {
             throw std::length_error("empty stack");
         }
-        return powers.top().max;
+        return max_stat.top().max;
     }
 
     auto empty() { return data.empty(); }
@@ -62,7 +64,7 @@ public:
 
 private:
     std::stack<element_type> data;
-    std::stack<max_power> powers;
+    std::stack<maximum_statistics> max_stat;
 };
 
 }
