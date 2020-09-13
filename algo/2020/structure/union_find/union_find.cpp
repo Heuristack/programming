@@ -2,6 +2,7 @@
 #include <vector>
 #include <set>
 #include <numeric>
+#include <cassert>
 #include <iomanip>
 
 template <typename element_t> using vector_storage = std::vector<element_t>;
@@ -19,6 +20,7 @@ public:
     {
         leader.resize(n);
         std::iota(begin(leader),end(leader),0);
+        unions = n;
     }
 
 public:
@@ -26,7 +28,10 @@ public:
     {
         auto ua = find(a);
         auto ub = find(b);
-        if (ua != ub) leader[ub] = ua;
+        if (ua != ub) {
+            leader[ub] = ua;
+            unions--;
+        }
         return *this;
     }
 
@@ -47,6 +52,7 @@ public:
         for (auto e : leader) {
             s.insert(find(e));
         }
+        assert(s.size() == unions);
         return s.size();
     }
 
@@ -58,6 +64,7 @@ public:
 
 public:
     storage_type leader;
+    int unions;
 };
 
 int main()
