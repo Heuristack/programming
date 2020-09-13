@@ -36,7 +36,7 @@ public:
     {
         set<T> s;
         for (auto [e,g] : *this) {
-            s.insert(g);
+            s.insert(Find(e));
         }
         return s.size();
     }
