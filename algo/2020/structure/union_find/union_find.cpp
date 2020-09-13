@@ -1,13 +1,11 @@
 #include <iostream>
+#include <cassert>
 #include <vector>
 #include <set>
-#include <numeric>
-#include <cassert>
-#include <iomanip>
 
-template <typename element_t> using vector_storage = std::vector<element_t>;
+template <typename element_t> using normalized_map = std::vector<element_t>;
 
-template <typename element_t, template <typename> typename storage_t = vector_storage>
+template <typename element_t, template <typename> typename storage_t = normalized_map>
 class union_find
 {
 public:
@@ -16,11 +14,12 @@ public:
     using this_type = union_find<element_type, storage_t>;
 
 public:
-    union_find(size_t n)
+    union_find(int n) : unions(n)
     {
         leader.resize(n);
-        std::iota(begin(leader),end(leader),0);
-        unions = n;
+        for (int i = 0; i < n; i++) {
+            leader[i] = i;
+        }
     }
 
 public:
