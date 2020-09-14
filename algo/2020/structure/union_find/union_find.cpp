@@ -51,8 +51,8 @@ public:
         for (auto e : leader) {
             s.insert(find(e));
         }
-        assert(s.size() == unions);
-        return s.size();
+        assert(unions == s.size());
+        return unions;
     }
 
 public:

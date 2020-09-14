@@ -2,8 +2,8 @@
 #include <list>
 #include <algorithm>
 
-namespace algo
-{
+namespace algo {
+
 template <typename element_t>
 class queue
 {
@@ -32,8 +32,9 @@ public:
     }
 
     auto empty() { return data.empty(); }
+
     auto front() { return data.front(); }
-    auto back() { return data.back(); }
+    auto back()  { return data.back();  }
 
 private:
     std::list<element_type> data;

@@ -5,11 +5,11 @@
 using namespace std;
 
 template <typename iterator, typename predicate>
-auto partition_forward(iterator p, iterator r, predicate e)
+auto partition_forward(iterator p, iterator r, predicate f)
 {
     iterator k = p;
     for (iterator i = p; i != r; i++) {
-        if (e(*i)) {
+        if (f(*i)) {
             iter_swap(k++,i);
         }
     }
