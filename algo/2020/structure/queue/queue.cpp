@@ -32,7 +32,6 @@ public:
     }
 
     auto empty() { return data.empty(); }
-
     auto front() { return data.front(); }
     auto back()  { return data.back();  }
 

@@ -17,8 +17,7 @@ struct node
     link_type next;
 };
 
-template <typename node_t>
-using list = typename node_t::link_type;
+template <typename node_t> using list = typename node_t::link_type;
 
 template <typename data_t>
 auto create_list(initializer_list<data_t> const & init)
