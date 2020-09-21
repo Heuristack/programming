@@ -42,7 +42,7 @@ add_executable(branch_bound algorithm/branch_bound/main.cpp)
 # 03 Searching - BT
 #
 add_executable(binary_search searching/binary_search/binary_search.cpp)
-add_executable(binary_search_tree_search searching/binary_search_tree_search/binary_search_tree_search.cpp)
+add_executable(binary_search_tree_search searching/binary_search_tree_search/search.cpp)
 
 #
 # 04 Sorting - ISBHMQ
