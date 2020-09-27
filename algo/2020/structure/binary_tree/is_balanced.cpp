@@ -1,28 +1,6 @@
-#include <iostream>
+#include "binary_tree.h"
 #include <cmath>
 #include <algorithm>
-
-using namespace std;
-
-template <typename data_t>
-struct node
-{
-    using data_type = data_t;
-    using node_type = node<data_type>;
-
-    node(data_type v, node_type * l, node_type *r) : v(v), ltree(l), rtree(r) {}
-    node(data_type v) : node(v,nullptr,nullptr) {}
-
-    data_type v;
-    node_type * ltree;
-    node_type * rtree;
-};
-
-template <typename data_t>
-ostream & operator << (ostream & s, node<data_t> const & n)
-{
-    return s << "(" << n.v << ")";
-}
 
 // note : return -1 if unblanced else height of the tree
 //        empty node has zero height, single node has 1 height, ...

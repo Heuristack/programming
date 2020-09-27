@@ -1,31 +1,6 @@
-#include <iostream>
-#include <iomanip>
-#include <string>
+#include "binary_tree.h"
 #include <vector>
 #include <map>
-
-using namespace std;
-
-template <typename data_t>
-struct node
-{
-    using data_type = data_t;
-    using node_type = node<data_type>;
-
-    node(data_type v, node_type * l, node_type * r) : data(v), ltree(l), rtree(r) {}
-    explicit node(data_type v) : node(v,nullptr,nullptr) {}
-
-    data_type data;
-    node_type * ltree;
-    node_type * rtree;
-};
-
-template <typename data_t>
-ostream & operator << (ostream & strm, node<data_t> const & n)
-{
-    strm << "(" << n.data << ")";
-    return strm;
-}
 
 template <typename node_t>
 auto traverse(node_t * n) -> map<int,vector<node_t*>>
