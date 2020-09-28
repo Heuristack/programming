@@ -1,10 +1,29 @@
-#include <iostream>
-#include <vector>
 #include <algorithm>
+#include <iterator>
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
-auto permute(vector<int> s, int n) -> vector<vector<int>>
+template <typename iterator, typename inserter>
+auto remove_copy_it(iterator p, iterator r, inserter b, iterator k) -> void
+{
+    for (auto i = p; i != r; i++) {
+        if (i != k) {
+            *b++ = *i;
+        }
+    }
+}
+
+template <typename iterator, typename return_type = vector<typename iterator_traits<iterator>::value_type>>
+auto remove_clone_it(iterator p, iterator r, iterator k) -> return_type
+{
+    return_type v;
+    remove_copy_it(p,r,back_inserter(v),k);
+    return v;
+}
+
+auto permute(vector<int> s, int n) -> vector<vector<int>> // note : generate all n-permutation(s) of set s
 {
     static vector<vector<int>> permutations;
     static vector<int> path;
@@ -15,10 +34,8 @@ auto permute(vector<int> s, int n) -> vector<vector<int>>
     }
 
     for (auto i = begin(s); i != end(s); i++) {
-        vector<int> c(begin(s),i);
-        copy(next(i),end(s),back_inserter(c));
         path.push_back(*i);
-        permute(c,n-1);
+        permute(remove_clone_it(begin(s),end(s),i),n-1);
         path.pop_back();
     }
 
