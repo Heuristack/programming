@@ -6,7 +6,7 @@ using namespace std;
 auto power(vector<int> s) -> vector<vector<int>>
 {
     if (s.empty()) return {{}};
-    auto p = power(vector<int> (next(begin(s)),end(s)));
+    auto p = power(vector<int>(next(begin(s)),end(s)));
     auto q = p;
     for (auto a : q) {
         a.push_back(*begin(s));
