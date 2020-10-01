@@ -1,3 +1,56 @@
+We Know Each Other - Happy Mid-Autumn Day
+-----------------------------------------
+```C++
+#include <iostream>
+
+template <typename instrument_data_t, typename order_manager_t, typename log_t>
+class state_base
+{
+public:
+    typedef instrument_data_t instrument_data_type;
+    typedef log_t log_type;
+    typedef order_manager_t order_manager_type;
+    state_base(order_manager_type & om) : om(om) {}
+    order_manager_type & om;
+};
+
+template <typename state_t>
+class order_manager
+{
+public:
+    typedef state_t state_type;
+    order_manager(state_type & s) : s(s) {}
+    state_type & s;
+public:
+    auto hello() -> void
+    {
+        static int n = 0;
+        if (n++ == 815) return;
+        std::cout << "Happy Mid-Autumm Day!" << std::endl;
+        return s.hello();
+    }
+};
+
+template <typename instrument_data_t, typename log_t>
+class state : public state_base<instrument_data_t,order_manager<state<instrument_data_t,log_t>>,log_t>
+{
+public:
+    typedef state_base<instrument_data_t,order_manager<state<instrument_data_t,log_t>>,log_t> base_type;
+    typedef typename base_type::order_manager_type order_manager_type;
+    state() : base_type(om),om(*this) {}
+    order_manager_type om;
+public:
+    auto hello() -> void { return om.hello(); }
+};
+
+int main()
+{
+    state<long,char> s;
+    s.hello();
+}
+
+```
+
 expelled
 --------
 ```C++
