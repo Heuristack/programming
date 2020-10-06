@@ -31,12 +31,12 @@ add_executable(queue structure/queue/queue.cpp)
 #
 # 02 Algo Techniques - BDBGDB
 #
-add_executable(brute_force algorithm/brute_force/iteration_vs_recursion.cpp)
-add_executable(divide_conquer algorithm/divide_conquer/recursion_tree.cpp)
-add_executable(backtracking algorithm/backtracking/permutation.cpp)
+add_executable(brute_force algorithm/brute_force/generate_powerset.cpp)
+add_executable(divide_n_conquer algorithm/divide_n_conquer/recursion_tree.cpp)
+add_executable(backtracking algorithm/backtracking/generate_permutation.cpp)
 add_executable(greedy_strategy algorithm/greedy_strategy/greedy_coin_changing.cpp)
 add_executable(dynamic_programming algorithm/dynamic_programming/dynamic_coin_changing.cpp)
-add_executable(branch_bound algorithm/branch_bound/main.cpp)
+add_executable(branch_n_bound algorithm/branch_n_bound/knapsack.cpp)
 
 #
 # 03 Searching - BT
