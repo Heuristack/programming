@@ -48,7 +48,7 @@ add_executable(binary_search_tree_search searching/binary_search_tree_search/sea
 # 04 Sorting - ISBHMQ
 #
 include_directories(sorting)
-add_executable(sorting_compete sorting/examples/compete.cpp)
+add_executable(sorting_compare sorting/examples/compare.cpp)
 
 #
 # 05 Graph - BDKPBD
