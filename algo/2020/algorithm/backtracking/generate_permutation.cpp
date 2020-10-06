@@ -23,7 +23,7 @@ auto remove_copy_it(iterator p, iterator r, iterator k) -> return_type
     return v;
 }
 
-auto permute(vector<int> s, int n) -> vector<vector<int>> // note : generate all n-permutation(s) of set s
+auto generate_permutation(vector<int> s, int n) -> vector<vector<int>> // note : generate all n-permutation(s) of set s
 {
     static vector<vector<int>> permutations;
     static vector<int> path;
@@ -35,7 +35,7 @@ auto permute(vector<int> s, int n) -> vector<vector<int>> // note : generate all
 
     for (auto i = begin(s); i != end(s); i++) {
         path.push_back(*i);
-        permute(remove_copy_it(begin(s),end(s),i),n-1);
+        generate_permutation(remove_copy_it(begin(s),end(s),i),n-1);
         path.pop_back();
     }
 
@@ -44,7 +44,7 @@ auto permute(vector<int> s, int n) -> vector<vector<int>> // note : generate all
 
 int main()
 {
-    for (auto const & s : permute({1,2,3},2)) {
+    for (auto const & s : generate_permutation({1,2,3,4,5},3)) {
         for (auto const & e : s) cout << e;
         cout << endl;
     }
