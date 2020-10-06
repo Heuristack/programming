@@ -23,24 +23,7 @@ auto remove_copy_it(iterator p, iterator r, iterator k) -> return_type
     return v;
 }
 
-auto generate_permutation(vector<int> s, int n) -> vector<vector<int>> // note : generate all n-permutation(s) of set s
-{
-    static vector<vector<int>> permutations;
-    static vector<int> path;
-
-    if (!n) {
-        permutations.push_back(path);
-        return permutations;
-    }
-
-    for (auto i = begin(s); i != end(s); i++) {
-        path.push_back(*i);
-        generate_permutation(remove_copy_it(begin(s),end(s),i),n-1);
-        path.pop_back();
-    }
-
-    return permutations;
-}
+#include "generate_permutation.ipp"
 
 int main()
 {
