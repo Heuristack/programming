@@ -35,16 +35,7 @@ public:
     auto explore() -> void override { explore(node(k++)); }
 
 public:
-    auto explore(node e) -> void
-    {
-        visit(e);
-        if (e.d < m) {
-            for (int i = 0; i < n; i++) {
-                node n(k++,i,e.d+1);
-                explore(n);
-            }
-        }
-    }
+    auto explore(node e) -> void;
 };
 
 class generate_recursion : public recursion
@@ -54,26 +45,11 @@ public:
     auto explore() -> void override { explore(node(k++)); }
 
 public:
-    auto generate(node e)
-    {
-        vector<node> v;
-        if (e.d < m) {
-            for (int i = 0; i < n; i++) {
-                node n(k++,i,e.d+1);
-                v.push_back(n);
-            }
-        }
-        return v;
-    }
-
-    auto explore(node e) -> void
-    {
-        visit(e);
-        for (node const & n : generate(e)) {
-            explore(n);
-        }
-    }
+    auto generate(node e) -> vector<node>;
+    auto explore(node e) -> void;
 };
+
+#include "recursion.ipp"
 
 int main()
 {
