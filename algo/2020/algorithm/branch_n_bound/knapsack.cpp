@@ -109,7 +109,7 @@ auto explore(node const & n) -> node
         a.reset();
 //      cout << "->" << a << "=" << calculate(a) << endl;
 //      cout << "->" << b << "=" << calculate(b) << endl;
-        if (calculate(a) < calculate(b)) return explore(b);
+        if (calculate(a) <= calculate(b)) return explore(b);
         else return explore(a);
     }
     else {
