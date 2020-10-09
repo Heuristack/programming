@@ -82,14 +82,17 @@ double calculate(node const & n, int weight_upper_bound = 100)
     double value = 0;
     for (int i = 0; i < (int)n.items.size(); i++) {
         if (auto const & item = n.items[i]; item.has_value()) {
-            if (auto trial_weight = weight + item->weight; trial_weight < weight_upper_bound) {
+            if (auto trial_weight = weight + item->weight; trial_weight <= weight_upper_bound) {
                 weight = trial_weight;
                 value += item->value;
             }
             else {
-                auto remaining_weight = weight_upper_bound - weight;
-                auto weight_ratio = remaining_weight / item->weight;
-                value += item->value * weight_ratio;
+                if (i > n.i - 1) {
+                    auto remaining_weight = weight_upper_bound - weight;
+                    auto weight_ratio = remaining_weight / item->weight;
+                    value += item->value * weight_ratio;
+                }
+                else value = -999;
                 break;
             }
         }
@@ -97,24 +100,26 @@ double calculate(node const & n, int weight_upper_bound = 100)
     return value;
 }
 
-auto explore(node const & n) -> void
+auto explore(node const & n) -> node
 {
-    cout << endl;
-    cout << n << endl;
-    if ((n.i - 1) < (int)n.items.size()) {
+//  cout << "==" << n << endl;
+    if (n.i < (int)n.items.size()) {
         node a(n);
         node b(n);
         a.reset();
-        cout << a << "=" << calculate(a) << endl;
-        cout << b << "=" << calculate(b) << endl;
-        if (calculate(a) < calculate(b)) explore(b);
-        else explore(a);
+//      cout << "->" << a << "=" << calculate(a) << endl;
+//      cout << "->" << b << "=" << calculate(b) << endl;
+        if (calculate(a) < calculate(b)) return explore(b);
+        else return explore(a);
+    }
+    else {
+        return n;
     }
 }
 
 int main()
 {
     node n({{40,40},{50,60},{30,10},{10,10},{10,3},{40,20},{30,60}});
-    explore(n);
+    cout << calculate(explore(n)) << endl;
 }
 
