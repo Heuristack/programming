@@ -24,12 +24,19 @@ auto remove_copy_it(iterator p, iterator r, iterator k) -> return_type
 }
 
 #include "generate_permutation.ipp"
+#include "constraint_satisfaction_problem.ipp"
 
 int main()
 {
     for (auto const & s : generate_permutation({1,2,3,4,5},3)) {
         for (auto const & e : s) cout << e;
-        cout << endl;
+        cout << " ";
     }
+    cout << endl;
+    for (auto const & s : permutation({1,2,3,4,5},3).generate()) {
+        for (auto const & e : s) cout << e;
+        cout << " ";
+    }
+    cout << endl;
 }
 
