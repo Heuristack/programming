@@ -6,7 +6,7 @@ public:
     : values(values) {}
 
 public:
-    template <typename ... types> auto constraint(types ... v) -> vector<type>;
+    template <typename ... types> auto constraint(types ...) -> vector<type>;
     virtual auto backtrack(vector<type> values) -> void = 0;
 
 public:
