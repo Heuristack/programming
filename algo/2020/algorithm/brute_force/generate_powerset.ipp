@@ -2,26 +2,20 @@ auto recursion::generate_powerset(vector<int> s) -> vector<vector<int>>
 {
     if (s.empty()) return {{}};
     auto p = generate_powerset(vector<int>(next(begin(s)),end(s)));
-    for (auto a : decltype(p)(p)) {
-        a.push_back(*begin(s));
-        p.push_back(a);
+    for (auto b : decltype(p)(p)) {
+        b.push_back(*begin(s));
+        p.push_back(b);
     }
     return p;
 }
 
 auto iteration::generate_powerset(vector<int> s) -> vector<vector<int>>
 {
-    vector<vector<int>> p;
+    vector<vector<int>> p = {{}};
     for (auto e : s) {
-        if (!p.empty()) {
-            for (auto q : decltype(p)(p)) {
-                q.push_back(e);
-                p.push_back(q);
-            }
-        }
-        else {
-            p.push_back({});
-            p.push_back({e});
+        for (auto b : decltype(p)(p)) {
+            b.push_back(e);
+            p.push_back(b);
         }
     }
     return p;

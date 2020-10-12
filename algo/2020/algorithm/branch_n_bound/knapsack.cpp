@@ -55,22 +55,12 @@ node & node::exclude()
     return *this;
 }
 
-node make_node(enum class exclude, node const & n)
+node make_node(node const & n)
 {
-    node a(n);
-    a.n = ++n.k;
-    a.i = n.i + 1;
-    a.exclude();
-    return a;
-}
-
-node make_node(enum class include, node const & n)
-{
-    node a(n);
-    a.n = ++n.k;
-    a.i = n.i + 1;
-    a.include();
-    return a;
+    node e(n);
+    e.n = ++n.k;
+    e.i = n.i + 1;
+    return e;
 }
 
 ostream & operator << (ostream & s, item const & i)
@@ -121,9 +111,9 @@ double bound(node const & n, int allowable_weight = 100)
 auto branch(node const & n) -> node
 {
 //  cout << "==" << n << endl;
-    if (n.i < (int)n.items.size()) {
-        node a = make_node(exclude(),n);
-        node b = make_node(include(),n);
+    if (n.i < (int)(n.items.size())) {
+        node a = make_node(n).exclude();
+        node b = make_node(n).include();
 //      cout << "->" << a << "=>B(" << a.n << ")=" << bound(a) << endl;
 //      cout << "->" << b << "=>B(" << b.n << ")=" << bound(b) << endl;
         if (bound(a) <= bound(b)) return branch(b);
@@ -159,9 +149,9 @@ auto explore(node const & n) -> int
 {
 //  cout << "==" << n << endl;
     static int max_value = 0;
-    if (n.i < (int)n.items.size()) {
-        node a = make_node(exclude(),n);
-        node b = make_node(include(),n);
+    if (n.i < (int)(n.items.size())) {
+        node a = make_node(n).exclude();
+        node b = make_node(n).include();
 //      cout << "->" << a << "=>B(" << a.n << ")=" << bound(a) << endl;
 //      cout << "->" << b << "=>B(" << b.n << ")=" << bound(b) << endl;
         explore(a);

@@ -30,7 +30,7 @@ struct iteration : execution
 {
     using execution::execution;
     auto generate_powerset(vector<int> s) -> vector<vector<int>> override;
-    auto run() -> void override { cout << "execution: "; return execution::run(); }
+    auto run() -> void override { cout << "iteration: "; return execution::run(); }
 };
 
 struct optimized : execution
