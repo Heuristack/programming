@@ -101,3 +101,4 @@ ostream & operator << (ostream & s, node const & n)
     }
     return s << "}=(" << weight << "," << value << ")";
 }
+
