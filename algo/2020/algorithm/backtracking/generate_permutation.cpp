@@ -5,38 +5,23 @@
 
 using namespace std;
 
-template <typename iterator, typename inserter>
-auto remove_copy_it(iterator p, iterator r, inserter b, iterator k) -> void
-{
-    for (auto i = p; i != r; i++) {
-        if (i != k) {
-            *b++ = *i;
-        }
-    }
-}
-
-template <typename iterator, typename return_type = vector<typename iterator_traits<iterator>::value_type>>
-auto remove_copy_it(iterator p, iterator r, iterator k) -> return_type
-{
-    return_type v;
-    remove_copy_it(p,r,back_inserter(v),k);
-    return v;
-}
-
-#include "generate_permutation.ipp"
+#include "constraint_satisfaction_problem.hpp"
 #include "constraint_satisfaction_problem.ipp"
+#include "generate_permutation.hpp"
+#include "generate_permutation.ipp"
+
+template <typename type>
+ostream & operator << (ostream & strm, vector<type> const v) {
+    for (auto const & s : v) {
+        for (auto const & e : s) strm << e;
+        strm << " ";
+    }
+    return strm;
+}
 
 int main()
 {
-    for (auto const & s : generate_permutation({1,2,3,4,5},3)) {
-        for (auto const & e : s) cout << e;
-        cout << " ";
-    }
-    cout << endl;
-    for (auto const & s : permutation({1,2,3,4,5},3).generate()) {
-        for (auto const & e : s) cout << e;
-        cout << " ";
-    }
-    cout << endl;
+    cout << permutation({1,2,3,4,5},3).generate() << endl;
+    cout << generate_permutation({1,2,3,4,5},3) << endl;
 }
 
