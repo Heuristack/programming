@@ -6,7 +6,8 @@
 using namespace std;
 
 #include "constraint_satisfaction_problem.hpp"
-#include "constraint_satisfaction_problem.ipp"
+#include "generate_permutation_csp.hpp"
+#include "generate_permutation_csp.ipp"
 #include "generate_permutation.hpp"
 #include "generate_permutation.ipp"
 
