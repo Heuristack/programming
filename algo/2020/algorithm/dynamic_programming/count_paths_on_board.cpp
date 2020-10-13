@@ -19,20 +19,20 @@ struct space
         for (int i = 0; i < m; i++) dp.push_back(vector<int> (n,0));
     }
 
-    auto compute_num_paths(state s) -> int
+    auto count_paths(state s) -> int
     {
         if (s.i == 0 && s.j == 0) {
             dp[s.i][s.j] = 1;
             return 1;
         }
         if (!dp[s.i][s.j]) {
-            if (s.i == 0) { dp[s.i][s.j] = compute_num_paths(state(s.i,s.j-1)); return dp[s.i][s.j]; }
-            if (s.j == 0) { dp[s.i][s.j] = compute_num_paths(state(s.i-1,s.j)); return dp[s.i][s.j]; }
-            dp[s.i][s.j] = compute_num_paths(state(s.i,s.j-1)) + compute_num_paths(state(s.i-1,s.j));
+            if (s.i == 0) { dp[s.i][s.j] = count_paths(state(s.i,s.j-1)); return dp[s.i][s.j]; }
+            if (s.j == 0) { dp[s.i][s.j] = count_paths(state(s.i-1,s.j)); return dp[s.i][s.j]; }
+            dp[s.i][s.j] = count_paths(state(s.i,s.j-1)) + count_paths(state(s.i-1,s.j));
         }
         return dp[s.i][s.j];
     }
-    auto compute_num_paths() -> int { return compute_num_paths(state(m-1,n-1)); }
+    auto count_paths() -> int { return count_paths(state(m-1,n-1)); }
 
     vector<vector<int>> dp;
     int m = 0;
@@ -52,7 +52,7 @@ ostream & operator << (ostream & strm, space const & s)
 int main()
 {
     space s(5,5);
-    cout << s.compute_num_paths() << endl;
+    cout << s.count_paths() << endl;
     cout << s;
 }
 
