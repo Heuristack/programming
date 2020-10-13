@@ -1,7 +1,7 @@
 auto generate_permutation(vector<int> s, int n) -> vector<vector<int>>
 {
     static vector<vector<int>> permutations;
-    static vector<int> path;
+    static vector<int> path; // note: n-path (track) is n-permutation
 
     if (!n) {
         permutations.push_back(path);
