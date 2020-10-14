@@ -1,3 +1,68 @@
+template type depandency of complete and incomplete type
+--------------------------------------------------------
+```C++
+#include <iostream>
+
+template <typename state_t>
+class order_manager
+{
+public:
+    typedef int internal_type;
+public:
+    typedef state_t state_type;
+//  typedef typename state_type::internal_type state_internal_type; // node : invalid use of incomplete type
+public:
+    order_manager(state_type & s) : s(s) {}
+    state_type & s;
+public:
+    auto hello() -> void
+    {
+        static int n = 0;
+        if (n++ == 815) return;
+        std::cout << "Happy Mid-Autumm Day!" << std::endl;
+        return s.hello();
+    }
+};
+
+template <typename instrument_data_t, typename order_manager_t, typename log_t>
+class state_base
+{
+public:
+    typedef int internal_type;
+public:
+    typedef instrument_data_t instrument_data_type;
+    typedef log_t log_type;
+    typedef order_manager_t order_manager_type;
+    typedef typename order_manager_type::internal_type order_manager_internal_type;
+public:
+    state_base(order_manager_type & om) : om(om) {}
+    order_manager_type & om;
+};
+
+template <typename instrument_data_t, typename log_t>
+class state : public state_base<instrument_data_t,order_manager<state<instrument_data_t,log_t>>,log_t>
+{
+public:
+    typedef int internal_type;
+public:
+    typedef state_base<instrument_data_t,order_manager<state<instrument_data_t,log_t>>,log_t> base_type;
+    typedef typename base_type::order_manager_type order_manager_type;
+    typedef typename base_type::internal_type base_internal_type;
+public:
+    state() : base_type(om),om(*this) {}
+    order_manager_type om;
+public:
+    auto hello() -> void { return om.hello(); }
+};
+
+int main()
+{
+    state<long,char> s;
+    s.hello();
+}
+
+```
+
 We Know Each Other - Happy Mid-Autumn Day
 -----------------------------------------
 ```C++
