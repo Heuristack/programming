@@ -21,39 +21,38 @@ public:
     }
 
 public:
-    virtual auto explore() -> void = 0;
+    auto explore() -> void { explore(node(k++)); }
+    virtual auto explore(node e) -> void = 0;
 
 public:
     recursion(int n, int m) : n(n), m(m) {}
     int k = 0; int n; int m;
 };
 
-class straight_recursion : public recursion
+class implicit_node_generation : public recursion
 {
 public:
     using recursion::recursion;
-    auto explore() -> void override { explore(node(k++)); }
 
 public:
-    auto explore(node e) -> void;
+    auto explore(node e) -> void override;
 };
 
-class generate_recursion : public recursion
+class explicit_node_generation : public recursion
 {
 public:
     using recursion::recursion;
-    auto explore() -> void override { explore(node(k++)); }
 
 public:
+    auto explore(node e) -> void override;
     auto generate(node e) -> vector<node>;
-    auto explore(node e) -> void;
 };
 
 #include "recursion.ipp"
 
 int main()
 {
-    straight_recursion(2,2).explore();
-    generate_recursion(2,2).explore();
+    implicit_node_generation(2,2).recursion::explore();
+    explicit_node_generation(2,2).recursion::explore();
 }
 

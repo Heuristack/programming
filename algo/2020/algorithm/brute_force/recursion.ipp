@@ -1,4 +1,4 @@
-auto straight_recursion::explore(node e) -> void
+auto implicit_node_generation::explore(node e) -> void
 {
     visit(e);
     if (e.d < m) {
@@ -9,7 +9,7 @@ auto straight_recursion::explore(node e) -> void
     }
 }
 
-auto generate_recursion::generate(node e) -> vector<node>
+auto explicit_node_generation::generate(node e) -> vector<node>
 {
     vector<node> v;
     if (e.d < m) {
@@ -21,7 +21,7 @@ auto generate_recursion::generate(node e) -> vector<node>
     return v;
 }
 
-auto generate_recursion::explore(node e) -> void
+auto explicit_node_generation::explore(node e) -> void
 {
     visit(e);
     for (node const & n : generate(e)) {
