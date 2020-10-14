@@ -7,7 +7,7 @@
 
 using namespace std;
 
-auto greedy_changing_coins(vector<int> s, int a) -> vector<pair<int,int>>
+auto greedy_coins_change(vector<int> s, int a) -> vector<pair<int,int>>
 {
     vector<pair<int,int>> changes;
     sort(rbegin(s),rend(s));
@@ -21,7 +21,7 @@ auto greedy_changing_coins(vector<int> s, int a) -> vector<pair<int,int>>
 int main()
 {
     vector<int> coins{1,3,4};
-    auto changes = greedy_changing_coins(coins,6);
+    auto changes = greedy_coins_change(coins,6);
     cout << accumulate(begin(changes),end(changes),0,[](auto const & a, auto const & i) {
         return a + get<1>(i);
     }) << endl;

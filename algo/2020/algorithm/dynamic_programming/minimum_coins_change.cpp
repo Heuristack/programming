@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int minimum_changing_coins(vector<int> coins, int a)
+int minimum_coins_change(vector<int> coins, int a)
 {
     vector<vector<int>> dp(coins.size() + 1);
     for (auto & v : dp) v.resize(a + 1, 0);
@@ -29,7 +29,7 @@ int main()
     vector<int> coins1 = {1,2,5};
     vector<int> coins2 = {1,3,4};
     auto amount = 6;
-    cout << minimum_changing_coins(coins1,amount) << endl;
-    cout << minimum_changing_coins(coins2,amount) << endl;
+    cout << minimum_coins_change(coins1,amount) << endl;
+    cout << minimum_coins_change(coins2,amount) << endl;
 }
 

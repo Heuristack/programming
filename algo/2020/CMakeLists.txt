@@ -34,15 +34,15 @@ add_executable(queue structure/queue/queue.cpp)
 add_executable(brute_force algorithm/brute_force/generate_powerset.cpp)
 add_executable(backtracking algorithm/backtracking/generate_permutation.cpp)
 add_executable(branch_n_bound algorithm/branch_n_bound/knapsack.cpp)
-add_executable(divide_n_conquer algorithm/divide_n_conquer/recursion.cpp)
-add_executable(dynamic_programming algorithm/dynamic_programming/dynamic_coin_changing.cpp)
-add_executable(greedy_strategy algorithm/greedy_strategy/greedy_coin_changing.cpp)
+add_executable(divide_n_conquer algorithm/divide_n_conquer/maximum_subarray.cpp)
+add_executable(dynamic_programming algorithm/dynamic_programming/minimum_coins_change.cpp)
+add_executable(greedy_strategy algorithm/greedy_strategy/greedy_coins_change.cpp)
 
 #
 # 03 Searching - BT
 #
 add_executable(binary_search searching/binary_search/binary_search.cpp)
-add_executable(binary_search_tree_search searching/binary_search_tree_search/search.cpp)
+add_executable(binary_search_tree searching/binary_search_tree/binary_search_tree.cpp)
 
 #
 # 04 Sorting - ISBHMQ
