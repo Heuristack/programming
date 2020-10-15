@@ -7,20 +7,19 @@ using namespace std;
 
 int main()
 {
-    using node_type = node<char>;
-    node_type * a = new node_type('A');
-    node_type * b = new node_type('B');
-    node_type * c = new node_type('C');
-    node_type * d = new node_type('D');
-    node_type * e = new node_type('E');
+    using node_t = node<char>;
+    auto * a = new node_t('A');
+    auto * b = new node_t('B');
+    auto * c = new node_t('C');
+    auto * d = new node_t('D');
+    auto * e = new node_t('E');
     link(a,b);
     link(b,c);
     link(c,d);
     link(d,e);
     link(e,c);
-    auto list = a;
     cout << size(d) << endl;
-    cout << *next(a,0) << *next(a,1) << *next(a,2) << *next(a,12) << endl;
-    if (auto * x = has_cycle(a); x) cout << (*x) << endl;
+    cout << next(a,0) << next(a,1) << next(a,2) << next(a,12) << endl;
+    if (auto * x = has_cycle(a); x) cout << x << endl;
 }
 

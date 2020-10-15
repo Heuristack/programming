@@ -9,15 +9,17 @@ using namespace std;
 int main()
 {
     auto list = create_list<int>({3,1,4,1,5,9});
-    traverse(list,[](auto const & data){ cout << data; });
-    cout << endl;
+    auto show = [](auto list){
+        cout << "["; traverse(list,[](auto n){ cout << n; }); cout << "]" << endl;
+    };
+    show(list);
 
-    remove_if(list,[](auto const & data){ return data == 1; });
-    traverse(list,[](auto const & data){ cout << data; });
-    cout << endl;
+    remove_if(list,[](auto const & n){
+        return n->data == 1;
+    });
+    show(list);
 
     delete_list(list);
-    traverse(list,[](auto const & data){ cout << data; });
-    cout << endl;
+    show(list);
 }
 

@@ -22,17 +22,17 @@ auto remove_if(list_t & head, pred_t pred) -> void
 {
     if (!head) return;
     assert(head);
-    while (head && pred(head->data)) {
+    while (head && pred(head)) {
         auto x = head;
         head = head->next;
         delete x;
     }
     if (!head) return;
-    assert(head && !pred(head->data));
+    assert(head && !pred(head));
     auto prev_node = head;
     auto this_node = head->next;
     while (this_node) {
-        if (pred(this_node->data)) {
+        if (pred(this_node)) {
             prev_node->next = this_node->next;
             delete this_node;
             this_node = prev_node->next;
@@ -54,7 +54,7 @@ template <typename list_t, typename func_t>
 auto traverse(list_t const & head, func_t func) -> void
 {
     for (auto i = head; i != nullptr; i = i->next) {
-        func(i->data);
+        func(i);
     }
 }
 
