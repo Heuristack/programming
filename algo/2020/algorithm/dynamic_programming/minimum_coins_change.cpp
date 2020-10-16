@@ -7,8 +7,8 @@ using namespace std;
 
 int minimum_coins_change(vector<int> coins, int a)
 {
-    vector<vector<int>> dp(coins.size() + 1);
-    for (auto & v : dp) v.resize(a + 1, 0);
+    vector<vector<int>> dp(coins.size()+1,vector<int>(a+1,0));
+
     for (auto i = 1u; i < a + 1; i++) {
         dp[0][i] = numeric_limits<int>::max();
     }
@@ -21,6 +21,7 @@ int minimum_coins_change(vector<int> coins, int a)
             dp[i][j] = min(dp[i][j-coins[i-1]] + 1, dp[i-1][j]);
         }
     }
+
     return dp[coins.size()][a];
 }
 
