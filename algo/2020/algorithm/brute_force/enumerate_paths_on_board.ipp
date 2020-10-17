@@ -58,6 +58,7 @@ public:
 
     auto explore(state_type i, state_type g) -> int
     {
+        // note : explicit goal state instead of goal condition -> bidirection search
         init = i; goal = g; return backtrack(init);
     }
 
