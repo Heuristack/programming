@@ -72,4 +72,5 @@ int main()
     u(4,3)(3,8)(6,5)(9,4)(2,1)(8,9)(5,0)(7,2)(6,1)(1,0)(6,7);
     std::cout << u.count() << std::endl;
 }
+// Sedgewick, R. and Wayne, K., 2011. Algorithms. Addison-wesley professional. Section 1.5, pp.220
 
