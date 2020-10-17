@@ -38,9 +38,7 @@ public:
     auto backtrack(state_type s) -> int
     {
         states.insert(s);
-
         path.push_back(s);
-
         if (is_goal(s)) {
             for (auto const & s : path) {
                 cout << s;
@@ -48,7 +46,6 @@ public:
             cout << endl;
             w++;
         }
-
         for (auto const & s : expand(s)) {
             backtrack(s);
         }
