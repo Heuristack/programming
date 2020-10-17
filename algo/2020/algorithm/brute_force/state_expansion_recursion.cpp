@@ -49,7 +49,7 @@ public:
     auto explore(node e) -> void override;
 };
 
-#include "exploration_recursion.ipp"
+#include "state_expansion_recursion.ipp"
 
 int main()
 {
