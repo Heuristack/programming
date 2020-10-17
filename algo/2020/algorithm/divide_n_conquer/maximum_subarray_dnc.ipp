@@ -38,3 +38,5 @@ auto maximum_subarray(iterator p, iterator r)
     return make_tuple(mlower,mupper,mmaxsum);
 }
 
+// Cormen, T.H., Leiserson, C.E., Rivest, R.L. and Stein, C., 2009. Introduction to algorithms. MIT press. 4.1
+
