@@ -44,11 +44,12 @@ public:
     using recursion::recursion;
 
 public:
-    auto explore(node e) -> void override;
     auto generate(node e) -> vector<node>;
+public:
+    auto explore(node e) -> void override;
 };
 
-#include "recursion.ipp"
+#include "exploration_recursion.ipp"
 
 int main()
 {
