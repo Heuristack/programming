@@ -1,16 +1,28 @@
-#include <iostream>
+#include <algorithm>
 #include <vector>
 #include <limits>
-#include <algorithm>
+#include <tuple>
+#include <iostream>
+#include <iterator>
 
 using namespace std;
 
-#include "kadane.ipp"
+#include "maximum_subarray_kadane.ipp"
+#include "maximum_subarray_dnc.ipp"
 
 int main()
 {
-    cout << kadane({5,-7,3,5,-2,4,-1}) << endl;
-    cout << kadane({-2,1,2}) << endl;
-    cout << kadane({-2}) << endl;
+    vector<vector<int>> vv = {
+        {13,-3,-25,20,-3,-16,-23,18,20,-7,12,-5,-22,15,-4,7},
+        {5,-7,3,5,-2,4,-1},
+        {-2,1,2},
+        {-2}
+    };
+    for (auto const & v : vv) {
+        cout << get<2>(maximum_subarray(begin(v),end(v)));
+        cout << "=";
+        cout << maximum_subarray_kadane(v);
+        cout << endl;
+    }
 }
 

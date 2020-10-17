@@ -1,4 +1,4 @@
-auto kadane(vector<int> a) {
+auto maximum_subarray_kadane(vector<int> a) {
     int max_ending = 0;
     int max_slice = 0;
     for (auto const & e : a) {
