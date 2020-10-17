@@ -10,6 +10,7 @@ public:
     state_space_model() = default;
 
 public:
+    virtual auto is_goal(state_type s) -> bool { return s == goal; }
     virtual auto visit(state_type) -> void {}
     virtual auto next(state_type s, operate_type o) -> optional<state_type> = 0;
 
@@ -29,7 +30,7 @@ public:
     virtual auto search(state_type s) -> void
     {
         visit(s);
-        if (s == goal) return;
+        if (is_goal(s)) return;
         for (auto const & s : expand(s)) {
             search(s);
         }

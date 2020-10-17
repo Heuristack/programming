@@ -41,7 +41,7 @@ public:
 
         path.push_back(s);
 
-        if (s == goal) {
+        if (is_goal(s)) {
             for (auto const & s : path) {
                 cout << s;
             }
