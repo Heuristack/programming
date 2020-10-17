@@ -60,7 +60,11 @@ struct state
     int j = 0;
 
     bool operator == (state const & that) const { return (this->i == that.i) && (this->j == that.j); }
-    bool operator  < (state const & that) const { return (this->i  < that.i) || (this->j  < that.j); }
+    bool operator  < (state const & that) const
+    {
+        if (this->i == that.i) return (this->j < that.j);
+        else return (this->i  < that.i);
+    }
 };
 ostream & operator << (ostream & strm, state const & s) { return strm << "(" << s.i << "," << s.j << ")"; }
 
@@ -131,12 +135,7 @@ int main()
 {
     board b(5,5);
     cout << b.explore({0,0},{4,4}) << endl;
-    cout << b.states.size() << endl;
     for (auto const & s : b.states) cout << s << endl;
-    set<state> s;
-    s.insert({2,1});
-    s.insert({2,1});
-    s.insert({2,1});
-    cout << s.size() << endl;
+    cout << b.states.size() << endl;
 }
 

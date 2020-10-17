@@ -1,7 +1,7 @@
 template <typename item_type> using vector_type = vector<item_type>;
 
 template <typename item_type>
-ostream & operator<<(ostream & s, vector_type<item_type> const & subset) { s << "{"; for (auto const & item : subset) s << item; s << "}"; return s; }
+ostream & operator <<(ostream & s, vector_type<item_type> const & subset) { s << "{"; for (auto const & item : subset) s << item; s << "}"; return s; }
 
 template <typename item_type>
 auto aggregate_subset(vector_type<item_type> subset) -> item_type
