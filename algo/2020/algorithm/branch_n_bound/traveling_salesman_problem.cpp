@@ -9,7 +9,7 @@ constexpr auto mi = numeric_limits<int>::min();
 constexpr auto mx = numeric_limits<int>::max();
 constexpr auto n = 6;
 
-vector<vector<int>> cost = {
+vector<vector<int>> cost_matrix = {
     {mx,27,43,16,30,26},
     { 7,mx,16, 1,30,25},
     {20,13,mx,35, 5, 0},
@@ -17,26 +17,37 @@ vector<vector<int>> cost = {
     {12,46,27,48,mx, 5},
     {23, 5, 5, 9, 5,mx},
 };
-auto show(vector<vector<int>> const & cost)
+auto show(vector<vector<int>> const & matrix)
 {
     for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
-        if (cost[i][j] == mx) {
+        if (matrix[i][j] == mx) {
             cout << "+-,";
             continue;
         }
         cout << setw(2)
         << setfill('0')
-        << cost[i][j]
+        << matrix[i][j]
         << ",";
     }   cout << endl;
     }
 }
+auto cost(vector<int> path) -> int
+{
+    path.push_back(1);
+    int path_cost = 0;
+    for (int i = 0; i < path.size() - 1; i++) {
+        path_cost += cost_matrix[path[i]-1][path[i+1]-1];
+    }
+    return path_cost;
+}
 
 struct node
 {
+    node(vector<int> p, vector<int> c): path(p),cans(c) {}
+    node() = default;
     vector<int> path;
-    vector<int> cans = {1,2,3}; // todo
+    vector<int> cans;
 };
 auto show(vector<int> const & v)
 {
@@ -67,9 +78,18 @@ auto generate(node const & e) -> vector<node>
     }
     return v;
 }
+
+vector<int> min_cost_path;
+int min_cost = mx;
+
 auto explore(node const & e) -> void
 {
-    show(e);
+    if (e.cans.empty()) {
+        if (auto path_cost = cost(e.path); path_cost < min_cost) {
+            min_cost = path_cost;
+            min_cost_path = e.path;
+        }
+    }
     for (auto const & n : generate(node(e))) {
         explore(n);
     }
@@ -77,6 +97,9 @@ auto explore(node const & e) -> void
 
 int main()
 {
-    explore(node());
+    explore(node({1},{2,3,4,5,6}));
+    show(min_cost_path);
+    cout << " = ";
+    cout << min_cost << endl;
 }
 
