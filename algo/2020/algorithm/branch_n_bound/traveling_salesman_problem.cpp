@@ -9,7 +9,7 @@ constexpr auto mi = numeric_limits<int>::min();
 constexpr auto mx = numeric_limits<int>::max();
 constexpr auto n = 6;
 
-vector<vector<int>> cost_matrix = {
+vector<vector<int>> cm = {
     {mx,27,43,16,30,26},
     { 7,mx,16, 1,30,25},
     {20,13,mx,35, 5, 0},
@@ -37,9 +37,42 @@ auto cost(vector<int> path) -> int
     path.push_back(1);
     int path_cost = 0;
     for (int i = 0; i < path.size() - 1; i++) {
-        path_cost += cost_matrix[path[i]-1][path[i+1]-1];
+        path_cost += cm[path[i]-1][path[i+1]-1];
     }
     return path_cost;
+}
+auto reduce(vector<vector<int>> & matrix) -> int
+{
+    int reduced = 0;
+    for (int i = 0; i < n; i++) {
+        int min = mx;
+        for (int j = 0; j < n; j++) {
+            if (matrix[i][j] < min) {
+                min = matrix[i][j];
+            }
+        }
+        for (int j = 0; j < n; j++) {
+            if (matrix[i][j] != mx) {
+                matrix[i][j] -= min;
+            }
+        }
+        reduced += min;
+    }
+    for (int j = 0; j < n; j++) {
+        int min = mx;
+        for (int i = 0; i < n; i++) {
+            if (matrix[i][j] < min) {
+                min = matrix[i][j];
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (matrix[i][j] != mx) {
+                matrix[i][j] -= min;
+            }
+        }
+        reduced += min;
+    }
+    return reduced;
 }
 
 struct node
@@ -101,5 +134,8 @@ int main()
     show(min_cost_path);
     cout << " = ";
     cout << min_cost << endl;
+    show(cm);
+    cout << reduce(cm) << endl;
+    show(cm);
 }
 
