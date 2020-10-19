@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <vector>
 #include <limits>
+#include <utility>
 
 using namespace std;
 
@@ -74,6 +75,71 @@ auto reduce(vector<vector<int>> & matrix) -> int
     }
     return reduced;
 }
+auto make(vector<vector<int>> const & m)
+{
+    return vector<vector<int>>(m);
+}
+auto exclude(vector<vector<int>> & m, int i, int j) -> vector<vector<int>> &
+{
+    m[i][j] = mx;
+    return m;
+}
+auto include(vector<vector<int>> & m, int i, int j) -> vector<vector<int>> &
+{
+    for (int k = 0; k < n; k++) {
+        m[i][k] = mx;
+        m[k][j] = mx;
+    }
+    return m;
+}
+auto theta(vector<vector<int>> const & m, int i, int j) -> int
+{
+    int min, tht = 0;
+    min = mx;
+    for (int k = 0; k < n; k++) {
+        if (k == j) continue;
+        if (m[i][k] < min) {
+            min = m[i][k];
+        }
+    }
+    tht += min;
+    min = mx;
+    for (int k = 0; k < n; k++) {
+        if (k == i) continue;
+        if (m[k][j] < min) {
+            min = m[k][j];
+        }
+    }
+    tht += min;
+    return tht;
+}
+auto theta_matrix(vector<vector<int>> const & m) -> vector<vector<int>>
+{
+    vector<vector<int>> t(n,vector<int>(n,0));
+    for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+        t[i][j] = theta(m,i,j);
+    }
+    }
+    return t;
+}
+
+auto maximum(vector<vector<int>> const & m) -> pair<int,int>
+{
+    int max_i = 0;
+    int max_j = 0;
+    int max = mi;
+    for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+        if (m[i][j] > max) {
+            max = m[i][j];
+            max_i = i;
+            max_j = j;
+        }
+    }
+    }
+    return {max_i,max_j};
+}
 
 struct node
 {
@@ -130,12 +196,36 @@ auto explore(node const & e) -> void
 
 int main()
 {
+    // brute-force
     explore(node({1},{2,3,4,5,6}));
     show(min_cost_path);
     cout << " = ";
     cout << min_cost << endl;
+
+    // branch-bound
     show(cm);
     cout << reduce(cm) << endl;
     show(cm);
+
+    cout << "theta matrix" << endl;
+    auto tm = theta_matrix(cm);
+    show(tm);
+    auto [i,j] = maximum(tm);
+    cout << "(" << i+1 << "," << j+1 << ")" << endl;
+
+    cout << "exclude" << endl;
+    auto am = make(cm);
+    exclude(am,1-1,4-1);
+    show(am);
+    cout << reduce(am) << endl;
+    show(am);
+
+    cout << "include" << endl;
+    auto bm = make(cm);
+    include(bm,1-1,4-1);
+    exclude(bm,4-1,1-1);
+    show(bm);
+    cout << reduce(bm) << endl;
+    show(bm);
 }
 
