@@ -41,6 +41,7 @@ add_executable(dynamic_programming algorithm/dynamic_programming/minimum_coins_c
 add_executable(greedy_strategy algorithm/greedy_strategy/greedy_coins_change.cpp)
 
 add_executable(board_explore algorithm/brute_force/enumerate_paths_on_board.cpp)
+add_executable(traveling_salesman_problem algorithm/branch_n_bound/tsp.cpp)
 
 #
 # 03 Searching - BT
