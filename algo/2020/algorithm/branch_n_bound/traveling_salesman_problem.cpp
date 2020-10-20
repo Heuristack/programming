@@ -57,7 +57,9 @@ auto reduce(vector<vector<int>> & matrix) -> int
                 matrix[i][j] -= min;
             }
         }
-        reduced += min;
+        if (min != mx) {
+            reduced += min;
+        }
     }
     for (int j = 0; j < n; j++) {
         int min = mx;
@@ -71,7 +73,9 @@ auto reduce(vector<vector<int>> & matrix) -> int
                 matrix[i][j] -= min;
             }
         }
-        reduced += min;
+        if (min != mx) {
+            reduced += min;
+        }
     }
     return reduced;
 }
@@ -123,7 +127,6 @@ auto theta_matrix(vector<vector<int>> const & m) -> vector<vector<int>>
     }
     return t;
 }
-
 auto maximum(vector<vector<int>> const & m) -> pair<int,int>
 {
     int max_i = 0;
@@ -223,9 +226,17 @@ int main()
     cout << "include" << endl;
     auto bm = make(cm);
     include(bm,1-1,4-1);
+    cout << reduce(bm) << endl;
     exclude(bm,4-1,1-1);
     show(bm);
     cout << reduce(bm) << endl;
     show(bm);
+
+    cout << "exclude" << endl;
+    auto dm = make(bm);
+    exclude(dm,2-1,1-1);
+    show(dm);
+    cout << reduce(dm) << endl;
+    show(dm);
 }
 
