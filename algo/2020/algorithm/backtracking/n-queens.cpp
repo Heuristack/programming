@@ -35,10 +35,6 @@ ostream & operator << (ostream & s, board<element_t> const & b)
     return s;
 }
 
-template <typename element_t = int>
-auto is_diag_ok(board<element_t> const & b)
-{}
-
 class queen
 {
 public:
