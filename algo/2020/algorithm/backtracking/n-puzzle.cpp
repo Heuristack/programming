@@ -26,14 +26,29 @@ auto make(vector<vector<int>> m) -> node
     return b;
 }
 
+static auto goal = make({
+    {0,1,2},
+    {3,4,5},
+    {6,7,8},
+});
+
 auto is_goal(node const & e) -> bool
 {
-    static auto goal = make({
-        {0,1,2},
-        {3,4,5},
-        {6,7,8},
-    });
     return (e == goal);
+}
+
+auto hamming(node const & e) -> int
+{
+    int value = 0;
+    for (int i = 0; i < e.n; i++) {
+    for (int j = 0; j < e.n; j++) {
+        if (e[i][j] != 0 &&
+            e[i][j] != goal[i][j]) {
+            value++;
+        }
+    }
+    }
+    return value;
 }
 
 auto locate(node const & b, int x = 0) -> pair<int,int>
@@ -68,20 +83,19 @@ auto generate(node const & b) -> vector<node>
         swap(n[i][j],n[p][q]);
         v.push_back(n);
     }
+    sort(begin(v),end(v),[](auto const & a, auto const & b) { return hamming(a) < hamming(b); });
     return v;
 }
 
-auto show(vector<node> const & path)
+auto show(vector<node> const & v)
 {
-    for (auto const & e : path) {
+    for (auto const & e : v) {
         cout << e;
-        cout << "->" << endl;
     }
 }
 
 auto explore(node const & e) -> bool
 {
-    cout << e;
     static vector<node> path = {e};
     static vector<node> c;
     c.push_back(e);
