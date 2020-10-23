@@ -2,6 +2,7 @@
 #include <vector>
 #include <set>
 #include <utility>
+#include <cmath>
 
 using namespace std;
 
@@ -37,6 +38,18 @@ auto is_goal(node const & e) -> bool
     return (e == goal);
 }
 
+auto locate(node const & b, int x = 0) -> pair<int,int>
+{
+    for (int i = 0; i < b.n; i++) {
+    for (int j = 0; j < b.n; j++) {
+        if (b[i][j] == x) {
+            return {i,j};
+        }
+    }
+    }
+    return {0,0};
+}
+
 auto hamming(node const & e) -> int
 {
     int value = 0;
@@ -51,16 +64,18 @@ auto hamming(node const & e) -> int
     return value;
 }
 
-auto locate(node const & b, int x = 0) -> pair<int,int>
+auto manhattan(node const & e) -> int
 {
-    for (int i = 0; i < b.n; i++) {
-    for (int j = 0; j < b.n; j++) {
-        if (b[i][j] == x) {
-            return {i,j};
+    auto value = 0;
+    for (auto i = 0; i < e.n; i++) {
+    for (auto j = 0; j < e.n; j++) {
+        if (auto g = goal[i][j]; g != 0) {
+            auto [p,q] = locate(e,g);
+            value += abs(p-i) + abs(q-j);
         }
     }
     }
-    return {0,0};
+    return value;
 }
 
 auto generate(int i, int j, int n) -> vector<pair<int,int>>
@@ -83,7 +98,8 @@ auto generate(node const & b) -> vector<node>
         swap(n[i][j],n[p][q]);
         v.push_back(n);
     }
-    sort(begin(v),end(v),[](auto const & a, auto const & b) { return hamming(a) < hamming(b); });
+//  sort(begin(v),end(v),[](auto const & a, auto const & b) { return hamming(a) < hamming(b); });
+    sort(begin(v),end(v),[](auto const & a, auto const & b) { return manhattan(a) < manhattan(b); });
     return v;
 }
 
