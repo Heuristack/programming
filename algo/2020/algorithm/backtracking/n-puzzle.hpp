@@ -45,11 +45,7 @@ public:
             : d(d),i(i),g(g),a(a),b(b) {}
 
 public:
-    double operator()(node const & e) const
-    {
-        if (e == g) return 0.0;
-        return a * d(e,i) + b * d(e,g);
-    }
+    double operator()(node const & e) const { return a * d(e,i) + b * d(e,g); }
     operator bool () const { return d != nullptr; }
 
 public:

@@ -40,6 +40,9 @@ public:
     auto explore(node const & e) -> bool;
 
 public:
+    bool is_goal(node const & e) { return h.g == e; }
+
+public:
     heuristic_type h;
     vector<node> path;
     vector<node> c;
@@ -50,7 +53,7 @@ auto puzzle<distance>::explore(node const & e) -> bool
 {
     path.push_back(e);
     c.push_back(e);
-    if (!h(e)) {
+    if (is_goal(e)) {
 //      cout << path.back();
         cout << path.size();
         cout << endl;
