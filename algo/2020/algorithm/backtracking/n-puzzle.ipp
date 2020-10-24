@@ -46,14 +46,14 @@ public:
 public:
     heuristic_type h;
     vector<node> path;
-    vector<node> c;
+    vector<node> close;
 };
 
 template <typename distance>
 auto puzzle<distance>::explore(node const & e) -> bool
 {
+    close.push_back(e);
     path.push_back(e);
-    c.push_back(e);
     if (is_goal(e)) {
 //      cout << path.back();
         cout << path.size();
@@ -61,7 +61,7 @@ auto puzzle<distance>::explore(node const & e) -> bool
         return 1;
     }
     for (auto const & n : generate(e,h)) {
-        if (find(begin(c),end(c),n) != end(c))
+        if (find(begin(close),end(close),n) != end(close))
             continue;
         if (explore(n)) return 1;
     }
