@@ -42,7 +42,7 @@ class heuristic
 {
 public:
     heuristic(distance d, node i, node g, double a, double b)
-            : d(d),i(i),g(g),a(a),b(b) {}
+    : d(d),i(i),g(g),a(a),b(b) {}
 
 public:
     double operator()(node const & e) const { return a * d(e,i) + b * d(e,g); }
