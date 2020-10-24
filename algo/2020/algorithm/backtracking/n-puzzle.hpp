@@ -37,3 +37,26 @@ auto locate(node const & b, int x = 0) -> pair<int,int>
     return {0,0};
 }
 
+template <typename distance>
+class heuristic
+{
+public:
+    heuristic(distance d, node i, node g, double a, double b)
+            : d(d),i(i),g(g),a(a),b(b) {}
+
+public:
+    double operator()(node const & e) const
+    {
+        if (e == g) return 0.0;
+        return a * d(e,i) + b * d(e,g);
+    }
+    operator bool () const { return d != nullptr; }
+
+public:
+    distance d = nullptr;
+    node i;
+    node g;
+    double a;
+    double b;
+};
+

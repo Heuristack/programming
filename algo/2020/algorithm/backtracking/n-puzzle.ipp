@@ -26,14 +26,32 @@ auto generate(node const & b, heuristic h) -> vector<node>
     return v;
 }
 
-template <typename heuristic>
-auto explore(node const & e, heuristic h) -> bool
+template <typename distance>
+class puzzle
 {
-    static vector<node> path = {e};
-    static vector<node> c;
+public:
+    typedef heuristic<distance> heuristic_type;
+public:
+    puzzle(distance d, node i, node g, double a, double b)
+    : h(d,i,g,a,b) {}
+
+public:
+    auto explore() -> bool { return explore(h.i); }
+    auto explore(node const & e) -> bool;
+
+public:
+    heuristic_type h;
+    vector<node> path;
+    vector<node> c;
+};
+
+template <typename distance>
+auto puzzle<distance>::explore(node const & e) -> bool
+{
+    path.push_back(e);
     c.push_back(e);
     if (!h(e)) {
-        cout << path.back();
+//      cout << path.back();
         cout << path.size();
         cout << endl;
         return 1;
@@ -41,10 +59,9 @@ auto explore(node const & e, heuristic h) -> bool
     for (auto const & n : generate(e,h)) {
         if (find(begin(c),end(c),n) != end(c))
             continue;
-        path.push_back(n);
-        if (explore(n,h)) return 1;
-        path.pop_back();
+        if (explore(n)) return 1;
     }
+    path.pop_back();
     return 0;
 }
 

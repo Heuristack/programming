@@ -9,25 +9,12 @@ using namespace std;
 
 #include "board.hpp"
 #include "n-puzzle.hpp"
+#include "distance.ipp"
 #include "n-puzzle.ipp"
-#include "heuristics.ipp"
-
-template <typename distance>
-class puzzle
-{
-public:
-    puzzle(distance d, node i, node g, double a, double b)
-    : h(d,i,g,a,b) {}
-
-public:
-    auto explore() -> bool { return ::explore(h.i,h); }
-
-public:
-    heuristic<distance> h;
-};
 
 int main()
 {
+    for (int i = 0; i < 10; i++)
     puzzle(manhattan,
     make({
         {8,1,3},
@@ -39,6 +26,6 @@ int main()
         {3,4,5},
         {6,7,8},
     }),
-    1,5).explore();
+    1,i).explore();
 }
 
