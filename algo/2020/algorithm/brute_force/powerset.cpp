@@ -40,7 +40,7 @@ struct optimized : execution
     auto run() -> void override { cout << "optimized: "; return execution::run(); }
 };
 
-#include "generate_powerset.ipp"
+#include "powerset.ipp"
 
 int main()
 {

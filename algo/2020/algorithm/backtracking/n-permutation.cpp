@@ -6,10 +6,10 @@
 using namespace std;
 
 #include "constraint_satisfaction_problem.hpp"
-#include "generate_permutation_csp.hpp"
-#include "generate_permutation_csp.ipp"
-#include "generate_permutation.hpp"
-#include "generate_permutation.ipp"
+#include "n-permutation_csp.hpp"
+#include "n-permutation_csp.ipp"
+#include "n-permutation.hpp"
+#include "n-permutation.ipp"
 
 template <typename type>
 ostream & operator << (ostream & strm, vector<type> const v) {
