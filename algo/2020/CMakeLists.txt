@@ -33,8 +33,8 @@ add_executable(cyclic_list structure/linked_list/cyclic_list.cpp)
 #
 # 02 Algo Techniques - BBBDDG
 #
-add_executable(brute_force algorithm/brute_force/generate_powerset.cpp)
-add_executable(backtracking algorithm/backtracking/generate_permutation.cpp)
+add_executable(brute_force algorithm/brute_force/powerset.cpp)
+add_executable(backtracking algorithm/backtracking/n-permutation.cpp)
 add_executable(branch_n_bound algorithm/branch_n_bound/knapsack.cpp)
 add_executable(divide_n_conquer algorithm/divide_n_conquer/maximum_subarray.cpp)
 add_executable(dynamic_programming algorithm/dynamic_programming/minimum_coins_change.cpp)
@@ -42,6 +42,8 @@ add_executable(greedy_strategy algorithm/greedy_strategy/greedy_coins_change.cpp
 
 add_executable(board_explore algorithm/brute_force/enumerate_paths_on_board.cpp)
 add_executable(traveling_salesman_problem algorithm/branch_n_bound/tsp.cpp)
+add_executable(n-queens algorithm/backtracking/n-queens.cpp)
+add_executable(n-puzzle algorithm/backtracking/n-puzzle.cpp)
 
 #
 # 03 Searching - BT
