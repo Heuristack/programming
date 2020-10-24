@@ -38,6 +38,7 @@ public:
 public:
     auto explore() -> bool { return explore(h.i); }
     auto explore(node const & e) -> bool;
+    auto search(node const & e) -> bool;
 
 public:
     bool is_goal(node const & e) { return h.g == e; }

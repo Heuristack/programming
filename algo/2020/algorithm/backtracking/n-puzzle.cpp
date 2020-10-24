@@ -11,6 +11,7 @@ using namespace std;
 #include "n-puzzle.hpp"
 #include "distance.ipp"
 #include "n-puzzle.ipp"
+#include "n-puzzle_search.ipp"
 
 int main()
 {
