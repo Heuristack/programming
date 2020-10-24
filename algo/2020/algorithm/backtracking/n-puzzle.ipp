@@ -32,8 +32,10 @@ auto explore(node const & e, heuristic h) -> bool
     static vector<node> path = {e};
     static vector<node> c;
     c.push_back(e);
-    if (is_goal(e)) {
-        cout << path;
+    if (!h(e)) {
+        cout << path.back();
+        cout << path.size();
+        cout << endl;
         return 1;
     }
     for (auto const & n : generate(e,h)) {

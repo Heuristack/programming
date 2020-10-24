@@ -3,7 +3,7 @@ class node : public board<int>
 public:
     typedef board<int> base_type;
 public:
-    node(int n): base_type(n) {}
+    node(int n) : base_type(n) {}
 };
 
 ostream & operator << (ostream & s, vector<node> const & v)
@@ -35,16 +35,5 @@ auto locate(node const & b, int x = 0) -> pair<int,int>
     }
     }
     return {0,0};
-}
-
-static auto goal = make({
-    {0,1,2},
-    {3,4,5},
-    {6,7,8},
-});
-
-auto is_goal(node const & e) -> bool
-{
-    return (e == goal);
 }
 
