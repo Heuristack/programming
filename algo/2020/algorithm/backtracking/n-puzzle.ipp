@@ -30,14 +30,17 @@ template <typename distance>
 class puzzle
 {
 public:
+    typedef puzzle<distance> this_type;
     typedef heuristic<distance> heuristic_type;
 public:
     puzzle(distance d, node i, node g, double a, double b)
     : h(d,i,g,a,b) {}
+    auto reset() -> this_type & { path.clear(); close.clear(); return *this; }
 
 public:
     auto explore() -> bool { return explore(h.i); }
     auto explore(node const & e) -> bool;
+    auto search() -> bool { return search(h.i); }
     auto search(node const & e) -> bool;
 
 public:
@@ -48,24 +51,4 @@ public:
     vector<node> path;
     vector<node> close;
 };
-
-template <typename distance>
-auto puzzle<distance>::explore(node const & e) -> bool
-{
-    close.push_back(e);
-    path.push_back(e);
-    if (is_goal(e)) {
-//      cout << path.back();
-        cout << path.size();
-        cout << endl;
-        return 1;
-    }
-    for (auto const & n : generate(e,h)) {
-        if (find(begin(close),end(close),n) != end(close))
-            continue;
-        if (explore(n)) return 1;
-    }
-    path.pop_back();
-    return 0;
-}
 

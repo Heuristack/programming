@@ -12,13 +12,14 @@ using namespace std;
 #include "n-puzzle.hpp"
 #include "distance.ipp"
 #include "n-puzzle.ipp"
+#include "n-puzzle_explore.ipp"
 #include "n-puzzle_search.ipp"
 
 int main()
 {
     for (int i = 1; i < 10; i++) {
         cout << i << ": ";
-        puzzle(manhattan,
+        puzzle sliding(manhattan,
         make({
             {8,1,3},
             {4,0,2},
@@ -29,7 +30,11 @@ int main()
             {3,4,5},
             {6,7,8},
         }),
-        1,i).explore();
+        1,i);
+        sliding.reset().explore();
+        cout << ":";
+        sliding.reset().search();
+        cout << endl;
     }
 }
 
