@@ -4,6 +4,7 @@ public:
     typedef board<int> base_type;
 public:
     node(int n) : base_type(n) {}
+    node() = default;
 };
 
 ostream & operator << (ostream & s, vector<node> const & v)
@@ -35,6 +36,27 @@ auto locate(node const & b, int x = 0) -> pair<int,int>
     }
     }
     return {0,0};
+}
+
+auto serialize(node const & n) -> vector<int>
+{
+    vector<int> v;
+    for (int i = 0; i < n.n; i++) {
+    for (int j = 0; j < n.n; j++) {
+        v.push_back(n[i][j]);
+    }
+    }
+    return v;
+}
+
+bool operator < (node const & a, node const & b)
+{
+    auto va = serialize(a);
+    auto vb = serialize(b);
+    return lexicographical_compare(
+        begin(va),end(va),
+        begin(vb),end(vb)
+    );
 }
 
 template <typename distance>

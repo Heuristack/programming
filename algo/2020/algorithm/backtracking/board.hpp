@@ -11,6 +11,7 @@ public:
         m(m),n(n) {}
 
     board(int n) : board(n,n) {}
+    board() : board(0) {}
 
 public:
     int m;
