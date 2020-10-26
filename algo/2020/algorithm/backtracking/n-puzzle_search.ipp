@@ -22,7 +22,6 @@ auto puzzle<distance>::search(node const & e) -> bool
         auto u = open.top();
         open.pop();
         close.push_back(u);
-        // note : seems not correct, does close[0...n] form a path?
         if (is_goal(u)) {
             auto track = get_track(parents,u);
             cout << close.size();
