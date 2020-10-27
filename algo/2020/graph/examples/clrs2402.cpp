@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    auto g = graph<node<string>,edge<string,int>>::make_graph<undirected>(clrs2404);
+    auto g = graph<node<string>,edge<string,int>>::make_graph<undirected>(clrs2402);
     auto n = node<string>("S");
     auto v = [](auto const & n){ cout << n; };
 
