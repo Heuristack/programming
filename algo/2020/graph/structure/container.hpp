@@ -1,19 +1,20 @@
 template <typename container>
 struct sequential : container
 {
-    using base_type = container;
-    using value_type = typename base_type::value_type;
+    using value_type = typename container::value_type;
+    using container::container;
+
     auto get() -> value_type
     {
         value_type v;
-        if constexpr (is_same<base_type,stack<value_type>>::value) { v = base_type::top();   }
-        if constexpr (is_same<base_type,queue<value_type>>::value) { v = base_type::front(); }
-        base_type::pop();
+        if constexpr (is_same<container,stack<value_type>>::value) { v = container::top();   }
+        if constexpr (is_same<container,queue<value_type>>::value) { v = container::front(); }
+        container::pop();
         return v;
     }
     auto put(value_type const & v)
     {
-        base_type::push(v);
+        container::push(v);
     }
 };
 template <typename item> using default_stack = sequential<stack<item>>;
@@ -22,6 +23,7 @@ template <typename item> using default_queue = sequential<queue<item>>;
 template <typename container>
 struct insertable : container
 {
+    using container::container;
     auto insert(typename container::value_type const & v) { return container::push_back(v); }
 };
 template <typename item> using default_list = insertable<list<item>>;
@@ -29,6 +31,7 @@ template <typename item> using default_list = insertable<list<item>>;
 template <typename container>
 struct searchable : container
 {
+    using container::container;
     auto contains(typename container::key_type const & k) const { return container::find(k) != container::end(); } // note : C++20 feature!
     auto get(typename container::key_type & k) -> typename container::value_type & { return *container::find(k); }
 };
