@@ -11,6 +11,7 @@
 #include <initializer_list>
 #include <variant>
 #include <functional>
+#include <iterator>
 
 namespace {
 
@@ -20,8 +21,14 @@ using namespace std;
 #include "structure/edge.hpp"
 #include "structure/container.hpp"
 #include "structure/graph.hpp"
-#include "stream/stream.hpp"
+
+#include "stream/node.hpp"
+#include "stream/edge.hpp"
+#include "stream/container.hpp"
+#include "stream/graph.hpp"
+
 #include "algorithm/search.hpp"
+
 #include "data_set/initializers.hpp"
 
 }
