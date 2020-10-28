@@ -1,5 +1,4 @@
-#define IMPLICIT_GRAPH
-#include "graph.h"
+#include "implicit_graph.h"
 
 class implicit_graph : public graph<node<string>,edge<string>>
 {
