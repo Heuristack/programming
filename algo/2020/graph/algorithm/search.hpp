@@ -3,28 +3,28 @@ auto search(graph const & g, typename graph::node_type const & n, visitor const 
 {
     using node = typename graph::node_type;
     using edge = typename graph::edge_type;
-    using weit = typename weight_type<edge>::type;
-    using prop = mixin<node, parent<node>, length<weit>, status, access<>>;
+    using weight = typename weight_type<edge>::type;
+    using prop = mixin<node, parent<node>, length<weight>, status, access<>>;
 
     if (!g.contains(n)) return;
 
     typename access<>::time_type time = 0;
     searchable<map<node,prop>> close;
     close[n] = prop(n);
-    container<node> open;
-    open.put(n);
+    container<prop> open;
+    open.put(close[n]);
     while (!open.empty()) {
-        auto & u = close[open.get()];
+        auto & u = close[static_cast<node>(open.get())];
         u.s = status::expanding;
         u.enter = time++;
         for (auto const & e : const_cast<graph&>(g)[u]) {
             if (auto v = node(e.t); !close.contains(v)) {
-                weit w = {1};
+                weight w = 1;
                 if constexpr (is_weighted<edge>::value) {
                     w = e.w;
                 }
                 close[v] = prop(v.v,u.v,u.l+w,{},{});
-                open.put(v);
+                open.put(close[v]);
             }
         }
         invoke(c,u);
