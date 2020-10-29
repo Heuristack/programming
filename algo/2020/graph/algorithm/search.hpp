@@ -59,7 +59,7 @@ namespace strategies
     };
     template<> struct container<BST>
     {
-        template <typename node> using type = sequential<priority_queue<node,vector<node>,typename node::length_less>>;
+        template <typename node> using type = sequential<priority_queue<node,vector<node>,typename node::length_greater>>;
     };
 }
 
