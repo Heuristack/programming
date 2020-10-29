@@ -23,9 +23,11 @@ template <typename weight>
 struct length
 {
     using weight_type = weight;
+    using this_type = length<weight_type>;
     length(weight_type const & l) : l(l) {}
     length() = default;
     weight_type l{};
+    struct length_less { bool operator () (this_type const & a, this_type const & b) { return a.l > b.l; } };
 };
 
 struct status

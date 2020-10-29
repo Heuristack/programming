@@ -7,8 +7,8 @@ struct sequential : container
     auto get() -> value_type
     {
         value_type v;
-        if constexpr (is_same<container,stack<value_type>>::value) { v = container::top();   }
         if constexpr (is_same<container,queue<value_type>>::value) { v = container::front(); }
+        else { v = container::top(); }
         container::pop();
         return v;
     }

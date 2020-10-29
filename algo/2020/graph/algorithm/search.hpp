@@ -51,11 +51,15 @@ namespace strategies
 {
     enum class DFS;
     enum class BFS;
+    enum class BST;
 
-    template <typename strategy>
-    struct container
+    template <typename strategy> struct container
     {
         template <typename node> using type = sequential<typename conditional<is_same<strategy,strategies::DFS>::value,stack<node>,queue<node>>::type>;
+    };
+    template<> struct container<BST>
+    {
+        template <typename node> using type = sequential<priority_queue<node,vector<node>,typename node::length_less>>;
     };
 }
 
