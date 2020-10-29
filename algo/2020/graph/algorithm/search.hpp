@@ -1,24 +1,29 @@
 template <template <typename> typename container, typename graph, typename visitor>
 auto search(graph const & g, typename graph::node_type const & n, visitor const & c) -> void
 {
-    using base = typename graph::node_type;
-    using node = mixin<base, parent<base>, length<int>, status, access<>>;
+    using node = typename graph::node_type;
+    using edge = typename graph::edge_type;
+    using weit = typename weight_type<edge>::type;
+    using prop = mixin<node, parent<node>, length<weit>, status, access<>>;
 
     if (!g.contains(n)) return;
 
     typename access<>::time_type time = 0;
-    searchable<map<base,node>> close;
-    close[n] = node(n);
-
-    container<base> open;
+    searchable<map<node,prop>> close;
+    close[n] = prop(n);
+    container<node> open;
     open.put(n);
     while (!open.empty()) {
         auto & u = close[open.get()];
         u.s = status::expanding;
         u.enter = time++;
         for (auto const & e : const_cast<graph&>(g)[u]) {
-            if (auto v = base(e.t); !close.contains(v)) {
-                close[v] = node(v,u.v,u.l+1,{},{});
+            if (auto v = node(e.t); !close.contains(v)) {
+                weit w = {1};
+                if constexpr (is_weighted<edge>::value) {
+                    w = e.w;
+                }
+                close[v] = prop(v.v,u.v,u.l+w,{},{});
                 open.put(v);
             }
         }
@@ -36,7 +41,7 @@ auto DFS(graph const & g, typename graph::node_type const & u, visitor const & c
     close.insert(u);
     invoke(c,u);
     for (auto const & e : const_cast<graph&>(g)[u]) {
-        if (auto v = node(e.t); !close.contains(v)) {
+        if (auto v = typename graph::node_type(e.t); !close.contains(v)) {
             DFS(g,v,c);
         }
     }

@@ -30,3 +30,7 @@ template <typename> struct is_weighted {};
 template <typename vertex> struct is_weighted<edge<vertex>> { static bool constexpr value = false; };
 template <typename vertex, typename ... weight> struct is_weighted<edge<vertex,weight...>> { static bool constexpr value = true; };
 
+template <typename> struct weight_type {};
+template <typename vertex> struct weight_type<edge<vertex>> { using type = int; };
+template <typename vertex, typename ... weight> struct weight_type<edge<vertex,weight...>> { using type = typename edge<vertex,weight...>::weight_type; };
+
