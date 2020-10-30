@@ -42,6 +42,7 @@ template <typename time = unsigned>
 struct access
 {
     using time_type = time;
+    access(time_type t) : enter(t),leave(t) {}
     access() = default;
     time_type enter{};
     time_type leave{};

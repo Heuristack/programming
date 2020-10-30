@@ -23,7 +23,7 @@ auto search(graph const & g, typename graph::node_type const & n, visitor const 
                 if constexpr (is_weighted<edge>::value) {
                     w = e.w;
                 }
-                close[v] = prop(v.v,u.v,u.l+w,{},{});
+                close[v] = prop(v.v,u.v,u.l+w,status::discovered,0);
                 open.put(close[v]);
             }
         }
