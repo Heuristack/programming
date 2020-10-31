@@ -1,8 +1,6 @@
-template <template <typename> typename container, typename graph, typename visitor>
-auto search(graph const & g, typename graph::node_type const & n, visitor const & f) -> void
+template <template <typename> typename container, typename graph, typename node = typename graph::node_type, typename edge = typename graph::edge_type, typename visitor>
+auto search(graph const & g, node const & n, visitor const & f) -> void
 {
-    using node = typename graph::node_type;
-    using edge = typename graph::edge_type;
     using weight = typename weight_type<edge>::type;
     using prop = mixin<node, parent<node>, length<weight>, status, access<>>;
 
@@ -34,8 +32,8 @@ auto search(graph const & g, typename graph::node_type const & n, visitor const 
     }
 }
 
-template <typename graph, typename visitor>
-auto DFS(graph const & g, typename graph::node_type const & u, visitor const & c) -> void
+template <typename graph, typename node = typename graph::node_type, typename visitor>
+auto DFS(graph const & g, node const & u, visitor const & c) -> void
 {
     static typename access<>::time_type time = 0;
     static searchable<set<typename graph::node_type>> close;
