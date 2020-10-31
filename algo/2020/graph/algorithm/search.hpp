@@ -25,6 +25,9 @@ auto search(graph const & g, node const & n, visitor const & f) -> void
                 close[v] = prop(v.v,u.v,u.l+w,status::discovered,0);
                 open.put(close[v]);
             }
+            else {
+                // todo : edge classification according to v's status
+            }
         }
         u.s = status::processed;
         u.leave = time++;
@@ -33,19 +36,19 @@ auto search(graph const & g, node const & n, visitor const & f) -> void
 }
 
 template <typename graph, typename node = typename graph::node_type, typename visitor>
-auto DFS(graph const & g, node const & u, visitor const & c) -> void
+auto DFS(graph const & g, node const & u, visitor const & f) -> void
 {
     static typename access<>::time_type time = 0;
     static searchable<set<typename graph::node_type>> close;
     if (!g.contains(u)) return;
     close.insert(u);
-    invoke(c,u,status::expanding,time++);
+    invoke(f,u,status::expanding,time++);
     for (auto const & e : const_cast<graph&>(g)[u]) {
         if (auto v = typename graph::node_type(e.t); !close.contains(v)) {
-            DFS(g,v,c);
+            DFS(g,v,f);
         }
     }
-    invoke(c,u,status::processed,time++);
+    invoke(f,u,status::processed,time++);
 }
 
 namespace strategies

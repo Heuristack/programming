@@ -5,11 +5,16 @@ using namespace std;
 
 int main()
 {
-    auto g = graph<node<string>,edge<string,int>>::make_graph<directed>(clrs2404);
+    auto g = graph<node<string>,edge<string,int>>::make_graph<directed>(clrs2406);
     auto n = node<string>("S");
-    auto v = bellman_ford(g,n);
-    for (auto const & [n,a] : v) {
-        cout << "(" << a.v << ":" << a.p << ") = " << a.l << endl;
-    }
+    auto f = [](auto const & v) {
+        for (auto const & [n,a] : v) {
+            cout << a.v << ":" << a.p
+                 << "=" << a.l << " ";
+        }
+        cout << endl;
+    };
+    f(bellman_ford(g,n));
+    f(dijkstra(g,n));
 }
 

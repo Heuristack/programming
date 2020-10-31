@@ -16,7 +16,9 @@ struct graph : searchable<map<node,set<edge>>>
     template <typename direction>
     graph(initializer_list<edge_type> edges, direction d)
     {
-        for (auto const & e : edges) insert_edge(e,d);
+        for (auto const & e : edges) {
+            insert_edge(e, d);
+        }
     }
 
     template <typename direction>
@@ -52,4 +54,22 @@ struct graph : searchable<map<node,set<edge>>>
     auto insert_edge(edge_type const & e, enum class   directed) { insert_edge(e.s,e); }
     auto insert_edge(edge_type const & e, enum class undirected) { insert_edge(e.s,e); insert_edge(e.t,edge_type{e}.reverse()); }
 };
+
+template <typename graph, typename visitor>
+auto for_each_node(graph const & g, visitor const & f)
+{
+    for (auto const & [n,_] : g) {
+        f(n);
+    }
+}
+
+template <typename graph, typename visitor>
+auto for_each_edge(graph const & g, visitor const & f)
+{
+    for (auto const & [_,v] : g) {
+        for (auto const & e : v) {
+            f(e);
+        }
+    }
+}
 
