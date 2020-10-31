@@ -12,6 +12,7 @@
 #include <variant>
 #include <functional>
 #include <iterator>
+#include <limits>
 
 namespace { using namespace std;
 
