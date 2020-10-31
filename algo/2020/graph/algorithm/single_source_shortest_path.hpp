@@ -50,9 +50,9 @@ auto bellman_ford(graph const & g, node const & n)
     });
 
     for_each_edge(g,[&nodes](auto const & e){
+        if (nodes.empty()) return;
         if (nodes[e.t].l > nodes[e.s].l + e.w) {
             nodes.clear();
-            return;
         }
     });
 
