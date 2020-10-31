@@ -1,3 +1,23 @@
+static initializer_list<edge<string>> clrs2203 = {
+    {"R","V"}, {"R","S"},
+    {"S","W"}, {"W","T"}, {"W","X"},
+    {"T","X"}, {"T","U"}, {"X","U"}, {"X","Y"},
+    {"U","Y"},
+};
+
+static initializer_list<edge<string>> clrs2204 = {
+    {"U","X"}, {"U","V"}, {"X","V"}, {"Y","X"},
+    {"V","Y"},
+    {"W","Y"}, {"W","Z"}, {"Z","Z"},
+};
+
+static initializer_list<edge<string>> clrs2205 = {
+    {"Y","X"}, {"Z","Y"}, {"X","Z"}, {"W","X"},
+    {"Z","W"}, {"S","Z"}, {"S","W"}, {"V","W"},
+    {"V","S"}, {"T","V"}, {"U","V"},
+    {"T","U"},
+};
+
 static initializer_list<edge<string,int>> clrs2301 = {
     {"A","B", 4}, {"A","H", 8},
     {"B","H",11}, {"B","C", 8},
