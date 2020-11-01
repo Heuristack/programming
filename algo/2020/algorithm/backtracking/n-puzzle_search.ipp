@@ -40,3 +40,5 @@ auto puzzle<distance>::search(node const & e) -> bool
     return 0;
 }
 
+// todo : add bidirectional best first search
+
