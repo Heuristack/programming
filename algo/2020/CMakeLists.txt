@@ -60,9 +60,11 @@ add_executable(sorting_compare sorting/examples/compare.cpp)
 #
 # 05 Graph - BDKPBD
 #
+include_directories(structure)
 include_directories(graph)
 add_executable(graph_generate graph/examples/generate.cpp)
 add_executable(graph_traverse graph/examples/traverse.cpp)
 add_executable(graph_search graph/examples/search.cpp)
 add_executable(graph_sssp graph/examples/sssp.cpp)
+add_executable(graph_mst graph/examples/mst.cpp)
 

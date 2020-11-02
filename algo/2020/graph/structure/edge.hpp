@@ -2,9 +2,12 @@ template <typename weight>
 struct weighted
 {
     using weight_type = weight;
+    using this_type = weighted<weight_type>;
 
     explicit weighted(weight_type const & w) : w(w) {}
     weighted() = default;
+
+    struct weight_less { bool operator()(this_type const & a, this_type const & b) const { return a.w < b.w; } };
 
     weight_type w{};
 };
