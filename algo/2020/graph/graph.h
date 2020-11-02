@@ -22,7 +22,6 @@ namespace { using namespace std;
 #include "stream/edge.hpp"
 #include "structure/container.hpp"
 #include "stream/container.hpp"
-#include "algorithm/search.hpp"
 #include "data_set/initializers.hpp"
 
 }
