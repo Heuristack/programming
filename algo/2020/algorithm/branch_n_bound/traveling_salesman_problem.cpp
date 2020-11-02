@@ -10,10 +10,10 @@
 
 using namespace std;
 
-#include "tsp.hpp"
-#include "tsp_bnb.ipp"
+#include "traveling_salesman_problem.hpp"
+#include "traveling_salesman_problem_bnb.ipp"
 namespace csp {
-#include "tsp_csp.ipp"
+#include "traveling_salesman_problem_csp.ipp"
 }
 
 int main()
