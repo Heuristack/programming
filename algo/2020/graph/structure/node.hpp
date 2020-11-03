@@ -5,8 +5,9 @@ struct node
     using vertex_type = vertex;
     node(vertex_type const & v) : v(v) {}
     node() = default;
-    bool operator  < (this_type const & that) const { return v < that.v; }       // TODO: vertex concept requires order relation
-    bool operator != (this_type const & that) const { return v < that.v || v > that.v; }
+    bool operator  < (this_type const & that) const { return v  < that.v; } // TODO: vertex concept requires order relation
+    bool operator == (this_type const & that) const { return v == that.v; }
+    bool operator != (this_type const & that) const { return v != that.v; }
     vertex_type v{};
 };
 
@@ -29,6 +30,7 @@ struct length
     length() = default;
     weight_type l{};
     struct length_greater { bool operator () (this_type const & a, this_type const & b) const { return a.l > b.l; } };
+    struct length_less    { bool operator () (this_type const & a, this_type const & b) const { return a.l < b.l; } };
 };
 
 struct status
