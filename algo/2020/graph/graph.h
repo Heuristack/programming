@@ -13,6 +13,7 @@
 #include <functional>
 #include <iterator>
 #include <limits>
+#include <boost/operators.hpp>
 
 namespace { using namespace std;
 
