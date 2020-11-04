@@ -43,13 +43,13 @@ add_executable(greedy_strategy algorithm/greedy_strategy/greedy_coins_change.cpp
 add_executable(board_explore algorithm/brute_force/enumerate_paths_on_board.cpp)
 add_executable(traveling_salesman_problem algorithm/branch_n_bound/traveling_salesman_problem.cpp)
 add_executable(n-queens algorithm/backtracking/n-queens.cpp)
-add_executable(n-puzzle algorithm/backtracking/n-puzzle.cpp)
 
 #
 # 03 Searching - BT
 #
 add_executable(binary_search searching/binary_search/binary_search.cpp)
 add_executable(binary_search_tree searching/binary_search_tree/binary_search_tree.cpp)
+add_executable(n-puzzle searching/puzzle/n-puzzle.cpp)
 
 #
 # 04 Sorting - ISBHMQ
