@@ -5,7 +5,6 @@
 
 using namespace std;
 
-#include "board.hpp"
 #include "n-queens.ipp"
 
 int main()
