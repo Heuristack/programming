@@ -1,3 +1,39 @@
+function template can be disabled
+---------------------------------
+```C++
+#include <boost/tti/has_type.hpp>
+#include <iostream>
+#include <vector>
+#include <set>
+using namespace std;
+
+BOOST_TTI_HAS_TYPE(key_type)
+
+template <typename container, typename enable_if<!has_type_key_type<container>::value,int>::type = 0>
+bool contains(container const & c, typename container::value_type const & v) { return find(begin(c),end(c),v) != end(c); }
+
+template <typename container, typename enable_if<has_type_key_type<container>::value,int>::type = 0>
+bool contains(container const & c, typename container::key_type const & k) { return c.find(k) != c.end(); }
+
+template <typename container>
+class adapter : public container
+{
+public:
+    using container::container;
+public:
+    // ...
+};
+
+int main()
+{
+    vector<double> v{3.14};
+    set<double> s{2.71};
+    cout << contains(v,3.14) << endl;
+    cout << contains(s,2.71) << endl;
+}
+
+```
+
 'enable_if' cannot be used to disable this declaration
 ------------------------------------------------------
 ```C++
