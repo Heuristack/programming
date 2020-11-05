@@ -1,3 +1,44 @@
+not idea ...
+------------
+```C++
+#include <iostream>
+#include <vector>
+#include <set>
+using namespace std;
+
+template <typename container, typename search_type>
+class adapter : public container
+{
+public:
+    using container::container;
+};
+
+template <typename container>
+class adapter<container,typename container::value_type> : public container
+{
+public:
+    using container::container;
+    bool contains(typename container::value_type const & v) { return find(begin(*this),end(*this),v) != end(*this); }
+};
+
+template <typename container>
+class adapter<container,typename container::key_type> : public container
+{
+public:
+    using container::container;
+    bool contains(typename container::key_type const & k) { return this->find(k) != this->end(); }
+};
+
+int main()
+{
+    adapter<vector<double>,vector<double>::value_type> v{3.14};
+    adapter<vector<double>,set<double>::key_type> s{2.71};
+    cout << v.contains(3.14) << endl;
+    cout << s.contains(2.71) << endl;
+}
+
+```
+
 function template can be disabled
 ---------------------------------
 ```C++
