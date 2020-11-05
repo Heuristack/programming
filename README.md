@@ -1,3 +1,35 @@
+'enable_if' cannot be used to disable this declaration
+------------------------------------------------------
+```C++
+#include <boost/tti/has_type.hpp>
+#include <iostream>
+#include <vector>
+#include <set>
+using namespace std;
+
+BOOST_TTI_HAS_TYPE(key_type)
+
+template <typename container>
+class adapter : public container
+{
+public:
+    using container::container;
+public:
+    template <typename type = typename enable_if<!has_type_key_type<container>::value,typename container::value_type>::type>
+    bool contains(typename container::value_type const & v) { return find(begin(*this),end(*this),v) != end(*this); }
+
+    template <typename type = typename enable_if<has_type_key_type<container>::value,typename container::value_type>::type>
+    bool contains(typename container::key_type const & k) { return this->find(k) != this->end(); }
+};
+
+int main()
+{
+    cout << has_type_key_type<adapter<vector<int>>>::value << endl;
+    cout << has_type_key_type<adapter<set<int>>>::value << endl;
+}
+
+```
+
 A better board implementation
 -----------------------------
 ```C++
