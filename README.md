@@ -39,7 +39,7 @@ int main()
 
 ```
 
-function template can be disabled
+Function Template can be Disabled
 ---------------------------------
 ```C++
 #include <boost/tti/has_type.hpp>
@@ -75,8 +75,8 @@ int main()
 
 ```
 
-'enable_if' cannot be used to disable this declaration
-------------------------------------------------------
+SFINAE: 'enable_if' cannot be used to disable this declaration
+--------------------------------------------------------------
 ```C++
 #include <boost/tti/has_type.hpp>
 #include <iostream>
@@ -107,7 +107,7 @@ int main()
 
 ```
 
-A better board implementation
+A Better Board Implementation
 -----------------------------
 ```C++
 #include <iostream>
@@ -154,7 +154,7 @@ int main()
 
 ```
 
-matrix initialization as vector of vector
+Matrix initialization as vector of vector
 -----------------------------------------
 ```C++
 #include <iostream>
@@ -173,7 +173,7 @@ int main()
 
 ```
 
-template type depandency of complete and incomplete type
+Template type depandency of complete and incomplete type
 --------------------------------------------------------
 ```C++
 #include <iostream>
@@ -291,7 +291,7 @@ int main()
 
 ```
 
-expelled
+Expelled
 --------
 ```C++
 #include <iostream>
@@ -329,7 +329,7 @@ int main()
 
 ```
 
-iterator passing issue
+Iterator passing issue
 ----------------------
 ```C++
 #include <iostream>
