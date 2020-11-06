@@ -41,7 +41,7 @@ auto prim(graph const & g, node const & s)
 {
     using weight = typename weight_type<edge>::type;
     using prop = mixin<node, parent<node>, length<weight>>;
-    extractable<nonsearchable<insertable<vector<prop>>>> open;
+    extractable<searchable<insertable<vector<prop>>>> open;
     for_each_node(g,[&open](auto const & n){
         open.insert(prop(n.v,decltype(n.v)(),numeric_limits<weight>::max()));
     });
