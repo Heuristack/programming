@@ -32,15 +32,14 @@ template <typename container>
 struct searchable : container
 {
     using container::container;
+    template <typename container_type = container, typename enable_if<has_type_key_type<container_type>::value, int>::type = 0>
     auto contains(typename container::key_type const & k) const { return this->find(k) != this->end(); } // note : C++20 feature!
+    template <typename container_type = container, typename enable_if<has_type_key_type<container_type>::value, int>::type = 0>
     auto get(typename container::key_type & k) -> typename container::value_type & { return *(this->find(k)); }
-};
 
-template <typename container>
-struct nonsearchable : container
-{
-    using container::container;
+    template <typename container_type = container, typename enable_if<!has_type_key_type<container_type>::value, int>::type = 0>
     auto contains(typename container::value_type const & v) const { return find(begin(*this),end(*this),v) != end(*this); }
+    template <typename container_type = container, typename enable_if<!has_type_key_type<container_type>::value, int>::type = 0>
     auto get(typename container::value_type const & v) -> typename container::value_type & { return *find(begin(*this),end(*this),v); }
 };
 

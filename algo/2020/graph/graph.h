@@ -1,7 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <string>
+#include <algorithm>
+#include <iterator>
 #include <vector>
 #include <list>
 #include <set>
@@ -9,13 +9,18 @@
 #include <stack>
 #include <queue>
 #include <initializer_list>
+#include <limits>
 #include <variant>
 #include <functional>
-#include <iterator>
-#include <limits>
+#include <type_traits>
+#include <string>
+#include <iostream>
 #include <boost/operators.hpp>
+#include <boost/tti/has_type.hpp>
 
 namespace { using namespace std;
+
+BOOST_TTI_HAS_TYPE(key_type)
 
 #include "structure/node.hpp"
 #include "stream/node.hpp"
