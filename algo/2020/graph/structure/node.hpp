@@ -42,11 +42,11 @@ struct status
 };
 
 template <typename time = unsigned>
-struct access
+struct visa
 {
     using time_type = time;
-    access(time_type t) : enter(t),leave(t) {}
-    access() = default;
+    visa(time_type t) : enter(t),leave(t) {}
+    visa() = default;
     time_type enter{};
     time_type leave{};
 };

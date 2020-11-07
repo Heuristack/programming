@@ -2,11 +2,11 @@ template <template <typename> typename container, typename graph, typename node 
 auto search(graph const & g, node const & n, visitor const & f) -> void
 {
     using weight = typename weight_type<edge>::type;
-    using prop = mixin<node, parent<node>, length<weight>, status, access<>>;
+    using prop = mixin<node, parent<node>, length<weight>, status, visa<>>;
 
     if (!g.contains(n)) return;
 
-    typename access<>::time_type time = 0;
+    typename prop::time_type time = 0;
     searchable<map<node,prop>> close;
     close[n] = prop(n);
     container<prop> open;
@@ -38,7 +38,7 @@ auto search(graph const & g, node const & n, visitor const & f) -> void
 template <typename graph, typename node = typename graph::node_type, typename visitor>
 auto DFS(graph const & g, node const & u, visitor const & f) -> void
 {
-    static typename access<>::time_type time = 0;
+    static typename visa<>::time_type time = 0;
     static searchable<set<typename graph::node_type>> close;
     if (!g.contains(u)) return;
     close.insert(u);
@@ -56,14 +56,15 @@ namespace strategies
     enum class DFS;
     enum class BFS;
     enum class BST;
-
-    template <typename strategy> struct container
-    {
-        template <typename node> using type = sequential<typename conditional<is_same<strategy,strategies::DFS>::value,stack<node>,queue<node>>::type>;
-    };
-    template<> struct container<BST>
-    {
-        template <typename node> using type = sequential<priority_queue<node,vector<node>,typename node::length_greater>>;
-    };
 }
+
+template <typename strategy> struct container
+{
+    template <typename node> using type = sequential<typename conditional<is_same<strategy,strategies::DFS>::value,stack<node>,queue<node>>::type>;
+};
+
+template<> struct container<strategies::BST>
+{
+    template <typename node> using type = sequential<priority_queue<node,vector<node>,typename node::length_greater>>;
+};
 

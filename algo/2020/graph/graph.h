@@ -13,6 +13,8 @@
 #include <variant>
 #include <functional>
 #include <type_traits>
+#include <utility>
+#include <cassert>
 #include <string>
 #include <iostream>
 #include <boost/operators.hpp>

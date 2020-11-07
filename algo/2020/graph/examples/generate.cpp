@@ -1,4 +1,5 @@
 #include "implicit_graph.h"
+#include "algorithm/search.hpp"
 
 class implicit_graph : public graph<node<string>,edge<string>>
 {
@@ -18,6 +19,6 @@ int main()
     typename implicit_graph::node_type n("a");
     implicit_graph g;
     auto v = [](auto const & n){ cout << n; };
-    search<strategies::container<strategies::BFS>::type>(g,n,v);
+    search<container<strategies::BFS>::type>(g,n,v);
 }
 

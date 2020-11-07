@@ -1,5 +1,4 @@
 #include "explicit_graph.h"
-#include "algorithm/single_source_shortest_path.hpp"
 #include "algorithm/minimum_spanning_tree.hpp"
 
 using namespace std;
