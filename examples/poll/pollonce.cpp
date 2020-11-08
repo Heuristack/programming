@@ -15,7 +15,7 @@ int main (void)
     fds[1].events = POLLOUT;
 
     if (int n = poll(fds, 2, 5); n > 0) {
-        if (fds[0].revents & POLLIN )  {
+        if (fds[0].revents & POLLIN ) {
             cout << "0 is ready" << endl;
         }
         if (fds[1].revents & POLLOUT) {
