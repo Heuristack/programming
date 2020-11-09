@@ -233,6 +233,8 @@ public:
                 cout << close.size();
                 cout << ":";
                 cout << track.size();
+                cout << "\n";
+                cout << track;
                 return 1;
             }
             for (auto const & v : generate(u)) {
@@ -259,11 +261,24 @@ public:
 int main()
 {
     using node = node<int>;
-    using disatnce_function = distance_function<node>;
+    using dist = distance_function<node>;
+
+    puzzle sliding(dist::manhattan,
+    node{
+           {4,1,2},
+           {5,0,3},
+    },
+    node{
+           {1,2,3},
+           {4,5,0},
+    },
+    1,4);
+    sliding.reset().search();
+    cout << endl;
 
     for (int i = 1; i < 10; i++) {
         cout << i << ": ";
-        puzzle sliding(disatnce_function::manhattan,
+        puzzle sliding(dist::manhattan,
         node{
             {8,1,3},
             {4,0,2},
