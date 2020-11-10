@@ -1,4 +1,4 @@
-Not Ideal ...
+Not ideal ...
 -------------
 ```C++
 #include <iostream>
@@ -39,7 +39,7 @@ int main()
 
 ```
 
-Function Template can be Disabled
+Function template can be disabled
 ---------------------------------
 ```C++
 #include <boost/tti/has_type.hpp>
@@ -107,7 +107,7 @@ int main()
 
 ```
 
-A Better Board Implementation
+A better board implementation
 -----------------------------
 ```C++
 #include <iostream>
