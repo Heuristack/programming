@@ -1,10 +1,4 @@
-#include <initializer_list>
-#include <iostream>
-
-using namespace std;
-
-#include "linked_list.hpp"
-#include "linked_list.ipp"
+#include "linked_list.h"
 
 int main()
 {

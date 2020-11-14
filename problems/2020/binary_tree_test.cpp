@@ -1,4 +1,4 @@
-#include "binary_tree.h"
+#include "structure/binary_tree/binary_tree.h"
 
 int main()
 {
@@ -9,6 +9,5 @@ int main()
         }
         cout << endl;
     }
-    cout << is_balanced(binary_tree_1()) << endl;
 }
 
