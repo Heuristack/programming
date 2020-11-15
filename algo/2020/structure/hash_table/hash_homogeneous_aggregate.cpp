@@ -1,7 +1,6 @@
-#include <unordered_set>
-#include <vector>
-#include <string>
 #include <iostream>
+#include <vector>
+#include <unordered_set>
 
 using namespace std;
 
@@ -9,7 +8,7 @@ struct contact_list
 {
     struct equal
     {
-        auto operator() (contact_list const a, contact_list const & b) const
+        auto operator() (contact_list const & a, contact_list const & b) const
         {
             return unordered_set<string>(begin(a.names),end(a.names))
                 == unordered_set<string>(begin(b.names),end(b.names));
@@ -20,7 +19,7 @@ struct contact_list
     {
         auto operator() (contact_list const & c) const
         {
-            size_t code;
+            size_t code = 0;
             for (auto const & n : unordered_set<string>(begin(c.names),end(c.names))) {
                 code ^= std::hash<string>()(n);
             }
@@ -28,7 +27,7 @@ struct contact_list
         }
     };
 
-    contact_list(vector<string> const & n) : names(n) {}
+    explicit contact_list(vector<string> const & n) : names(n) {}
     vector<string> names;
 };
 
