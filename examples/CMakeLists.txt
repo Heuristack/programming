@@ -9,6 +9,7 @@ add_subdirectory(kqueue)
 add_subdirectory(lock_free)
 add_subdirectory(bpipe)
 add_subdirectory(orion)
+add_subdirectory(quant)
 add_subdirectory(rdtsc)
 add_subdirectory(program_options)
 
