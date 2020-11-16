@@ -4,3 +4,13 @@ long long gcd(long long a, long long b)
     else return a;
 }
 
+long long gcd_iterative(long long a, long long b)
+{
+    while (b) {
+        auto r = a % b;
+        a = b;
+        b = r;
+    }
+    return a;
+}
+
