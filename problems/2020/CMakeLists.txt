@@ -5,4 +5,5 @@ project(prob)
 include_directories(~/repositories/programming/algo/2020)
 add_executable(linked_list_test linked_list_test.cpp)
 add_executable(binary_tree_test binary_tree_test.cpp)
+add_subdirectory(epi_judge_cpp)
 
