@@ -12,7 +12,8 @@ using std::shared_ptr;
 
 
 template <typename T>
-struct ListNode {
+struct ListNode
+{
   T data;
 
   // We need to use a shared pointer since multiple nodes may point to a
@@ -22,11 +23,12 @@ struct ListNode {
   //       ^     |
   //       |_____|
   shared_ptr<ListNode<T>> next;
-  
+
   ListNode(T data = {}, shared_ptr<ListNode<T>> next = nullptr)
       : data(data), next(next) {}
 
-  ~ListNode() {
+ ~ListNode()
+  {
     // Extra-long lists cause stack overflow with default destructor
     // implementation
     while (next && (next.use_count() == 1)) {
@@ -36,7 +38,8 @@ struct ListNode {
     }
   }
 
-  bool operator==(const ListNode<T>& that) const {
+  bool operator==(const ListNode<T>& that) const
+  {
     const ListNode<T>* a = this;
     const ListNode<T>* b = &that;
     while (a && b) {
@@ -48,7 +51,7 @@ struct ListNode {
     }
     return a == nullptr && b == nullptr;
   }
-  
+
 };
 
 

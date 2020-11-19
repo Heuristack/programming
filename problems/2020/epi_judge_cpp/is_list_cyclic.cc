@@ -6,10 +6,48 @@
 #include "test_framework/timed_executor.h"
 using std::shared_ptr;
 
-shared_ptr<ListNode<int>> HasCycle(const shared_ptr<ListNode<int>>& head) {
-  // TODO - you fill in here.
+template <typename node_t>
+auto next(node_t n, int i)
+{
+    while (n && i > 0) {
+        n = n->next;
+        i--;
+    }
+    return n;
+}
+
+template <typename node_t>
+auto size(node_t n)
+{
+    auto p = n;
+    int i = 0;
+    if (p) {
+        do {
+            n = n->next;
+            i++;
+        } while (n && n != p);
+    }
+    return i;
+}
+
+shared_ptr<ListNode<int>> HasCycle(const shared_ptr<ListNode<int>>& head)
+{
+  auto p = head, q = head;
+  while (q && q->next) {
+      p = p->next; q = q->next->next;
+      if (p == q) {
+          auto i = p;
+          auto e = next(p,size(p));
+          while (i != e) {
+              i = i->next;
+              e = e->next;
+          }
+          return i;
+      }
+  }
   return nullptr;
 }
+
 void HasCycleWrapper(TimedExecutor& executor,
                      const shared_ptr<ListNode<int>>& head, int cycle_idx) {
   int cycle_length = 0;
