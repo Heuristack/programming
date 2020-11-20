@@ -13,15 +13,36 @@ struct node
 };
 
 template <typename data_t>
+auto insert_after(node<data_t> * p, node<data_t> * n)
+{
+    if (p && n) {
+        n->next = p->next;
+        p->next = n;
+    }
+}
+
+template <typename data_t>
+auto delete_after(node<data_t> * p)
+{
+    if (auto n = p->next; n) {
+        p->next = n->next;
+        delete n;
+    }
+}
+
+template <typename data_t>
 ostream & operator << (ostream & s, node<data_t> const & n)
 {
     return s << "(" << n.data << ")";
 }
 
 template <typename data_t>
-ostream & operator << (ostream & s, node<data_t> const * n)
+ostream & operator << (ostream & s, node<data_t> const * p)
 {
-    return s << (*n);
+    for (auto const * n = p; n != nullptr; n = n->next) {
+        s << (*n);
+    }
+    return s;
 }
 
 template <typename node_t> using list = typename node_t::link_type;

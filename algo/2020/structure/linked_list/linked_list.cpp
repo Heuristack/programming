@@ -3,17 +3,20 @@
 int main()
 {
     auto list = create_list<int>({3,1,4,1,5,9});
-    auto show = [](auto list){
-        cout << "["; traverse(list,[](auto n){ cout << n; }); cout << "]" << endl;
-    };
-    show(list);
+    cout << list << endl;
 
     remove_if(list,[](auto const & n){
         return n->data == 1;
     });
-    show(list);
+    cout << list << endl;
+
+    delete_after(list);
+    cout << list << endl;
+
+    insert_after(list,new node<int>(7));
+    cout << list << endl;
 
     delete_list(list);
-    show(list);
+    cout << list << endl;
 }
 
