@@ -9,6 +9,11 @@ int main()
         }
         cout << endl;
     }
-    cout << is_balanced(binary_tree_1()) << endl;
+
+    for (auto const & n : search<order::pre>(binary_tree_1())) cout << (*n); cout << endl;
+    for (auto const & n : search<order::btw>(binary_tree_1())) cout << (*n); cout << endl;
+    for (auto const & n : search<order::pos>(binary_tree_1())) cout << (*n); cout << endl;
+
+    cout << "balanced: " << is_balanced(binary_tree_1()) << endl;
 }
 
