@@ -2022,7 +2022,7 @@ problem_mapping = {
         },
         "15.05 Generate the power set": {
             "C++: power_set.cc": {
-                "passed": 0,
+                "passed": 15,
                 "total": 15
             },
             "Java: PowerSet.java": {
