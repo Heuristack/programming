@@ -45,6 +45,6 @@ ostream & operator << (ostream & s, node<data_t> const * p)
     return s;
 }
 
-template <typename node_t> using list = typename node_t::link_type;
-
+template <typename node_t>
+using list = typename node_t::link_type;
 
