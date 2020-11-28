@@ -2318,7 +2318,7 @@ problem_mapping = {
     "Chapter 17: Greedy Algorithms and Invariants": {
         "17.00 Bootcamp: Greedy Algorithms and Invariants": {
             "C++: making_change.cc": {
-                "passed": 0,
+                "passed": 49999,
                 "total": 49999
             },
             "Java: MakingChange.java": {
@@ -2386,7 +2386,7 @@ problem_mapping = {
         },
         "17.04 The 3-sum problem": {
             "C++: three_sum.cc": {
-                "passed": 0,
+                "passed": 1008,
                 "total": 1008
             },
             "Java: ThreeSum.java": {
