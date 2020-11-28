@@ -2122,7 +2122,7 @@ problem_mapping = {
     "Chapter 16: Dynamic Programming": {
         "16.00 Bootcamp: Dynamic Programming": {
             "C++: fibonacci.cc": {
-                "passed": 0,
+                "passed": 46,
                 "total": 46
             },
             "C++: max_sum_subarray.cc": {
