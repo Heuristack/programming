@@ -2176,7 +2176,7 @@ problem_mapping = {
         },
         "16.03 Count the number of ways to traverse a 2D array": {
             "C++: number_of_traversals_matrix.cc": {
-                "passed": 0,
+                "passed": 1775,
                 "total": 1775
             },
             "Java: NumberOfTraversalsMatrix.java": {
