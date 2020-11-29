@@ -3,7 +3,7 @@
 
 int main()
 {
-    std::cout << gcd(6,9) << std::endl;
+    std::cout << gcd_recursive(6,9) << std::endl;
     std::cout << gcd_iterative(6,9) << std::endl;
 }
 
