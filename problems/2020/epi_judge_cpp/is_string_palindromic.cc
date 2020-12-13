@@ -2,8 +2,15 @@
 
 #include "test_framework/generic_test.h"
 using std::string;
-bool IsPalindromic(const string& s) {
-  // TODO - you fill in here.
+bool IsPalindromic(const string& s)
+{
+  auto p = begin(s);
+  auto r = end(s);
+  while (p < r) {
+    if (*p++ != *prev(r--)) {
+      return false;
+    }
+  }
   return true;
 }
 
