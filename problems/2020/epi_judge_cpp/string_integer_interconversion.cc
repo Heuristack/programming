@@ -4,15 +4,48 @@
 #include "test_framework/test_failure.h"
 using std::string;
 
-string IntToString(int x) {
-  // TODO - you fill in here.
-  return "0";
+string IntToString(int x)
+{
+  if (!x) return "0";
+  auto is_negative = (x < 0);
+  if (is_negative) x = -x;
+  string s;
+  while (x) {
+    auto r = x % 10;
+    auto q = x / 10;
+    if (r < 0) r = -r;
+    s.push_back('0' + r);
+    x = q;
+  }
+  if (is_negative) s.push_back('-');
+  return string(s.rbegin(),s.rend());
 }
-int StringToInt(const string& s) {
-  // TODO - you fill in here.
-  return 0;
+
+int StringToInt(const string& s)
+{
+  auto is_negative = false;
+  auto has_sign = false;
+  if (!s.empty() && s[0] == '-') {
+      is_negative = true;
+      has_sign = true;
+  }
+  if (!s.empty() && s[0] == '+') {
+      is_negative = false;
+      has_sign = true;
+  }
+  auto p = begin(s);
+  auto r = end(s);
+  if (has_sign) p = next(p);
+  int i = 0;
+  for (; p != r; p++) {
+    i = i*10 + (*p) - '0';
+  }
+  if (is_negative) i = -i;
+  return i;
 }
-void Wrapper(int x, const string& s) {
+
+void Wrapper(int x, const string& s)
+{
   if (stoi(IntToString(x)) != x) {
     throw TestFailure("Int to string conversion failed");
   }

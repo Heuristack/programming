@@ -482,7 +482,7 @@ problem_mapping = {
         },
         "6.01 Interconvert strings and integers": {
             "C++: string_integer_interconversion.cc": {
-                "passed": 0,
+                "passed": 15002,
                 "total": 15002
             },
             "Java: StringIntegerInterconversion.java": {
