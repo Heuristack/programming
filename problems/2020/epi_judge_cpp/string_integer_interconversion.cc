@@ -8,14 +8,11 @@ string IntToString(int x)
 {
   if (!x) return "0";
   auto is_negative = (x < 0);
-  if (is_negative) x = -x;
   string s;
   while (x) {
     auto r = x % 10;
-    auto q = x / 10;
-    if (r < 0) r = -r;
-    s.push_back('0' + r);
-    x = q;
+    x = x / 10;
+    s.push_back('0' + abs(r));
   }
   if (is_negative) s.push_back('-');
   return string(s.rbegin(),s.rend());
