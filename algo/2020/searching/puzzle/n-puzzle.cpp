@@ -18,10 +18,8 @@ public:
     explicit board(int n) : board(n,n) {}
 
 public:
-
-public:
-    [[nodiscard]] int size_m([[maybe_unused]] int i = 0) const { return this->size(); }
-    [[nodiscard]] int size_n(int i = 0) const { return this->operator[](i).size(); }
+    int size_m([[maybe_unused]] int i = 0) const { return this->size(); }
+    int size_n(int i = 0) const { return this->operator[](i).size(); }
 };
 
 template <typename element>
@@ -43,11 +41,11 @@ public:
     using board_type::board_type;
 
 public:
-    [[nodiscard]] auto get(int i, int j) const -> element
+    auto get(int i, int j) const -> element
     {
         return this->operator[](i).operator[](j);
     }
-    [[nodiscard]] auto locate(element e = 0) const -> pair<int,int>
+    auto locate(element e = 0) const -> pair<int,int>
     {
         for (int i = 0; i < this->size_m(); i++) {
         for (int j = 0; j < this->size_n(); j++) {
@@ -58,7 +56,7 @@ public:
         }
         return {0,0};
     }
-    [[nodiscard]] auto serialize() const -> vector<element>
+    auto serialize() const -> vector<element>
     {
         vector<element> s;
         for (int i = 0; i < this->size_m(); i++) {
