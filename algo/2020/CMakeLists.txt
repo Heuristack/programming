@@ -50,6 +50,7 @@ add_executable(n-queens algorithm/backtracking/n-queens.cpp)
 #
 # 03 Searching - BT
 #
+include_directories(searching/board)
 add_executable(binary_search searching/binary_search/binary_search.cpp)
 add_executable(binary_search_tree searching/binary_search_tree/binary_search_tree.cpp)
 add_executable(n-puzzle searching/puzzle/n-puzzle.cpp)

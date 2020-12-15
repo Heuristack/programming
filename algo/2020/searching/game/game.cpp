@@ -5,26 +5,33 @@
 
 using namespace std;
 
-class player
+#include "board.hpp"
+
+class state : public board<char>
 {
 public:
-    player(string const & n): name(n) {}
-
-public:
-    string name;
+    using board_type = board<char>;
+    using board_type::board_type;
 };
 
-class game
+auto operator << (ostream & s, state const & b) -> ostream &
 {
-public:
-    game(initializer_list<player> const & players) : players(players) {}
-
-public:
-    vector<player> players;
-};
+    for (int i = 0; i < b.size_m(i); i++) {
+    for (int j = 0; j < b.size_n(i); j++) {
+        s << b[i][j] << " ";
+    }   s << "\n";
+    }
+    return s;
+}
 
 int main()
 {
-    cout << "game: playing!" << endl;
+    state s
+    {
+      {'X','X','O'},
+      {'X','X','O'},
+      {'X','X','X'},
+    };
+    cout << s;
 }
 
