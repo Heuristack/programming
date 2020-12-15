@@ -7,10 +7,24 @@ using namespace std;
 
 #include "board.hpp"
 
-class state : public board<char>
+class element
 {
 public:
-    using board_type = board<char>;
+    element(char v): value(v) {}
+
+public:
+    char value = ' ';
+};
+
+auto operator << (ostream & s, element const & e) -> ostream &
+{
+    return s << e.value;
+}
+
+class state : public board<element>
+{
+public:
+    using board_type = board<element>;
     using board_type::board_type;
 };
 
