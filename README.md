@@ -1,3 +1,21 @@
+minus the minimum integer is itself
+-----------------------------------
+```C++
+#include <iostream>
+#include <limits>
+
+using namespace std;
+
+int main()
+{
+    auto i = numeric_limits<int>::min();
+    cout << "min(int) = " << i << " -min(int) = " << -i << endl;
+    auto x = numeric_limits<int>::max();
+    cout << "max(int) = " << x << " -max(int) = " << -x << endl;
+}
+
+```
+
 Not ideal ...
 -------------
 ```C++
