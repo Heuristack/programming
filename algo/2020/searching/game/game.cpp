@@ -42,67 +42,78 @@ public:
 
 auto state::is_terminal() const -> bool
 {
-    set<element> s;
+    set<element> line;
 
-    auto is_line = [](decltype(s) const & s){
-        if (s.size() == 1) {
-            auto e = s.begin()->value;
-            if (e == X || e == O) {
+    auto is_lined_up = [](decltype(line) const & line){
+        if (line.size() == 1) {
+            if (auto e = line.begin()->value; (e == X || e == O)) {
                 return true;
             }
         }
         return false;
     };
 
+    // note : rows
     for (int i = 0; i < size_m(i); i++) {
-        s.clear();
+        line.clear();
         for (int j = 0; j < size_n(i); j++) {
-            s.insert(get(i,j));
+            line.insert(get(i,j));
         }
-        if (is_line(s)) {
-//          cout << "row: " << i << endl;
+        if (is_lined_up(line)) {
+        //  cout << "row: " << i << endl;
             return true;
         }
     }
 
+    // note : cols
     for (int j = 0; j < size_n(j); j++) {
-        s.clear();
+        line.clear();
         for (int i = 0; i < size_m(j); i++) {
-            s.insert(get(i,j));
+            line.insert(get(i,j));
         }
-        if (is_line(s)) {
-//          cout << "col: " << j << endl;
+        if (is_lined_up(line)) {
+        //  cout << "col: " << j << endl;
             return true;
         }
     }
 
-    s.clear();
+    // note : diag+
+    line.clear();
     for (int i = 0; i < size_m(i); i++) {
         for (int j = 0; j < size_n(i); j++) {
             if (i == j) {
-                s.insert(get(i,j));
+                line.insert(get(i,j));
             }
         }
     }
-    if (is_line(s)) {
-//      cout << "diag+: " << endl;
+    if (is_lined_up(line)) {
+    //  cout << "diag+: " << endl;
         return true;
     }
 
-    s.clear();
+    // note : diag-
+    line.clear();
     for (int i = 0; i < size_m(i); i++) {
         for (int j = 0; j < size_n(i); j++) {
             if (i + j == size_m(i) - 1) {
-                s.insert(get(i,j));
+                line.insert(get(i,j));
             }
         }
     }
-    if (is_line(s)) {
-//      cout << "diag-: " << endl;
+    if (is_lined_up(line)) {
+    //  cout << "diag-: " << endl;
         return true;
     }
 
-    return false;
+    // note : all filled
+    for (int i = 0; i < size_m(i); i++) {
+        for (int j = 0; j < size_n(i); j++) {
+            if (get(i,j).value == E) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 auto operator << (ostream & s, state const & b) -> ostream &
@@ -120,7 +131,7 @@ int main()
     state s
     {
       {X,X,O},
-      {X,O,O},
+      {X,X,O},
       {O,O,E},
     };
     cout << s;
