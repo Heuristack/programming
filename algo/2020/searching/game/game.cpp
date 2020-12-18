@@ -3,6 +3,7 @@
 #include <vector>
 #include <set>
 #include <iterator>
+#include <utility>
 #include <initializer_list>
 
 using namespace std;
@@ -16,6 +17,7 @@ class element
 public:
     element(char v): value(v) {}
     bool operator < (element const & that) const { return this->value < that.value; }
+
 public:
     char value = E;
 };
@@ -30,15 +32,21 @@ class state : public board<element>
 public:
     using board_type = board<element>;
     using board_type::board_type;
+
 public:
     auto get(int i, int j) const -> element { return this->operator[](i).operator[](j); }
 
 public:
-    struct terminal_utility { bool is_terminal; int utility; };
-    auto terminal_test() const -> terminal_utility;
+    auto terminal_test() const -> pair<bool,int>;
+    auto is_terminal() -> bool;
+    auto utility() -> int;
+
+private:
+    bool is_terminal_{};
+    int utility_{};
 };
 
-auto state::terminal_test() const -> state::terminal_utility
+auto state::terminal_test() const -> pair<bool,int>
 {
     set<element> line;
     int value = 0;
@@ -119,6 +127,19 @@ auto state::terminal_test() const -> state::terminal_utility
     return {true,value};
 }
 
+auto state::is_terminal() -> bool
+{
+    auto result = terminal_test();
+    is_terminal_ = std::get<0>(result);
+    utility_ = std::get<1>(result);
+    return is_terminal_;
+}
+
+auto state::utility() -> int
+{
+    return utility_;
+}
+
 auto operator << (ostream & s, state const & b) -> ostream &
 {
     for (int i = 0; i < b.size_m(i); i++) {
@@ -138,8 +159,6 @@ int main()
       {O,O,X},
     };
     cout << s;
-    auto [is_terminal,utility] = s.terminal_test();
-    cout << is_terminal << "," << utility << endl;
-
+    cout << "is terminal = " << s.is_terminal() << "; utility = " << s.utility() << ";" << endl;
 }
 

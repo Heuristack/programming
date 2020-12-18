@@ -54,6 +54,7 @@ include_directories(searching/board)
 add_executable(binary_search searching/binary_search/binary_search.cpp)
 add_executable(binary_search_tree searching/binary_search_tree/binary_search_tree.cpp)
 add_executable(n-puzzle searching/puzzle/n-puzzle.cpp)
+add_executable(game searching/game/game.cpp)
 
 #
 # 04 Sorting - ISBHMQ
