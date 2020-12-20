@@ -4,6 +4,8 @@
 #include <set>
 #include <iterator>
 #include <utility>
+#include <limits>
+#include <algorithm>
 #include <initializer_list>
 
 using namespace std;
@@ -187,10 +189,15 @@ auto operator << (ostream & s, state const & n) -> ostream &
     return s;
 }
 
+auto minimax_decision(state const & s) -> position;
+auto max_value(state s) -> int;
+auto min_value(state s) -> int;
+
 class player
 {
 public:
     player(string const & n, element const & e): name(n), e(e) {}
+    player(element const & e): player("", e) {}
 
 public:
     auto move(state const & s) const -> position;
@@ -207,11 +214,7 @@ auto operator << (ostream & s, player const & p) -> ostream &
 
 auto player::move(state const & s) const -> position
 {
-    position next;
-    for (auto const & p : s.available_positions()) {
-        next = p;
-    }
-    return next;
+    return minimax_decision(s);
 }
 
 class action
@@ -229,13 +232,19 @@ auto operator << (ostream & s, action const & a) -> ostream &
     return s << "[" << a.who << ":" << a.where << "]";
 }
 
+auto result(state const & s, action const & a) -> state
+{
+    state next = s;
+    next.get(a.where.i, a.where.j) = a.who.e;
+    return next;
+}
+
 class game
 {
 public:
     game(initializer_list<player> players): players(players) {}
 
 public:
-    auto result(state const & s, action const & a) -> state;
     auto move(action const & a) -> void;
 
 public:
@@ -255,13 +264,6 @@ auto operator << (ostream & s, game const & g) -> ostream &
     return s;
 }
 
-auto game::result(state const & s, action const & a) -> state
-{
-    state next = s;
-    next.get(a.where.i, a.where.j) = a.who.e;
-    return next;
-}
-
 auto game::move(action const & a) -> void
 {
     current_state = result(current_state, a);
@@ -271,7 +273,9 @@ auto game::play() -> int
 {
     for (;;) {
     for (auto const & p : players) {
-        move(action(p,p.move(current_state)));
+        auto a = action(p,p.move(current_state));
+        cout << a << endl;
+        move(a);
         if (current_state.is_terminal()) {
             return current_state.utility();
         }
@@ -280,9 +284,51 @@ auto game::play() -> int
     return 0;
 }
 
+auto minimax_decision(state const & s) -> position
+{
+    int max = numeric_limits<int>::min();
+    position max_position;
+    for (auto const & p : s.available_positions()) {
+        if (int min = min_value(result(s,action(element(X),p))); min > max) {
+            max = min;
+            max_position = p;
+        }
+    }
+    return max_position;
+}
+
+auto max_value(state s) -> int
+{
+//  cout << "max: \n";
+//  cout << s;
+    if (s.is_terminal()) return s.utility();
+    int max = numeric_limits<int>::min();
+    for (auto const & p : s.available_positions()) {
+        if (int min = min_value(result(s,action(element(X),p))); min > max) {
+            max = min;
+        }
+    }
+    return max;
+}
+
+auto min_value(state s) -> int
+{
+//  cout << "min: \n";
+//  cout << s;
+    if (s.is_terminal()) return s.utility();
+    int min = numeric_limits<int>::max();
+    for (auto const & p : s.available_positions()) {
+        if (int max = max_value(result(s,action(element(O),p))); max < min) {
+            min = max;
+        }
+    }
+    return min;
+}
+
 int main()
 {
     game g({player("MAX",X),player("MIN",O)});
     cout << g.play() << endl;
+    cout << g.current_state;
 }
 
