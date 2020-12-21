@@ -5,7 +5,7 @@
 
 int TreeHeight(const unique_ptr<BinaryTreeNode<int>>& tree)
 {
-  if (tree.get() == nullptr) return 0;
+  if (tree == nullptr) return 0;
   auto lh = TreeHeight(tree->left);
   auto rh = TreeHeight(tree->right);
   if (lh < 0 || rh < 0 || std::abs(lh-rh) > 1) return -1;
