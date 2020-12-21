@@ -2,7 +2,6 @@
 #include "test_framework/generic_test.h"
 #include <cmath>
 
-
 int TreeHeight(const unique_ptr<BinaryTreeNode<int>>& tree)
 {
   if (tree == nullptr) return 0;
