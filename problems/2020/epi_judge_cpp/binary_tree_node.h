@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <list>
@@ -12,15 +11,16 @@ using std::unique_ptr;
 
 
 template <typename T>
-struct BinaryTreeNode {
+struct BinaryTreeNode
+{
   T data;
   unique_ptr<BinaryTreeNode<T>> left, right;
-  
+
   explicit BinaryTreeNode(const T& data) : data(data) {}
   BinaryTreeNode(T data, unique_ptr<BinaryTreeNode<T>> left,
                  unique_ptr<BinaryTreeNode<T>> right)
       : data(data), left(std::move(left)), right(std::move(right)) {}
-  
+
 };
 
 
