@@ -1,11 +1,11 @@
-#include <iostream>
-#include <string>
+#include <algorithm>
+#include <iterator>
 #include <vector>
 #include <set>
-#include <iterator>
 #include <utility>
 #include <limits>
-#include <algorithm>
+#include <string>
+#include <iostream>
 #include <initializer_list>
 
 using namespace std;
@@ -13,22 +13,6 @@ using namespace std;
 #include "board.hpp"
 
 enum noughts_n_crosses { E = 'E', X = 'X', O = 'O' };
-
-class position
-{
-public:
-    position(int i, int j): i(i), j(j) {}
-    position() = default;
-
-public:
-    int i = 0;
-    int j = 0;
-};
-
-auto operator << (ostream & s, position const & p) -> ostream &
-{
-    return s << "(" << p.i << "," << p.j << ")";
-}
 
 class element
 {
@@ -48,6 +32,22 @@ auto operator << (ostream & s, element const & e) -> ostream &
     return s << e.value;
 }
 
+class position
+{
+public:
+    position(int i, int j): i(i), j(j) {}
+    position() = default;
+
+public:
+    int i = 0;
+    int j = 0;
+};
+
+auto operator << (ostream & s, position const & p) -> ostream &
+{
+    return s << "(" << p.i << "," << p.j << ")";
+}
+
 class state : public board<element>
 {
 public:
@@ -58,8 +58,8 @@ public:
     state(): board_type(3) {}
 
 public:
-    auto get(int i, int j) const -> element { return this->operator[](i).operator[](j); }
-    auto get(int i, int j) -> element & { return this->operator[](i).operator[](j); }
+    auto get(int i, int j) const -> element const & { return this->operator[](i).operator[](j); }
+    auto get(int i, int j) -> element & { return const_cast<element&>(const_cast<state const *>(this)->get(i,j)); }
 
 public:
     auto available_positions() const -> vector<position>;
