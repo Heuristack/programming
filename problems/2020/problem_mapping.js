@@ -986,7 +986,7 @@ problem_mapping = {
         },
         "8.09 Implement a queue with max API": {
             "C++: queue_with_max.cc": {
-                "passed": 0,
+                "passed": 201,
                 "total": 201
             },
             "Java: QueueWithMax.java": {

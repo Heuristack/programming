@@ -1,4 +1,6 @@
 #include <stdexcept>
+#include <deque>
+#include <algorithm>
 
 #include "test_framework/generic_test.h"
 #include "test_framework/serialization_traits.h"
@@ -6,20 +8,34 @@
 using std::length_error;
 
 class QueueWithMax {
- public:
-  void Enqueue(int x) {
-    // TODO - you fill in here.
+public:
+  void Enqueue(int x)
+  {
+    elements.push_back(x);
     return;
   }
-  int Dequeue() {
-    // TODO - you fill in here.
-    return 0;
+
+  int Dequeue()
+  {
+    if (elements.empty()) {
+      throw std::length_error("empty queue");
+    }
+    auto x = elements.front();
+    elements.pop_front();
+    return x;
   }
-  int Max() const {
-    // TODO - you fill in here.
-    return 0;
+
+  int Max() const
+  {
+    if (elements.empty()) {
+      throw std::length_error("empty queue");
+    }
+    return *std::max_element(elements.begin(),elements.end());
   }
+public:
+  std::deque<int> elements;
 };
+
 struct QueueOp {
   enum class Operation { kConstruct, kDequeue, kEnqueue, kMax } op;
   int argument;
