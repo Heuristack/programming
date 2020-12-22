@@ -972,7 +972,7 @@ problem_mapping = {
         },
         "8.08 Implement a queue using stacks": {
             "C++: queue_from_stacks.cc": {
-                "passed": 0,
+                "passed": 65,
                 "total": 65
             },
             "Java: QueueFromStacks.java": {
