@@ -1,4 +1,4 @@
-#include "structure/linked_list/linked_list.h"
+#include "/Users/lancel/Projects/playground.clion/prog/algo/2020/structure/linked_list/linked_list.h"
 
 int main()
 {

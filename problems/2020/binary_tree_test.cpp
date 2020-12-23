@@ -1,4 +1,4 @@
-#include "structure/binary_tree/binary_tree.h"
+#include "/Users/lancel/Projects/playground.clion/prog/algo/2020/structure/binary_tree/binary_tree.h"
 
 int main()
 {
