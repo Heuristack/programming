@@ -21,6 +21,8 @@ class position
 public:
     position(int i, int j) : i(i), j(j) {}
 public:
+    bool operator < (position const & that) { return tie(i,j) < tie(that.i,that.j); }
+public:
     int i = 0;
     int j = 0;
 };
