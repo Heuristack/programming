@@ -72,6 +72,16 @@ private:
     int utility_{};
 };
 
+auto operator << (ostream & s, state const & n) -> ostream &
+{
+    for (int i = 0; i < n.size_m(); i++) {
+        for (int j = 0; j < n.size_n(); j++) {
+            s << n[i][j] << " ";
+        }   s << "\n";
+    }
+    return s;
+}
+
 auto state::available_positions() const -> vector<position>
 {
     vector<position> moves;
@@ -179,16 +189,6 @@ auto state::utility() -> int
     return utility_;
 }
 
-auto operator << (ostream & s, state const & n) -> ostream &
-{
-    for (int i = 0; i < n.size_m(); i++) {
-    for (int j = 0; j < n.size_n(); j++) {
-        s << n[i][j] << " ";
-    }   s << "\n";
-    }
-    return s;
-}
-
 auto minimax_decision(state const & s) -> position;
 auto max_value(state s) -> int;
 auto min_value(state s) -> int;
@@ -246,8 +246,6 @@ public:
 
 public:
     auto move(action const & a) -> void;
-
-public:
     auto play() -> int;
 
 public:
