@@ -12,6 +12,32 @@ auto traverse(node_t * n) -> map<int,vector<node_t*>>
     return node_map;
 }
 
+template <typename node_t>
+auto traverse_iterative(node_t * n) -> map<int,vector<node_t*>>
+{
+    map<int,vector<node_t*>> node_map;
+    int depth = 0;
+
+    queue<node_t*> q;
+    if (n) q.push(n);
+    int num = q.size();
+
+    while (!q.empty()) {
+        n = q.front();
+        node_map[depth].push_back(n);
+        q.pop();
+        num--;
+        if (n->ltree) q.push(n->ltree);
+        if (n->rtree) q.push(n->rtree);
+        if (!num) {
+            num = q.size();
+            depth++;
+        }
+    }
+
+    return node_map;
+}
+
 struct order
 {
     enum class pre;
