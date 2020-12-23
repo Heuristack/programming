@@ -2,7 +2,7 @@
 
 int main()
 {
-    for (auto const & [i,v] : traverse(binary_tree_1())) {
+    for (auto const & [i,v] : traverse_recursive(binary_tree_1())) {
         cout << i << ":";
         for (auto const * n : v) {
             cout << (*n);
