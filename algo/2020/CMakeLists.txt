@@ -49,7 +49,7 @@ add_executable(fibonacci algorithm/brute_force/fibonacci.cpp)
 add_executable(factorial algorithm/brute_force/factorial.cpp)
 add_executable(board_explore algorithm/brute_force/enumerate_paths_on_board.cpp)
 add_executable(board_count algorithm/dynamic_programming/count_paths_on_board.cpp)
-add_executable(traveling_salesman_problem algorithm/branch_n_bound/traveling_salesman_problem.cpp)
+add_executable(traveling_salesman algorithm/branch_n_bound/traveling_salesman.cpp)
 add_executable(n-queens algorithm/backtracking/n-queens.cpp)
 
 #
