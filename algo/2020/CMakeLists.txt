@@ -15,6 +15,10 @@ link_directories(/usr/local/lib)
 # Project - DASSG
 #
 project(algo)
+include_directories(searching/board)
+include_directories(structure)
+include_directories(graph)
+include_directories(sorting)
 
 #
 # 01 Data Structures - AHLBHUSQ
@@ -27,7 +31,6 @@ add_executable(hash_table structure/hash_table/hash_string.cpp)
 add_executable(union_find structure/union_find/union_find.cpp)
 add_executable(stack structure/stack/stack.cpp)
 add_executable(queue structure/queue/queue.cpp)
-
 add_executable(cyclic_list structure/linked_list/cyclic_list.cpp)
 
 #
@@ -50,7 +53,6 @@ add_executable(n-queens algorithm/backtracking/n-queens.cpp)
 #
 # 03 Searching - BT
 #
-include_directories(searching/board)
 add_executable(binary_search searching/binary_search/binary_search.cpp)
 add_executable(binary_search_tree searching/binary_search_tree/binary_search_tree.cpp)
 add_executable(n-puzzle searching/puzzle/n-puzzle.cpp)
@@ -59,14 +61,11 @@ add_executable(game searching/game/game.cpp)
 #
 # 04 Sorting - ISBHMQ
 #
-include_directories(sorting)
 add_executable(sorting_compare sorting/examples/compare.cpp)
 
 #
 # 05 Graph - BDKPBD
 #
-include_directories(structure)
-include_directories(graph)
 add_executable(graph_generate graph/examples/generate.cpp)
 add_executable(graph_traverse graph/examples/traverse.cpp)
 add_executable(graph_search graph/examples/search.cpp)
