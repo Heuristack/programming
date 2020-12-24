@@ -9,7 +9,7 @@
 
 using namespace std;
 
-#include "board.hpp"
+#include "board/board.hpp"
 
 template <typename element = int>
 class node : public board<element>

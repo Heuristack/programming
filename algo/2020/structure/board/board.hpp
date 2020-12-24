@@ -22,3 +22,22 @@ auto operator << (ostream & s, board<element> const & b) -> ostream &
     return s;
 }
 
+class position
+{
+public:
+    position(int i, int j): i(i), j(j) {}
+    position() = default;
+
+public:
+    bool operator < (position const & that) { return tie(i,j) < tie(that.i,that.j); }
+
+public:
+    int i = 0;
+    int j = 0;
+};
+
+auto operator << (ostream & s, position const & p) -> ostream &
+{
+    return s << "(" << p.i << "," << p.j << ")";
+}
+

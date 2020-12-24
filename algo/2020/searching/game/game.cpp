@@ -10,7 +10,7 @@
 
 using namespace std;
 
-#include "board.hpp"
+#include "board/board.hpp"
 
 enum noughts_n_crosses { E = 'E', X = 'X', O = 'O' };
 
@@ -30,22 +30,6 @@ public:
 auto operator << (ostream & s, element const & e) -> ostream &
 {
     return s << e.value;
-}
-
-class position
-{
-public:
-    position(int i, int j): i(i), j(j) {}
-    position() = default;
-
-public:
-    int i = 0;
-    int j = 0;
-};
-
-auto operator << (ostream & s, position const & p) -> ostream &
-{
-    return s << "(" << p.i << "," << p.j << ")";
 }
 
 class state : public board<element>

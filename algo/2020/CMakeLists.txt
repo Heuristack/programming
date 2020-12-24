@@ -15,10 +15,11 @@ link_directories(/usr/local/lib)
 # Project - DASSG
 #
 project(algo)
-include_directories(searching/board)
 include_directories(structure)
-include_directories(graph)
+include_directories(algorithm)
 include_directories(sorting)
+include_directories(searching)
+include_directories(graph)
 
 #
 # 01 Data Structures - AHLBHUSQ
