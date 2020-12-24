@@ -15,5 +15,5 @@ int main(int argc, char const ** argv)
     auto g = graph<node<string>,edge<string,double>>::make_graph<undirected>(cin);
     auto n = node<string>(source_node);
     auto v = [](auto const & n){ cout << n; };
-    search<strategies::container<strategies::DFS>::type>(g,n,v); cout << endl;
+    search<container<strategies::DFS>::type>(g,n,v); cout << endl;
 }
