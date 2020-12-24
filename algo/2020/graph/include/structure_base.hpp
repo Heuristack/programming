@@ -20,10 +20,9 @@
 #include <boost/operators.hpp>
 #include <boost/tti/has_type.hpp>
 
-namespace { using namespace std;
-
+namespace {
 BOOST_TTI_HAS_TYPE(key_type)
-
+using namespace std;
 #include "structure/node.hpp"
 #include "stream/node.hpp"
 #include "structure/edge.hpp"
@@ -31,6 +30,5 @@ BOOST_TTI_HAS_TYPE(key_type)
 #include "structure/container.hpp"
 #include "stream/container.hpp"
 #include "data_set/initializers.hpp"
-
 }
 

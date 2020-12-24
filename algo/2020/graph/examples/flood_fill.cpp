@@ -1,6 +1,4 @@
-#include "implicit_graph.h"
-#include "algorithm/search.hpp"
-#include <iostream>
+#include "tree.h"
 #include "board/board.hpp"
 
 class element

@@ -20,6 +20,7 @@ include_directories(algorithm)
 include_directories(sorting)
 include_directories(searching)
 include_directories(graph)
+include_directories(graph/include)
 
 #
 # 01 Data Structures - AHLBHUSQ

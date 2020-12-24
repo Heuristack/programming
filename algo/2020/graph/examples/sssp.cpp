@@ -1,7 +1,4 @@
-#include "explicit_graph.h"
-#include "algorithm/single_source_shortest_path.hpp"
-
-using namespace std;
+#include "graph.h"
 
 int main()
 {

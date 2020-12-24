@@ -1,7 +1,6 @@
-#include "implicit_graph.h"
-#include "algorithm/search.hpp"
+#include "tree.h"
 
-class implicit_graph : public graph<node<string>,edge<string>>
+class generation_tree : public tree<node<string>,edge<string>>
 {
 public:
     auto operator[](node_type const & n) -> set_type<edge_type> override
@@ -16,8 +15,8 @@ public:
 
 int main()
 {
-    typename implicit_graph::node_type n("a");
-    implicit_graph g;
+    typename generation_tree::node_type n("a");
+    generation_tree g;
     auto v = [](auto const & n){ cout << n; };
     search<container<strategies::BFS>::type>(g,n,v);
 }

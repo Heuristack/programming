@@ -1,7 +1,4 @@
-#include "explicit_graph.h"
-#include "algorithm/search.hpp"
-
-using namespace std;
+#include "graph.h"
 
 int main()
 {

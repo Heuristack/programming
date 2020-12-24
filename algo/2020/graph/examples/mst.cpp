@@ -1,7 +1,4 @@
-#include "explicit_graph.h"
-#include "algorithm/minimum_spanning_tree.hpp"
-
-using namespace std;
+#include "graph.h"
 
 int main()
 {

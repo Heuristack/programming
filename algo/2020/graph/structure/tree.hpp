@@ -1,5 +1,5 @@
 template <typename node, typename edge, template<typename> typename set=default_list>
-class graph
+class tree
 {
 public:
     static_assert(is_same<typename node::vertex_type, typename edge::vertex_type>::value);
