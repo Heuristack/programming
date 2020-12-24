@@ -6,7 +6,7 @@ link_directories(/usr/local/lib)
 
 project(programming)
 
-add_subdirectory(algo)
+add_subdirectory(algorithm)
 add_subdirectory(books/ecpp)
 add_subdirectory(examples)
 add_subdirectory(problems)
