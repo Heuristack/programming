@@ -52,6 +52,7 @@ add_executable(board_explore algorithm/brute_force/enumerate_paths_on_board.cpp)
 add_executable(board_count algorithm/dynamic_programming/count_paths_on_board.cpp)
 add_executable(traveling_salesman algorithm/branch_n_bound/traveling_salesman.cpp)
 add_executable(n-queens algorithm/backtracking/n-queens.cpp)
+add_executable(space_division algorithm/divide_n_conquer/space_division_recursion.cpp)
 
 #
 # 03 Searching - BT
