@@ -59,7 +59,7 @@ add_executable(n-queens algorithm/backtracking/n-queens.cpp)
 add_executable(binary_search searching/binary_search/binary_search.cpp)
 add_executable(binary_search_tree searching/binary_search_tree/binary_search_tree.cpp)
 add_executable(n-puzzle searching/puzzle/n-puzzle.cpp)
-add_executable(game searching/game/game.cpp)
+add_executable(noughts_n_crosses searching/game/noughts_n_crosses.cpp)
 
 #
 # 04 Sorting - ISBHMQ
