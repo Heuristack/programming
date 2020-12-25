@@ -7,10 +7,7 @@
 #include <string>
 #include <iostream>
 #include <initializer_list>
-
-using namespace std;
-
-#include "board/board.hpp"
+#include "board/board.h"
 
 enum noughts_n_crosses { E = 'E', X = 'X', O = 'O' };
 

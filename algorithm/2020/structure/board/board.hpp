@@ -7,6 +7,9 @@ public:
     explicit board(int n) : board(n,n) {}
 
 public:
+    auto get(int i, int j) const -> element { return this->operator[](i).operator[](j); }
+
+public:
     int size_m([[maybe_unused]] int i = 0) const { return this->size(); }
     int size_n(int i = 0) const { return this->operator[](i).size(); }
 };

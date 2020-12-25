@@ -6,10 +6,7 @@
 #include <cmath>
 #include <utility>
 #include <iostream>
-
-using namespace std;
-
-#include "board/board.hpp"
+#include "board/board.h"
 
 template <typename element = int>
 class node : public board<element>
@@ -19,15 +16,11 @@ public:
     using board_type::board_type;
 
 public:
-    auto get(int i, int j) const -> element
-    {
-        return this->operator[](i).operator[](j);
-    }
     auto locate(element e = 0) const -> pair<int,int>
     {
         for (int i = 0; i < this->size_m(); i++) {
         for (int j = 0; j < this->size_n(); j++) {
-            if (get(i,j) == e) {
+            if (this->get(i,j) == e) {
                 return {i,j};
             }
         }
@@ -39,7 +32,7 @@ public:
         vector<element> s;
         for (int i = 0; i < this->size_m(); i++) {
         for (int j = 0; j < this->size_n(); j++) {
-            s.push_back(get(i,j));
+            s.push_back(this->get(i,j));
         }
         }
         return s;

@@ -1,5 +1,5 @@
+#include "board/board.h"
 #include "tree.h"
-#include "board/board.hpp"
 
 class element
 {
