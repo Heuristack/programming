@@ -1,4 +1,5 @@
-#include "dbg.h"
+#include "dbg/dbg.h"
+
 using namespace std;
 
 template <typename string_t>
