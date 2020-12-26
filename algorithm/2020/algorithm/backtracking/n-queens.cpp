@@ -43,7 +43,10 @@ public:
     int j = -1;
 };
 
-ostream & operator << (ostream & s, queen const & q) { return s << "(" << q.i << "," << q.j << ")"; }
+ostream & operator << (ostream & s, queen const & q)
+{
+    return s << "(" << q.i << "," << q.j << ")";
+}
 
 class node
 {
