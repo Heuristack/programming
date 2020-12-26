@@ -53,7 +53,7 @@ add_executable(powerset algorithm/iteration_n_recursion/powerset.cpp)
 add_executable(board_count algorithm/dynamic_programming/count_paths_on_board.cpp)
 add_executable(traveling_salesman algorithm/branch_n_bound/traveling_salesman.cpp)
 add_executable(n-queens algorithm/backtracking/n-queens.cpp)
-add_executable(space_division algorithm/divide_n_conquer/space_division_recursion.cpp)
+add_executable(dnc algorithm/divide_n_conquer/divide_n_conquer.cpp)
 
 #
 # 03 Searching - BT
