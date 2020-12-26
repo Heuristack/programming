@@ -37,7 +37,7 @@ add_executable(queue structure/queue/queue.cpp)
 add_executable(cyclic_list structure/linked_list/cyclic_list.cpp)
 
 #
-# 02 Algo Techniques - BBBDDG
+# 02 Algo Techniques - RBBDDG
 #
 add_executable(recursion algorithm/iteration_n_recursion/recursion.cpp)
 add_executable(backtracking algorithm/backtracking/n-permutation.cpp)
