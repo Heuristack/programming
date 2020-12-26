@@ -39,17 +39,17 @@ add_executable(cyclic_list structure/linked_list/cyclic_list.cpp)
 #
 # 02 Algo Techniques - BBBDDG
 #
-add_executable(brute_force algorithm/brute_force/powerset.cpp)
+add_executable(generate_powerset algorithm/iteration_n_recursion/powerset.cpp)
 add_executable(backtracking algorithm/backtracking/n-permutation.cpp)
 add_executable(branch_n_bound algorithm/branch_n_bound/knapsack.cpp)
 add_executable(divide_n_conquer algorithm/divide_n_conquer/maximum_subarray.cpp)
 add_executable(dynamic_programming algorithm/dynamic_programming/minimum_coins_change.cpp)
 add_executable(greedy_strategy algorithm/greedy_strategy/greedy_coins_change.cpp)
 
-add_executable(euclidean algorithm/brute_force/euclidean.cpp)
-add_executable(fibonacci algorithm/brute_force/fibonacci.cpp)
-add_executable(factorial algorithm/brute_force/factorial.cpp)
-add_executable(recursion algorithm/brute_force/recursion_tree.cpp)
+add_executable(euclidean algorithm/iteration_n_recursion/euclidean.cpp)
+add_executable(fibonacci algorithm/iteration_n_recursion/fibonacci.cpp)
+add_executable(factorial algorithm/iteration_n_recursion/factorial.cpp)
+add_executable(recursion algorithm/iteration_n_recursion/recursion_tree.cpp)
 add_executable(board_count algorithm/dynamic_programming/count_paths_on_board.cpp)
 add_executable(traveling_salesman algorithm/branch_n_bound/traveling_salesman.cpp)
 add_executable(n-queens algorithm/backtracking/n-queens.cpp)
