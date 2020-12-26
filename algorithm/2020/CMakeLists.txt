@@ -60,7 +60,7 @@ add_executable(space_division algorithm/divide_n_conquer/space_division_recursio
 # 03 Searching - BT
 #
 add_executable(binary_search searching/binary_search/binary_search.cpp)
-add_executable(binary_search_tree searching/binary_search_tree/binary_search_tree.cpp)
+add_executable(tree_search searching/tree_search/binary_search_tree.cpp)
 add_executable(n-puzzle searching/puzzle/n-puzzle.cpp)
 add_executable(noughts_n_crosses searching/game/noughts_n_crosses.cpp)
 
