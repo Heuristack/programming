@@ -39,3 +39,6 @@ auto bound(node const & n) -> double
     return value;
 }
 
+// A branch and bound algorithm for the knapsack problem.
+// Kolesar, P.J., 1967.
+// Management science, 13(9), pp.723-735.

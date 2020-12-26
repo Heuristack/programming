@@ -89,6 +89,6 @@ auto explore(node const & e) -> node
     if (a.bound < b.bound) return explore(a);
     else return explore(b);
 }
-// Little, J.D., Murty, K.G., Sweeney, D.W. and Karel, C., 1963.
 // An algorithm for the traveling salesman problem.
+// Little, J.D., Murty, K.G., Sweeney, D.W. and Karel, C., 1963.
 // Operations research, 11(6), pp.972-989.

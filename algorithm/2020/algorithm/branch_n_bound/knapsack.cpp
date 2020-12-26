@@ -26,5 +26,4 @@ int main()
     cout << explore(n) << endl;
     cout << aggregate_subset(max_value_subset(vector_type<item>(items),maximum_allowable_weight)).value << endl;
 }
-// Kolesar, P.J., 1967. A branch and bound algorithm for the knapsack problem. Management science, 13(9), pp.723-735.
 

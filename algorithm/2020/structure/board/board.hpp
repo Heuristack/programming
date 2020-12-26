@@ -32,7 +32,7 @@ public:
     position() = default;
 
 public:
-    bool operator < (position const & that) { return tie(i,j) < tie(that.i,that.j); }
+    bool operator < (position const & that) const { return tie(i,j) < tie(that.i,that.j); }
 
 public:
     int i = 0;
