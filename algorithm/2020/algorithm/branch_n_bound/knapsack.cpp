@@ -22,6 +22,11 @@ struct item
     int value = 0;
 };
 
+ostream & operator << (ostream & s, item const & i)
+{
+    return s << "(" << i.weight << "," << i.value << ")[" << i.ratio() << "]";
+}
+
 item sigma(vector<optional<item>> items)
 {
     int weight = 0;
@@ -33,11 +38,6 @@ item sigma(vector<optional<item>> items)
         }
     }
     return {weight,value};
-}
-
-ostream & operator << (ostream & s, item const & i)
-{
-    return s << "(" << i.weight << "," << i.value << ")[" << i.ratio() << "]";
 }
 
 struct node
@@ -53,6 +53,21 @@ struct node
     int w = 0;
     vector<optional<item>> items;
 };
+
+ostream & operator << (ostream & s, node const & n)
+{
+    int weight = 0;
+    int value = 0;
+    s << "[" << setw(3) << setfill('0') << n.n << ":" << n.i << "]{";
+    for (auto const & i : n.items) {
+        if (i.has_value()) {
+            weight += i->weight;
+            value += i->value;
+            s << i.value();
+        }
+    }
+    return s << "}=(" << weight << "," << value << ")";
+}
 
 node::node(initializer_list<item> const & list, int maximum_allowable_weight)
 {
@@ -100,22 +115,6 @@ auto maximum_allowable_weight(node const & n) -> int
 {
     return n.w;
 }
-
-ostream & operator << (ostream & s, node const & n)
-{
-    int weight = 0;
-    int value = 0;
-    s << "[" << setw(3) << setfill('0') << n.n << ":" << n.i << "]{";
-    for (auto const & i : n.items) {
-        if (i.has_value()) {
-            weight += i->weight;
-            value += i->value;
-            s << i.value();
-        }
-    }
-    return s << "}=(" << weight << "," << value << ")";
-}
-
 
 auto explore(node const & n) -> int
 {
