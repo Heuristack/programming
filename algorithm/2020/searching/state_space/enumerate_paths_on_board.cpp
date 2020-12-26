@@ -78,7 +78,6 @@ public:
     int w = 0;
 };
 
-
 int main()
 {
     board b(5,5);
