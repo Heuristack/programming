@@ -14,17 +14,26 @@ struct recursion : execution
 {
     using execution::execution;
     auto run() -> void override { cout << "recursion::"; return execution::run(); }
-    auto factorial(int n) -> int override;
+    auto factorial(int n) -> int override
+    {
+        if (n == 0) return 1;
+        return factorial(n-1) * n;
+    }
 };
 
 struct iteration : execution
 {
     using execution::execution;
     auto run() -> void override { cout << "iteration::"; return execution::run(); }
-    auto factorial(int n) -> int override;
+    auto factorial(int n) -> int override
+    {
+        int f = 1;
+        for (int i = 1; i <= n; i++) {
+            f *= i;
+        }
+        return f;
+    }
 };
-
-#include "factorial.ipp"
 
 int main()
 {

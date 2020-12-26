@@ -49,7 +49,7 @@ add_executable(greedy_strategy algorithm/greedy_strategy/greedy_coins_change.cpp
 add_executable(euclidean algorithm/brute_force/euclidean.cpp)
 add_executable(fibonacci algorithm/brute_force/fibonacci.cpp)
 add_executable(factorial algorithm/brute_force/factorial.cpp)
-add_executable(state_expansion algorithm/brute_force/state_expansion_recursion.cpp)
+add_executable(recursion algorithm/brute_force/recursion_tree.cpp)
 add_executable(board_count algorithm/dynamic_programming/count_paths_on_board.cpp)
 add_executable(traveling_salesman algorithm/branch_n_bound/traveling_salesman.cpp)
 add_executable(n-queens algorithm/backtracking/n-queens.cpp)

@@ -14,17 +14,28 @@ struct recursion : execution
 {
     using execution::execution;
     auto run() -> void override { cout << "recursion::"; return execution::run(); }
-    auto fibonacci(int n) -> int override;
+    auto fibonacci(int n) -> int override
+    {
+        if (n == 0 || n == 1) return n;
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
 };
 
 struct iteration : execution
 {
     using execution::execution;
     auto run() -> void override { cout << "iteration::"; return execution::run(); }
-    auto fibonacci(int n) -> int override;
-};
+    auto fibonacci(int n) -> int override
+    {
+        int a = 0, b = 1;
+        int f = n;
+        for (int i = 2; i <= n; i++) {
+            f = a + b; a = b; b = f;
+        }
+        return f;
+    }
 
-#include "fibonacci.ipp"
+};
 
 int main()
 {
