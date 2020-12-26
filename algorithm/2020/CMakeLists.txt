@@ -50,7 +50,6 @@ add_executable(euclidean algorithm/brute_force/euclidean.cpp)
 add_executable(fibonacci algorithm/brute_force/fibonacci.cpp)
 add_executable(factorial algorithm/brute_force/factorial.cpp)
 add_executable(state_expansion algorithm/brute_force/state_expansion_recursion.cpp)
-add_executable(board_explore algorithm/brute_force/enumerate_paths_on_board.cpp)
 add_executable(board_count algorithm/dynamic_programming/count_paths_on_board.cpp)
 add_executable(traveling_salesman algorithm/branch_n_bound/traveling_salesman.cpp)
 add_executable(n-queens algorithm/backtracking/n-queens.cpp)
@@ -61,8 +60,9 @@ add_executable(space_division algorithm/divide_n_conquer/space_division_recursio
 #
 add_executable(binary_search searching/binary_search/binary_search.cpp)
 add_executable(tree_search searching/tree_search/binary_search_tree.cpp)
-add_executable(n-puzzle searching/puzzle/n-puzzle.cpp)
 add_executable(noughts_n_crosses searching/game/noughts_n_crosses.cpp)
+add_executable(n-puzzle searching/puzzle/n-puzzle.cpp)
+add_executable(board_explore searching/state_space/enumerate_paths_on_board.cpp)
 
 #
 # 04 Sorting - ISBHMQ
