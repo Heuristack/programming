@@ -180,15 +180,16 @@ auto cans(vector<vector<int>> const & m) -> vector<pair<int,int>>
     return c;
 }
 
-struct node {
+struct node
+{
     node(vector<vector<int>> const &m) : matrix(m) { bound = reduce(matrix); }
-
     vector<pair<int, int>> path;
     vector<vector<int>> matrix;
     int bound;
 };
 
-auto next(vector<pair<int, int>> const &path, int s) -> int {
+auto next(vector<pair<int, int>> const &path, int s) -> int
+{
     for (auto[i, j] : path) {
         if (i == s) {
             return j;
@@ -197,7 +198,8 @@ auto next(vector<pair<int, int>> const &path, int s) -> int {
     return -1;
 }
 
-auto show_path(vector<pair<int, int>> const &p) -> void {
+auto show_path(vector<pair<int,int>> const &p) -> void
+{
     int s = 0;
     cout << "(" << s + 1;
     for (int i = next(p, 0); i > 0; i = next(p, i)) {
@@ -206,13 +208,15 @@ auto show_path(vector<pair<int, int>> const &p) -> void {
     cout << ")";
 }
 
-auto show(vector<pair<int, int>> const &p) -> void {
+auto show(vector<pair<int,int>> const &p) -> void
+{
     for (auto[i, j] : p) {
         cout << "(" << i << "," << j << ")";
     }
 }
 
-auto show(node const &e) -> void {
+auto show(node const &e) -> void
+{
     cout << "[";
     show(e.path);
     cout << "]" << endl;
@@ -220,14 +224,16 @@ auto show(node const &e) -> void {
     cout << e.bound << endl;
 }
 
-auto exclude(node const &e, int i, int j) -> node {
+auto exclude(node const &e, int i, int j) -> node
+{
     node x(e);
     exclude(x.matrix, i, j);
     x.bound += reduce(x.matrix);
     return x;
 }
 
-auto include(node const &e, int i, int j) -> node {
+auto include(node const &e, int i, int j) -> node
+{
     node x(e);
     include(x.matrix, i, j);
     for (auto[m, p] : e.path) {
@@ -244,17 +250,20 @@ auto include(node const &e, int i, int j) -> node {
     return x;
 }
 
-auto choose(node const &e) -> pair<int, int> {
+auto choose(node const & e) -> pair<int, int>
+{
     int i = 0, j = 0;
     if (auto t = theta(e.matrix); !zero(t)) {
         tie(i, j) = max_element(t);
-    } else {
+    }
+    else {
         tie(i, j) = cans(e.matrix).back();
     }
     return {i, j};
 }
 
-auto explore(node const &e) -> node {
+auto explore(node const & e) -> node
+{
     if (e.path.size() == n) {
         return e;
     }
