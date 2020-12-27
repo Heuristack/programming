@@ -173,6 +173,9 @@ auto state::utility() -> int
 auto minimax_decision(state const & s) -> position;
 auto max_value(state s) -> int;
 auto min_value(state s) -> int;
+auto alpha_beta_search(state const & s) -> position;
+auto max_value(state s, int alpha, int beta) -> int;
+auto min_value(state s, int alpha, int beta) -> int;
 
 class player
 {
@@ -195,7 +198,7 @@ auto operator << (ostream & s, player const & p) -> ostream &
 
 auto player::move(state const & s) const -> position
 {
-    return minimax_decision(s);
+    return alpha_beta_search(s);
 }
 
 class action
@@ -278,8 +281,6 @@ auto minimax_decision(state const & s) -> position
 
 auto max_value(state s) -> int
 {
-//  cout << "max: \n";
-//  cout << s;
     if (s.is_terminal()) return s.utility();
     int max = numeric_limits<int>::min();
     for (auto const & p : s.available_positions()) {
@@ -292,8 +293,6 @@ auto max_value(state s) -> int
 
 auto min_value(state s) -> int
 {
-//  cout << "min: \n";
-//  cout << s;
     if (s.is_terminal()) return s.utility();
     int min = numeric_limits<int>::max();
     for (auto const & p : s.available_positions()) {
@@ -302,6 +301,47 @@ auto min_value(state s) -> int
         }
     }
     return min;
+}
+
+auto alpha_beta_search(state const & s) -> position
+{
+    int max = numeric_limits<int>::min();
+    position max_position;
+    for (auto const & p : s.available_positions()) {
+        if (int min = min_value(result(s,action(element(X),p)), numeric_limits<int>::min(),numeric_limits<int>::max()); min > max) {
+            max = min;
+            max_position = p;
+        }
+    }
+    return max_position;
+}
+
+auto max_value(state s, int alpha, int beta) -> int
+{
+    if (s.is_terminal()) return s.utility();
+    int val = numeric_limits<int>::min();
+    for (auto const & p : s.available_positions()) {
+        if (int min = min_value(result(s,action(element(X),p)),alpha,beta); min > val) {
+            val = min;
+        }
+        if (val >= beta) return val;
+        alpha = max(alpha,val);
+    }
+    return val;
+}
+
+auto min_value(state s, int alpha, int beta) -> int
+{
+    if (s.is_terminal()) return s.utility();
+    int val = numeric_limits<int>::max();
+    for (auto const & p : s.available_positions()) {
+        if (int max = max_value(result(s,action(element(O),p)),alpha,beta); max < val) {
+            val = max;
+        }
+        if (val <= alpha) return val;
+        beta = min(beta,val);
+    }
+    return val;
 }
 
 int main()
