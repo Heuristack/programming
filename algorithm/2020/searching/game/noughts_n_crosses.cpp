@@ -198,6 +198,8 @@ auto operator << (ostream & s, player const & p) -> ostream &
 
 auto player::move(state const & s) const -> position
 {
+    // todo : set strategy to player instance, can be different.
+    //        should player MIN(O) use the same strategy as MAX(X) ...
     return alpha_beta_search(s);
 }
 
