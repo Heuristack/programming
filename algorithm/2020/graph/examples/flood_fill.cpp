@@ -65,15 +65,14 @@ public:
         for (auto p : positions_to_fill) {
             flap(p);
         }
-        cout << endl;
     }
 
     auto flap(position const & p) -> void
     {
         color flapped = B;
         switch (flood_board.get(p.i,p.j).c) {
-            case color::B : flapped = W;
-            case color::W : flapped = B;
+            case color::B : flapped = W; break;
+            case color::W : flapped = B; break;
         }
         flood_board.get(p.i,p.j) = flapped;
     }
@@ -97,8 +96,10 @@ int main()
         {W,W,W,W,W,W,W,B,B,W},
     };
     flood_tree flood(initial_board);
-    cout << flood.flood_board;
+    cout << flood.flood_board << endl;
     flood.flood_fill({5,4});
-    cout << flood.flood_board;
+    cout << flood.flood_board << endl;
+    flood.flood_fill({3,6});
+    cout << flood.flood_board << endl;
 }
 
