@@ -2472,7 +2472,7 @@ problem_mapping = {
         },
         "18.02 Paint a Boolean matrix": {
             "C++: matrix_connected_regions.cc": {
-                "passed": 0,
+                "passed": 50,
                 "total": 50
             },
             "Java: MatrixConnectedRegions.java": {
