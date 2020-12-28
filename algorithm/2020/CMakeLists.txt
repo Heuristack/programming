@@ -78,5 +78,5 @@ add_executable(graph_search graph/examples/search.cpp)
 add_executable(graph_sssp graph/examples/sssp.cpp)
 add_executable(graph_mst graph/examples/mst.cpp)
 add_executable(graph_flood_fill graph/examples/flood_fill.cpp)
-add_executable(simple_graph graph/examples/simple_graph.cpp)
+add_executable(simple graph/examples/simple.cpp)
 
