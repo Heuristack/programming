@@ -7,17 +7,17 @@
 #include "test_framework/test_failure.h"
 #include "test_framework/timed_executor.h"
 using std::vector;
-enum class Color { kWhite, kBlack };
-struct Coordinate {
-  bool operator==(const Coordinate& that) const {
-    return x == that.x && y == that.y;
-  }
 
+enum class Color { kWhite, kBlack };
+
+struct Coordinate
+{
+  bool operator==(const Coordinate& that) const { return x == that.x && y == that.y; }
   int x, y;
 };
-vector<Coordinate> SearchMaze(vector<vector<Color>> maze, const Coordinate& s,
-                              const Coordinate& e) {
-  // TODO - you fill in here.
+
+vector<Coordinate> SearchMaze(vector<vector<Color>> maze, const Coordinate & s, const Coordinate & e)
+{
   return {};
 }
 
