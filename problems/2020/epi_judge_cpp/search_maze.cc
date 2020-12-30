@@ -34,7 +34,7 @@ auto generate(int i, int j, int m, int n) -> return_type
 
 bool Search(vector<vector<Color>> & maze, vector<Coordinate> & path, const Coordinate & s, const Coordinate & e)
 {
-  if (s == e) return 1;
+  if (s == e) return true;
   for (auto [p,q] : generate(s.x,s.y,maze.size(),maze[s.x].size())) {
     if (maze[p][q] == Color::kWhite) {
       Coordinate n(p,q);
@@ -46,7 +46,7 @@ bool Search(vector<vector<Color>> & maze, vector<Coordinate> & path, const Coord
       path.pop_back();
     }
   }
-  return 0;
+  return false;
 }
 
 vector<Coordinate> SearchMaze(vector<vector<Color>> maze, const Coordinate & s, const Coordinate & e)
