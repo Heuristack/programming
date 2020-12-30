@@ -56,6 +56,7 @@ public:
             w++;
         }
         for (auto const & s : expand(s)) {
+            // note : if return from here, early exit of backtracking
             backtrack(s);
         }
         path.pop_back();
