@@ -2458,7 +2458,7 @@ problem_mapping = {
     "Chapter 18: Graphs": {
         "18.01 Search a maze": {
             "C++: search_maze.cc": {
-                "passed": 0,
+                "passed": 101,
                 "total": 101
             },
             "Java: SearchMaze.java": {

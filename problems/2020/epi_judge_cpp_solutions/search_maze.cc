@@ -126,3 +126,4 @@ int main(int argc, char* argv[]) {
   return GenericTestMain(args, "search_maze.cc", "search_maze.tsv",
                          &SearchMazeWrapper, DefaultComparator{}, param_names);
 }
+

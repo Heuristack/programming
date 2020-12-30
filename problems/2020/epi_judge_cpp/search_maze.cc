@@ -1,24 +1,65 @@
 #include <istream>
 #include <string>
 #include <vector>
+#include <utility>
+#include <cassert>
 
 #include "test_framework/generic_test.h"
 #include "test_framework/serialization_traits.h"
 #include "test_framework/test_failure.h"
 #include "test_framework/timed_executor.h"
 using std::vector;
+using std::pair;
 
 enum class Color { kWhite, kBlack };
 
 struct Coordinate
 {
+  Coordinate(int x, int y) : x(x), y(y) {}
   bool operator==(const Coordinate& that) const { return x == that.x && y == that.y; }
   int x, y;
 };
 
+template <typename return_type = vector<pair<int,int>>>
+auto generate(int i, int j, int m, int n) -> return_type
+{
+  return_type adjancets;
+  for (auto [p,q] : return_type{{i-1,j},{i+1,j},{i,j-1},{i,j+1}}) {
+    if ((0 <= p) && (p < m) && (0 <= q) && (q < n)) {
+      adjancets.emplace_back(p,q);
+    }
+  }
+  return adjancets;
+}
+
+bool Search(vector<vector<Color>> & maze, vector<Coordinate> & path, const Coordinate & s, const Coordinate & e)
+{
+  if (s == e) return 1;
+  for (auto [p,q] : generate(s.x,s.y,maze.size(),maze[s.x].size())) {
+    if (maze[p][q] == Color::kWhite) {
+      Coordinate n(p,q);
+      maze[p][q] = Color::kBlack;
+      path.push_back(n);
+      if (Search(maze,path,n,e)) {
+          return true;
+      }
+      path.pop_back();
+    }
+  }
+  return 0;
+}
+
 vector<Coordinate> SearchMaze(vector<vector<Color>> maze, const Coordinate & s, const Coordinate & e)
 {
-  return {};
+  if (maze.empty()) return {};
+  for (int i = 1; i < maze.size(); i++) { assert(maze[i].size() == maze[i-1].size()); }
+  vector<Coordinate> path;
+  maze[s.x][s.y] = Color::kBlack;
+  path.push_back(s);
+  if (!Search(maze,path,s,e)) {
+    path.pop_back();
+  }
+  return path;
 }
 
 namespace test_framework {
