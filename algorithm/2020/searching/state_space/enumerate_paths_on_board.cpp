@@ -9,6 +9,7 @@ using namespace std;
 
 struct state
 {
+    // note : state is just position in this problem not the board snapshot
     state(int i, int j) : i(i), j(j) {}
     state() : state(0,0) {}
 
@@ -38,6 +39,7 @@ public:
 public:
     auto next(state_type s, operate_type o) -> optional<state_type> override
     {
+        // note : it doesn't go back and results in endless loop because it only goes to E and S
         if ((o == E) && (s.i < m-1)) return make_optional<state_type>(s.i + 1, s.j);
         if ((o == S) && (s.j < n-1)) return make_optional<state_type>(s.i, s.j + 1);
         return nullopt;
