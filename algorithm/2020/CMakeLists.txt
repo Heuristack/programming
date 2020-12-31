@@ -62,6 +62,7 @@ add_executable(binary_search searching/binary_search/binary_search.cpp)
 add_executable(tree_search searching/tree_search/binary_search_tree.cpp)
 add_executable(noughts_n_crosses searching/game/noughts_n_crosses.cpp)
 add_executable(n-puzzle searching/puzzle/n-puzzle.cpp)
+add_executable(maze searching/puzzle/maze.cpp)
 add_executable(board_explore searching/state_space/enumerate_paths_on_board.cpp)
 
 #
