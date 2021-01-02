@@ -2486,7 +2486,7 @@ problem_mapping = {
         },
         "18.03 Compute enclosed regions": {
             "C++: matrix_enclosed_regions.cc": {
-                "passed": 0,
+                "passed": 51,
                 "total": 51
             },
             "Java: MatrixEnclosedRegions.java": {
