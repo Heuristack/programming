@@ -6,7 +6,8 @@
 #include "test_framework/timed_executor.h"
 using std::vector;
 
-struct GraphVertex {
+struct GraphVertex
+{
   vector<GraphVertex*> edges;
 };
 
