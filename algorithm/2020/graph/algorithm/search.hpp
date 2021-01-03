@@ -32,20 +32,34 @@ auto search(graph const & g, node const & n, visitor const & f) -> void
     }
 }
 
-template <typename graph, typename node = typename graph::node_type, typename visitor>
+template <typename graph, typename node = typename graph::node_type, typename edge = typename graph::edge_type, typename visitor>
 auto DFS(graph const & g, node const & u, visitor const & f) -> void
 {
-    static typename visa<>::time_type time = 0;
-    static searchable<set<typename graph::node_type>> close;
+    using prop = mixin<node, status, visa<>>;
+    static searchable<map<node,prop>> close;
+    static typename prop::time_type time = 0;
     if (!g.contains(u)) return;
-    close.insert(u);
-    invoke(f,u,status::expanding,time++);
-    for (auto const & e : const_cast<graph&>(g)[u]) {
-        if (auto v = typename graph::node_type(e.t); !close.contains(v)) {
+    close.insert({u,prop(u)});
+    auto & n = close[u];
+    n.s = status::expanding;
+    n.enter = time++;
+    invoke(f,n);
+    for (auto & e : const_cast<graph&>(g)[u]) {
+        if (auto v = node(e.t); !close.contains(v)) {
+            e.c = classified::edge_class::tree;
             DFS(g,v,f);
         }
+        else {
+            switch (close[v].s) {
+            case status::discovered: e.c = classified::edge_class::cross;   break;
+            case status::expanding:  e.c = classified::edge_class::back;    break;
+            case status::processed:  e.c = classified::edge_class::forward; break;
+            }
+        }
     }
-    invoke(f,u,status::processed,time++);
+    n.s = status::processed;
+    n.leave = time++;
+    invoke(f,n);
 }
 
 namespace strategies
