@@ -12,8 +12,16 @@ struct weighted
     weight_type w{};
 };
 
+struct classified
+{
+    enum edge_class { unknown, tree, forward, backward, cross };
+    explicit classified(edge_class c) : c(c) {}
+    classified() = default;
+    edge_class c = unknown;
+};
+
 template <typename vertex, typename ... weight>
-struct edge : weighted<weight> ...
+struct edge : classified, weighted<weight> ...
 {
     static_assert(sizeof...(weight) <= 1);
     using this_type = edge<vertex, weight...>;

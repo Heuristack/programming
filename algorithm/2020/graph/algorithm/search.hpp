@@ -25,9 +25,6 @@ auto search(graph const & g, node const & n, visitor const & f) -> void
                 close[v] = prop(v.v,u.v,u.l+w,status::discovered,0);
                 open.put(close[v]);
             }
-            else {
-                // todo : edge classification according to v's status
-            }
         }
         u.s = status::processed;
         u.leave = time++;

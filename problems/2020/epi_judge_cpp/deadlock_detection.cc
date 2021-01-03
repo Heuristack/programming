@@ -8,13 +8,15 @@ using std::vector;
 
 struct GraphVertex
 {
+  enum status { discovered, expanding, processed };
   vector<GraphVertex*> edges;
 };
 
-bool IsDeadlocked(vector<GraphVertex>* graph) {
-  // TODO - you fill in here.
+bool IsDeadlocked(vector<GraphVertex>* graph)
+{
   return true;
 }
+
 struct Edge {
   int from;
   int to;
