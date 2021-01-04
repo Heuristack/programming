@@ -51,9 +51,9 @@ auto DFS(graph const & g, node const & u, visitor const & f) -> void
         }
         else {
             switch (close[v].s) {
-            case status::discovered: e.c = classified::edge_class::cross;   break;
-            case status::expanding:  e.c = classified::edge_class::back;    break;
-            case status::processed:  e.c = classified::edge_class::forward; break;
+                case status::processed: e.c = classified::edge_class::cross_or_forward; break;
+                case status::expanding: e.c = classified::edge_class::back; break;
+                default: break;
             }
         }
     }

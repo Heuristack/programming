@@ -50,7 +50,7 @@ struct graph : searchable<map<node,set<edge>>>
 
     auto insert_node(vertex_type const & v) -> set<edge_type> & { return base_type::operator[](node_type(v)); }
     auto insert_node(node_type const & n) { insert_node(n.v); }
-    auto insert_edge(vertex_type const & v, edge_type const & e) { insert_node(v).insert(e); }
+    auto insert_edge(vertex_type const & v, edge_type const & e) { insert_node(v).insert(e); insert_node(e.t); }
     auto insert_edge(edge_type const & e, enum class   directed) { insert_edge(e.s,e); }
     auto insert_edge(edge_type const & e, enum class undirected) { insert_edge(e.s,e); insert_edge(e.t,edge_type{e}.reverse()); }
 };

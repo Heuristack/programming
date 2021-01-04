@@ -14,7 +14,7 @@ struct weighted
 
 struct classified
 {
-    enum edge_class { unknown, tree, forward, back, cross };
+    enum edge_class { unknown, tree, back, cross_or_forward };
     explicit classified(edge_class c) : c(c) {}
     classified() = default;
     edge_class c = unknown;
