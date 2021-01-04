@@ -35,9 +35,17 @@ auto search(graph const & g, node const & n, visitor const & f) -> void
 template <typename graph, typename node = typename graph::node_type, typename edge = typename graph::edge_type, typename visitor>
 auto DFS(graph const & g, node const & u, visitor const & f) -> void
 {
-    using prop = mixin<node, status, visa<>>;
+    using prop = mixin<node, parent<node>, status, visa<>>;
     static searchable<map<node,prop>> close;
     static typename prop::time_type time = 0;
+    auto is_ancestor = [](auto & close, node u, node v) {
+        while (close.contains(v)) {
+            auto p = close[v].p;
+            if (p == u.v) return true;
+            else v = node(p);
+        }
+        return false;
+    };
 
     if (!g.contains(u)) return;
 
@@ -48,14 +56,21 @@ auto DFS(graph const & g, node const & u, visitor const & f) -> void
     invoke(f,n);
     for (auto & e : const_cast<graph&>(g)[u]) {
         if (auto v = node(e.t); !close.contains(v)) {
+            close.insert({v,prop(v.v,u.v,status::discovered,0)});
             e.c = classified::edge_class::tree;
             DFS(g,v,f);
         }
         else {
             switch (close[v].s) {
-                case status::processed: e.c = classified::edge_class::cross_or_forward; break;
-                case status::expanding: e.c = classified::edge_class::back; break;
-                default: break;
+            case status::processed:
+                if (is_ancestor(close,u,v)) e.c = classified::edge_class::forward;
+                else e.c = classified::edge_class::cross;
+                break;
+            case status::expanding:
+                e.c = classified::edge_class::back;
+                break;
+            default:
+                break;
             }
         }
     }
