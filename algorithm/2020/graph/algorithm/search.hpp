@@ -38,7 +38,9 @@ auto DFS(graph const & g, node const & u, visitor const & f) -> void
     using prop = mixin<node, status, visa<>>;
     static searchable<map<node,prop>> close;
     static typename prop::time_type time = 0;
+
     if (!g.contains(u)) return;
+
     close.insert({u,prop(u)});
     auto & n = close[u];
     n.s = status::expanding;
