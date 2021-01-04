@@ -82,4 +82,5 @@ add_executable(graph_mst graph/examples/mst.cpp)
 add_executable(graph_flood graph/examples/flood.cpp)
 add_executable(graph_class graph/examples/class.cpp)
 add_executable(graph_simple graph/examples/simple.cpp)
+add_executable(graph_tree graph/examples/tree.cpp)
 
