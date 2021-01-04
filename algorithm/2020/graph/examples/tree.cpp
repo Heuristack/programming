@@ -33,7 +33,7 @@ template <typename node_t, typename visitor_t>
 auto search(node_t * n, visitor_t f)
 {
     if (!n) return;
-    vector<node_t*> close;
+    vector<node_t*> close; // note : this can also be achieved by keeping status in node
     close.push_back(n);
     queue<node_t*> q;
     q.push(n);
