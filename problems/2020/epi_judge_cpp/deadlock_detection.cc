@@ -1,5 +1,7 @@
+#include <algorithm>
 #include <stdexcept>
 #include <vector>
+#include <iterator>
 
 #include "test_framework/generic_test.h"
 #include "test_framework/serialization_traits.h"
@@ -8,13 +10,31 @@ using std::vector;
 
 struct GraphVertex
 {
-  enum status { discovered, expanding, processed };
+  enum { discovered, expanding, processed } status = discovered;
   vector<GraphVertex*> edges;
 };
 
+bool HasCycle(GraphVertex * u)
+{
+  if (u->status == GraphVertex::expanding) return true;
+  u->status = GraphVertex::expanding;
+  for (auto * & v : u->edges) {
+    if (v->status != GraphVertex::discovered) {
+      if (HasCycle(v)) {
+        return true;
+      }
+    }
+  }
+  u->status = GraphVertex::processed;
+  return false;
+}
+
 bool IsDeadlocked(vector<GraphVertex>* graph)
 {
-  return true;
+  if (!graph) return false;
+  return std::any_of(begin(*graph),end(*graph),[](auto & u){
+      return u.status == GraphVertex::discovered && HasCycle(&u);
+    });
 }
 
 struct Edge {

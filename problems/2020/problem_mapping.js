@@ -2500,7 +2500,7 @@ problem_mapping = {
         },
         "18.04 Deadlock detection": {
             "C++: deadlock_detection.cc": {
-                "passed": 0,
+                "passed": 71,
                 "total": 71
             },
             "Java: DeadlockDetection.java": {
