@@ -1314,7 +1314,7 @@ problem_mapping = {
         },
         "11.02 Search a sorted array for entry equal to its index": {
             "C++: search_entry_equal_to_index.cc": {
-                "passed": 0,
+                "passed": 501,
                 "total": 501
             },
             "Java: SearchEntryEqualToIndex.java": {

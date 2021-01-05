@@ -5,10 +5,21 @@
 #include "test_framework/timed_executor.h"
 using std::vector;
 
-int SearchEntryEqualToItsIndex(const vector<int>& A) {
-  // TODO - you fill in here.
-  return 0;
+int SearchEntryEqualToItsIndex(vector<int> const & A)
+{
+  int p = 0, q = A.size() - 1;
+  int d = q - p + 1;
+  int m = p + d/2;
+  while (d > 0) {
+    if (A[m] == m) return m;
+    else if (A[m] > m) q = m - 1;
+    else if (A[m] < m) p = m + 1;
+    d = q - p + 1;
+    m = p + d/2;
+  }
+  return -1;
 }
+
 void SearchEntryEqualToItsIndexWrapper(TimedExecutor& executor,
                                        const vector<int>& A) {
   int result = executor.Run([&] { return SearchEntryEqualToItsIndex(A); });
