@@ -1328,7 +1328,7 @@ problem_mapping = {
         },
         "11.03 Search a cyclically sorted array": {
             "C++: search_shifted_sorted_array.cc": {
-                "passed": 0,
+                "passed": 307,
                 "total": 307
             },
             "Java: SearchShiftedSortedArray.java": {
