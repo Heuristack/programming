@@ -1782,7 +1782,7 @@ problem_mapping = {
     "Chapter 14: Binary Search Trees": {
         "14.00 Bootcamp: Binary Search Trees": {
             "C++: search_in_bst.cc": {
-                "passed": 0,
+                "passed": 955,
                 "total": 955
             },
             "Java: SearchInBst.java": {

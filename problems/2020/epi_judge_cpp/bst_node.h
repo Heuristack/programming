@@ -13,12 +13,12 @@ template <typename T>
 struct BstNode {
   T data;
   unique_ptr<BstNode<T>> left, right;
-  
+
   explicit BstNode(const T& data) : data(data) {}
 
   BstNode(T data, unique_ptr<BstNode<T>> left, unique_ptr<BstNode<T>> right)
       : data(data), left(std::move(left)), right(std::move(right)) {}
-  
+
 };
 
 
