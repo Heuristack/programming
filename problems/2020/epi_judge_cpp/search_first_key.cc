@@ -19,14 +19,14 @@ int SearchFirstOfK(vector<int> const & A, int k)
 {
   if (A.empty()) return -1;
   int p = 0, q = size(A) - 1;
-  int d = q - p;
+  int d = q - p + 1;
   int m = p + d/2;
   int e = -1;
-  while (d >= 0) {
+  while (d > 0) {
     if (k < A[m]) { q = m - 1; }
     else if (k == A[m]) { e = m; q = m - 1; }
     else { p = m + 1; }
-    d = q - p;
+    d = q - p + 1;
     m = p + d/2;
   }
   return e;
