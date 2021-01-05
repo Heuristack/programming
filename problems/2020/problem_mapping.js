@@ -1300,7 +1300,7 @@ problem_mapping = {
     "Chapter 11: Searching": {
         "11.01 Search a sorted array for first occurrence of k": {
             "C++: search_first_key.cc": {
-                "passed": 0,
+                "passed": 314,
                 "total": 314
             },
             "Java: SearchFirstKey.java": {
