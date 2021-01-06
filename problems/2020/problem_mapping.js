@@ -1214,7 +1214,7 @@ problem_mapping = {
     "Chapter 10: Heaps": {
         "10.01 Merge sorted files": {
             "C++: sorted_arrays_merge.cc": {
-                "passed": 0,
+                "passed": 152,
                 "total": 152
             },
             "Java: SortedArraysMerge.java": {
