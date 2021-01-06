@@ -10,7 +10,7 @@ auto n_way_merge(vector<vector<int>> a) -> vector<int>
 
     struct index
     {
-        using iterator = vector<int>::iterator;
+        using iterator = vector<int>::const_iterator;
         index(iterator c, iterator e) : current(c), end(e) {}
         iterator current;
         iterator end;
