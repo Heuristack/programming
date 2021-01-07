@@ -27,7 +27,7 @@ include_directories(graph/include)
 # 01 Data Structures - AHLBHUSQ
 #
 add_executable(array structure/array/partition_forward.cpp)
-add_executable(heap structure/heap/n_way_merge.cpp)
+add_executable(heap structure/heap/k-way_merge.cpp)
 add_executable(linked_list structure/linked_list/linked_list.cpp)
 add_executable(binary_tree structure/binary_tree/binary_tree.cpp)
 add_executable(hash_table structure/hash_table/hash_string.cpp)

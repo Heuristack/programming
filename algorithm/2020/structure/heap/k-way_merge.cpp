@@ -4,7 +4,7 @@
 
 using namespace std;
 
-auto n_way_merge(vector<vector<int>> a) -> vector<int>
+auto merge(vector<vector<int>> vectors) -> vector<int>
 {
     vector<int> m;
 
@@ -14,15 +14,17 @@ auto n_way_merge(vector<vector<int>> a) -> vector<int>
         index(iterator c, iterator e) : current(c), end(e) {}
         iterator current;
         iterator end;
+        // note : by-default priority queue is a max heap, need a min heap here, reverse the order
         bool operator < (index const & that) const { return *current > *that.current; }
     };
 
     priority_queue<index> q;
-    for (auto & v : a) {
+    for (auto & v : vectors) {
         if (!v.empty()) {
             q.emplace(begin(v),end(v));
         }
     }
+
     while (!q.empty()) {
         auto i = q.top();
         q.pop();
@@ -38,7 +40,7 @@ auto n_way_merge(vector<vector<int>> a) -> vector<int>
 int main()
 {
     vector<vector<int>> a {{3,5,7},{0,6},{0,6,28}};
-    for (auto i : n_way_merge(a)) cout << "(" << i << ")";
+    for (auto i : merge(a)) cout << "(" << i << ")";
     cout << endl;
 }
 
