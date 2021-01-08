@@ -16,6 +16,7 @@ auto to_string(iterator b, iterator e) -> string
     return s.str();
 }
 
+// note : 2-way partition forward
 template <typename iterator, typename predicate>
 auto partition_lower(iterator p, iterator r, predicate f)
 {
@@ -27,6 +28,7 @@ auto partition_lower(iterator p, iterator r, predicate f)
     return p;
 }
 
+// note : 2-way partition backward
 template <typename iterator, typename predicate>
 auto partition_upper(iterator p, iterator r, predicate f)
 {
@@ -39,6 +41,7 @@ auto partition_upper(iterator p, iterator r, predicate f)
     return r;
 }
 
+// note : 3-way partition forward and backward
 template <typename iterator, typename predicate>
 auto partition_upper_lower(iterator p, iterator r, predicate f)
 {
