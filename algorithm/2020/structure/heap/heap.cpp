@@ -37,7 +37,7 @@ int main()
     push_heap(begin(heap),next(heap_end));
     cout << to_string(begin(heap),end(heap)) << endl;
 
-    // note : heap is increased by 2, since 3 is accentally already in heap
+    // note : heap is increased by 2, since 3 is accidentally already in heap
     heap_end = is_heap_until(begin(heap),end(heap));
     cout << to_string(begin(heap),heap_end) << endl;
 
