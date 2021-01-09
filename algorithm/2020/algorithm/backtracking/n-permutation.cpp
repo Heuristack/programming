@@ -96,7 +96,6 @@ auto generate_permutation(vector<int> s, int n) -> vector<vector<int>>
     return permutations;
 }
 
-
 template <typename type>
 ostream & operator << (ostream & strm, vector<type> const v) {
     for (auto const & s : v) {

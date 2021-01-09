@@ -11,7 +11,8 @@ using std::vector;
 
 enum class Color { kRed, kWhite, kBlue };
 
-void DutchFlagPartition(int pivot_index, vector<Color>* A_ptr) {
+void DutchFlagPartition(int pivot_index, vector<Color>* A_ptr)
+{
   vector<Color>& A = *A_ptr;
   Color pivot = A[pivot_index];
   /**
