@@ -20,6 +20,7 @@ auto to_string(iterator b, iterator e) -> string
 template <typename iterator, typename predicate>
 auto partition_lower(iterator p, iterator r, predicate f)
 {
+    // note : partitions [b,p), [p,i), [i,r=e)
     for (iterator i = p; i < r; i++) {
         if (f(*i)) {
             iter_swap(p++,i);
@@ -32,6 +33,7 @@ auto partition_lower(iterator p, iterator r, predicate f)
 template <typename iterator, typename predicate>
 auto partition_upper(iterator p, iterator r, predicate f)
 {
+    // note : partitions [b=p,i), [i,r) [r,e)
     for (iterator i = p; i < r;) {
         if (f(*i)) {
             iter_swap(--r,i);
@@ -45,6 +47,7 @@ auto partition_upper(iterator p, iterator r, predicate f)
 template <typename iterator, typename predicate>
 auto partition_upper_lower(iterator p, iterator r, predicate f)
 {
+    // note : partitions [b,p), [p,i), [i,r) [r,e)
     for (iterator i = p; i < r;) {
         if (auto v = f(*i); v == 0) i++;
         else if (v < 0) iter_swap(p++,i++);
