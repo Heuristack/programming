@@ -36,6 +36,7 @@ add_executable(stack structure/stack/stack.cpp)
 add_executable(queue structure/queue/queue.cpp)
 add_executable(cyclic_list structure/linked_list/cyclic_list.cpp)
 add_executable(heap_usages structure/heap/heap_usages.cpp)
+add_executable(is_heap structure/heap/is_heap.cpp)
 add_executable(priority_queue_usages structure/heap/priority_queue_usages.cpp)
 
 #
