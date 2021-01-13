@@ -45,7 +45,7 @@ auto partition_upper(iterator p, iterator r, predicate f)
 
 // note : 3-way partition forward and backward
 template <typename iterator, typename predicate>
-auto partition_upper_lower(iterator p, iterator r, predicate f)
+auto partition_lower_upper(iterator p, iterator r, predicate f)
 {
     // note : partitions [b,p), [p,i), [i,r) [r,e)
     for (iterator i = p; i < r;) {
@@ -74,7 +74,7 @@ int main()
     assert(is_partitioned(begin(v),end(v),[bin_predicate](auto const & e){ return !bin_predicate(e); }));
 
     // note : put target elements at lower & upper locations
-    partition_upper_lower(begin(v),end(v),tri_predicate);
+    partition_lower_upper(begin(v),end(v),tri_predicate);
     cout << to_string(begin(v),end(v)) << endl;
 }
 
