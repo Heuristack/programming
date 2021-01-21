@@ -228,7 +228,7 @@ problem_mapping = {
         },
         "5.04 Advancing through an array": {
             "C++: advance_by_offsets.cc": {
-                "passed": 0,
+                "passed": 2004,
                 "total": 2004
             },
             "Java: AdvanceByOffsets.java": {
