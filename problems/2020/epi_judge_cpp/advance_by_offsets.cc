@@ -9,6 +9,7 @@ using std::max;
 bool CanReachEnd(const vector<int> & max_advance_steps)
 {
   int p = 0, q = max_advance_steps.size() - 1;
+  // note : stop condition is tricky, i <= p && p < q
   for (int i = 0; i <= p && p < q; i++) {
     p = max(p,max_advance_steps[i] + i);
 //  std::cout << "[" << i << "] = " << p << std::endl;
