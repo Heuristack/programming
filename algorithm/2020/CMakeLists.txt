@@ -26,6 +26,7 @@ include_directories(graph/include)
 #
 # 01 Data Structures - AHLBHUSQ
 #
+add_executable(buy_n_sell structure/array/buy_n_sell.cpp)
 add_executable(partition structure/array/partition.cpp)
 add_executable(k-way_merge structure/heap/k-way_merge.cpp)
 add_executable(linked_list structure/linked_list/linked_list.cpp)
