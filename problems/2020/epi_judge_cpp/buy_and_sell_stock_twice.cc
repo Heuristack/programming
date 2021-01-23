@@ -1,9 +1,11 @@
+#include <algorithm>
 #include <vector>
 
 #include "test_framework/generic_test.h"
 using std::vector;
-double BuyAndSellStockTwice(const vector<double>& prices) {
-  // TODO - you fill in here.
+
+double BuyAndSellStockTwice(const vector<double>& prices)
+{
   return 0.0;
 }
 
@@ -14,3 +16,4 @@ int main(int argc, char* argv[]) {
                          "buy_and_sell_stock_twice.tsv", &BuyAndSellStockTwice,
                          DefaultComparator{}, param_names);
 }
+

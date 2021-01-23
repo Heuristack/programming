@@ -26,8 +26,8 @@ include_directories(graph/include)
 #
 # 01 Data Structures - AHLBHUSQ
 #
-add_executable(buy_n_sell structure/array/buy_n_sell.cpp)
 add_executable(partition structure/array/partition.cpp)
+add_executable(max_diff structure/array/max_diff.cpp)
 add_executable(k-way_merge structure/heap/k-way_merge.cpp)
 add_executable(linked_list structure/linked_list/linked_list.cpp)
 add_executable(binary_tree structure/binary_tree/binary_tree.cpp)
@@ -55,6 +55,7 @@ add_executable(euclidean algorithm/iteration_n_recursion/euclidean.cpp)
 add_executable(fibonacci algorithm/iteration_n_recursion/fibonacci.cpp)
 add_executable(factorial algorithm/iteration_n_recursion/factorial.cpp)
 add_executable(powerset  algorithm/iteration_n_recursion/powerset.cpp)
+add_executable(enumerate_pairs algorithm/iteration_n_recursion/enumerate_pairs.cpp)
 add_executable(tsp algorithm/branch_n_bound/traveling_salesman.cpp)
 add_executable(n-queens algorithm/backtracking/n-queens.cpp)
 add_executable(maximum_subarray algorithm/divide_n_conquer/maximum_subarray.cpp)
