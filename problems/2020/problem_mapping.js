@@ -270,7 +270,7 @@ problem_mapping = {
         },
         "5.07 Buy and sell a stock twice": {
             "C++: buy_and_sell_stock_twice.cc": {
-                "passed": 0,
+                "passed": 402,
                 "total": 402
             },
             "Java: BuyAndSellStockTwice.java": {
