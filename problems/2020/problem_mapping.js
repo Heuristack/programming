@@ -298,7 +298,7 @@ problem_mapping = {
         },
         "5.09 Enumerate all primes to n": {
             "C++: prime_sieve.cc": {
-                "passed": 0,
+                "passed": 24,
                 "total": 24
             },
             "Java: PrimeSieve.java": {
