@@ -6,6 +6,8 @@
 using std::vector;
 using std::swap;
 
+void CyclicPermutation(vector<int> perm, vector<int> * A_ptr, int s);
+
 void ApplyPermutation0(vector<int> perm, vector<int> * A_ptr)
 {
   if (!A_ptr || A_ptr->empty()) return;
@@ -18,21 +20,48 @@ void ApplyPermutation0(vector<int> perm, vector<int> * A_ptr)
   return;
 }
 
-void ApplyPermutation(vector<int> perms, vector<int> * A_ptr)
+void ApplyPermutation1(vector<int> perm, vector<int> * A_ptr)
 {
   if (!A_ptr || A_ptr->empty()) return;
   vector<int> & A = *A_ptr;
-  for (int i = 0; i < perms.size(); i++) {
+  for (int i = 0; i < perm.size(); i++) {
     int k = i;
-    while (perms[k] >= 0) {
-      swap(A[i],A[perms[k]]);
-      int t = perms[k];
-      perms[k] -= perms.size();
+    while (perm[k] >= 0) {
+      swap(A[i],A[perm[k]]);
+      int t = perm[k];
+      perm[k] -= perm.size();
       k = t;
     }
   }
-  for (auto & e : perms) { e += perms.size(); }
+  for (auto & e : perm) { e += perm.size(); }
   return;
+}
+
+void ApplyPermutation(vector<int> perm, vector<int> * A_ptr)
+{
+  if (!A_ptr || A_ptr->empty()) return;
+  vector<int> & A = *A_ptr;
+  for (int i = 0; i < A.size(); i++) {
+    int k = i;
+    while (perm[k] != i) {
+      k = perm[k];
+      if (k < i) {
+        break;
+      }
+    }
+    if (i > k) continue;
+    CyclicPermutation(perm,A_ptr,i);
+  }
+}
+
+void CyclicPermutation(vector<int> perm, vector<int> * A_ptr, int s)
+{
+  vector<int> & A = *A_ptr;
+  int k = s;
+  while (perm[k] != s) {
+    swap(A[s],A[perm[k]]);
+    k = perm[k];
+  }
 }
 
 vector<int> ApplyPermutationWrapper(const vector<int>& perm, vector<int> A)
