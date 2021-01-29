@@ -1,17 +1,32 @@
-#include <algorithm>
 #include <functional>
+#include <algorithm>
 #include <iterator>
 #include <vector>
+#include <random>
 
 #include "test_framework/generic_test.h"
 #include "test_framework/random_sequence_checker.h"
 #include "test_framework/timed_executor.h"
-using std::bind;
+
 using std::vector;
-void RandomSampling(int k, vector<int>* A_ptr) {
-  // TODO - you fill in here.
+using std::bind;
+using std::swap;
+using std::random_device;
+using std::mt19937;
+using std::uniform_int_distribution;
+
+void RandomSampling(int k, vector<int> * A_ptr)
+{
+  if (!A_ptr || A_ptr->empty()) return;
+  auto & A = *A_ptr;
+  random_device device;
+  mt19937 engine(device());
+  for (int i = 0; i < k; i++) {
+    swap(A[i], A[uniform_int_distribution<int>{i,static_cast<int>(A.size()) - 1}(engine)]);
+  }
   return;
 }
+
 bool RandomSamplingRunner(TimedExecutor& executor, int k, vector<int> A) {
   using namespace test_framework;
   vector<vector<int>> results;
