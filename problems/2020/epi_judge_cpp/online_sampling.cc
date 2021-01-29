@@ -1,20 +1,37 @@
-#include <algorithm>
 #include <functional>
+#include <algorithm>
 #include <iterator>
 #include <vector>
+#include <random>
+#include <iostream>
 
 #include "test_framework/generic_test.h"
 #include "test_framework/random_sequence_checker.h"
 #include "test_framework/timed_executor.h"
+
+using std::vector;
 using std::bind;
 using std::sort;
-using std::vector;
+using std::random_device;
+using std::mt19937;
+using std::uniform_int_distribution;
+
 // Assumption: there are at least k elements in the stream.
-vector<int> OnlineRandomSample(vector<int>::const_iterator stream_begin,
-                               const vector<int>::const_iterator stream_end,
-                               int k) {
-  // TODO - you fill in here.
-  return {};
+vector<int> OnlineRandomSample(vector<int>::const_iterator b, const vector<int>::const_iterator e, int k)
+{
+  vector<int> running_samples;
+  mt19937 engine((random_device())());
+  for (auto i = b; i != e; i++) {
+    if (int n = distance(b,i); n < k) {
+      running_samples.emplace_back(*i);
+    }
+    else {
+        if (auto r = uniform_int_distribution<int>{0,n}(engine); r < k) {
+            running_samples[r] = *i;
+        }
+    }
+  }
+  return running_samples;
 }
 bool OnlineRandomSamplingRunner(TimedExecutor& executor, vector<int> stream,
                                 int k) {

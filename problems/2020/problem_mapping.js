@@ -354,7 +354,7 @@ problem_mapping = {
         },
         "5.13 Sample online data": {
             "C++: online_sampling.cc": {
-                "passed": 0,
+                "passed": 7,
                 "total": 7
             },
             "Java: OnlineSampling.java": {
