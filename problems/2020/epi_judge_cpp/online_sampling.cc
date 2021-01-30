@@ -26,23 +26,24 @@ vector<int> OnlineRandomSample(vector<int>::const_iterator b, const vector<int>:
       running_samples.emplace_back(*i);
     }
     else {
-        if (auto r = uniform_int_distribution<int>{0,n}(engine); r < k) {
-            running_samples[r] = *i;
-        }
+      if (auto r = uniform_int_distribution<int>{0,n}(engine); r < k) {
+        running_samples[r] = *i;
+      }
     }
   }
   return running_samples;
 }
-bool OnlineRandomSamplingRunner(TimedExecutor& executor, vector<int> stream,
-                                int k) {
+
+bool OnlineRandomSamplingRunner(TimedExecutor& executor, vector<int> stream, int k)
+{
   using namespace test_framework;
   vector<vector<int>> results;
 
   executor.Run([&] {
-    std::generate_n(
-        back_inserter(results), 100000,
-        std::bind(OnlineRandomSample, cbegin(stream), cend(stream), k));
-  });
+      std::generate_n(
+          back_inserter(results), 100000,
+          std::bind(OnlineRandomSample, cbegin(stream), cend(stream), k));
+      });
 
   int total_possible_outcomes = BinomialCoefficient(stream.size(), k);
   sort(begin(stream), end(stream));
@@ -56,10 +57,10 @@ bool OnlineRandomSamplingRunner(TimedExecutor& executor, vector<int> stream,
     sort(begin(result), end(result));
     sequence.emplace_back(
         distance(begin(combinations),
-                 find(begin(combinations), end(combinations), result)));
+          find(begin(combinations), end(combinations), result)));
   }
   return CheckSequenceIsUniformlyRandom(sequence, total_possible_outcomes,
-                                        0.01);
+      0.01);
 }
 
 void OnlineRandomSampleWrapper(TimedExecutor& executor,
@@ -75,3 +76,4 @@ int main(int argc, char* argv[]) {
                          &OnlineRandomSampleWrapper, DefaultComparator{},
                          param_names);
 }
+
