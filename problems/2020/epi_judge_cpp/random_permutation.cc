@@ -1,15 +1,39 @@
 #include <functional>
+#include <algorithm>
 #include <vector>
+#include <random>
 
-#include "test_framework/generic_test.h"
 #include "test_framework/random_sequence_checker.h"
 #include "test_framework/timed_executor.h"
-using std::bind;
+#include "test_framework/generic_test.h"
+
 using std::vector;
-vector<int> ComputeRandomPermutation(int n) {
-  // TODO - you fill in here.
-  return {};
+using std::bind;
+using std::swap;
+using std::random_device;
+using std::mt19937;
+using std::uniform_int_distribution;
+
+void RandomSampling(int k, vector<int> * A_ptr)
+{
+  if (!A_ptr || A_ptr->empty()) return;
+  auto & A = *A_ptr;
+  random_device device;
+  mt19937 engine(device());
+  for (int i = 0; i < k; i++) {
+    swap(A[i], A[uniform_int_distribution<int>{i,static_cast<int>(A.size()) - 1}(engine)]);
+  }
+  return;
 }
+
+vector<int> ComputeRandomPermutation(int n)
+{
+  vector<int> permutation(n);
+  iota(begin(permutation),end(permutation),0);
+  RandomSampling(permutation.size(),&permutation);
+  return permutation;
+}
+
 int Factorial(int n) { return n <= 1 ? 1 : n * Factorial(n - 1); }
 
 int PermutationIndex(vector<int> perm) {
@@ -57,3 +81,4 @@ int main(int argc, char* argv[]) {
       args, "random_permutation.cc", "random_permutation.tsv",
       &ComputeRandomPermutationWrapper, DefaultComparator{}, param_names);
 }
+
