@@ -15,6 +15,7 @@ add_subdirectory(rdtsc)
 add_subdirectory(program_options)
 
 add_executable(accumulator accumulator/main.cpp)
+add_executable(histogram histogram/main.cpp)
 
 add_executable(microbenchmark benchmark/main.cpp)
 target_link_libraries(microbenchmark benchmark)
