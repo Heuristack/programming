@@ -396,7 +396,7 @@ problem_mapping = {
         },
         "5.16 Generate nonuniform random numbers": {
             "C++: nonuniform_random_number.cc": {
-                "passed": 0,
+                "passed": 10,
                 "total": 10
             },
             "Java: NonuniformRandomNumber.java": {

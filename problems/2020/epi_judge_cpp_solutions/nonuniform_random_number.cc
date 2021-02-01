@@ -20,23 +20,18 @@ using std::random_device;
 using std::unordered_map;
 using std::vector;
 
-int NonuniformRandomNumberGeneration(const vector<int>& values,
-                                     const vector<double>& probabilities) {
+int NonuniformRandomNumberGeneration(const vector<int>& values, const vector<double>& probabilities)
+{
   vector<double> prefix_sums_of_probabilities;
   // Creating the endpoints for the intervals corresponding to the
   // probabilities.
-  partial_sum(cbegin(probabilities), cend(probabilities),
-              back_inserter(prefix_sums_of_probabilities));
+  partial_sum(cbegin(probabilities), cend(probabilities), back_inserter(prefix_sums_of_probabilities));
 
   default_random_engine seed((random_device())());
-  const double uniform_0_1 =
-      generate_canonical<double, numeric_limits<double>::digits>(seed);
+  const double uniform_0_1 = generate_canonical<double, numeric_limits<double>::digits>(seed);
   // Find the index of the interval that uniform_0_1 lies in, which is the
   // return value of upper_bound() minus 1.
-  const int interval_idx =
-      distance(cbegin(prefix_sums_of_probabilities),
-               upper_bound(cbegin(prefix_sums_of_probabilities),
-                           cend(prefix_sums_of_probabilities), uniform_0_1));
+  const int interval_idx = distance(cbegin(prefix_sums_of_probabilities), upper_bound(cbegin(prefix_sums_of_probabilities), cend(prefix_sums_of_probabilities), uniform_0_1));
   return values[interval_idx];
 }
 
