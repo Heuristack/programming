@@ -1,3 +1,20 @@
+Entropy of a random device
+--------------------------
+```C++
+#include <iostream>
+#include <random>
+
+using namespace std;
+
+int main()
+{
+    if (random_device device; device.entropy() == 0) {
+        cout << "deterministic (e.g., pseudo-random)" << endl;
+    }
+}
+
+```
+
 minus the minimum integer is itself
 -----------------------------------
 ```C++
