@@ -1,20 +1,35 @@
 #include <algorithm>
 #include <functional>
+#include <iterator>
+#include <numeric>
+#include <random>
 #include <unordered_map>
 #include <vector>
 
 #include "test_framework/generic_test.h"
 #include "test_framework/random_sequence_checker.h"
 #include "test_framework/timed_executor.h"
+
 using std::abs;
 using std::bind;
+using std::default_random_engine;
+using std::distance;
+using std::generate_canonical;
+using std::numeric_limits;
+using std::random_device;
 using std::unordered_map;
 using std::vector;
-int NonuniformRandomNumberGeneration(const vector<int>& values,
-                                     const vector<double>& probabilities) {
-  // TODO - you fill in here.
-  return 0;
+
+int NonuniformRandomNumberGeneration(const vector<int>& values, const vector<double>& probabilities)
+{
+  vector<double> cumulative;
+  partial_sum(cbegin(probabilities),cend(probabilities),back_inserter(cumulative));
+  default_random_engine engine((random_device())());
+  double canonical = generate_canonical<double,numeric_limits<double>::digits>(engine);
+  int i = distance(cbegin(cumulative),upper_bound(cbegin(cumulative),cend(cumulative),canonical));
+  return values[i];
 }
+
 bool NonuniformRandomNumberGenerationRunner(
     TimedExecutor& executor, const vector<int>& values,
     const vector<double>& probabilities) {
