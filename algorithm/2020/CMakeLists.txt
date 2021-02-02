@@ -49,6 +49,8 @@ add_executable(branch_n_bound algorithm/branch_n_bound/knapsack.cpp)
 add_executable(divide_n_conquer algorithm/divide_n_conquer/divide_n_conquer.cpp)
 add_executable(dynamic_programming algorithm/dynamic_programming/minimum_coins_change.cpp)
 add_executable(greedy_strategy algorithm/greedy_strategy/greedy_coins_change.cpp)
+add_executable(generate_gausslan algorithm/monte_carlo_method/generate_gausslan.cpp)
+
 
 add_executable(euclidean algorithm/iteration_n_recursion/euclidean.cpp)
 add_executable(fibonacci algorithm/iteration_n_recursion/fibonacci.cpp)
