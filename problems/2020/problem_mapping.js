@@ -1682,7 +1682,7 @@ problem_mapping = {
         },
         "13.06 Render a calendar": {
             "C++: calendar_rendering.cc": {
-                "passed": 0,
+                "passed": 97,
                 "total": 97
             },
             "Java: CalendarRendering.java": {
