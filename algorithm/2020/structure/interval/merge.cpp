@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <vector>
-#include <stack>
 #include <iostream>
 #include "interval.h"
 
@@ -11,7 +10,7 @@ int main()
     vector<interval> intervals = {{-4,-1},{0,2},{3,6},{7,9},{11,12},{14,17},{1,8}};
     for (auto i : intervals) cout << i; cout << endl;
     sort(begin(intervals),end(intervals),[](auto const & a, auto const & b) {
-        return a.q < b.q;
+        return a.p < b.p;
     });
     for (auto i : intervals) cout << i; cout << endl;
 
@@ -26,19 +25,19 @@ int main()
     for (auto e : endpoints) cout << e; cout << endl;
 
     vector<interval> results;
-    vector<endpoint> s;
+    vector<endpoint> stack;
     for (auto e : endpoints) {
-        if (e.b == 0) {
-            s.push_back(e);
+        if (e.m == 0) {
+            stack.push_back(e);
         }
         else {
-            if (s.back().i == e.i) {
-                s.pop_back();
+            if (stack.back().i == e.i) {
+                stack.pop_back();
                 results.push_back(intervals[e.i]);
             }
         }
     }
-    for (auto e : s) cout << e; cout << endl;
+    for (auto e : stack) cout << e; cout << endl;
     for (auto i : results) cout << i; cout << endl;
 }
 
