@@ -1,44 +1,10 @@
 #include <algorithm>
 #include <vector>
 #include <stack>
-#include <cassert>
-#include <ostream>
 #include <iostream>
+#include "interval.h"
 
 using namespace std;
-
-struct interval
-{
-    interval(int p, int q): p(p),q(q) { assert(p < q); }
-    int p,q;
-};
-
-ostream & operator << (ostream & s, interval const & i)
-{
-    return s << "(" << i.p << "," << i.q << ")";
-}
-
-bool is_disjoint(vector<interval> const & intervals)
-{
-    if (intervals.size() < 2) return 1;
-    for (int i = 0; i < intervals.size() - 1; i++) {
-        if (intervals[i].q >= intervals[i+1].p) {
-            return 0;
-        }
-    }
-    return 1;
-}
-
-struct endpoint
-{
-    endpoint(int e, int i, int b): e(e),i(i),b(b) {}
-    int e,i,b;
-};
-
-ostream & operator << (ostream & s, endpoint const & e)
-{
-    return s << "(" << e.e << "," << e.i << "," << e.b << ")";
-}
 
 int main()
 {
@@ -48,6 +14,7 @@ int main()
         return a.q < b.q;
     });
     for (auto i : intervals) cout << i; cout << endl;
+
     vector<endpoint> endpoints;
     for (int i = 0; i < intervals.size(); i++) {
         endpoints.emplace_back(intervals[i].p,i,0);
