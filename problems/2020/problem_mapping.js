@@ -1710,7 +1710,7 @@ problem_mapping = {
         },
         "13.08 Compute the union of intervals": {
             "C++: intervals_union.cc": {
-                "passed": 0,
+                "passed": 191,
                 "total": 191
             },
             "Java: IntervalsUnion.java": {
