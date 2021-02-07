@@ -13,7 +13,6 @@ struct Interval {
     bool is_closed;
     int val;
   };
-
   Endpoint left, right;
 };
 
