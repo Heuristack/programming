@@ -1696,7 +1696,7 @@ problem_mapping = {
         },
         "13.07 Merging intervals": {
             "C++: interval_add.cc": {
-                "passed": 0,
+                "passed": 103,
                 "total": 103
             },
             "Java: IntervalAdd.java": {

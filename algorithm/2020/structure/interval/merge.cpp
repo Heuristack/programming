@@ -37,7 +37,8 @@ auto merge(vector<interval> & intervals) -> vector<interval>
         endpoints.emplace_back(intervals[i].q,i,1);
     }
     sort(begin(endpoints),end(endpoints),[](auto const & a, auto const & b) {
-        return a.e < b.e;
+        if (a.e == b.e) { return a.m < b.m; }
+        else return a.e < b.e;
     });
 
     vector<interval> results;
