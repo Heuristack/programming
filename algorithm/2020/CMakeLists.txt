@@ -40,7 +40,7 @@ add_executable(is_heap structure/heap/is_heap.cpp)
 add_executable(priority_queue_usages structure/heap/priority_queue_usages.cpp)
 add_executable(count_bits structure/bitset/count_bits.cpp)
 add_executable(merge_interval structure/interval/merge.cpp)
-add_executable(disjoint_interval structure/interval/disjoint.cpp)
+add_executable(disjoint_interval structure/interval/is_disjoint.cpp)
 
 #
 # 02 Algo Techniques - RBBDDG
