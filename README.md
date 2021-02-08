@@ -15,8 +15,8 @@ int main()
 
 ```
 
-minus the minimum integer is itself
------------------------------------
+Negate the minimum integer is itself
+------------------------------------
 ```C++
 #include <iostream>
 #include <limits>
