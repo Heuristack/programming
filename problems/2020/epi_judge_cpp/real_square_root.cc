@@ -14,7 +14,7 @@ int compare(double a, double b)
 double SquareRoot(double x)
 {
   double p,q;
-  if (x < 1.0) { p = x; q = 1.0; }
+  if (x < 1.0/*compare(x,1.0) < 0*/) { p = x; q = 1.0; }
   else { p = 1.0; q = x; }
 
   while (compare(p,q) < 0) {
@@ -22,7 +22,7 @@ double SquareRoot(double x)
     double s = m * m;
     if (compare(s,x) == 0) return m;
     if (compare(s,x) < 0) p = m;
-    if (compare(s,x) > 0) q = m;
+    else /*if (compare(s,x) > 0)*/ q = m;
   }
   return p;
 }
