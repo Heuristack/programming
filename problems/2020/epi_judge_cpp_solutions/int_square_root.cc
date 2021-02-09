@@ -1,6 +1,7 @@
 #include "test_framework/generic_test.h"
 
-int SquareRoot(int k) {
+int SquareRoot(int k)
+{
   int left = 0, right = k;
   // Candidate interval [left, right] where everything before left has
   // square <= k, and everything after right has square > k.
