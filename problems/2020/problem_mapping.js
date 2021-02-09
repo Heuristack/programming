@@ -1370,7 +1370,7 @@ problem_mapping = {
         },
         "11.06 Search in a 2D sorted array": {
             "C++: search_row_col_sorted_matrix.cc": {
-                "passed": 0,
+                "passed": 194,
                 "total": 194
             },
             "Java: SearchRowColSortedMatrix.java": {

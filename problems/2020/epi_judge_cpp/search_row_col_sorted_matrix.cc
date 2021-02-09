@@ -3,9 +3,17 @@
 #include "test_framework/generic_test.h"
 using std::vector;
 
-bool MatrixSearch(const vector<vector<int>>& A, int x) {
-  // TODO - you fill in here.
-  return true;
+bool MatrixSearch(vector<vector<int>> const & a, int x)
+{
+  if (a.empty() || a[0].empty()) return 0;
+  int m = a.size();
+  int n = a.back().size();
+  for (int i = 0, j = n - 1; i <= m - 1 && 0 <= j;) {
+    if (auto e = a[i][j]; x == e) { return 1; }
+    else if (x < e) { j--; }
+    else if (x > e) { i++; }
+  }
+  return 0;
 }
 
 int main(int argc, char* argv[]) {
@@ -15,3 +23,4 @@ int main(int argc, char* argv[]) {
                          "search_row_col_sorted_matrix.tsv", &MatrixSearch,
                          DefaultComparator{}, param_names);
 }
+

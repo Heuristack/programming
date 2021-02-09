@@ -8,7 +8,7 @@ bool binary_search(board<int> const & a, int k)
 {
     int m = a.size_m();
     int n = a.size_n();
-    for (int i = 0, j = n-1; i < m && 0 < j;) {
+    for (int i = 0, j = n-1; i <= m - 1 && 0 <= j;) {
         if (auto e = a.get(i,j); e == k) return 1;
         else if (k < e) { j--; } // eliminate col
         else if (k > e) { i++; } // eliminate row
