@@ -7,11 +7,8 @@ public:
     using link_type = node_type *;
 
 public:
-    node(data_type v, link_type l, link_type r)
-    : value(v),ltree(l),rtree(r) {}
-
-    explicit node(data_type v)
-    : node(v,nullptr,nullptr) {}
+    node(data_type v, link_type l, link_type r) : value(v),ltree(l),rtree(r) {}
+    explicit node(data_type v) : node(v,nullptr,nullptr) {}
 
 public:
     data_type value;

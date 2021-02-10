@@ -6,7 +6,7 @@
 
 using namespace std;
 
-#include "binary_search_tree.hpp"
+#include "binary_tree/binary_tree.hpp"
 #include "traverse.ipp"
 #include "property.ipp"
 #include "search.ipp"

@@ -3,11 +3,12 @@
 
 #include "bst_node.h"
 #include "test_framework/generic_test.h"
+
 using std::unique_ptr;
 using std::vector;
 
-vector<int> FindKLargestInBST(const unique_ptr<BstNode<int>>& tree, int k) {
-  // TODO - you fill in here.
+vector<int> FindKLargestInBST(unique_ptr<BstNode<int>> const & tree, int k)
+{
   return {};
 }
 
@@ -18,3 +19,4 @@ int main(int argc, char* argv[]) {
                          "k_largest_values_in_bst.tsv", &FindKLargestInBST,
                          UnorderedComparator{}, param_names);
 }
+
