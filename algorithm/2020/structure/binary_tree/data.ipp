@@ -89,3 +89,20 @@ auto binary_tree_3()
     return tree;
 }
 
+template <typename node_type = node<name_data>>
+auto binary_tree_4()
+{
+    node_type * tree = new node_type({'A',108},
+        new node_type({'B',108},
+            new node_type({'L',-10},
+                new node_type({'D',-14}),
+                new node_type({'E',2})),
+            new node_type({'F',108})),
+        new node_type({'G',285},
+            new node_type({'H',243}),
+            new node_type({'I',285},
+                nullptr,
+                new node_type({'J',401}))));
+    return tree;
+}
+

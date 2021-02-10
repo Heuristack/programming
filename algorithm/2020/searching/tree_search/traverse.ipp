@@ -8,6 +8,15 @@ auto binary_search_tree_traverse(typename node_t::link_type tree, vistor_t f)
 }
 
 template <typename node_t, typename vistor_t>
+auto binary_search_tree_traverse_reverse(typename node_t::link_type tree, vistor_t f)
+{
+    if (!tree) return;
+    binary_search_tree_traverse_reverse<node_t>(tree->rtree,f);
+    f(tree);
+    binary_search_tree_traverse_reverse<node_t>(tree->ltree,f);
+}
+
+template <typename node_t, typename vistor_t>
 auto binary_search_tree_explore(typename node_t::link_type tree, vistor_t f)
 {
     queue<typename node_t::link_type> q;
