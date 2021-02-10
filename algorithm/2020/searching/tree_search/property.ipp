@@ -1,7 +1,5 @@
 template <typename node_t>
-auto is_binary_search_tree(typename node_t::link_type tree,
-    typename node_t::data_type lower_bound,
-    typename node_t::data_type upper_bound)
+auto is_binary_search_tree(typename node_t::link_type tree, typename node_t::data_type lower_bound, typename node_t::data_type upper_bound)
 {
     if (!tree) return true;
     if (tree->value < lower_bound || tree->value > upper_bound) return false;
