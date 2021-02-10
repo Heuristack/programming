@@ -4,9 +4,9 @@
 #include "test_framework/generic_test.h"
 using std::unique_ptr;
 
-BstNode<int> * SearchBST(const unique_ptr<BstNode<int>>& tree, int key)
+BstNode<int> * SearchBST(unique_ptr<BstNode<int>> const & tree, int key)
 {
-  if (!tree.get()) return nullptr;
+  if (!tree) return nullptr;
   if (tree->data == key) return tree.get();
   else if (key < tree->data) return SearchBST(tree->left,key);
   else return SearchBST(tree->right,key);
@@ -24,3 +24,4 @@ int main(int argc, char* argv[]) {
   return GenericTestMain(args, "search_in_bst.cc", "search_in_bst.tsv",
                          &SearchBSTWrapper, DefaultComparator{}, param_names);
 }
+

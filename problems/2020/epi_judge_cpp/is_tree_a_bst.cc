@@ -6,15 +6,15 @@
 using std::unique_ptr;
 using std::numeric_limits;
 
-bool IsBinaryTreeBST0(const unique_ptr<BinaryTreeNode<int>>& tree, int lower, int upper)
+bool IsBinaryTreeBST0(unique_ptr<BinaryTreeNode<int>> const & tree, int lower, int upper)
 {
-  if (!tree.get()) return true;
+  if (!tree) return true;
   if (tree->data < lower || tree->data > upper) return false;
   return IsBinaryTreeBST0(tree->left,lower,tree->data)
       && IsBinaryTreeBST0(tree->right,tree->data,upper);
 }
 
-bool IsBinaryTreeBST(const unique_ptr<BinaryTreeNode<int>>& tree)
+bool IsBinaryTreeBST(unique_ptr<BinaryTreeNode<int>> const & tree)
 {
   return IsBinaryTreeBST0(tree,numeric_limits<int>::min(),numeric_limits<int>::max());
 }
