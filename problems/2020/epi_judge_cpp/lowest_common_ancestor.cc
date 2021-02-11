@@ -1,17 +1,33 @@
 #include <memory>
+#include <type_traits>
 
 #include "binary_tree_node.h"
 #include "test_framework/binary_tree_utils.h"
 #include "test_framework/generic_test.h"
 #include "test_framework/test_failure.h"
 #include "test_framework/timed_executor.h"
+
 using std::unique_ptr;
-BinaryTreeNode<int>* Lca(const unique_ptr<BinaryTreeNode<int>>& tree,
-                         const unique_ptr<BinaryTreeNode<int>>& node0,
-                         const unique_ptr<BinaryTreeNode<int>>& node1) {
-  // TODO - you fill in here.
-  return nullptr;
+
+// note : this seems not correct
+BinaryTreeNode<int>* Lca(const unique_ptr<BinaryTreeNode<int>>& tree, const unique_ptr<BinaryTreeNode<int>>& node0, const unique_ptr<BinaryTreeNode<int>>& node1)
+{
+  BinaryTreeNode<int> * p = nullptr;
+  BinaryTreeNode<int> * q = nullptr;
+  BinaryTreeNode<int> * r = tree.get();
+  if (!r) return nullptr;
+
+  if (node0->data < node1->data) { p = node0.get(); q = node1.get(); }
+  else { q = node0.get(); p = node1.get(); }
+
+  while (r->data < p->data || r->data > q->data) {
+    while (r->data < p->data) r = r->right.get();
+    while (r->data > q->data) r = r->left.get();
+  }
+
+  return r;
 }
+
 int LcaWrapper(TimedExecutor& executor,
                const unique_ptr<BinaryTreeNode<int>>& tree, int key0,
                int key1) {
@@ -33,3 +49,4 @@ int main(int argc, char* argv[]) {
                          "lowest_common_ancestor.tsv", &LcaWrapper,
                          DefaultComparator{}, param_names);
 }
+

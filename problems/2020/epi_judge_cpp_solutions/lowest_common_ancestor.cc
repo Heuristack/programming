@@ -9,18 +9,16 @@
 using std::unique_ptr;
 
 struct Status;
-Status LcaHelper(const unique_ptr<BinaryTreeNode<int>>&,
-                 const unique_ptr<BinaryTreeNode<int>>&,
-                 const unique_ptr<BinaryTreeNode<int>>&);
+Status LcaHelper(const unique_ptr<BinaryTreeNode<int>>&, const unique_ptr<BinaryTreeNode<int>>&, const unique_ptr<BinaryTreeNode<int>>&);
 
-struct Status {
+struct Status
+{
   int num_target_nodes;
   BinaryTreeNode<int>* ancestor;
 };
 
-BinaryTreeNode<int>* Lca(const unique_ptr<BinaryTreeNode<int>>& tree,
-                         const unique_ptr<BinaryTreeNode<int>>& node0,
-                         const unique_ptr<BinaryTreeNode<int>>& node1) {
+BinaryTreeNode<int>* Lca(const unique_ptr<BinaryTreeNode<int>>& tree, const unique_ptr<BinaryTreeNode<int>>& node0, const unique_ptr<BinaryTreeNode<int>>& node1)
+{
   return LcaHelper(tree, node0, node1).ancestor;
 }
 
@@ -28,9 +26,8 @@ BinaryTreeNode<int>* Lca(const unique_ptr<BinaryTreeNode<int>>& tree,
 // 0, 1, or 2 depending on how many of {node0, node1} are present in
 // the tree. If both are present in the tree, when ancestor is
 // assigned to a non-null value, it is the LCA.
-Status LcaHelper(const unique_ptr<BinaryTreeNode<int>>& tree,
-                 const unique_ptr<BinaryTreeNode<int>>& node0,
-                 const unique_ptr<BinaryTreeNode<int>>& node1) {
+Status LcaHelper(const unique_ptr<BinaryTreeNode<int>>& tree, const unique_ptr<BinaryTreeNode<int>>& node0, const unique_ptr<BinaryTreeNode<int>>& node1)
+{
   if (tree == nullptr) {
     return {/*num_target_nodes=*/0, /*ancestor=*/nullptr};
   }
@@ -45,15 +42,13 @@ Status LcaHelper(const unique_ptr<BinaryTreeNode<int>>& tree,
     // Found both nodes in the right subtree.
     return right_result;
   }
-  int num_target_nodes = left_result.num_target_nodes +
-                         right_result.num_target_nodes + (tree == node0) +
-                         (tree == node1);
+  int num_target_nodes = left_result.num_target_nodes + right_result.num_target_nodes
+      + (tree == node0) + (tree == node1);
   return {num_target_nodes, num_target_nodes == 2 ? tree.get() : nullptr};
 }
 
-int LcaWrapper(TimedExecutor& executor,
-               const unique_ptr<BinaryTreeNode<int>>& tree, int key0,
-               int key1) {
+int LcaWrapper(TimedExecutor& executor, const unique_ptr<BinaryTreeNode<int>>& tree, int key0, int key1)
+{
   const unique_ptr<BinaryTreeNode<int>>& node0 = MustFindNode(tree, key0);
   const unique_ptr<BinaryTreeNode<int>>& node1 = MustFindNode(tree, key1);
 
@@ -65,7 +60,8 @@ int LcaWrapper(TimedExecutor& executor,
   return result->data;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
   std::vector<std::string> args{argv + 1, argv + argc};
   std::vector<std::string> param_names{"executor", "tree", "key0", "key1"};
   return GenericTestMain(args, "lowest_common_ancestor.cc",
