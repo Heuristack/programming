@@ -14,9 +14,9 @@ BstNode<int>* FindLca(const unique_ptr<BstNode<int>>& tree, const unique_ptr<Bst
     while (r->data < p->data) r = r->right.get();
     while (r->data > q->data) r = r->left.get();
   }
-
   return r;
 }
+
 int LcaWrapper(TimedExecutor& executor,
                const std::unique_ptr<BstNode<int>>& tree, int key0, int key1) {
   const unique_ptr<BstNode<int>>& node0 = MustFindNode(tree, key0);
