@@ -7,9 +7,19 @@
 using std::unique_ptr;
 using std::vector;
 
+auto FindKLargestInBST0(unique_ptr<BstNode<int>> const & tree, int k, vector<int> & v)
+{
+  if (!tree) return;
+  if (v.size() < k) FindKLargestInBST0(tree->right,k,v);
+  if (v.size() < k) v.emplace_back(tree->data);
+  if (v.size() < k) FindKLargestInBST0(tree->left,k,v);
+}
+
 vector<int> FindKLargestInBST(unique_ptr<BstNode<int>> const & tree, int k)
 {
-  return {};
+  vector<int> v;
+  FindKLargestInBST0(tree,k,v);
+  return v;
 }
 
 int main(int argc, char* argv[]) {
