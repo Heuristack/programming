@@ -9,23 +9,9 @@
 
 using std::unique_ptr;
 
-// note : this seems not correct
 BinaryTreeNode<int>* Lca(const unique_ptr<BinaryTreeNode<int>>& tree, const unique_ptr<BinaryTreeNode<int>>& node0, const unique_ptr<BinaryTreeNode<int>>& node1)
 {
-  BinaryTreeNode<int> * p = nullptr;
-  BinaryTreeNode<int> * q = nullptr;
-  BinaryTreeNode<int> * r = tree.get();
-  if (!r) return nullptr;
-
-  if (node0->data < node1->data) { p = node0.get(); q = node1.get(); }
-  else { q = node0.get(); p = node1.get(); }
-
-  while (r->data < p->data || r->data > q->data) {
-    while (r->data < p->data) r = r->right.get();
-    while (r->data > q->data) r = r->left.get();
-  }
-
-  return r;
+  return nullptr;
 }
 
 int LcaWrapper(TimedExecutor& executor,
