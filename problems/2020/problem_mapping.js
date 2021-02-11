@@ -1838,7 +1838,7 @@ problem_mapping = {
         },
         "14.04 Compute the LCA in a BST": {
             "C++: lowest_common_ancestor_in_bst.cc": {
-                "passed": 0,
+                "passed": 951,
                 "total": 951
             },
             "Java: LowestCommonAncestorInBst.java": {

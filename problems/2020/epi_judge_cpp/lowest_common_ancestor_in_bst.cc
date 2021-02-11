@@ -7,13 +7,15 @@
 #include "test_framework/timed_executor.h"
 using std::unique_ptr;
 
-// Input nodes are nonempty and the key at s is less than or equal to that at
-// b.
-BstNode<int>* FindLca(const unique_ptr<BstNode<int>>& tree,
-                      const unique_ptr<BstNode<int>>& s,
-                      const unique_ptr<BstNode<int>>& b) {
-  // TODO - you fill in here.
-  return nullptr;
+// Input nodes are nonempty and the key at s is less than or equal to that at b.
+BstNode<int>* FindLca(const unique_ptr<BstNode<int>>& tree, const unique_ptr<BstNode<int>>& p, const unique_ptr<BstNode<int>>& q) {
+  auto * r = tree.get();
+  while (r->data < p->data || r->data > q->data) {
+    while (r->data < p->data) r = r->right.get();
+    while (r->data > q->data) r = r->left.get();
+  }
+
+  return r;
 }
 int LcaWrapper(TimedExecutor& executor,
                const std::unique_ptr<BstNode<int>>& tree, int key0, int key1) {
