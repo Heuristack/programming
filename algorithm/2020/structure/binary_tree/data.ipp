@@ -9,6 +9,9 @@ public:
     long data;
 };
 
+bool operator < (name_data const & a, name_data const & b) { return a.data < b.data; }
+bool operator > (name_data const & a, name_data const & b) { return a.data > b.data; }
+
 ostream & operator << (ostream & s, name_data const & v)
 {
     return s << v.name << ":" << v.data;
@@ -91,6 +94,33 @@ auto binary_tree_3()
 
 template <typename node_type = node<name_data>>
 auto binary_tree_4()
+{
+    node_type * tree = new node_type({'A',19},
+        new node_type({'B',7},
+            new node_type({'C',3},
+                new node_type({'D',2}),
+                new node_type({'E',5})),
+            new node_type({'F',11},
+                nullptr,
+                new node_type({'G',17},
+                    new node_type({'H',13}),
+                    nullptr))),
+        new node_type({'I',43},
+            new node_type({'J',23},
+                nullptr,
+                new node_type({'K',37},
+                    new node_type({'L',29},
+                        nullptr,
+                        new node_type({'M',31})),
+                    new node_type({'N',41}))),
+            new node_type({'O',47},
+                nullptr,
+                new node_type({'P',53}))));
+    return tree;
+}
+
+template <typename node_type = node<name_data>>
+auto binary_tree_5()
 {
     node_type * tree = new node_type({'A',108},
         new node_type({'B',108},

@@ -23,7 +23,7 @@ int main()
 {
     using node_type = node<name_data>;
 
-    node_type * tree = binary_tree_4();
+    node_type * tree = binary_tree_5();
     binary_search_tree_traverse_reverse<node_type>(tree,[](node_type * n){ cout << *n; });
     cout << endl;
 
