@@ -1852,7 +1852,7 @@ problem_mapping = {
         },
         "14.05 Reconstruct a BST from traversal data": {
             "C++: bst_from_preorder.cc": {
-                "passed": 0,
+                "passed": 950,
                 "total": 950
             },
             "Java: BstFromPreorder.java": {
