@@ -12,8 +12,8 @@ using std::next;
 using std::numeric_limits;
 using std::vector;
 
-int FindClosestElementsInSortedArrays(
-    const vector<vector<int>>& sorted_arrays) {
+int FindClosestElementsInSortedArrays(const vector<vector<int>>& sorted_arrays)
+{
   struct IterTail {
     vector<int>::const_iterator iter, tail;
   };

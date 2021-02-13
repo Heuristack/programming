@@ -5,7 +5,7 @@ using std::vector;
 
 int FindClosestElementsInSortedArrays(vector<vector<int>> const & sorted_arrays)
 {
-  // note : skip this ...
+  // note : skip ...
   return 0;
 }
 

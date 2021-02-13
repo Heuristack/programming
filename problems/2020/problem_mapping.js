@@ -1866,7 +1866,7 @@ problem_mapping = {
         },
         "14.06 Find the closest entries in three sorted arrays": {
             "C++: minimum_distance_3_sorted_arrays.cc": {
-                "passed": 0,
+                "passed": 51,
                 "total": 51
             },
             "Java: MinimumDistance3SortedArrays.java": {
@@ -1908,7 +1908,7 @@ problem_mapping = {
         },
         "14.09 Test if three BST nodes are totally ordered": {
             "C++: descendant_and_ancestor_in_bst.cc": {
-                "passed": 0,
+                "passed": 958,
                 "total": 958
             },
             "Java: DescendantAndAncestorInBst.java": {
