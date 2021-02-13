@@ -1922,7 +1922,7 @@ problem_mapping = {
         },
         "14.10 The range lookup problem": {
             "C++: range_lookup_in_bst.cc": {
-                "passed": 0,
+                "passed": 954,
                 "total": 954
             },
             "Java: RangeLookupInBst.java": {

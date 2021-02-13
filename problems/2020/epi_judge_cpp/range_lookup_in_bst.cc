@@ -7,17 +7,33 @@
 using std::unique_ptr;
 using std::vector;
 
-struct Interval {
-  int left, right;
-};
+struct Interval { int left, right; };
 
-vector<int> RangeLookupInBST(const unique_ptr<BstNode<int>>& tree,
-                             const Interval& interval) {
-  // TODO - you fill in here.
-  return {};
+void RangeLookupInBSTHelper(unique_ptr<BstNode<int>> const & tree, Interval const & interval, vector<int> & result)
+{
+  if (!tree) return;
+  if (interval.left <= tree->data && tree->data <= interval.right) {
+    RangeLookupInBSTHelper(tree->left,interval,result);
+    result.emplace_back(tree->data);
+    RangeLookupInBSTHelper(tree->right,interval,result);
+    return;
+  }
+  if (tree->data < interval.left) {
+    RangeLookupInBSTHelper(tree->right,interval,result);
+    return;
+  }
+  if (tree->data > interval.right) {
+    RangeLookupInBSTHelper(tree->left,interval,result);
+    return;
+  }
 }
-void RangeLookupInBSTHelper(const unique_ptr<BstNode<int>>& tree,
-                            const Interval& interval, vector<int>* result) {}
+
+vector<int> RangeLookupInBST(unique_ptr<BstNode<int>> const & tree, Interval const & interval)
+{
+  vector<int> values;
+  RangeLookupInBSTHelper(tree,interval,values);
+  return values;
+}
 
 namespace test_framework {
 template <>
