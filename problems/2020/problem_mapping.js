@@ -1894,7 +1894,7 @@ problem_mapping = {
         },
         "14.08 Build a minimum height BST from a sorted array": {
             "C++: bst_from_sorted_array.cc": {
-                "passed": 0,
+                "passed": 87,
                 "total": 87
             },
             "Java: BstFromSortedArray.java": {

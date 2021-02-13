@@ -1,21 +1,33 @@
-#include <memory>
+#include <iterator>
 #include <vector>
+#include <memory>
+#include <iostream>
 
 #include "bst_node.h"
 #include "test_framework/binary_tree_utils.h"
 #include "test_framework/generic_test.h"
 #include "test_framework/test_failure.h"
 #include "test_framework/timed_executor.h"
+
+using std::make_unique;
 using std::unique_ptr;
 using std::vector;
+using std::cout;
+using std::endl;
 
-unique_ptr<BstNode<int>> BuildMinHeightBSTFromSortedArray(
-    const vector<int>& A) {
-  // TODO - you fill in here.
-  return nullptr;
+unique_ptr<BstNode<int>> BuildMinHeightBSTFromSortedArray(vector<int> const & a)
+{
+  auto p = begin(a), q = end(a);
+  auto d = distance(p,q);
+  if (d <= 0) return {};
+  auto m = next(p, d/2);
+  return make_unique<BstNode<int>>(*m,
+    BuildMinHeightBSTFromSortedArray(vector<int>(p,m)),
+    BuildMinHeightBSTFromSortedArray(vector<int>(next(m),q)));
 }
-int BuildMinHeightBSTFromSortedArrayWrapper(TimedExecutor& executor,
-                                            const vector<int>& A) {
+
+int BuildMinHeightBSTFromSortedArrayWrapper(TimedExecutor& executor, const vector<int>& A)
+{
   auto result =
       executor.Run([&] { return BuildMinHeightBSTFromSortedArray(A); });
 
@@ -33,3 +45,4 @@ int main(int argc, char* argv[]) {
                          &BuildMinHeightBSTFromSortedArrayWrapper,
                          DefaultComparator{}, param_names);
 }
+
