@@ -10,12 +10,10 @@ auto lower_bound_search(iterator_type p, iterator_type r, value_type v)
 {
     auto e = r;
     auto d = distance(p,r);
-    auto m = p + d/2;
     while (d > 0) {
-        if (v <= *m) { e = r = m; }
+        if (auto m = p + d/2; v <= *m) { e = r = m; }
         else { p = next(m); }
         d = distance(p,r);
-        m = p + d/2;
     }
     return e;
 }

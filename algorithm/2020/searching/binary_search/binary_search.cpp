@@ -8,14 +8,10 @@ template <typename iterator_type, typename value_type>
 auto binary_search_iterative(iterator_type p, iterator_type r, value_type v)
 {
     auto e = r;
-    auto d = distance(p,r);
-    auto m = p + d/2;
-    while (d > 0) {
-        if (v == *m) return m;
+    for (auto d = distance(p,r); d > 0; d = distance(p,r)) {
+        if (auto m = p + d/2; v == *m) return m;
         else if (v < *m) r = m;
         else if (v > *m) p = next(m);
-        d = distance(p,r);
-        m = p + d/2;
     }
     return e;
 }
@@ -26,8 +22,7 @@ auto binary_search_recursive(iterator_type p, iterator_type r, value_type v)
 {
     static const auto e = r;
     auto d = distance(p,r);
-    auto m = p + d/2;
-    if (d <= 0) return e;
+    if (auto m = p + d/2; d <= 0) return e;
     else if (v < *m) return binary_search_recursive(p,m,v);
     else if (v > *m) return binary_search_recursive(next(m),r,v);
     else return m;
@@ -41,7 +36,7 @@ int main()
     if (i != end(v)) {
         cout << (*i) << endl;
     }
-    auto j = binary_search_iterative(begin(v),end(v),2);
+    auto j = binary_search_iterative(begin(v),end(v),4);
     if (j != end(v)) {
         cout << (*j) << endl;
     }
