@@ -70,7 +70,7 @@ add_executable(count_paths algorithm/dynamic_programming/count_paths_on_board.cp
 #
 add_executable(binary_search searching/binary_search/binary_search.cpp)
 add_executable(board_search searching/binary_search/board_search.cpp)
-add_executable(lower_bound searching/binary_search/lower_bound.cpp)
+add_executable(lower_bound searching/binary_search/bound_search.cpp)
 add_executable(tree_search searching/tree_search/binary_search_tree.cpp)
 add_executable(k_largest_bst searching/tree_search/k_largest.cpp)
 add_executable(lca_bst searching/tree_search/lowest_common_ancestor.cpp)

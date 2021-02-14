@@ -18,6 +18,19 @@ auto lower_bound_search(iterator_type p, iterator_type r, value_type v)
     return e;
 }
 
+template <typename iterator_type, typename value_type>
+auto upper_bound_search(iterator_type p, iterator_type r, value_type v)
+{
+    auto e = r;
+    auto d = distance(p,r);
+    while (d > 0) {
+        if (auto m = p + d/2; v < *m) { r = m; }
+        else { e = p = next(m); }
+        d = distance(p,r);
+    }
+    return e;
+}
+
 int main()
 {
     vector<int> v {-14,-10,2,108,108,243,285,285,285,401};
@@ -25,5 +38,7 @@ int main()
     assert(lower_bound_search(begin(v),end(v),285) == lower_bound(begin(v),end(v),285));
     assert(lower_bound_search(begin(v),end(v),250) == lower_bound(begin(v),end(v),250));
     assert(lower_bound_search(begin(v),end(v),402) == lower_bound(begin(v),end(v),402));
+    assert(upper_bound_search(begin(v),end(v),285) == upper_bound(begin(v),end(v),285));
+    assert(upper_bound_search(begin(v),end(v),243) == upper_bound(begin(v),end(v),243));
 }
 
