@@ -1966,7 +1966,7 @@ problem_mapping = {
         },
         "15.01 The Towers of Hanoi problem": {
             "C++: hanoi.cc": {
-                "passed": 0,
+                "passed": 10,
                 "total": 10
             },
             "Java: Hanoi.java": {

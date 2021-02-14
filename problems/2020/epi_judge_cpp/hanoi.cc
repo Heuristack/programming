@@ -1,19 +1,45 @@
-#include <array>
-#include <stack>
 #include <string>
 #include <vector>
+#include <array>
+#include <stack>
 
+#include "test_framework/timed_executor.h"
 #include "test_framework/generic_test.h"
 #include "test_framework/test_failure.h"
-#include "test_framework/timed_executor.h"
+
+using std::vector;
 using std::array;
 using std::stack;
-using std::vector;
+using std::cout;
+using std::endl;
+
 const int kNumPegs = 3;
-vector<vector<int>> ComputeTowerHanoi(int num_rings) {
-  // TODO - you fill in here.
-  return {};
+
+void ComputeTowerHanoiSteps(int num_rings_to_move, array<stack<int>, kNumPegs> & pegs, int p0, int p1, int p2, vector<vector<int>> & results);
+
+vector<vector<int>> ComputeTowerHanoi(int num_rings)
+{
+  array<stack<int>, kNumPegs> pegs;
+  for (int i = num_rings; i >= 1; --i) {
+    pegs[0].push(i);
+  }
+
+  vector<vector<int>> results;
+  ComputeTowerHanoiSteps(num_rings,pegs,0,1,2,results);
+  return results;
 }
+
+void ComputeTowerHanoiSteps(int num_rings_to_move, array<stack<int>, kNumPegs> & pegs, int p0, int p1, int p2, vector<vector<int>> & results)
+{
+  if (num_rings_to_move > 0) {
+    ComputeTowerHanoiSteps(num_rings_to_move - 1, pegs, p0, p2, p1, results);
+    pegs[p1].push(pegs[p0].top());
+    pegs[p0].pop();
+    results.emplace_back(vector<int>{p0,p1});
+    ComputeTowerHanoiSteps(num_rings_to_move - 1, pegs, p2, p1, p0, results);
+  }
+}
+
 void ComputeTowerHanoiWrapper(TimedExecutor& executor, int num_rings) {
   array<stack<int>, kNumPegs> pegs;
   for (int i = num_rings; i >= 1; --i) {
@@ -52,3 +78,4 @@ int main(int argc, char* argv[]) {
                          &ComputeTowerHanoiWrapper, DefaultComparator{},
                          param_names);
 }
+
