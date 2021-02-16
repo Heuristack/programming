@@ -6,6 +6,8 @@
 using std::iterator_traits;
 using std::vector;
 
+// note : this method is too slow to compute even 8-permutation, requires a good algo
+
 template <typename iterator, typename inserter>
 auto remove_copy_it(iterator p, iterator r, inserter b, iterator k) -> void
 {
