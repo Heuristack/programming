@@ -2008,7 +2008,7 @@ problem_mapping = {
         },
         "15.04 Generate permutations": {
             "C++: permutations.cc": {
-                "passed": 0,
+                "passed": 1,
                 "total": 8
             },
             "Java: Permutations.java": {

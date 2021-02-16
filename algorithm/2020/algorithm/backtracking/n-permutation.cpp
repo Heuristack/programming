@@ -108,6 +108,6 @@ ostream & operator << (ostream & strm, vector<type> const v) {
 int main()
 {
     cout << permutation({1,2,3,4,5},3).generate() << endl;
-    cout << generate_permutation({1,2,3,4,5},3) << endl;
+    cout << generate_permutation({1,2,3,4,5,6,7,8},5) << endl;
 }
 
