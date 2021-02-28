@@ -11,35 +11,35 @@ using std::vector;
 template <typename iterator, typename inserter>
 auto remove_copy_it(iterator p, iterator r, inserter b, iterator k) -> void
 {
-    for (auto i = p; i != r; i++) {
-        if (i != k) {
-            *b++ = *i;
-        }
+  for (auto i = p; i != r; i++) {
+    if (i != k) {
+      *b++ = *i;
     }
+  }
 }
 
 template <typename iterator, typename return_type = vector<typename iterator_traits<iterator>::value_type>>
 auto remove_copy_it(iterator p, iterator r, iterator k) -> return_type
 {
-    return_type v;
-    remove_copy_it(p,r,back_inserter(v),k);
-    return v;
+  return_type v;
+  remove_copy_it(p,r,back_inserter(v),k);
+  return v;
 }
 
 auto generate_permutation(vector<int> s, int n, vector<vector<int>> & permutations, vector<int> & path) -> vector<vector<int>>
 {
-    if (!n) {
-        permutations.push_back(path);
-        return permutations;
-    }
-
-    for (auto i = begin(s); i != end(s); i++) {
-        path.push_back(*i);
-        generate_permutation(remove_copy_it(begin(s),end(s),i),n-1,permutations,path);
-        path.pop_back();
-    }
-
+  if (!n) {
+    permutations.push_back(path);
     return permutations;
+  }
+
+  for (auto i = begin(s); i != end(s); i++) {
+    path.push_back(*i);
+    generate_permutation(remove_copy_it(begin(s),end(s),i),n-1,permutations,path);
+    path.pop_back();
+  }
+
+  return permutations;
 }
 
 vector<vector<int>> Permutations(vector<int> A)
