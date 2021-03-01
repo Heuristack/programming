@@ -2,7 +2,7 @@ struct interval
 {
     interval(int p, int q, int op, int oq): p(p),q(q),op(op),oq(oq) {}
     interval(int p, int q): interval(p,q,0,0) {}
-    int p,q,op,oq;
+    int p,q,op,oq; // op,oq - open (1),close(0)
 };
 
 ostream & operator << (ostream & s, interval const & i)
