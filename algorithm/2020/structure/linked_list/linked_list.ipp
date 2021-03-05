@@ -1,4 +1,22 @@
 template <typename data_t>
+auto insert_after(node<data_t> * p, node<data_t> * n)
+{
+    if (p && n) {
+        n->next = p->next;
+        p->next = n;
+    }
+}
+
+template <typename data_t>
+auto delete_after(node<data_t> * p)
+{
+    if (auto n = p->next; n) {
+        p->next = n->next;
+        delete n;
+    }
+}
+
+template <typename data_t>
 auto create_list(initializer_list<data_t> const & init) -> list<node<data_t>>
 {
     list<node<data_t>> head = nullptr;
