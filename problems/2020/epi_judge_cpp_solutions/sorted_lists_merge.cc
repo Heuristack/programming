@@ -3,8 +3,8 @@
 
 void AppendNode(shared_ptr<ListNode<int>> *, shared_ptr<ListNode<int>> *);
 
-shared_ptr<ListNode<int>> MergeTwoSortedLists(shared_ptr<ListNode<int>> L1,
-                                              shared_ptr<ListNode<int>> L2) {
+shared_ptr<ListNode<int>> MergeTwoSortedLists(shared_ptr<ListNode<int>> L1, shared_ptr<ListNode<int>> L2)
+{
   // Creates a placeholder for the result.
   shared_ptr<ListNode<int>> dummy_head(new ListNode<int>);
   auto tail = dummy_head;
@@ -18,8 +18,8 @@ shared_ptr<ListNode<int>> MergeTwoSortedLists(shared_ptr<ListNode<int>> L1,
   return dummy_head->next;
 }
 
-void AppendNode(shared_ptr<ListNode<int>> *node,
-                shared_ptr<ListNode<int>> *tail) {
+void AppendNode(shared_ptr<ListNode<int>> *node, shared_ptr<ListNode<int>> *tail)
+{
   (*tail)->next = *node;
   *tail = *node;  // Updates tail.
   *node = (*node)->next;
@@ -32,3 +32,4 @@ int main(int argc, char *argv[]) {
                          "sorted_lists_merge.tsv", &MergeTwoSortedLists,
                          DefaultComparator{}, param_names);
 }
+
