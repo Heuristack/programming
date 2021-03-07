@@ -10,7 +10,8 @@
 using std::swap;
 using std::vector;
 
-void EvenOdd(vector<int>* A_ptr) {
+void EvenOdd(vector<int>* A_ptr)
+{
   vector<int>& A = *A_ptr;
   int next_even = 0, next_odd = size(A) - 1;
   while (next_even < next_odd) {
