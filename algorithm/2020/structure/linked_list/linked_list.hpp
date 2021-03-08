@@ -7,7 +7,7 @@ public:
     using link_type = node_type *;
 
 public:
-    node(date_type data, link_type n) : data(data), next(n) {}
+    node(date_type data, link_type n) : data(data),next(n) {}
     explicit node(date_type data) : node(data,nullptr) {}
 
 public:
