@@ -1,3 +1,8 @@
+/**
+ *
+ * Bootcamp01: Implement linked_list structure and traverse
+ *
+**/
 #include <iostream>
 #include <vector>
 
