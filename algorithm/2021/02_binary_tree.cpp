@@ -29,9 +29,29 @@ ostream & operator << (ostream & s, node<data_t> const & n)
     return s << "(" << n.value << ")";
 }
 
+template <typename data_t>
+auto traverse(node<data_t> * tree)
+{
+    if (!tree) return;
+    cout << (*tree) << endl;
+    traverse(tree->ltree);
+    traverse(tree->rtree);
+}
+
 int main()
 {
-    node<int> root(0);
-    cout << root << endl;
+    using node_type = node<int>;
+    typename node_type::link_type tree =
+    new node_type(0,
+        new node_type(1,
+            new node_type(3),
+            new node_type(4)
+        ),
+        new node_type(2,
+            new node_type(5),
+            new node_type(6)
+        )
+    );
+    traverse(tree);
 }
 

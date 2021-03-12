@@ -40,13 +40,14 @@ ostream & operator << (ostream & s, node<data_t> const & n)
 
 int main()
 {
-    node<int> n0(0);
-    node<int> n1(1); link(n0,n1);
-    node<int> n2(2); link(n1,n2);
-    node<int> n3(3); link(n2,n3);
-    node<int> n4(4); link(n3,n4);
+    using node_type = node<int>;
 
-    node<int>::link_type list = &n0;
+    typename node_type::link_type list =
+        new node_type(0,
+            new node_type(1,
+                new node_type(2,
+                    new node_type(3,
+                        new node_type(4)))));
 
     for (node<int> * p = list; p != nullptr; p = p->next) {
         cout << (*p) << endl;
