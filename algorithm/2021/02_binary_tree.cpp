@@ -31,18 +31,18 @@ ostream & operator << (ostream & s, node<data_t> const & n)
 }
 
 template <typename data_t>
-auto traverse(node<data_t> * tree)
+auto traverse(node<data_t> * root)
 {
-    if (!tree) return;
-    cout << (*tree) << endl;
-    traverse(tree->ltree);
-    traverse(tree->rtree);
+    if (!root) return;
+    cout << (*root) << endl;
+    traverse(root->ltree);
+    traverse(root->rtree);
 }
 
 int main()
 {
     using node_type = node<int>;
-    typename node_type::link_type tree =
+    typename node_type::link_type root =
     new node_type(0,
         new node_type(1,
             new node_type(3),
@@ -53,6 +53,6 @@ int main()
             new node_type(6)
         )
     );
-    traverse(tree);
+    traverse(root);
 }
 

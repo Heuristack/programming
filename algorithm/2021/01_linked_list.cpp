@@ -30,9 +30,9 @@ ostream & operator << (ostream & s, node<data_t> const & n)
 }
 
 template <typename data_t>
-auto traverse(node<data_t> * list)
+auto traverse(node<data_t> * head)
 {
-    for (node<int> * p = list; p != nullptr; p = p->next) {
+    for (node<int> * p = head; p != nullptr; p = p->next) {
         cout << (*p) << endl;
     }
 }
@@ -40,12 +40,12 @@ auto traverse(node<data_t> * list)
 int main()
 {
     using node_type = node<int>;
-    typename node_type::link_type list =
+    typename node_type::link_type head =
         new node_type(0,
             new node_type(1,
                 new node_type(2,
                     new node_type(3,
                         new node_type(4)))));
-    traverse(list);
+    traverse(head);
 }
 
