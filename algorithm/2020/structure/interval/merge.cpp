@@ -2,7 +2,10 @@
 #include <vector>
 #include <map>
 #include <iostream>
-#include "interval.h"
+
+using namespace std;
+
+#include "interval.hpp"
 
 using namespace std;
 
