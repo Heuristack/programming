@@ -1,18 +1,8 @@
-template <typename data_t>
-auto insert_after(node<data_t> * p, node<data_t> * n)
+template <typename list_t, typename func_t>
+auto traverse(list_t const & head, func_t func) -> void
 {
-    if (p && n) {
-        n->next = p->next;
-        p->next = n;
-    }
-}
-
-template <typename data_t>
-auto delete_after(node<data_t> * p)
-{
-    if (auto n = p->next; n) {
-        p->next = n->next;
-        delete n;
+    for (auto i = head; i != nullptr; i = i->next) {
+        func(i);
     }
 }
 
@@ -68,11 +58,21 @@ auto delete_list(list_t & head) -> void
     remove_if(head,[](auto const &){ return true; });
 }
 
-template <typename list_t, typename func_t>
-auto traverse(list_t const & head, func_t func) -> void
+template <typename data_t>
+auto insert_after(node<data_t> * p, node<data_t> * n)
 {
-    for (auto i = head; i != nullptr; i = i->next) {
-        func(i);
+    if (p && n) {
+        n->next = p->next;
+        p->next = n;
+    }
+}
+
+template <typename data_t>
+auto delete_after(node<data_t> * p)
+{
+    if (auto n = p->next; n) {
+        p->next = n->next;
+        delete n;
     }
 }
 
