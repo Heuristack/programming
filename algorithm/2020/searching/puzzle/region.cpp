@@ -1,4 +1,9 @@
-#include "board/board.h"
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+#include "board/board.hpp"
 
 enum color { B = 0, W = 1, G = 2 };
 

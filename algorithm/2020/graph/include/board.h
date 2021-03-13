@@ -3,5 +3,5 @@
 #include <vector>
 namespace {
 using namespace std;
-#include "board.hpp"
+#include "board/board.hpp"
 }

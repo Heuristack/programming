@@ -1,6 +1,10 @@
 #include <algorithm>
 #include <iostream>
-#include "board/board.h"
+#include <vector>
+
+using namespace std;
+
+#include "board/board.hpp"
 
 using namespace std;
 

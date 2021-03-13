@@ -4,10 +4,12 @@
 #include <set>
 #include <utility>
 #include <limits>
-#include <string>
 #include <iostream>
 #include <initializer_list>
-#include "board/board.h"
+
+using namespace std;
+
+#include "board/board.hpp"
 
 enum noughts_n_crosses { E = 'E', X = 'X', O = 'O' };
 

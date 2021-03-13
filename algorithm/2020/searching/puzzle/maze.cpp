@@ -1,4 +1,9 @@
-#include "board/board.h"
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+#include "board/board.hpp"
 
 using namespace std;
 

@@ -6,7 +6,10 @@
 #include <cmath>
 #include <utility>
 #include <iostream>
-#include "board/board.h"
+
+using namespace std;
+
+#include "board/board.hpp"
 
 template <typename element = int>
 class node : public board<element>

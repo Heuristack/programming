@@ -1,4 +1,4 @@
-#include "board/board.h"
+#include "board.h"
 #include "tree.h"
 
 enum color { B = 0, W = 1 };
