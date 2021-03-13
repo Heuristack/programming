@@ -14,7 +14,6 @@ link_directories(/usr/local/lib)
 #
 # Project - Boot Camp
 #
-
-add_executable(BC01 01_linked_list.cpp)
-add_executable(BC02 02_binary_tree.cpp)
+add_executable(BC01 bootcamp/01_linked_list.cpp)
+add_executable(BC02 bootcamp/02_binary_tree.cpp)
 
