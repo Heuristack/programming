@@ -3,10 +3,7 @@
  * Bootcamp01: Implement a linked_list structure
  *
 **/
-
 #include <iostream>
-#include <vector>
-
 using namespace std;
 
 template <typename data_t>
@@ -27,30 +24,28 @@ public:
 };
 
 template <typename data_t>
-auto link(node<data_t> & a, node<data_t> & b)
-{
-    a.next = &b;
-}
-
-template <typename data_t>
 ostream & operator << (ostream & s, node<data_t> const & n)
 {
     return s << "(" << n.data << ")";
 }
 
+template <typename data_t>
+auto traverse(node<data_t> * list)
+{
+    for (node<int> * p = list; p != nullptr; p = p->next) {
+        cout << (*p) << endl;
+    }
+}
+
 int main()
 {
     using node_type = node<int>;
-
     typename node_type::link_type list =
         new node_type(0,
             new node_type(1,
                 new node_type(2,
                     new node_type(3,
                         new node_type(4)))));
-
-    for (node<int> * p = list; p != nullptr; p = p->next) {
-        cout << (*p) << endl;
-    }
+    traverse(list);
 }
 
