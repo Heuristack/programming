@@ -4,9 +4,29 @@
 
 using namespace std;
 
-template <typename iterator> auto parent(iterator b, iterator i, iterator e) {  if (auto r = b + (distance(b,i)+1)/2 - 1; r >= b && r < e ) return r; return e; }
-template <typename iterator> auto lchild(iterator b, iterator i, iterator e) {  if (auto r = b + (distance(b,i)+1)*2 - 1; r >= b && r < e ) return r; return e; }
-template <typename iterator> auto rchild(iterator b, iterator i, iterator e) {  if (auto r = b + (distance(b,i)+1)*2 + 0; r >= b && r < e ) return r; return e; }
+template <typename iterator>
+auto parent(iterator b, iterator i, iterator e)
+{
+    if (auto r = b + (distance(b,i)+1)/2 - 1; r >= b && r < e )
+        return r;
+    return e;
+}
+
+template <typename iterator>
+auto lchild(iterator b, iterator i, iterator e)
+{
+    if (auto r = b + (distance(b,i)+1)*2 - 1; r >= b && r < e )
+        return r;
+    return e;
+}
+
+template <typename iterator>
+auto rchild(iterator b, iterator i, iterator e)
+{
+    if (auto r = b + (distance(b,i)+1)*2 + 0; r >= b && r < e )
+        return r;
+    return e;
+}
 
 template <typename iterator>
 bool is_heap_naive(iterator p, iterator r)
