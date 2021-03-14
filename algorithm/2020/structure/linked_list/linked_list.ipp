@@ -1,11 +1,3 @@
-template <typename list_t, typename func_t>
-auto traverse(list_t const & head, func_t func) -> void
-{
-    for (auto i = head; i != nullptr; i = i->next) {
-        func(i);
-    }
-}
-
 template <typename data_t>
 auto create_list(initializer_list<data_t> const & init) -> list<node<data_t>>
 {
@@ -56,6 +48,14 @@ template <typename list_t>
 auto delete_list(list_t & head) -> void
 {
     remove_if(head,[](auto const &){ return true; });
+}
+
+template <typename list_t, typename func_t>
+auto traverse(list_t const & head, func_t func) -> void
+{
+    for (auto i = head; i != nullptr; i = i->next) {
+        func(i);
+    }
 }
 
 template <typename data_t>
