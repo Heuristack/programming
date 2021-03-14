@@ -45,10 +45,10 @@ int main()
     typename node_type::link_type root =
     new node_type(0,
         new node_type(1,
-            new node_type(3),
-            new node_type(4)
+            new node_type(2),
+            new node_type(3)
         ),
-        new node_type(2,
+        new node_type(4,
             new node_type(5),
             new node_type(6)
         )
