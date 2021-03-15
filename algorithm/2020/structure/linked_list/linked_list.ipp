@@ -61,18 +61,19 @@ auto traverse(list_t const & head, func_t func) -> void
 template <typename data_t>
 auto insert_after(node<data_t> * p, node<data_t> * n)
 {
-    if (p && n) {
-        n->next = p->next;
-        p->next = n;
-    }
+    if (!p) return;
+    if (!n) return;
+    n->next = p->next;
+    p->next = n;
 }
 
 template <typename data_t>
 auto delete_after(node<data_t> * p)
 {
-    if (auto n = p->next; n) {
-        p->next = n->next;
-        delete n;
-    }
+    if (!p) return;
+    auto n = p->next;
+    if (!n) return;
+    p->next = n->next;
+    delete n;
 }
 
