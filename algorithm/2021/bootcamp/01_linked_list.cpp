@@ -1,6 +1,6 @@
 /**
  *
- * Bootcamp01: Implement a linked_list structure
+ * Bootcamp01: Implement a linked list structure
  *
 **/
 #include <iostream>
